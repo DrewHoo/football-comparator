@@ -1,0 +1,1816 @@
+{
+  "schema": "football-comparator/gates/v1",
+  "doc": "data/gates/README.md",
+  "generated": "2026-10-21",
+  "team_ledger": {
+    "entity": "team: key on ESPN team id plus a merge table (renames, re-ingests); a team's league is a property of the season (promotion and relegation)",
+    "row": "one row per team per league match, in date order: date, season (assigned by match date, July to June), competition, team game number in season (tgn), home/away, opponent, GF, GA, result (W/D/L from the final score; AET counts as played, no penalties in league), points (3/1/0)",
+    "derived_team_season": {
+      "P": "league matches played (STATUS_FULL_TIME, STATUS_FINAL_AET, STATUS_FINAL_ABANDONED; drop postponed ghost rows and relegation playoffs)",
+      "W": "count result = W",
+      "D": "count result = D",
+      "L": "count result = L",
+      "GF": "sum goals for, from the final score (own goals count for the beneficiary)",
+      "GA": "sum goals against",
+      "GD": "GF - GA",
+      "points_on_pitch": "3W + D",
+      "points_table": "points_on_pitch minus deductions from data/corrections (e.g. Portsmouth 2009-10 -9; Everton 2023-24 -8, later reduced on appeal; Nottingham Forest 2023-24 -4). Pin which one each publisher uses",
+      "position": "rank by points_table, then GD, then GF (PL rule); later head-to-head never needed in the gated seasons, assert if it is",
+      "points_per_game": "points_on_pitch / P (for 38- vs 42-game comparisons)",
+      "games_left_at_clinch": "the team's own remaining league fixtures at the moment a title or relegation became mathematically certain. The moment can be another team's match (Leicester 2016, Liverpool 2020). Clinched relegation: at least (teams - relegation slots) other teams have current points > this team's maximum possible points. Ignore GD unless the publisher counts it (they don't for these gates). Clinched title: no other team's maximum reaches this team's points",
+      "first_n": "sum over the team's first N league matches of the season (tgn <= N)"
+    },
+    "runs": {
+      "definition": "a streak over the team's league matches in this competition in date order, ignoring season boundaries and skipping seasons spent outside the league (Sunderland 2003-05). A run open at the team's last match is 'ongoing' (Derby)",
+      "tests": [
+        "no win (D or L)",
+        "loss",
+        "not losing (W or D)",
+        "win",
+        "home loss with GF = 0"
+      ],
+      "field_floor": "a run is visible only if its first match is on or after the ledger floor (eng.1 2002-03); a run already in progress at the floor is truncated and flagged"
+    },
+    "era_wall": "PL era is 1992-93 onward; ledger starts 2002-03, so ten PL seasons (1992-2002, three of them 42-game) are invisible. 'English top flight' (1888-) is a different record book and is never visible"
+  },
+  "gates": [
+    {
+      "id": "derby-11-points",
+      "corpus_ref": "A2#23",
+      "claim": "Derby's record-low 11 points",
+      "publisher": "Opta Analyst; premierleague.com records",
+      "url": [
+        "https://theanalyst.com/articles/lowest-points-totals-in-pl-history/",
+        "https://www.premierleague.com/en/stats/records"
+      ],
+      "claim_date": "2025-05",
+      "as_of": "2025-06-30",
+      "scope": {
+        "competitions": [
+          "eng.1"
+        ],
+        "label": "Premier League (also called a top-flight record on 3-points terms)",
+        "publisher_era_floor": "1992-93",
+        "stages": "league"
+      },
+      "query": {
+        "who": {
+          "kind": "team",
+          "unit": "team-seasons"
+        },
+        "stat": {
+          "stat": "points"
+        },
+        "how": {
+          "agg": "sum",
+          "dir": "fewest"
+        },
+        "window": {
+          "seq": "season"
+        },
+        "field": {
+          "competitions": [
+            "eng.1"
+          ],
+          "since": "1992-93",
+          "label": "PL all-time"
+        }
+      },
+      "unit": "points in a 38-game season",
+      "assertions": [
+        {
+          "role": "headline",
+          "subject": "Derby County",
+          "season": "2007-08",
+          "kind": "team-season",
+          "expected": {
+            "points": 11,
+            "W": 1,
+            "D": 8,
+            "L": 29,
+            "GF": 20,
+            "GA": 89,
+            "GD": -69
+          },
+          "rank": 1,
+          "source_note": "D derived (11 - 3)",
+          "checkable": "full"
+        },
+        {
+          "role": "runner-up",
+          "subject": "Southampton",
+          "season": "2024-25",
+          "kind": "team-season",
+          "expected": {
+            "points": 12
+          },
+          "rank": 2,
+          "checkable": "full"
+        },
+        {
+          "role": "runner-up",
+          "subject": "Sunderland",
+          "season": "2005-06",
+          "kind": "team-season",
+          "expected": {
+            "points": 15
+          },
+          "rank": 3,
+          "checkable": "full"
+        },
+        {
+          "role": "runner-up",
+          "subject": "Sheffield United",
+          "season": "2023-24",
+          "kind": "team-season",
+          "expected": {
+            "points": 16
+          },
+          "rank": "T4",
+          "checkable": "full"
+        },
+        {
+          "role": "runner-up",
+          "subject": "Huddersfield Town",
+          "season": "2018-19",
+          "kind": "team-season",
+          "expected": {
+            "points": 16
+          },
+          "rank": "T4",
+          "checkable": "full"
+        },
+        {
+          "role": "derived",
+          "kind": "visible-bottom-5",
+          "expected": [
+            "Derby 2007-08 11",
+            "Southampton 2024-25 12",
+            "Sunderland 2005-06 15",
+            "Sheffield United 2023-24 16",
+            "Huddersfield 2018-19 16"
+          ],
+          "checkable": "full",
+          "why": "the publisher's bottom five are all in era, so no 1992-2002 season can be below 16; the visible board must equal the published one. Check Wolves 2025-26 (20) sits just outside"
+        }
+      ],
+      "ledger_view": {
+        "can_see": "every season named",
+        "cannot_see": "1992-2002, which the publisher's list shows has nothing at 16 or below"
+      },
+      "era_wall": "reproducible-in-full",
+      "status": "reproducible-in-full",
+      "status_reason": "all five published entries in era",
+      "definition_diffs": [
+        "pl-era-vs-top-flight"
+      ]
+    },
+    {
+      "id": "derby-32-winless",
+      "corpus_ref": "A2#24",
+      "claim": "Derby's 32-game winless run, the Premier League record",
+      "publisher": "Opta Analyst",
+      "url": [
+        "https://theanalyst.com/articles/premier-league-winless-runs-southampton"
+      ],
+      "claim_date": "2025",
+      "as_of": "2026-10-20",
+      "scope": {
+        "competitions": [
+          "eng.1"
+        ],
+        "label": "PL league games only",
+        "publisher_era_floor": "1992-93",
+        "stages": "league"
+      },
+      "query": {
+        "who": {
+          "kind": "team",
+          "unit": "team-runs"
+        },
+        "stat": {
+          "test": [
+            {
+              "result": [
+                "D",
+                "L"
+              ]
+            }
+          ]
+        },
+        "how": {
+          "agg": "streak",
+          "dir": "most"
+        },
+        "window": {
+          "seq": "team-league-games",
+          "span": "any",
+          "crosses_seasons": true
+        },
+        "field": {
+          "competitions": [
+            "eng.1"
+          ],
+          "since": "1992-93",
+          "label": "PL all-time"
+        }
+      },
+      "unit": "consecutive PL matches without a win",
+      "assertions": [
+        {
+          "role": "headline",
+          "subject": "Derby County",
+          "kind": "run",
+          "expected": 32,
+          "span": {
+            "from": "2007-09-22",
+            "to": "2008-05-11"
+          },
+          "ongoing": true,
+          "rank": 1,
+          "checkable": "full",
+          "why": "Derby haven't played a PL match since, so the run is open ('technically ongoing')"
+        },
+        {
+          "role": "runner-up",
+          "subject": "Sunderland",
+          "kind": "run",
+          "expected": 26,
+          "crosses_seasons": true,
+          "rank": 2,
+          "checkable": "full",
+          "why": "2002-03 into 2005-06, skipping two Championship seasons"
+        },
+        {
+          "role": "runner-up",
+          "subject": "Southampton",
+          "kind": "run",
+          "expected": 22,
+          "crosses_seasons": true,
+          "checkable": "full"
+        }
+      ],
+      "ledger_view": {
+        "can_see": "all three runs",
+        "cannot_see": "pre-2002 runs; publisher's top three are all in era"
+      },
+      "era_wall": "reproducible-in-full",
+      "status": "reproducible-in-full",
+      "status_reason": "every published run starts after the floor",
+      "definition_diffs": []
+    },
+    {
+      "id": "sunderland-20-defeats",
+      "corpus_ref": "A2#25",
+      "claim": "Sunderland's 20 consecutive defeats, a Premier League and top-flight record",
+      "publisher": "Opta Analyst",
+      "url": [
+        "https://theanalyst.com/articles/longest-premier-league-losing-runs",
+        "https://theanalyst.com/articles/wolves-worst-premier-league-team-records"
+      ],
+      "claim_date": "2025-12",
+      "as_of": "2026-10-20",
+      "scope": {
+        "competitions": [
+          "eng.1"
+        ],
+        "label": "PL; also claimed as the English top-flight record",
+        "publisher_era_floor": "1992-93 (and 1888-89)",
+        "stages": "league"
+      },
+      "query": {
+        "who": {
+          "kind": "team",
+          "unit": "team-runs"
+        },
+        "stat": {
+          "test": [
+            {
+              "result": [
+                "L"
+              ]
+            }
+          ]
+        },
+        "how": {
+          "agg": "streak",
+          "dir": "most"
+        },
+        "window": {
+          "seq": "team-league-games",
+          "span": "any",
+          "crosses_seasons": true
+        },
+        "field": {
+          "competitions": [
+            "eng.1"
+          ],
+          "since": "1992-93",
+          "label": "PL all-time"
+        }
+      },
+      "unit": "consecutive PL defeats",
+      "assertions": [
+        {
+          "role": "headline",
+          "subject": "Sunderland",
+          "kind": "run",
+          "expected": 20,
+          "parts": {
+            "end_of_2002-03": 15,
+            "start_of_2005-06": 5
+          },
+          "rank": 1,
+          "checkable": "full"
+        },
+        {
+          "role": "runner-up",
+          "subject": "Norwich City",
+          "kind": "run",
+          "expected": 16,
+          "checkable": "full",
+          "note": "Analyst labels it 2020-21; Norwich were in the Championship then, so it must span 2019-20 into 2021-22. Ledger decides"
+        },
+        {
+          "role": "runner-up",
+          "subject": "Wolverhampton Wanderers",
+          "kind": "run",
+          "expected": 11,
+          "date": "2025-12",
+          "checkable": "full"
+        },
+        {
+          "role": "runner-up",
+          "subject": "Aston Villa",
+          "season": "2015-16",
+          "kind": "run",
+          "expected": 11,
+          "checkable": "full"
+        },
+        {
+          "role": "context",
+          "subject": "Sunderland",
+          "kind": "rank",
+          "field": "English top flight since 1888",
+          "expected": 1,
+          "checkable": "no",
+          "why": "top-flight record book"
+        }
+      ],
+      "ledger_view": {
+        "can_see": "the whole run, including the two-season gap",
+        "cannot_see": "top-flight history"
+      },
+      "era_wall": "reproducible-partial",
+      "status": "reproducible-partial",
+      "status_reason": "PL record visible; the top-flight half of the claim is not",
+      "definition_diffs": [
+        "pl-era-vs-top-flight"
+      ]
+    },
+    {
+      "id": "sheffield-united-104-conceded",
+      "corpus_ref": "A2#26",
+      "claim": "Sheffield United concede a record 104 Premier League goals",
+      "publisher": "Opta Analyst",
+      "url": [
+        "https://theanalyst.com/articles/most-goals-conceded-premier-league-season/"
+      ],
+      "claim_date": "2024-05",
+      "as_of": "2024-06-30",
+      "scope": {
+        "competitions": [
+          "eng.1"
+        ],
+        "label": "PL, with an explicit 38- vs 42-game caveat",
+        "publisher_era_floor": "1992-93",
+        "stages": "league"
+      },
+      "query": {
+        "who": {
+          "kind": "team",
+          "unit": "team-seasons"
+        },
+        "stat": {
+          "stat": "GA"
+        },
+        "how": {
+          "agg": "sum",
+          "dir": "most"
+        },
+        "window": {
+          "seq": "season"
+        },
+        "field": {
+          "competitions": [
+            "eng.1"
+          ],
+          "since": "1992-93",
+          "label": "PL all-time"
+        },
+        "variants": [
+          {
+            "how": {
+              "agg": "rate",
+              "per": "game"
+            },
+            "label": "per game, top flight"
+          }
+        ]
+      },
+      "unit": "goals conceded in a season",
+      "assertions": [
+        {
+          "role": "headline",
+          "subject": "Sheffield United",
+          "season": "2023-24",
+          "kind": "team-season",
+          "expected": {
+            "GA": 104,
+            "P": 38,
+            "GA_per_game": 2.74
+          },
+          "rank": 1,
+          "checkable": "full"
+        },
+        {
+          "role": "previous-holder",
+          "subject": "Swindon Town",
+          "season": "1993-94",
+          "kind": "team-season",
+          "expected": {
+            "GA": 100,
+            "P": 42
+          },
+          "checkable": "no",
+          "why": "42-game season, pre-floor"
+        },
+        {
+          "role": "context",
+          "subject": "Ipswich Town",
+          "season": "1963-64",
+          "kind": "team-season",
+          "expected": {
+            "GA_per_game": 2.88
+          },
+          "checkable": "no",
+          "why": "top-flight rate"
+        }
+      ],
+      "ledger_view": {
+        "can_see": "Sheffield United and every season since 2002-03",
+        "cannot_see": "Swindon's 100 and the top-flight rate comparison"
+      },
+      "era_wall": "reproducible-partial",
+      "status": "reproducible-partial",
+      "status_reason": "previous record in a 42-game pre-floor season",
+      "definition_diffs": [
+        "42-game-seasons",
+        "pl-era-vs-top-flight"
+      ]
+    },
+    {
+      "id": "sheffield-united-2020-21-start",
+      "corpus_ref": "A2#27",
+      "claim": "Sheffield United's worst start (2020-21): 2 points from 17 games",
+      "publisher": "Opta Analyst",
+      "url": [
+        "https://theanalyst.com/articles/lowest-points-totals-in-pl-history/",
+        "https://theanalyst.com/articles/wolves-worst-premier-league-team-records"
+      ],
+      "claim_date": "2021",
+      "as_of": "2021-06-30",
+      "scope": {
+        "competitions": [
+          "eng.1"
+        ],
+        "label": "PL",
+        "publisher_era_floor": "1992-93",
+        "stages": "league"
+      },
+      "query": {
+        "who": {
+          "kind": "team",
+          "unit": "team-seasons"
+        },
+        "stat": {
+          "stat": "points"
+        },
+        "how": {
+          "agg": "sum",
+          "dir": "fewest"
+        },
+        "window": {
+          "seq": "team-games-of-season",
+          "n": 17
+        },
+        "field": {
+          "competitions": [
+            "eng.1"
+          ],
+          "since": "1992-93",
+          "label": "PL all-time"
+        }
+      },
+      "unit": "points through the team's first N league games",
+      "assertions": [
+        {
+          "role": "headline",
+          "subject": "Sheffield United",
+          "season": "2020-21",
+          "kind": "first-n",
+          "n": 17,
+          "expected": {
+            "points": 2,
+            "W": 0
+          },
+          "checkable": "full"
+        },
+        {
+          "role": "headline",
+          "subject": "Sheffield United",
+          "season": "2020-21",
+          "kind": "first-n",
+          "n": 14,
+          "expected": {
+            "points": 2,
+            "GD": -17
+          },
+          "source_note": "Analyst Wolves article, WebFetch 2026-10-21",
+          "checkable": "full"
+        },
+        {
+          "role": "headline",
+          "subject": "Sheffield United",
+          "season": "2020-21",
+          "kind": "winless-start",
+          "expected": 17,
+          "first_win": {
+            "tgn": 18,
+            "date": "2021-01-12",
+            "match": "Sheffield United 1-0 Newcastle"
+          },
+          "checkable": "full"
+        },
+        {
+          "role": "headline",
+          "subject": "Sheffield United",
+          "season": "2020-21",
+          "kind": "team-season",
+          "expected": {
+            "points": 23,
+            "GF": 20
+          },
+          "note": "20 GF is joint fewest (with Derby 2007-08)",
+          "checkable": "full"
+        }
+      ],
+      "ledger_view": {
+        "can_see": "the whole season",
+        "cannot_see": "1992-2002 starts"
+      },
+      "era_wall": "reproducible-partial",
+      "status": "reproducible-partial",
+      "status_reason": "'worst start in PL history' rank includes pre-floor seasons",
+      "definition_diffs": []
+    },
+    {
+      "id": "southampton-earliest-relegation-30-losses",
+      "corpus_ref": "A2#28",
+      "claim": "Southampton relegated earliest by games remaining; first PL team to lose 30",
+      "publisher": "Opta Analyst",
+      "url": [
+        "https://theanalyst.com/articles/premier-league-earliest-relegations"
+      ],
+      "claim_date": "2025-04-06",
+      "as_of": "2025-06-30",
+      "scope": {
+        "competitions": [
+          "eng.1"
+        ],
+        "label": "PL (with a top-flight caveat for losses)",
+        "publisher_era_floor": "1992-93",
+        "stages": "league"
+      },
+      "query": {
+        "who": {
+          "kind": "team",
+          "unit": "team-seasons"
+        },
+        "stat": {
+          "stat": "games_left_at_relegation_clinch"
+        },
+        "how": {
+          "agg": "value",
+          "dir": "most"
+        },
+        "window": {
+          "seq": "season"
+        },
+        "field": {
+          "competitions": [
+            "eng.1"
+          ],
+          "since": "1992-93",
+          "label": "PL all-time"
+        },
+        "variants": [
+          {
+            "stat": {
+              "stat": "date_of_relegation_clinch"
+            },
+            "how": {
+              "dir": "earliest"
+            },
+            "label": "by calendar date"
+          },
+          {
+            "stat": {
+              "stat": "L"
+            },
+            "how": {
+              "agg": "sum",
+              "dir": "most"
+            },
+            "label": "most defeats"
+          }
+        ]
+      },
+      "unit": "games remaining at clinch; losses in a season",
+      "assertions": [
+        {
+          "role": "headline",
+          "subject": "Southampton",
+          "season": "2024-25",
+          "kind": "clinch",
+          "expected": {
+            "games_left": 7,
+            "date": "2025-04-06"
+          },
+          "rank": 1,
+          "checkable": "full",
+          "why": "season visible; rank against 1992-2002 is not"
+        },
+        {
+          "role": "headline",
+          "subject": "Southampton",
+          "season": "2024-25",
+          "kind": "team-season",
+          "expected": {
+            "points": 12,
+            "L": 30
+          },
+          "rank": 1,
+          "checkable": "full"
+        },
+        {
+          "role": "context",
+          "subject": "Derby County",
+          "season": "2007-08",
+          "kind": "clinch",
+          "variant": "by calendar date",
+          "expected": {
+            "date": "2008-03-29"
+          },
+          "rank": 1,
+          "checkable": "full",
+          "why": "earliest by date is still Derby's"
+        },
+        {
+          "role": "context",
+          "subject": "Stoke City",
+          "season": "1984-85",
+          "kind": "team-season",
+          "expected": {
+            "L": 31
+          },
+          "checkable": "no",
+          "why": "top-flight record"
+        }
+      ],
+      "ledger_view": {
+        "can_see": "both seasons and their clinch moments",
+        "cannot_see": "1992-2002 clinch dates; Stoke 1984-85"
+      },
+      "era_wall": "reproducible-partial",
+      "status": "publisher-definition-differs",
+      "status_reason": "'earliest' names Southampton by games remaining and Derby by date; the gate pins both and the site must say which it means (games, matching the player 'fastest to')",
+      "definition_diffs": [
+        "earliest-by-date-vs-games-remaining",
+        "pl-era-vs-top-flight",
+        "clinch-moment"
+      ]
+    },
+    {
+      "id": "wolves-2025-26-start",
+      "corpus_ref": "A2#29",
+      "claim": "Wolves, worst start in Premier League history (2025-26)",
+      "publisher": "Opta Analyst; NBC table",
+      "url": [
+        "https://theanalyst.com/articles/wolves-worst-premier-league-team-records",
+        "https://theanalyst.com/articles/worst-starts-premier-league-season",
+        "https://www.nbcsports.com/premier-league-table-2025-26-season-standings"
+      ],
+      "claim_date": "2025-12-04",
+      "as_of": "2026-06-30",
+      "scope": {
+        "competitions": [
+          "eng.1"
+        ],
+        "label": "PL; top-flight comparison for the winless start",
+        "publisher_era_floor": "1992-93",
+        "stages": "league"
+      },
+      "query": {
+        "who": {
+          "kind": "team",
+          "unit": "team-seasons"
+        },
+        "stat": {
+          "stat": "points"
+        },
+        "how": {
+          "agg": "sum",
+          "dir": "fewest"
+        },
+        "window": {
+          "seq": "team-games-of-season",
+          "n": 14
+        },
+        "field": {
+          "competitions": [
+            "eng.1"
+          ],
+          "since": "1992-93",
+          "label": "PL all-time"
+        }
+      },
+      "unit": "points through the team's first N league games; winless start length",
+      "assertions": [
+        {
+          "role": "headline",
+          "subject": "Wolverhampton Wanderers",
+          "season": "2025-26",
+          "kind": "first-n",
+          "n": 14,
+          "expected": {
+            "points": 2,
+            "GD": -22,
+            "L": 12
+          },
+          "checkable": "full",
+          "source_note": "Analyst 2025-12-04 (WebFetch 2026-10-21)"
+        },
+        {
+          "role": "headline",
+          "subject": "Wolverhampton Wanderers",
+          "season": "2025-26",
+          "kind": "first-n",
+          "n": 18,
+          "expected": {
+            "points": 2
+          },
+          "checkable": "full",
+          "source_note": "Analyst 2026-08-07: 'over the first 18 MDs (2)'"
+        },
+        {
+          "role": "headline",
+          "subject": "Wolverhampton Wanderers",
+          "season": "2025-26",
+          "kind": "winless-start",
+          "expected": 19,
+          "first_win": {
+            "tgn": 20,
+            "match": "Wolves 3-0 West Ham (home), early Jan 2026"
+          },
+          "checkable": "full",
+          "source_note": "derived: 2 points from 18, then 1-1 at Man Utd on 2025-12-30 (assumed matchday 19), then the West Ham win. The corpus says '18 games without a win' and '19 before their first win'; this gate reads it as 19 winless, first win in game 20. Ledger decides; if the Man Utd draw was game 18, flip to 18/19"
+        },
+        {
+          "role": "headline",
+          "subject": "Wolverhampton Wanderers",
+          "season": "2025-26",
+          "kind": "run",
+          "test": "loss",
+          "expected": 11,
+          "checkable": "full"
+        },
+        {
+          "role": "headline",
+          "subject": "Wolverhampton Wanderers",
+          "season": "2025-26",
+          "kind": "team-season",
+          "expected": {
+            "points": 20,
+            "W": 3,
+            "D": 11,
+            "L": 24
+          },
+          "checkable": "full"
+        },
+        {
+          "role": "headline",
+          "subject": "Wolverhampton Wanderers",
+          "season": "2025-26",
+          "kind": "clinch",
+          "expected": {
+            "games_left": 5
+          },
+          "source_note": "date UNVERIFIED",
+          "checkable": "full"
+        },
+        {
+          "role": "context",
+          "subject": "Bolton Wanderers",
+          "season": "1902-03",
+          "kind": "winless-start",
+          "expected": 22,
+          "checkable": "no",
+          "why": "top-flight record (Analyst: 'failed to win any of their opening 22 games')"
+        },
+        {
+          "role": "context",
+          "subject": "Sheffield United",
+          "season": "2020-21",
+          "kind": "winless-start",
+          "expected": 17,
+          "checkable": "full",
+          "why": "the PL record Wolves broke"
+        }
+      ],
+      "ledger_view": {
+        "can_see": "the whole 2025-26 season",
+        "cannot_see": "1992-2002 starts; Bolton 1902-03"
+      },
+      "era_wall": "reproducible-partial",
+      "status": "reproducible-partial",
+      "status_reason": "season fully visible; 'worst in PL history' and the Bolton comparison reach past the floor",
+      "definition_diffs": [
+        "pl-era-vs-top-flight",
+        "clinch-moment"
+      ]
+    },
+    {
+      "id": "sunderland-15-and-19-points",
+      "corpus_ref": "A2#30",
+      "claim": "Sunderland 2005-06 (15 points) and 2002-03 (19 points)",
+      "publisher": "Opta Analyst",
+      "url": [
+        "https://theanalyst.com/articles/lowest-points-totals-in-pl-history/",
+        "https://theanalyst.com/articles/premier-league-earliest-relegations"
+      ],
+      "claim_date": "2025",
+      "as_of": "2006-06-30",
+      "scope": {
+        "competitions": [
+          "eng.1"
+        ],
+        "label": "PL",
+        "publisher_era_floor": "1992-93",
+        "stages": "league"
+      },
+      "query": {
+        "who": {
+          "kind": "team",
+          "unit": "team-seasons"
+        },
+        "stat": {
+          "stat": "points"
+        },
+        "how": {
+          "agg": "sum",
+          "dir": "fewest"
+        },
+        "window": {
+          "seq": "season"
+        },
+        "field": {
+          "competitions": [
+            "eng.1"
+          ],
+          "since": "1992-93",
+          "label": "PL all-time"
+        }
+      },
+      "unit": "points in a season",
+      "assertions": [
+        {
+          "role": "headline",
+          "subject": "Sunderland",
+          "season": "2005-06",
+          "kind": "team-season",
+          "expected": {
+            "points": 15,
+            "W": 3,
+            "D": 6,
+            "L": 29
+          },
+          "source_note": "D and L derived from 15 points, 3 wins, 38 games",
+          "checkable": "full"
+        },
+        {
+          "role": "headline",
+          "subject": "Sunderland",
+          "season": "2005-06",
+          "kind": "clinch",
+          "expected": {
+            "games_left": 5
+          },
+          "checkable": "full"
+        },
+        {
+          "role": "headline",
+          "subject": "Sunderland",
+          "season": "2002-03",
+          "kind": "team-season",
+          "expected": {
+            "points": 19,
+            "W": 4,
+            "D": 7,
+            "L": 27
+          },
+          "source_note": "D and L derived",
+          "checkable": "full"
+        },
+        {
+          "role": "headline",
+          "subject": "Sunderland",
+          "season": "2002-03",
+          "kind": "run",
+          "test": "loss",
+          "expected": 15,
+          "note": "lost their last 15",
+          "checkable": "full"
+        }
+      ],
+      "ledger_view": {
+        "can_see": "both seasons (2002-03 is the floor season)",
+        "cannot_see": "nothing the claim needs"
+      },
+      "era_wall": "reproducible-in-full",
+      "status": "reproducible-in-full",
+      "status_reason": "both seasons in era",
+      "definition_diffs": []
+    },
+    {
+      "id": "leicester-8-home-losses-no-goal",
+      "corpus_ref": "A2#31",
+      "claim": "Leicester become the first team in England's top four tiers to lose 8 straight home league games without scoring",
+      "publisher": "Opta Analyst",
+      "url": [
+        "https://theanalyst.com/articles/leicester-city-record-breaking-home-run"
+      ],
+      "claim_date": "2025-04",
+      "as_of": "2025-04-19",
+      "scope": {
+        "competitions": [
+          "eng.1",
+          "eng.2",
+          "eng.3",
+          "eng.4"
+        ],
+        "label": "league games, English tiers 1-4",
+        "publisher_era_floor": "1888-89",
+        "stages": "league"
+      },
+      "query": {
+        "who": {
+          "kind": "team",
+          "unit": "team-runs"
+        },
+        "stat": {
+          "test": [
+            {
+              "venue": "home",
+              "result": [
+                "L"
+              ],
+              "GF": 0
+            }
+          ]
+        },
+        "how": {
+          "agg": "streak",
+          "dir": "most",
+          "over": "home league games only"
+        },
+        "window": {
+          "seq": "team-league-games",
+          "filter": "home",
+          "span": "any"
+        },
+        "field": {
+          "competitions": [
+            "eng.1"
+          ],
+          "since": "1992-93",
+          "label": "PL (publisher: tiers 1-4, all time)"
+        }
+      },
+      "unit": "consecutive home league defeats without scoring",
+      "assertions": [
+        {
+          "role": "headline",
+          "subject": "Leicester City",
+          "season": "2024-25",
+          "kind": "run",
+          "expected": 8,
+          "GA_in_run": 21,
+          "checkable": "full"
+        },
+        {
+          "role": "context",
+          "subject": "Leicester City",
+          "kind": "run",
+          "expected": 9,
+          "source_note": "later extension, UNVERIFIED",
+          "checkable": "no",
+          "reason": "The extension to 9 postdates the claim (as_of 2025-04-19) and was UNVERIFIED in the factoid report; it is kept as a note, not asserted."
+        },
+        {
+          "role": "context",
+          "kind": "rank",
+          "field": "English tiers 1-4, all time",
+          "expected": 1,
+          "checkable": "no",
+          "why": "the ledger carries only the top flight from 2002-03"
+        }
+      ],
+      "ledger_view": {
+        "can_see": "Leicester's PL run",
+        "cannot_see": "tiers 2-4 and all pre-2002 history"
+      },
+      "era_wall": "reproducible-partial",
+      "status": "reproducible-partial",
+      "status_reason": "run visible; the field (four tiers) is not carried",
+      "definition_diffs": [
+        "english-tiers-1-4"
+      ]
+    },
+    {
+      "id": "arsenal-49-unbeaten",
+      "corpus_ref": "A2#32",
+      "claim": "Arsenal's Invincibles: 49 Premier League games unbeaten",
+      "publisher": "premierleague.com; Opta Analyst",
+      "url": [
+        "https://www.premierleague.com/en/news/59016",
+        "https://theanalyst.com/articles/the-longest-unbeaten-runs-in-the-premier-league/"
+      ],
+      "claim_date": "2024",
+      "as_of": "2004-10-24",
+      "scope": {
+        "competitions": [
+          "eng.1"
+        ],
+        "label": "PL league games only",
+        "publisher_era_floor": "1992-93",
+        "stages": "league"
+      },
+      "query": {
+        "who": {
+          "kind": "team",
+          "unit": "team-runs"
+        },
+        "stat": {
+          "test": [
+            {
+              "result": [
+                "W",
+                "D"
+              ]
+            }
+          ]
+        },
+        "how": {
+          "agg": "streak",
+          "dir": "most"
+        },
+        "window": {
+          "seq": "team-league-games",
+          "span": "any",
+          "crosses_seasons": true
+        },
+        "field": {
+          "competitions": [
+            "eng.1"
+          ],
+          "since": "1992-93",
+          "label": "PL all-time"
+        }
+      },
+      "unit": "consecutive PL matches without defeat",
+      "assertions": [
+        {
+          "role": "headline",
+          "subject": "Arsenal",
+          "kind": "run",
+          "expected": 49,
+          "span": {
+            "from": "2003-05-07",
+            "to": "2004-10-16",
+            "ended_by": "Manchester United 2-0 Arsenal, 2004-10-24",
+            "source_note": "corpus gives 7 May 2003 to 24 Oct 2004 (the defeat); the last unbeaten match date is derived, ledger confirms"
+          },
+          "seasons_spanned": [
+            "2002-03",
+            "2003-04",
+            "2004-05"
+          ],
+          "rank": 1,
+          "checkable": "full",
+          "why": "the run starts 2003-05-07, inside the 2002-03 floor season"
+        },
+        {
+          "role": "headline",
+          "subject": "Arsenal",
+          "season": "2003-04",
+          "kind": "team-season",
+          "expected": {
+            "W": 26,
+            "D": 12,
+            "L": 0,
+            "points": 90
+          },
+          "checkable": "full"
+        },
+        {
+          "role": "derived",
+          "subject": "Arsenal",
+          "kind": "run-split",
+          "expected": null,
+          "note": "the Analyst page contradicts itself on the run's W/D split; the ledger derives it and the gate records the derived value, citing no publisher",
+          "checkable": "full"
+        },
+        {
+          "role": "context",
+          "subject": "Nottingham Forest",
+          "kind": "run",
+          "expected": 42,
+          "field": "pre-PL top flight",
+          "checkable": "no"
+        }
+      ],
+      "ledger_view": {
+        "can_see": "the whole run, including its May 2003 start",
+        "cannot_see": "Forest's 42 (1977-78); any 1992-2002 PL run (none is longer per the record book)"
+      },
+      "era_wall": "reproducible-in-full",
+      "status": "reproducible-in-full",
+      "status_reason": "the claim is PL-only and the run is inside the ledger; the record book has no longer PL run before 2002",
+      "definition_diffs": []
+    },
+    {
+      "id": "leicester-2015-16-title",
+      "corpus_ref": "A2#33",
+      "claim": "Leicester win the title as 5000-1 outsiders",
+      "publisher": "Sky Sports",
+      "url": [
+        "https://www.skysports.com/football/news/30385/10283289/leicester-city-201516-premier-league-season-review"
+      ],
+      "claim_date": "2016-05",
+      "as_of": "2016-06-30",
+      "scope": {
+        "competitions": [
+          "eng.1"
+        ],
+        "label": "PL",
+        "publisher_era_floor": "1992-93",
+        "stages": "league"
+      },
+      "query": {
+        "who": {
+          "kind": "team",
+          "unit": "team-seasons"
+        },
+        "stat": {
+          "stat": "points"
+        },
+        "how": {
+          "agg": "sum",
+          "dir": "most"
+        },
+        "window": {
+          "seq": "season"
+        },
+        "field": {
+          "competitions": [
+            "eng.1"
+          ],
+          "since": "1992-93",
+          "label": "PL all-time"
+        }
+      },
+      "unit": "points; title margin; games left at title clinch",
+      "assertions": [
+        {
+          "role": "headline",
+          "subject": "Leicester City",
+          "season": "2015-16",
+          "kind": "team-season",
+          "expected": {
+            "points": 81,
+            "W": 23,
+            "D": 12,
+            "L": 3,
+            "margin": 10,
+            "position": 1
+          },
+          "source_note": "W/D/L UNVERIFIED in corpus (consistent with 81)",
+          "checkable": "full"
+        },
+        {
+          "role": "headline",
+          "subject": "Leicester City",
+          "season": "2015-16",
+          "kind": "clinch",
+          "expected": {
+            "games_left": 2
+          },
+          "checkable": "full",
+          "why": "clinched by another team's result"
+        },
+        {
+          "role": "context",
+          "kind": "odds",
+          "expected": "5000-1",
+          "checkable": "no",
+          "why": "narrative hook, not ledger data"
+        }
+      ],
+      "ledger_view": {
+        "can_see": "the whole season",
+        "cannot_see": "betting odds"
+      },
+      "era_wall": "reproducible-in-full",
+      "status": "reproducible-in-full",
+      "status_reason": "every numeric part is a 2015-16 team-season stat",
+      "definition_diffs": [
+        "clinch-moment"
+      ]
+    },
+    {
+      "id": "city-100-points",
+      "corpus_ref": "A2#34",
+      "claim": "Man City's Centurions: 100 points",
+      "publisher": "premierleague.com",
+      "url": [
+        "https://www.premierleague.com/en/news/666355"
+      ],
+      "claim_date": "2018-05",
+      "as_of": "2018-06-30",
+      "scope": {
+        "competitions": [
+          "eng.1"
+        ],
+        "label": "PL; points and wins also described as top-flight records",
+        "publisher_era_floor": "1992-93",
+        "stages": "league"
+      },
+      "query": {
+        "who": {
+          "kind": "team",
+          "unit": "team-seasons"
+        },
+        "stat": {
+          "stat": "points"
+        },
+        "how": {
+          "agg": "sum",
+          "dir": "most"
+        },
+        "window": {
+          "seq": "season"
+        },
+        "field": {
+          "competitions": [
+            "eng.1"
+          ],
+          "since": "1992-93",
+          "label": "PL all-time"
+        }
+      },
+      "unit": "points in a season",
+      "assertions": [
+        {
+          "role": "headline",
+          "subject": "Manchester City",
+          "season": "2017-18",
+          "kind": "team-season",
+          "expected": {
+            "points": 100,
+            "W": 32,
+            "D": 4,
+            "L": 2,
+            "GF": 106,
+            "GD": 79,
+            "GA": 27,
+            "margin": 19
+          },
+          "rank": 1,
+          "source_note": "D, L, GA derived",
+          "checkable": "full"
+        },
+        {
+          "role": "headline",
+          "subject": "Manchester City",
+          "season": "2017-18",
+          "kind": "run",
+          "test": "win",
+          "expected": 18,
+          "checkable": "full"
+        },
+        {
+          "role": "previous-holder",
+          "subject": "Chelsea",
+          "season": "2004-05",
+          "kind": "team-season",
+          "expected": {
+            "points": 95
+          },
+          "checkable": "full",
+          "why": "the previous PL record is in era, so no pre-floor season can outrank it"
+        },
+        {
+          "role": "context",
+          "kind": "rank",
+          "field": "English top flight",
+          "expected": 1,
+          "checkable": "no"
+        }
+      ],
+      "ledger_view": {
+        "can_see": "City 2017-18 and Chelsea 2004-05",
+        "cannot_see": "top-flight history"
+      },
+      "era_wall": "reproducible-partial",
+      "status": "reproducible-partial",
+      "status_reason": "PL record fully visible; the top-flight framing is not",
+      "definition_diffs": [
+        "pl-era-vs-top-flight",
+        "42-game-seasons"
+      ]
+    },
+    {
+      "id": "liverpool-title-7-games-left",
+      "corpus_ref": "A2#35a",
+      "claim": "Liverpool win the title with 7 games to spare (2019-20)",
+      "publisher": "premierleague.com",
+      "url": [
+        "https://www.premierleague.com/news/1745296"
+      ],
+      "claim_date": "2020-06-25",
+      "as_of": "2020-07-31",
+      "scope": {
+        "competitions": [
+          "eng.1"
+        ],
+        "label": "PL; record by games remaining, not by date",
+        "publisher_era_floor": "1992-93",
+        "stages": "league"
+      },
+      "query": {
+        "who": {
+          "kind": "team",
+          "unit": "team-seasons"
+        },
+        "stat": {
+          "stat": "games_left_at_title_clinch"
+        },
+        "how": {
+          "agg": "value",
+          "dir": "most"
+        },
+        "window": {
+          "seq": "season"
+        },
+        "field": {
+          "competitions": [
+            "eng.1"
+          ],
+          "since": "1992-93",
+          "label": "PL all-time"
+        }
+      },
+      "unit": "games remaining at title clinch",
+      "assertions": [
+        {
+          "role": "headline",
+          "subject": "Liverpool",
+          "season": "2019-20",
+          "kind": "clinch",
+          "expected": {
+            "games_left": 7,
+            "date": "2020-06-25"
+          },
+          "rank": 1,
+          "checkable": "full",
+          "why": "clinched when Chelsea beat City; the 2020 suspension makes the date meaningless as a record"
+        },
+        {
+          "role": "headline",
+          "subject": "Liverpool",
+          "season": "2019-20",
+          "kind": "team-season",
+          "expected": {
+            "points": 99
+          },
+          "source_note": "UNVERIFIED in corpus",
+          "checkable": "full"
+        }
+      ],
+      "ledger_view": {
+        "can_see": "the season",
+        "cannot_see": "1992-2002 title clinches (Man Utd 2000-01 is the one to worry about)"
+      },
+      "era_wall": "reproducible-partial",
+      "status": "reproducible-partial",
+      "status_reason": "rank 'record' includes pre-floor seasons",
+      "definition_diffs": [
+        "earliest-by-date-vs-games-remaining",
+        "clinch-moment"
+      ]
+    },
+    {
+      "id": "city-four-in-a-row",
+      "corpus_ref": "A2#35b",
+      "claim": "Man City win a fourth straight title; no team in English football history had done it",
+      "publisher": "ESPN",
+      "url": [
+        "https://www.espn.com/soccer/story/_/id/40178380/manchester-city-make-history-fourth-straight-premier-league-title"
+      ],
+      "claim_date": "2024-05-19",
+      "as_of": "2024-06-30",
+      "scope": {
+        "competitions": [
+          "eng.1"
+        ],
+        "label": "English top flight since 1888",
+        "publisher_era_floor": "1888-89",
+        "stages": "league"
+      },
+      "query": {
+        "who": {
+          "kind": "team",
+          "unit": "team-runs"
+        },
+        "stat": {
+          "test": [
+            {
+              "position": 1
+            }
+          ]
+        },
+        "how": {
+          "agg": "streak",
+          "dir": "most"
+        },
+        "window": {
+          "seq": "seasons",
+          "span": "any"
+        },
+        "field": {
+          "competitions": [
+            "eng.1"
+          ],
+          "since": "1888-89",
+          "label": "English top flight"
+        }
+      },
+      "unit": "consecutive titles (seasons)",
+      "assertions": [
+        {
+          "role": "headline",
+          "subject": "Manchester City",
+          "kind": "run",
+          "expected": 4,
+          "seasons": [
+            "2020-21",
+            "2021-22",
+            "2022-23",
+            "2023-24"
+          ],
+          "checkable": "full"
+        },
+        {
+          "role": "headline",
+          "subject": "Manchester City",
+          "season": "2023-24",
+          "kind": "team-season",
+          "expected": {
+            "points": 91,
+            "position": 1
+          },
+          "checkable": "full"
+        },
+        {
+          "role": "runner-up",
+          "subject": "Arsenal",
+          "season": "2023-24",
+          "kind": "team-season",
+          "expected": {
+            "points": 89,
+            "position": 2
+          },
+          "checkable": "full"
+        },
+        {
+          "role": "context",
+          "kind": "rank",
+          "field": "English top flight since 1888",
+          "expected": 1,
+          "checkable": "no"
+        }
+      ],
+      "ledger_view": {
+        "can_see": "the four seasons",
+        "cannot_see": "the 1888-2002 record book that makes it 'first'"
+      },
+      "era_wall": "reproducible-partial",
+      "status": "reproducible-partial",
+      "status_reason": "streak visible; the 'first ever' field is top flight since 1888",
+      "definition_diffs": [
+        "pl-era-vs-top-flight"
+      ]
+    },
+    {
+      "id": "four-9-0-wins",
+      "corpus_ref": "A2 extras",
+      "claim": "Four 9-0 wins in Premier League history, Southampton on the losing end twice",
+      "publisher": "Opta Analyst",
+      "url": [
+        "https://theanalyst.com/articles/biggest-premier-league-wins"
+      ],
+      "claim_date": "2022",
+      "as_of": "2026-10-20",
+      "scope": {
+        "competitions": [
+          "eng.1"
+        ],
+        "label": "PL",
+        "publisher_era_floor": "1992-93",
+        "stages": "league"
+      },
+      "query": {
+        "who": {
+          "kind": "team",
+          "unit": "team-matches"
+        },
+        "stat": {
+          "stat": "GD_in_match"
+        },
+        "how": {
+          "agg": "value",
+          "dir": "most"
+        },
+        "window": {
+          "seq": "match"
+        },
+        "field": {
+          "competitions": [
+            "eng.1"
+          ],
+          "since": "1992-93",
+          "label": "PL all-time"
+        }
+      },
+      "unit": "single-match winning margin",
+      "assertions": [
+        {
+          "role": "headline",
+          "kind": "count",
+          "expected": 4,
+          "checkable": "partial",
+          "why": "one of the four (Man Utd 9-0 Ipswich, 1995) is pre-floor; the visible count is 3"
+        },
+        {
+          "role": "derived",
+          "kind": "visible-count",
+          "expected": 3,
+          "matches": [
+            "Southampton 0-9 Leicester (2019-10-25)",
+            "Southampton 0-9 Man Utd (2021-02-02)",
+            "Liverpool 9-0 Bournemouth (2022-08-27)"
+          ],
+          "source_note": "match list from general knowledge, not the corpus; confirm against the Analyst page",
+          "checkable": "full"
+        }
+      ],
+      "ledger_view": {
+        "can_see": "three of four",
+        "cannot_see": "Man Utd 9-0 Ipswich (1995)"
+      },
+      "era_wall": "reproducible-partial",
+      "status": "reproducible-partial",
+      "status_reason": "one match pre-floor",
+      "definition_diffs": []
+    },
+    {
+      "id": "spurs-10-losses-after-leading-by-2",
+      "corpus_ref": "A2 extras",
+      "claim": "Spurs became the first club to lose 10 Premier League games after leading by 2 or more goals",
+      "publisher": "Sky Sports",
+      "url": [
+        "https://www.skysports.com/football/news/11675/13229943"
+      ],
+      "claim_date": "2024",
+      "as_of": "2026-10-20",
+      "scope": {
+        "competitions": [
+          "eng.1"
+        ],
+        "label": "PL",
+        "publisher_era_floor": "1992-93",
+        "stages": "league"
+      },
+      "query": {
+        "who": {
+          "kind": "team",
+          "unit": "careers"
+        },
+        "stat": {
+          "test": [
+            {
+              "result": [
+                "L"
+              ],
+              "max_lead_in_match": 2
+            }
+          ]
+        },
+        "how": {
+          "agg": "count",
+          "dir": "most"
+        },
+        "window": {
+          "seq": "team-league-games",
+          "span": "all"
+        },
+        "field": {
+          "competitions": [
+            "eng.1"
+          ],
+          "since": "1992-93",
+          "label": "PL all-time"
+        }
+      },
+      "unit": "count of matches lost after leading by 2+",
+      "assertions": [
+        {
+          "role": "headline",
+          "subject": "Tottenham Hotspur",
+          "kind": "count",
+          "expected": 10,
+          "checkable": "partial",
+          "why": "needs in-match score state from goal clocks (keyEvents); Spurs' 1992-2002 matches are invisible"
+        }
+      ],
+      "ledger_view": {
+        "can_see": "2002-03 onward, if goal keyEvents are reconciled to the score in every match",
+        "cannot_see": "1992-2002"
+      },
+      "era_wall": "reproducible-partial",
+      "status": "reproducible-partial",
+      "status_reason": "career count straddles the floor; needs a new derived per-match stat",
+      "definition_diffs": []
+    },
+    {
+      "id": "spurs-17th-twice",
+      "corpus_ref": "A2 extras",
+      "claim": "Spurs finished 17th in both 2024-25 and 2025-26",
+      "publisher": "Sky Sports",
+      "url": [
+        "https://www.skysports.com/football/news/11095/13546772"
+      ],
+      "claim_date": "2026-05",
+      "as_of": "2026-06-30",
+      "scope": {
+        "competitions": [
+          "eng.1"
+        ],
+        "label": "PL",
+        "publisher_era_floor": "1992-93",
+        "stages": "league"
+      },
+      "query": {
+        "who": {
+          "kind": "team",
+          "unit": "team-seasons"
+        },
+        "stat": {
+          "stat": "position"
+        },
+        "how": {
+          "agg": "value"
+        },
+        "window": {
+          "seq": "season"
+        },
+        "field": {
+          "competitions": [
+            "eng.1"
+          ],
+          "since": "1992-93",
+          "label": "PL"
+        }
+      },
+      "unit": "final league position",
+      "assertions": [
+        {
+          "role": "headline",
+          "subject": "Tottenham Hotspur",
+          "season": "2024-25",
+          "kind": "team-season",
+          "expected": {
+            "position": 17
+          },
+          "checkable": "full"
+        },
+        {
+          "role": "headline",
+          "subject": "Tottenham Hotspur",
+          "season": "2025-26",
+          "kind": "team-season",
+          "expected": {
+            "position": 17
+          },
+          "checkable": "full"
+        }
+      ],
+      "ledger_view": {
+        "can_see": "both seasons",
+        "cannot_see": "nothing"
+      },
+      "era_wall": "reproducible-in-full",
+      "status": "reproducible-in-full",
+      "status_reason": "position derives from points, GD, GF (and deductions)",
+      "definition_diffs": [
+        "points-deductions"
+      ]
+    },
+    {
+      "id": "west-ham-relegated-39",
+      "corpus_ref": "A2 extras",
+      "claim": "West Ham were relegated in 2025-26 on 39 points",
+      "publisher": "ESPN",
+      "url": [
+        "https://www.espn.com/soccer/story/_/id/48804476"
+      ],
+      "claim_date": "2026-05",
+      "as_of": "2026-06-30",
+      "scope": {
+        "competitions": [
+          "eng.1"
+        ],
+        "label": "PL",
+        "publisher_era_floor": "1992-93",
+        "stages": "league"
+      },
+      "query": {
+        "who": {
+          "kind": "team",
+          "unit": "team-seasons"
+        },
+        "stat": {
+          "stat": "points"
+        },
+        "how": {
+          "agg": "sum"
+        },
+        "window": {
+          "seq": "season"
+        },
+        "field": {
+          "competitions": [
+            "eng.1"
+          ],
+          "since": "1992-93",
+          "label": "PL relegated teams"
+        }
+      },
+      "unit": "points in a relegation season",
+      "assertions": [
+        {
+          "role": "headline",
+          "subject": "West Ham United",
+          "season": "2025-26",
+          "kind": "team-season",
+          "expected": {
+            "points": 39,
+            "position_min": 18
+          },
+          "checkable": "full"
+        }
+      ],
+      "ledger_view": {
+        "can_see": "the season",
+        "cannot_see": "nothing"
+      },
+      "era_wall": "reproducible-in-full",
+      "status": "reproducible-in-full",
+      "status_reason": "single team-season",
+      "definition_diffs": [
+        "points-deductions"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+# Raw third-party responses (~10 GB+) and long-form derived data live in the private
+# store DrewHoo/football-comparator-data (see pipeline/docs/data-store.md). Never commit them.
+data/raw/
+data/index/
+data/ledger/
+
+# The compact per-competition ledger is committed once it's built at full scope.
+# Until then it stays local.
+
+# Probe outputs that data/index/ supersedes
+research/espn/out/
+research/wayback/out/
+
+# Correspondence drafts
+research/emails/
+
+# Local tooling
+node_modules/
+dist/
+.DS_Store
+*.tmp
+*.log.bak
+.claude/settings.local.json

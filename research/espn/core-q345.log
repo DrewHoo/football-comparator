@@ -1,0 +1,61 @@
+slug? fifa.confederations {"id":"4006","name":"FIFA Confederations Cup","abbr":"Confederations Cup"}
+slug? global.champs_cup {"id":"8307","name":"International Champions Cup","abbr":"Champions Cup"}
+slug? global.world_football_challenge {"id":"8203","name":"WORLD FOOTBALL CHALLENGE","abbr":"WFC"}
+slug? club.friendly {"id":"19834","name":"Club Friendly","abbr":"Club Friendly"}
+slug? fifa.worldq {"name":"World Cup Qualifying","abbr":"WCQ"}
+slug? fifa.worldq.playoff null
+slug? fifa.worldq.uefa.playoff null
+slug? uefa.euroq.playoff null
+slug? uefa.euro.qual null
+slug? uefa.euro_qual null
+slug? fifa.friendlies null
+slug? intl.friendly null
+slug? global.friendly null
+slug? fifa.world.qual null
+slug? conmebol.americaq null
+slug? concacaf.goldq null
+slug? caf.nationsq null
+slug? afc.asian null
+slug? afc.asianq null
+slug? fifa.olympicsq null
+slug? fifa.worldq.intercontinental null
+slug? uefa.nations_qual null
+slug? fifa.worldq.uefa.ply null
+slug? afc.asian.cupq null
+seasons fifa.friendly 26 2001 2026
+seasons fifa.worldq.uefa 12 2006 2025
+seasons fifa.worldq.conmebol 12 2006 2023
+seasons fifa.worldq.concacaf 13 2006 2024
+seasons fifa.worldq.caf 12 2006 2023
+seasons fifa.worldq.afc 13 2006 2023
+seasons uefa.euroq 8 2004 2023
+seasons uefa.nations 5 2018 2026
+seasons conmebol.america 9 2001 2024
+seasons caf.nations 12 2004 2025
+seasons caf.nations_qual 7 2014 2026
+seasons concacaf.gold 12 2003 2025
+seasons afc.asian.cup 6 2007 2027
+seasons afc.cupq 6 2006 2024
+seasons fifa.confederations 6 2003 2017
+seasons fifa.world 23 1930 2026
+sb 20041013 fifa.worldq.uefa 21 North Macedonia at Andorra; Albania at Kazakhstan; Malta at Bulgaria; Estonia at Latvia
+sb 20041013 fifa.worldq.concacaf 6 Panama at United States; El Salvador at Jamaica; St. Vincent and the Grenadines at St. Kitts and Nevis; Trinidad and Tobago at Mexico
+sb 20041013 fifa.worldq.conmebol 3 Peru at Paraguay; Argentina at Chile; Colombia at Brazil
+Q3 Portugal 2004 11 2004-02-18 fifa.friendly SC | 2004-03-31 fifa.friendly SC | 2004-04-28 fifa.friendly -- | 2004-05-29 fifa.friendly -- | 2004-06-05 fifa.friendly -- | 2004-06-12 uefa.euro SC | 2004-06-16 uefa.euro SC | 2004-06-20 uefa.euro SC | 2004-06-24 uefa.euro SC | 2004-06-30 uefa.euro SC | 2004-07-04 uefa.euro SC
+Q3 Portugal 2006 11 2006-03-01 fifa.friendly SC | 2006-05-27 fifa.friendly SC | 2006-06-03 fifa.friendly SC | 2006-06-11 fifa.world SC | 2006-06-17 fifa.world SC | 2006-06-21 fifa.world SC | 2006-06-25 fifa.world SC | 2006-07-01 fifa.world SC | 2006-07-05 fifa.world SC | 2006-07-08 fifa.world SC | 2006-09-01 fifa.friendly --
+Q3 Portugal 2008 13 2008-02-06 fifa.friendly SC | 2008-03-26 fifa.friendly SC | 2008-05-31 fifa.friendly SC | 2008-06-07 uefa.euro SC | 2008-06-11 uefa.euro SC | 2008-06-15 uefa.euro SC | 2008-06-19 uefa.euro SC | 2008-08-20 fifa.friendly SC | 2008-09-06 fifa.worldq.uefa SC | 2008-09-10 fifa.worldq.uefa SC | 2008-10-11 fifa.worldq.uefa SC | 2008-10-15 fifa.worldq.uefa SC | 2008-11-20 fifa.friendly --
+Q3 Argentina 2005 17 2005-02-09 fifa.friendly SC | 2005-03-10 fifa.friendly -- | 2005-03-26 fifa.worldq.conmebol -- | 2005-03-30 fifa.worldq.conmebol -- | 2005-06-04 fifa.worldq.conmebol -- | 2005-06-09 fifa.worldq.conmebol -- | 2005-06-15 fifa.confederations SC | 2005-06-18 fifa.confederations SC | 2005-06-21 fifa.confederations SC | 2005-06-26 fifa.confederations SC | 2005-06-29 fifa.confederations SC | 2005-08-17 fifa.friendly -- | 2005-09-03 fifa.worldq.conmebol SC | 2005-10-09 fifa.worldq.conmebol SC | 2005-10-13 fifa.worldq.conmebol SC | 2005-11-12 fifa.friendly SC | 2005-11-16 fifa.friendly --
+Q3 Argentina 2007 13 2007-02-07 fifa.friendly SC | 2007-04-19 fifa.friendly -- | 2007-05-20 fifa.friendly -- | 2007-06-02 fifa.friendly -- | 2007-06-05 fifa.friendly -- | 2007-06-29 conmebol.america SC | 2007-07-03 conmebol.america SC | 2007-07-06 conmebol.america SC | 2007-07-08 conmebol.america SC | 2007-07-12 conmebol.america SC | 2007-07-15 conmebol.america SC | 2007-08-22 fifa.friendly -- | 2007-09-11 fifa.friendly --
+pools 1338 895
+Q1intl friendly 39145 2002-02-12 Honduras at Slovenia site [14,3] core {"215":{"n":3,"distinct":3,"starters":3,"ok":false},"472":{"n":14,"distinct":14,"starters":11,"ok":true}}
+Q1intl friendly 45289 2002-03-27 Belgium at Greece site [2,2] core {"455":{"n":2,"distinct":2,"starters":2,"ok":false},"459":{"n":2,"distinct":2,"starters":2,"ok":false}}
+Q1intl friendly 57480 2002-08-21 Slovakia at Czechia site [2,1] core {"450":{"n":2,"distinct":2,"starters":2,"ok":false},"468":{"n":1,"distinct":1,"starters":1,"ok":false}}
+Q1intl friendly 71237 2002-11-20 Bulgaria at Spain site [18,19] core {"164":{"n":18,"distinct":18,"starters":7,"ok":false},"462":{"n":19,"distinct":19,"starters":11,"ok":true}}
+Q1intl friendly 97883 2003-05-09 Mexico at United States site [0,0] core {"203":{"n":0,"distinct":0,"starters":0,"ok":false},"660":{"n":0,"distinct":0,"starters":0,"ok":false}}
+Q1intl friendly 98559 2003-07-06 El Salvador at Mexico site [1,2] core {"203":{"n":1,"distinct":1,"starters":1,"ok":false},"2650":{"n":2,"distinct":2,"starters":2,"ok":false}}
+Q1intl friendly 115783 2003-08-20 Kazakhstan at Portugal site [1,0] core {"482":{"n":1,"distinct":1,"starters":0,"ok":false},"2619":{"n":0,"distinct":0,"starters":0,"ok":false}}
+Q1intl friendly 148440 2004-04-01 Costa Rica at Mexico site [2,0] core {"203":{"n":2,"distinct":2,"starters":2,"ok":false},"214":{"n":0,"distinct":0,"starters":0,"ok":false}}
+Q1intl friendly 150747 2004-04-29 Peru at Chile site [1,1] core {"207":{"n":1,"distinct":1,"starters":1,"ok":false},"211":{"n":1,"distinct":1,"starters":1,"ok":false}}
+Q1intl friendly 157660 2004-08-12 Trinidad and Tobago at Guatemala site [4,1] core {"2627":{"n":1,"distinct":1,"starters":1,"ok":false},"2652":{"n":4,"distinct":4,"starters":4,"ok":false}}
+Q1intl uefaQual 60630 2002-09-08 North Macedonia at Liechtenstein site [1,1] core {"463":{"n":1,"distinct":1,"starters":1,"ok":false},"589":{"n":1,"distinct":1,"starters":1,"ok":false}}
+{"hits":46,"misses":478,"retries":0}

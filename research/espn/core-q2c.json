@@ -1,0 +1,243 @@
+[
+ {
+  "p": "ronaldo",
+  "l": "eng.1/seasons/2003",
+  "inStatlog": true,
+  "appearances": 28,
+  "starts": 14,
+  "subIns": 14,
+  "minutes": 0,
+  "goals": 4,
+  "assists": 4
+ },
+ {
+  "p": "ronaldo",
+  "l": "eng.1/seasons/2007",
+  "inStatlog": true,
+  "appearances": 34,
+  "starts": 31,
+  "subIns": 3,
+  "minutes": 1854,
+  "goals": 31,
+  "assists": 7
+ },
+ {
+  "p": "ronaldo",
+  "l": "uefa.champions/seasons/2007",
+  "inStatlog": true,
+  "appearances": 11,
+  "starts": 11,
+  "subIns": 0,
+  "minutes": 569,
+  "goals": 8,
+  "assists": 1
+ },
+ {
+  "p": "ronaldo",
+  "l": "esp.1/seasons/2011",
+  "inStatlog": true,
+  "appearances": 38,
+  "starts": 37,
+  "subIns": 1,
+  "minutes": 3354,
+  "goals": 46,
+  "assists": 12
+ },
+ {
+  "p": "ronaldo",
+  "l": "uefa.euro/seasons/2004",
+  "inStatlog": true,
+  "appearances": 6,
+  "starts": 4,
+  "subIns": 2,
+  "minutes": 0,
+  "goals": 2,
+  "assists": 2
+ },
+ {
+  "p": "ronaldo",
+  "l": "fifa.friendly/seasons/2004",
+  "inStatlog": true,
+  "appearances": 2,
+  "starts": 0,
+  "subIns": 2,
+  "minutes": 0,
+  "goals": 0,
+  "assists": 0
+ },
+ {
+  "p": "messi",
+  "l": "esp.1/seasons/2004",
+  "inStatlog": true,
+  "appearances": 7,
+  "starts": 0,
+  "subIns": 7,
+  "minutes": 64,
+  "goals": 1,
+  "assists": 0
+ },
+ {
+  "p": "messi",
+  "l": "esp.1/seasons/2005",
+  "inStatlog": true,
+  "appearances": 17,
+  "starts": 11,
+  "subIns": 6,
+  "minutes": 0,
+  "goals": 6,
+  "assists": 0
+ },
+ {
+  "p": "messi",
+  "l": "uefa.champions/seasons/2005",
+  "inStatlog": false
+ },
+ {
+  "p": "messi",
+  "l": "esp.1/seasons/2008",
+  "inStatlog": true,
+  "appearances": 31,
+  "starts": 27,
+  "subIns": 4,
+  "minutes": 2516,
+  "goals": 23,
+  "assists": 11
+ },
+ {
+  "p": "messi",
+  "l": "fifa.world/seasons/2010",
+  "inStatlog": true,
+  "appearances": 5,
+  "starts": 5,
+  "subIns": 0,
+  "minutes": 450,
+  "goals": 0,
+  "assists": 1
+ },
+ {
+  "p": "messi",
+  "l": "fifa.world/seasons/2014",
+  "inStatlog": true,
+  "appearances": 7,
+  "starts": 7,
+  "subIns": 0,
+  "minutes": 693,
+  "goals": 4,
+  "assists": 1
+ },
+ {
+  "p": "henry",
+  "l": "eng.1/seasons/2002",
+  "inStatlog": true,
+  "appearances": 37,
+  "starts": 37,
+  "subIns": 0,
+  "minutes": 0,
+  "goals": 24,
+  "assists": 23
+ },
+ {
+  "p": "henry",
+  "l": "eng.1/seasons/2003",
+  "inStatlog": true,
+  "appearances": 37,
+  "starts": 37,
+  "subIns": 0,
+  "minutes": 0,
+  "goals": 30,
+  "assists": 9
+ },
+ {
+  "p": "henry",
+  "l": "esp.1/seasons/2008",
+  "inStatlog": true,
+  "appearances": 30,
+  "starts": 25,
+  "subIns": 5,
+  "minutes": 2119,
+  "goals": 19,
+  "assists": 8
+ },
+ {
+  "p": "henry",
+  "l": "uefa.champions/seasons/2002",
+  "inStatlog": false
+ },
+ {
+  "p": "totti",
+  "l": "ita.1/seasons/2003",
+  "inStatlog": true,
+  "appearances": 32,
+  "starts": 32,
+  "subIns": 0,
+  "minutes": 0,
+  "goals": 20,
+  "assists": 0
+ },
+ {
+  "p": "totti",
+  "l": "ita.1/seasons/2006",
+  "inStatlog": true,
+  "appearances": 35,
+  "starts": 35,
+  "subIns": 0,
+  "minutes": 0,
+  "goals": 26,
+  "assists": 9
+ },
+ {
+  "p": "totti",
+  "l": "ita.1/seasons/2010",
+  "inStatlog": true,
+  "appearances": 33,
+  "starts": 30,
+  "subIns": 3,
+  "minutes": 2434,
+  "goals": 15,
+  "assists": 8
+ },
+ {
+  "p": "haaland",
+  "l": "eng.1/seasons/2022",
+  "inStatlog": true,
+  "appearances": 35,
+  "starts": 33,
+  "subIns": 2,
+  "minutes": 2779,
+  "goals": 36,
+  "assists": 8
+ },
+ {
+  "p": "haaland",
+  "l": "uefa.champions/seasons/2022",
+  "inStatlog": true,
+  "appearances": 11,
+  "starts": 11,
+  "subIns": 0,
+  "minutes": 846,
+  "goals": 12,
+  "assists": 1
+ },
+ {
+  "p": "haaland",
+  "l": "eng.1/seasons/2024",
+  "inStatlog": true,
+  "appearances": 31,
+  "starts": 31,
+  "subIns": 0,
+  "minutes": 2742,
+  "goals": 22,
+  "assists": 3
+ },
+ {
+  "p": "haaland",
+  "l": "aut.1/seasons/2019",
+  "inStatlog": true,
+  "appearances": 14,
+  "starts": 11,
+  "subIns": 3,
+  "minutes": 985,
+  "goals": 16,
+  "assists": 0
+ }
+]

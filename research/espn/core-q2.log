@@ -1,0 +1,113 @@
+plays 131335 {"n":12,"withParticipants":10,"subs":5,"goals":4,"sample":[{"t":"Goal","clock":"16'","parts":["leagues/ita.1/seasons/2003/athletes/10293"]},{"t":"Goal","clock":"33'","parts":["leagues/ita.1/seasons/2003/athletes/12036"]},{"t":"Goal","clock":"39'","parts":["leagues/ita.1/seasons/2003/athletes/10544"]}]}
+plays 188764 {"n":108,"withParticipants":103,"subs":6,"goals":5,"sample":[{"t":"Foul","clock":"2'","parts":["leagues/uefa.champions/seasons/2005/athletes/11784"]},{"t":"Foul","clock":"3'","parts":["leagues/uefa.champions/seasons/2005/athletes/12693"]},{"t":"Foul","clock":"4'","parts":["leagues/uefa.champions/seasons/2005/athletes/24576"]}]}
+plays 264119 {"n":0,"withParticipants":0,"subs":0,"goals":0,"sample":[]}
+plays 383241 {"n":0,"withParticipants":0,"subs":0,"goals":0,"sample":[]}
+haaland 253989 Erling Haaland
+ronaldo 2002 count 4 uefa.champions|2250:1/2 uefa.uefa|2250:0/2
+ronaldo 2003 count 56 eng.charity|360:0/1 eng.1|360:33/39 uefa.champions|360:7/8 eng.league_cup|360:1/2 eng.fa|360:5/6
+ronaldo 2004 count 78 fifa.friendly|482:2/5 uefa.euro|482:6/6 eng.charity|360:0/1 uefa.champions|360:9/11 eng.1|360:35/43 eng.league_cup|360:2/5 eng.fa|360:7/7
+ronaldo 2005 count 79 fifa.friendly|482:2/5 uefa.champions|360:8/8 eng.1|360:34/55 eng.league_cup|360:4/6 eng.fa|360:2/5
+ronaldo 2006 count 84 fifa.worldq.uefa|482:12/12 fifa.friendly|482:3/4 fifa.world|482:7/7 eng.1|360:35/39 uefa.champions|360:11/12 eng.league_cup|360:1/2 eng.fa|360:7/8
+ronaldo 2007 count 58 eng.charity|360:0/1 eng.1|360:34/39 uefa.champions|360:12/13 eng.league_cup|360:0/1 eng.fa|360:3/4
+ronaldo 2008 count 94 uefa.euroq|482:13/14 fifa.friendly|482:1/5 uefa.euro|482:4/4 eng.charity|360:0/1 eng.1|360:34/38 uefa.super_cup|360:0/1 fifa.worldq.uefa|482:3/5 uefa.champions|360:12/13 eng.league_cup|360:4/6 fifa.cwc|360:2/2 eng.fa|360:2/5
+ronaldo 2009 count 59 fifa.friendly|482:0/4 fifa.worldq.uefa|482:4/7 esp.1|86:29/38 uefa.champions|86:6/8 esp.copa_del_rey|86:0/2
+ronaldo 2010 count 72 fifa.friendly|482:4/5 fifa.world|482:4/4 esp.1|86:34/38 uefa.euroq|482:2/4 uefa.champions|86:12/12 esp.copa_del_rey|86:8/9
+ronaldo 2011 count 72 fifa.friendly|482:3/5 uefa.euroq|482:6/6 global.world_football_challenge|86:3/3 esp.super_cup|86:2/2 esp.1|86:37/38 uefa.champions|86:11/12 esp.copa_del_rey|86:5/6
+ronaldo 2012 count 76 fifa.friendly|482:4/6 uefa.euro|482:5/5 global.world_football_challenge|86:4/4 esp.1|86:34/38 esp.super_cup|86:0/2 uefa.champions|86:12/12 esp.copa_del_rey|86:8/9
+ronaldo 2013 count 82 fifa.worldq.uefa|482:5/12 global.champs_cup|86:3/3 fifa.friendly|482:3/6 esp.1|86:31/38 uefa.champions|86:12/13 esp.copa_del_rey|86:6/10
+ronaldo 2014 count 72 fifa.world|482:3/3 global.champs_cup|86:3/3 uefa.super_cup|86:1/1 esp.super_cup|86:2/2 esp.1|86:35/38 uefa.euroq|482:2/3 uefa.champions|86:12/12 fifa.friendly|482:2/4 esp.copa_del_rey|86:0/4 fifa.cwc|86:2/2
+ronaldo 2015 count 78 uefa.euroq|482:4/5 global.champs_cup|86:4/4 club.friendly|86:0/3 esp.1|86:36/38 fifa.friendly|482:1/3 uefa.champions|86:12/13 esp.copa_del_rey|86:0/2 fifa.worldq.uefa|482:9/10
+ronaldo 2016 count 76 fifa.friendly|482:1/6 uefa.euro|482:7/7 global.champs_cup|86:0/3 uefa.super_cup|86:0/1 esp.1|86:29/38 uefa.champions|86:13/13 esp.copa_del_rey|86:2/6 fifa.cwc|86:2/2
+ronaldo 2017 count 76 fifa.friendly|482:1/4 fifa.confederations|482:4/5 global.champs_cup|86:0/3 usa.1|86:0/1 uefa.super_cup|86:1/1 esp.super_cup|86:1/2 esp.1|86:27/38 club.friendly|86:1/1 uefa.champions|86:13/13 esp.copa_del_rey|86:0/6 fifa.cwc|86:2/2
+ronaldo 2018 count 72 fifa.friendly|482:3/7 fifa.world|482:4/4 global.champs_cup|111:0/3 usa.1|111:0/1 ita.1|111:32/38 uefa.nations|482:2/6 uefa.champions|111:9/10 ita.coppa_italia|111:0/2 ita.super_cup|111:1/1
+ronaldo 2019 count 64 uefa.euroq|482:8/8 global.champs_cup|111:3/3 club.friendly|111:0/1 ita.1|111:33/38 uefa.champions|111:8/8 ita.super_cup|111:1/1 ita.coppa_italia|111:0/5
+ronaldo 2020 count 70 fifa.friendly|482:2/7 uefa.nations|482:4/6 club.friendly|111:1/1 ita.1|111:34/38 uefa.champions|111:6/8 ita.coppa_italia|111:4/5 ita.super_cup|111:1/1 uefa.euro|482:4/4
+ronaldo 2021 count 125 fifa.worldq.uefa|482:9/10 fifa.friendly|482:3/4 club.friendly|360:0/5 club.friendly|111:1/4 esp.joan_gamper|111:1/1 eng.1|360:30/38 ita.1|111:1/38 uefa.champions|360:7/8 uefa.champions|111:0/8 eng.league_cup|360:0/1 eng.fa|360:1/2 ita.super_cup|111:0/1 ita.coppa_italia|111:0/5
+ronaldo 2022 count 112 uefa.nations|482:5/6 club.friendly|360:1/8 eng.1|360:12/38 ksa.1|817:16/30 uefa.europa|360:6/12 eng.league_cup|360:0/6 fifa.friendly|482:0/1 fifa.world|482:5/5 eng.fa|360:0/6
+ronaldo 2023 count 66 club.friendly|21825:1/1 uefa.euroq|482:9/10 club.friendly|817:2/6 ksa.1|817:31/34 afc.champions|817:8/10 ksa.kings.cup|817:0/5
+ronaldo 2024 count 77 club.friendly|817:1/9 fifa.friendly|482:3/5 uefa.euro|482:5/5 ksa.1|817:30/34 uefa.nations|482:9/10 afc.champions|817:8/12 ksa.kings.cup|817:1/2
+ronaldo 2025 count 58 club.friendly|817:3/4 ksa.1|817:30/34 fifa.worldq.uefa|482:5/6 afc.cup|817:4/12 ksa.kings.cup|817:2/2
+ronaldo 2026 count 63 fifa.friendly|482:2/4 fifa.world|482:5/5 club.friendly|817:0/4 ksa.1|817:8/34 ksa.kings.cup|817:0/2 afc.champions|817:2/8 uefa.nations|482:2/6
+messi 2003 count null 
+messi 2004 count 47 esp.1|83:17/39 uefa.champions|83:4/8
+messi 2005 count 51 esp.1|83:18/38 uefa.champions|83:7/13
+messi 2006 count 87 fifa.worldq.conmebol|202:3/18 fifa.friendly|202:4/7 fifa.world|202:5/5 uefa.super_cup|83:1/1 esp.1|83:26/38 uefa.champions|83:6/8 esp.copa_del_rey|83:2/8 fifa.cwc|83:0/2
+messi 2007 count 74 fifa.friendly|202:0/7 conmebol.america|202:0/6 esp.1|83:28/38 uefa.champions|83:9/12 esp.copa_del_rey|83:1/11
+messi 2008 count 73 fifa.friendly|202:0/5 fifa.olympics|202:5/6 uefa.champions|83:12/15 esp.1|83:33/38 esp.copa_del_rey|83:8/9
+messi 2009 count 80 fifa.worldq.conmebol|202:12/18 fifa.friendly|202:1/5 uefa.super_cup|83:1/1 esp.1|83:35/38 uefa.champions|83:12/12 esp.copa_del_rey|83:3/4 fifa.cwc|83:2/2
+messi 2010 count 76 fifa.friendly|202:1/11 fifa.world|202:5/5 esp.1|83:34/38 uefa.champions|83:13/13 esp.copa_del_rey|83:8/9
+messi 2011 count 88 fifa.friendly|202:4/17 conmebol.america|202:4/4 global.world_football_challenge|83:0/3 esp.super_cup|83:2/2 uefa.super_cup|83:1/1 esp.1|83:36/38 uefa.champions|83:11/12 esp.copa_del_rey|83:7/9 fifa.cwc|83:2/2
+messi 2012 count 67 fifa.friendly|202:4/7 esp.1|83:32/38 esp.super_cup|83:0/2 uefa.champions|83:12/12 esp.copa_del_rey|83:6/8
+messi 2013 count 83 fifa.worldq.conmebol|202:7/16 fifa.friendly|202:4/7 esp.1|83:31/38 esp.super_cup|83:2/2 uefa.champions|83:7/10 esp.copa_del_rey|83:7/10
+messi 2014 count 76 fifa.world|202:7/7 club.friendly|83:0/1 esp.1|83:38/38 fifa.friendly|202:5/8 uefa.champions|83:13/13 esp.copa_del_rey|83:6/9
+messi 2015 count 93 conmebol.america|202:6/6 global.champs_cup|83:0/4 club.friendly|83:0/1 uefa.super_cup|83:1/1 esp.super_cup|83:2/2 esp.1|83:33/38 fifa.friendly|202:2/2 uefa.champions|83:7/10 fifa.worldq.conmebol|202:10/18 esp.copa_del_rey|83:5/9 fifa.cwc|83:2/2
+messi 2016 count 70 fifa.friendly|202:1/1 conmebol.america|202:6/6 global.champs_cup|83:3/3 esp.super_cup|83:2/2 esp.1|83:34/38 uefa.champions|83:9/10 club.friendly|83:0/1 esp.copa_del_rey|83:7/9
+messi 2017 count 68 fifa.friendly|202:2/4 global.champs_cup|83:3/3 club.friendly|83:0/1 esp.joan_gamper|83:1/1 esp.super_cup|83:2/2 esp.1|83:36/38 uefa.champions|83:10/10 esp.copa_del_rey|83:6/9
+messi 2018 count 79 fifa.friendly|202:2/10 club.friendly|83:1/1 fifa.world|202:4/4 global.champs_cup|83:0/3 esp.super_cup|83:1/1 esp.joan_gamper|83:1/1 esp.1|83:34/38 uefa.champions|83:10/12 esp.copa_del_rey|83:5/9
+messi 2019 count 72 fifa.friendly|202:4/9 conmebol.america|202:6/6 club.friendly|83:0/5 esp.joan_gamper|83:1/1 esp.1|83:33/38 uefa.champions|83:8/9 esp.super_cup|83:1/1 esp.copa_del_rey|83:2/3
+messi 2020 count 82 club.friendly|83:2/2 esp.joan_gamper|83:1/1 esp.1|83:35/38 fifa.worldq.conmebol|202:16/18 uefa.champions|83:6/8 esp.super_cup|83:1/2 esp.copa_del_rey|83:5/6 conmebol.america|202:7/7
+messi 2021 count 55 club.friendly|160:0/5 fra.super_cup|160:0/1 fra.1|160:26/38 uefa.champions|160:7/8 fra.coupe_de_france|160:1/3
+messi 2022 count 69 global.finalissima|202:1/1 fifa.friendly|202:4/5 club.friendly|160:4/6 fra.super_cup|160:1/1 fra.1|160:32/38 uefa.champions|160:7/8 fifa.world|202:7/7 fra.coupe_de_france|160:1/3
+messi 2023 count 130 club.friendly|160:1/6 club.friendly|20232:1/2 usa.1|20232:6/34 fifa.friendly|202:3/4 usa.open|20232:1/6 concacaf.leagues.cup|20232:7/7 fra.1|160:0/34 fifa.worldq.conmebol|202:12/18 uefa.champions|160:0/12 fra.super_cup|160:0/1 fra.coupe_de_france|160:0/6
+messi 2024 count 62 club.friendly|20232:6/7 usa.1|20232:22/37 concacaf.champions|20232:3/4 fifa.friendly|202:2/4 conmebol.america|202:6/6 concacaf.leagues.cup|20232:0/4
+messi 2025 count 66 club.friendly|20232:5/5 concacaf.champions|20232:7/8 usa.1|20232:35/40 fifa.cwc|20232:4/4 concacaf.leagues.cup|20232:4/6 fifa.friendly|202:2/3
+messi 2026 count 64 club.friendly|20232:4/4 usa.1|20232:27/34 concacaf.champions|20232:2/2 global.finalissima|202:0/1 fifa.friendly|202:5/11 fifa.world|202:8/8 concacaf.leagues.cup|20232:2/3 campeones.cup|20232:1/1
+henry 1994 count null 
+henry 1995 count null 
+henry 1996 count null 
+henry 1997 count null 
+henry 1998 count 7 fifa.world|478:4/7
+henry 1999 count null 
+henry 2000 count null 
+henry 2001 count 68 eng.1|359:34/46 uefa.champions|359:2/12 eng.league_cup|359:0/3 eng.fa|359:5/7
+henry 2002 count 79 fifa.friendly|478:5/7 fifa.world|478:2/3 eng.charity|359:1/1 eng.1|359:37/48 uefa.champions|359:0/12 eng.league_cup|359:0/1 eng.fa|359:5/7
+henry 2003 count 72 fifa.friendly|478:4/4 fifa.confederations|478:2/5 eng.charity|359:1/1 eng.1|359:37/41 uefa.champions|359:10/10 eng.league_cup|359:0/6 eng.fa|359:3/5
+henry 2004 count 83 uefa.euroq|478:7/8 fifa.friendly|478:6/7 uefa.euro|478:4/4 eng.charity|359:1/1 eng.1|359:32/45 uefa.champions|359:8/8 eng.league_cup|359:0/3 eng.fa|359:1/7
+henry 2005 count 77 fifa.friendly|478:4/5 eng.charity|359:1/1 eng.1|359:32/51 uefa.champions|359:11/13 eng.league_cup|359:1/5 eng.fa|359:0/2
+henry 2006 count 86 fifa.worldq.uefa|478:7/10 fifa.friendly|478:6/9 fifa.world|478:7/7 uefa.champions|359:7/10 eng.1|359:17/38 eng.league_cup|359:0/7 eng.fa|359:3/5
+henry 2007 count 61 esp.1|83:32/38 uefa.champions|83:10/12 esp.copa_del_rey|83:2/11
+henry 2008 count 88 uefa.euroq|478:8/12 fifa.friendly|478:2/6 uefa.euro|478:3/3 uefa.champions|83:14/15 esp.1|83:33/38 fifa.worldq.uefa|478:5/5 esp.copa_del_rey|83:2/9
+henry 2009 count 70 fifa.friendly|478:1/6 fifa.worldq.uefa|478:6/7 uefa.super_cup|83:1/1 esp.1|83:33/38 uefa.champions|83:10/12 esp.copa_del_rey|83:2/4 fifa.cwc|83:1/2
+henry 2010 count 43 fifa.friendly|478:4/4 usa.1|190:12/32 fifa.world|478:3/3 uefa.euroq|478:0/4
+henry 2011 count 92 usa.1|190:29/37 usa.1|9817:1/1 eng.1|359:1/38 uefa.champions|359:1/10 eng.league_cup|359:0/3 eng.fa|359:2/3
+henry 2012 count 37 usa.1|190:27/36 usa.1|9817:1/1
+henry 2013 count 37 usa.1|190:32/36 usa.1|9817:1/1
+henry 2014 count 45 usa.1|190:35/39 club.friendly|190:0/1 usa.1|9817:1/1 concacaf.champions|190:0/4
+totti 1992 count null 
+totti 1993 count null 
+totti 1994 count null 
+totti 1995 count null 
+totti 1996 count null 
+totti 1997 count null 
+totti 1998 count null 
+totti 1999 count null 
+totti 2000 count null 
+totti 2001 count 48 ita.1|104:25/35 uefa.champions|104:3/12 fifa.friendly|162:1/1
+totti 2002 count 56 fifa.friendly|162:2/6 fifa.world|162:4/4 ita.1|104:24/34 uefa.champions|104:1/12
+totti 2003 count 49 fifa.friendly|162:2/6 ita.1|104:31/35 uefa.uefa|104:3/8
+totti 2004 count 63 uefa.euroq|162:3/8 fifa.friendly|162:3/6 uefa.euro|162:1/3 ita.1|104:29/40 uefa.champions|104:4/6
+totti 2005 count 56 fifa.friendly|162:1/6 ita.1|104:25/40 uefa.uefa|104:3/10
+totti 2006 count 85 fifa.worldq.uefa|162:6/10 fifa.friendly|162:2/7 fifa.world|162:7/7 ita.1|104:35/43 uefa.champions|104:9/10 ita.coppa_italia|104:6/8
+totti 2007 count 56 ita.1|104:26/38 uefa.champions|104:6/10 ita.coppa_italia|104:3/8
+totti 2008 count 48 ita.1|104:25/38 uefa.champions|104:7/8 ita.coppa_italia|104:0/2
+totti 2009 count 55 uefa.europa|104:7/12 ita.1|104:23/38 ita.coppa_italia|104:3/5
+totti 2010 count 52 ita.1|104:34/39 uefa.champions|104:8/8 ita.coppa_italia|104:0/5
+totti 2011 count 42 uefa.europa|104:2/2 ita.1|104:29/38 ita.coppa_italia|104:2/2
+totti 2012 count 43 ita.1|104:35/38 ita.coppa_italia|104:4/5
+totti 2013 count 43 usa.1|104:1/1 ita.1|104:28/38 ita.coppa_italia|104:4/4
+totti 2014 count 55 club.friendly|104:1/2 global.champs_cup|104:2/3 ita.1|104:34/38 uefa.champions|104:6/6 ita.coppa_italia|104:0/2 uefa.europa|104:3/4
+totti 2015 count 50 global.champs_cup|104:2/2 club.friendly|104:0/1 ita.1|104:23/38 uefa.champions|104:3/8 ita.coppa_italia|104:0/1
+totti 2016 count 56 club.friendly|104:0/2 uefa.champions|104:2/2 ita.1|104:30/38 uefa.europa|104:8/10 ita.coppa_italia|104:0/4
+haaland 2015 count null 
+haaland 2016 count null 
+haaland 2017 count 30 nor.1|2715:18/30
+haaland 2018 count 88 nor.1|2715:27/30 uefa.europa|2715:0/8 uefa.euro.u19|19232:4/4 aut.1|2790:4/32 uefa.champions|2790:0/4 uefa.europa|2790:3/10
+haaland 2019 count 112 club.friendly|124:0/9 uefa.euroq|464:4/11 fifa.world.u20|19966:3/3 club.friendly|2790:3/3 aut.1|2790:14/32 ger.super_cup|124:0/1 ger.dfb_pokal|124:1/3 ger.1|124:15/34 uefa.champions|124:2/8 uefa.champions|2790:6/6 uefa.europa|2790:0/2
+haaland 2020 count 68 club.friendly|124:3/8 fifa.friendly|464:0/3 uefa.nations|464:4/6 ger.dfb_pokal|124:4/6 ger.1|124:28/34 ger.super_cup|124:1/1 uefa.champions|124:8/10
+haaland 2021 count 61 fifa.worldq.uefa|464:6/10 fifa.friendly|464:2/2 club.friendly|124:2/3 ger.dfb_pokal|124:2/3 ger.1|124:24/34 ger.super_cup|124:1/1 uefa.champions|124:3/6 uefa.europa|124:0/2
+haaland 2022 count 133 fifa.friendly|464:2/4 club.friendly|124:1/12 uefa.nations|464:6/6 club.friendly|382:4/4 ger.dfb_pokal|124:0/4 eng.charity|382:1/1 ger.1|124:0/34 eng.1|382:36/38 uefa.champions|124:2/8 uefa.champions|382:12/13 eng.league_cup|382:3/3 eng.fa|382:6/6
+haaland 2023 count 72 uefa.euroq|464:5/8 jpn.world_challenge|382:1/1 club.friendly|382:2/2 eng.charity|382:1/1 eng.1|382:32/38 uefa.super_cup|382:1/1 fifa.friendly|464:2/2 uefa.champions|382:9/10 eng.league_cup|382:1/1 fifa.cwc|382:0/2 eng.fa|382:3/6
+haaland 2024 count 71 fifa.friendly|464:4/4 club.friendly|382:4/4 eng.charity|382:1/1 eng.1|382:32/38 uefa.nations|464:6/6 uefa.champions|382:10/10 eng.league_cup|382:1/2 eng.fa|382:4/6
+haaland 2025 count 75 fifa.worldq.uefa|464:8/8 fifa.cwc|382:4/4 club.friendly|382:1/1 eng.1|382:36/38 fifa.friendly|464:1/2 uefa.champions|382:10/10 eng.league_cup|382:4/6 eng.fa|382:4/6
+haaland 2026 count 67 fifa.friendly|464:2/4 fifa.world|464:6/6 club.friendly|382:0/2 eng.charity|382:1/1 eng.1|382:7/38 uefa.champions|382:3/8 eng.league_cup|382:0/2 uefa.nations|464:4/6
+{"hits":1,"misses":116,"retries":0}

@@ -1,0 +1,855 @@
+{
+  "schema": "football-comparator/gates/v1",
+  "doc": "data/gates/README.md",
+  "generated": "2026-10-21",
+  "sources": [
+    "research/factoids-and-conventions.md (Part A corpus numbers, Part B conventions)",
+    "research/espn-coverage-leagues.md, research/espn-coverage-ucl-intl.md (probe-verified gates)",
+    "research/beachhead.md (era floors)",
+    "WebFetch re-verification 2026-10-21: UEFA first-N-games article, Wikipedia Alan Shearer and Erling Haaland career tables"
+  ],
+  "ledger_floors": {
+    "eng.1": { "apps_goals": "2002-03", "assists": "2005-06", "minutes": "2002-03" },
+    "esp.1": { "apps_goals": "2002-03", "assists": "2005-06", "minutes": "2002-03" },
+    "ita.1": { "apps_goals": "2002-03", "assists": "2008-09", "minutes": "2002-03", "note": "core-API athlete store repairs the collapsed 2002-08 rosters (beachhead.md update)" },
+    "ger.1": { "apps_goals": "2002-03", "assists": "2006-07", "minutes": "2002-03" },
+    "fra.1": { "apps_goals": "2003-04", "assists": "2007-08", "minutes": "2003-04" },
+    "uefa.champions": { "apps_goals": "2002-03", "assists": "2006-07", "minutes": "2002-03", "note": "proper stages; qualifiers flagged by /qualif|play-?off/i, from 2020-21 under uefa.champions_qual" }
+  },
+  "gates": [
+    {
+      "id": "haaland-fastest-100-pl",
+      "corpus_ref": "A1#1",
+      "claim": "Haaland fastest to 100 Premier League goals",
+      "publisher": "Opta Analyst",
+      "url": [
+        "https://theanalyst.com/articles/erling-haaland-fastest-100-premier-league-goals-stats",
+        "https://theanalyst.com/articles/fastest-players-to-100-premier-league-goals",
+        "https://africa.espn.com/football/story/_/id/47051666"
+      ],
+      "claim_date": "2025-12-02",
+      "as_of": "2025-12-02",
+      "scope": { "competitions": ["eng.1"], "label": "Premier League", "publisher_era_floor": "1992-93", "qualifiers": "n/a", "stages": "league", "notes": "PL only" },
+      "query": {
+        "who": { "kind": "player", "unit": "careers" },
+        "stat": { "stat": "goals" },
+        "how": { "agg": "reach", "target": 100, "dir": "fewest" },
+        "window": { "seq": "apps", "n": null },
+        "field": { "competitions": ["eng.1"], "since": "1992-93", "label": "PL all-time" }
+      },
+      "unit": "PL appearances (starts plus sub appearances)",
+      "entities": [
+        { "name": "Erling Haaland", "espn_id": null, "dob_needed": false },
+        { "name": "Harry Kane", "espn_id": null },
+        { "name": "Sergio Agüero", "espn_id": null },
+        { "name": "Mohamed Salah", "espn_id": null },
+        { "name": "Thierry Henry", "espn_id": 8039 },
+        { "name": "Alan Shearer", "espn_id": null }
+      ],
+      "assertions": [
+        { "role": "headline", "subject": "Erling Haaland", "kind": "reach", "expected": 111, "rank": 1, "date": "2025-12-02", "match": "Fulham 4-5 Manchester City", "checkable": "full", "why": "PL debut 2022-23, every app inside the ledger" },
+        { "role": "previous-holder", "subject": "Alan Shearer", "kind": "reach", "expected": 124, "date": "1995-12", "checkable": "no", "why": "reached 100 in Dec 1995, before the 2002-03 floor" },
+        { "role": "runner-up", "subject": "Harry Kane", "kind": "reach", "expected": 141, "checkable": "full", "why": "PL debut 2012-13 (Norwich loan), inside the ledger" },
+        { "role": "runner-up", "subject": "Sergio Agüero", "kind": "reach", "expected": 147, "checkable": "full", "why": "PL debut 2011-12" },
+        { "role": "runner-up", "subject": "Thierry Henry", "kind": "reach", "expected": 160, "alt_expected": { "value": 141, "publisher": "ESPN" }, "checkable": "no", "why": "PL debut 1999-2000; his first 160 apps start before the floor, so he sits out the career field (gapped)" },
+        { "role": "runner-up", "subject": "Mohamed Salah", "kind": "reach", "expected": 162, "checkable": "full", "why": "PL debut 2013-14 (Chelsea)" },
+        { "role": "derived", "subject": "Erling Haaland", "kind": "rank-visible", "expected": 1, "checkable": "full", "why": "rank among careers that start on or after 2002-03; the board prints the gapped count" }
+      ],
+      "ledger_view": {
+        "can_see": "Haaland's whole PL career; Kane, Agüero, Salah from debut",
+        "cannot_see": "Shearer (124) and Henry (Opta 160 / ESPN 141): careers began before 2002-03, so 'fastest ever' rests on the publisher's record book"
+      },
+      "era_wall": "reproducible-partial",
+      "status": "reproducible-partial",
+      "status_reason": "Haaland's 111 is fully visible; the 'record' comparison to Shearer is pre-floor",
+      "definition_diffs": ["appearances-include-subs", "publisher-count-disagreement"],
+      "needs_dob": false
+    },
+    {
+      "id": "haaland-fastest-50-pl",
+      "corpus_ref": "A1#2",
+      "claim": "Haaland fastest to 50 Premier League goals",
+      "publisher": "Opta Analyst",
+      "url": ["https://theanalyst.com/articles/fastest-players-to-100-premier-league-goals"],
+      "claim_date": "2023-12",
+      "as_of": "2025-12-02",
+      "scope": { "competitions": ["eng.1"], "label": "Premier League", "publisher_era_floor": "1992-93", "qualifiers": "n/a", "stages": "league" },
+      "query": {
+        "who": { "kind": "player", "unit": "careers" },
+        "stat": { "stat": "goals" },
+        "how": { "agg": "reach", "target": 50, "dir": "fewest" },
+        "window": { "seq": "apps", "n": null },
+        "field": { "competitions": ["eng.1"], "since": "1992-93", "label": "PL all-time" }
+      },
+      "unit": "PL appearances",
+      "entities": [{ "name": "Erling Haaland", "espn_id": null }, { "name": "Andrew Cole", "espn_id": null }, { "name": "Alan Shearer", "espn_id": null }, { "name": "Sergio Agüero", "espn_id": null }, { "name": "Thierry Henry", "espn_id": 8039 }, { "name": "Harry Kane", "espn_id": null }],
+      "assertions": [
+        { "role": "headline", "subject": "Erling Haaland", "kind": "reach", "expected": 48, "rank": 1, "checkable": "full" },
+        { "role": "previous-holder", "subject": "Andrew Cole", "kind": "reach", "expected": 65, "source_note": "derived: 'beat Cole by 17'", "checkable": "no", "why": "1990s" },
+        { "role": "runner-up", "subject": "Alan Shearer", "kind": "reach", "expected": 66, "checkable": "no", "why": "1990s" },
+        { "role": "runner-up", "subject": "Sergio Agüero", "kind": "reach", "expected": 81, "checkable": "full" },
+        { "role": "runner-up", "subject": "Thierry Henry", "kind": "reach", "expected": 83, "checkable": "no", "why": "50th PL goal in 2001-02, pre-floor" },
+        { "role": "runner-up", "subject": "Harry Kane", "kind": "reach", "expected": 90, "checkable": "full" },
+        { "role": "derived", "subject": "visible board order", "kind": "order-visible", "expected": ["Erling Haaland", "Sergio Agüero", "Harry Kane"], "checkable": "full", "why": "Of the publisher's six, these three are in era; others may interleave and must be checked, not assumed" }
+      ],
+      "ledger_view": { "can_see": "Haaland, Agüero, Kane from debut", "cannot_see": "Cole, Shearer, Henry" },
+      "era_wall": "reproducible-partial",
+      "status": "reproducible-partial",
+      "status_reason": "headline visible, previous holder pre-floor",
+      "definition_diffs": ["appearances-include-subs"],
+      "needs_dob": false
+    },
+    {
+      "id": "haaland-36-pl-season",
+      "corpus_ref": "A1#3",
+      "claim": "Haaland's 36 Premier League goals in a season is the record",
+      "publisher": "Opta Analyst",
+      "url": ["https://theanalyst.com/articles/who-has-scored-the-most-goals-in-a-premier-league-season"],
+      "claim_date": "2023-05",
+      "as_of": "2023-06-30",
+      "scope": { "competitions": ["eng.1"], "label": "Premier League, one season", "publisher_era_floor": "1992-93", "qualifiers": "n/a", "stages": "league", "notes": "Analyst names the 38- vs 42-game split" },
+      "query": {
+        "who": { "kind": "player", "unit": "player-seasons" },
+        "stat": { "stat": "goals" },
+        "how": { "agg": "sum", "dir": "most" },
+        "window": { "seq": "season", "n": null },
+        "field": { "competitions": ["eng.1"], "since": "1992-93", "label": "PL all-time" }
+      },
+      "unit": "goals in one PL season",
+      "entities": [{ "name": "Erling Haaland", "espn_id": null }, { "name": "Mohamed Salah", "espn_id": null }],
+      "assertions": [
+        { "role": "headline", "subject": "Erling Haaland", "season": "2022-23", "kind": "value", "expected": 36, "rank": 1, "checkable": "full" },
+        { "role": "headline", "subject": "Erling Haaland", "season": "2022-23", "kind": "apps", "expected": 35, "source_note": "Wikipedia career table (WebFetch 2026-10-21); corpus had it UNVERIFIED", "checkable": "full" },
+        { "role": "headline", "subject": "Erling Haaland", "season": "2022-23", "kind": "reach", "target": 30, "expected": 27, "unit": "season apps", "checkable": "full", "why": "fastest to 30 in a season, 27 apps" },
+        { "role": "previous-holder", "subject": "Andrew Cole", "season": "1993-94", "kind": "value", "expected": 34, "checkable": "no", "why": "42-game season, pre-floor" },
+        { "role": "previous-holder", "subject": "Alan Shearer", "season": "1994-95", "kind": "value", "expected": 34, "checkable": "no", "why": "42-game season, pre-floor" },
+        { "role": "runner-up", "subject": "Mohamed Salah", "season": "2017-18", "kind": "value", "expected": 32, "checkable": "full", "why": "the 38-game record before Haaland" }
+      ],
+      "ledger_view": { "can_see": "every season from 2002-03, so Haaland 36 and Salah 32 rank 1 and 2 on the visible board unless a check finds otherwise", "cannot_see": "Cole and Shearer's 34s (42-game seasons)" },
+      "era_wall": "reproducible-partial",
+      "status": "reproducible-partial",
+      "status_reason": "record comparison is to 1993-95",
+      "definition_diffs": ["42-game-seasons"],
+      "needs_dob": false
+    },
+    {
+      "id": "shearer-260-pl",
+      "corpus_ref": "A1#4",
+      "claim": "Shearer holds the record of 260 Premier League goals",
+      "publisher": "ESPN",
+      "url": ["https://africa.espn.com/football/story/_/id/47051666", "https://en.wikipedia.org/wiki/Alan_Shearer"],
+      "claim_date": "2025-12",
+      "as_of": "2006-06-30",
+      "scope": { "competitions": ["eng.1"], "label": "Premier League", "publisher_era_floor": "1992-93", "qualifiers": "n/a", "stages": "league" },
+      "query": {
+        "who": { "kind": "player", "unit": "careers" },
+        "stat": { "stat": "goals" },
+        "how": { "agg": "sum", "dir": "most" },
+        "window": { "seq": "apps", "n": null, "note": "whole career" },
+        "field": { "competitions": ["eng.1"], "since": "1992-93", "label": "PL all-time" }
+      },
+      "unit": "PL goals",
+      "entities": [{ "name": "Alan Shearer", "espn_id": null }],
+      "assertions": [
+        { "role": "headline", "subject": "Alan Shearer", "kind": "value", "expected": 260, "checkable": "no", "why": "1992-2006; 204 of the 260 were scored before 2002-03" },
+        { "role": "partial", "subject": "Alan Shearer", "kind": "visible-sum", "window": { "seasons": ["2002-03", "2003-04", "2004-05", "2005-06"] }, "expected": { "apps": 132, "goals": 56 }, "by_season": { "2002-03": { "apps": 35, "goals": 17 }, "2003-04": { "apps": 37, "goals": 22 }, "2004-05": { "apps": 28, "goals": 7 }, "2005-06": { "apps": 32, "goals": 10 } }, "source_note": "Wikipedia career table, WebFetch 2026-10-21; sums derived", "checkable": "full" }
+      ],
+      "ledger_view": { "can_see": "Shearer's last four Newcastle seasons, 132 apps, 56 goals", "cannot_see": "1992-2002 (Blackburn 112, Newcastle 1996-2002), 204 goals; the career row sits out every career field and appears only in player-season fields" },
+      "era_wall": "reproducible-partial",
+      "status": "reproducible-partial",
+      "status_reason": "gate the partial sum, never print 56 as his career",
+      "definition_diffs": ["42-game-seasons"],
+      "needs_dob": false
+    },
+    {
+      "id": "salah-47-involvements",
+      "corpus_ref": "A1#5",
+      "claim": "Salah's 47 goal involvements equal the Premier League season record",
+      "publisher": "premierleague.com",
+      "url": ["https://www.premierleague.com/news/4298728"],
+      "claim_date": "2025-05",
+      "as_of": "2025-06-30",
+      "scope": { "competitions": ["eng.1"], "label": "Premier League, one season", "publisher_era_floor": "1992-93", "qualifiers": "n/a", "stages": "league", "notes": "assists are Opta's" },
+      "query": {
+        "who": { "kind": "player", "unit": "player-seasons" },
+        "stat": { "stat": "goals+assists" },
+        "how": { "agg": "sum", "dir": "most" },
+        "window": { "seq": "season", "n": null },
+        "field": { "competitions": ["eng.1"], "since": "1992-93", "label": "PL all-time" }
+      },
+      "unit": "goals + assists in one PL season",
+      "entities": [{ "name": "Mohamed Salah", "espn_id": null }],
+      "assertions": [
+        { "role": "headline", "subject": "Mohamed Salah", "season": "2024-25", "kind": "value", "expected": 47, "parts": { "goals": 29, "assists": 18, "apps": 38 }, "checkable": "full", "why": "inside the assists floor (2005-06), but ESPN's stats A must equal Opta's 18" },
+        { "role": "previous-holder", "subject": "Andrew Cole", "season": "1993-94", "kind": "value", "expected": 47, "parts": { "goals": 34, "assists": 13 }, "checkable": "no", "why": "42-game season" },
+        { "role": "previous-holder", "subject": "Alan Shearer", "season": "1994-95", "kind": "value", "expected": 47, "parts": { "goals": 34, "assists": 13 }, "checkable": "no", "why": "42-game season" }
+      ],
+      "ledger_view": { "can_see": "Salah 2024-25 goals and ESPN assists", "cannot_see": "Cole and Shearer's 1993-95 seasons; and whether ESPN's assist definition equals Opta's for this season" },
+      "era_wall": "reproducible-partial",
+      "status": "publisher-definition-differs",
+      "status_reason": "assist counts are Opta's; ESPN stats A is the only assist source and can differ (Henry 2002-03: ESPN 23 vs 20). If ESPN gives 18 the gate passes; if not, the site prints the difference rather than patching",
+      "definition_diffs": ["opta-assists", "42-game-seasons"],
+      "needs_dob": false
+    },
+    {
+      "id": "haaland-fastest-50-ucl",
+      "corpus_ref": "A1#6",
+      "claim": "Haaland fastest to 50 Champions League goals, in 49 games (previous record Van Nistelrooy, 62)",
+      "publisher": "Opta Analyst",
+      "url": ["https://theanalyst.com/articles/erling-haaland-fastest-to-50-champions-league-goals", "https://theanalyst.com/articles/kylian-mbappe-youngest-players-50-uefa-champions-league-goals"],
+      "claim_date": "2025-09-18",
+      "as_of": "2025-09-18",
+      "scope": { "competitions": ["uefa.champions"], "label": "Champions League", "publisher_era_floor": "1992-93", "qualifiers": "unstated (Analyst's UCL figures exclude qualifiers by house convention)", "stages": "proper" },
+      "query": {
+        "who": { "kind": "player", "unit": "careers" },
+        "stat": { "stat": "goals" },
+        "how": { "agg": "reach", "target": 50, "dir": "fewest" },
+        "window": { "seq": "apps", "n": null },
+        "field": { "competitions": ["uefa.champions"], "qualifiers": false, "since": "1992-93", "label": "UCL all-time" }
+      },
+      "unit": "UCL proper appearances",
+      "entities": [{ "name": "Erling Haaland", "espn_id": null }, { "name": "Ruud van Nistelrooy", "espn_id": null }, { "name": "Lionel Messi", "espn_id": 45843 }, { "name": "Robert Lewandowski", "espn_id": null }, { "name": "Kylian Mbappé", "espn_id": null }],
+      "assertions": [
+        { "role": "headline", "subject": "Erling Haaland", "kind": "reach", "expected": 49, "rank": 1, "date": "2025-09-18", "match": "Manchester City v Napoli", "checkable": "full", "why": "UCL debut 2019-20 with Salzburg (direct entry, no qualifiers)" },
+        { "role": "previous-holder", "subject": "Ruud van Nistelrooy", "kind": "reach", "expected": 62, "checkable": "no", "why": "UCL career began with PSV before 2001-02, outside ESPN" },
+        { "role": "runner-up", "subject": "Lionel Messi", "kind": "reach", "expected": 66, "checkable": "full" },
+        { "role": "runner-up", "subject": "Robert Lewandowski", "kind": "reach", "expected": 77, "source_note": "UNVERIFIED (secondary press)", "checkable": "full" },
+        { "role": "runner-up", "subject": "Kylian Mbappé", "kind": "reach", "expected": 79, "checkable": "full" }
+      ],
+      "consistency": "UEFA's first-N table agrees: Haaland 52 through 50 games; Van Nistelrooy 48 through 60 and 55 through 70; Messi 53 through 70; Mbappé 51 through 80; Lewandowski 53 through 80",
+      "ledger_view": { "can_see": "Haaland, Messi, Lewandowski, Mbappé from UCL debut", "cannot_see": "Van Nistelrooy's PSV years; his board row is gapped" },
+      "era_wall": "reproducible-partial",
+      "status": "reproducible-partial",
+      "status_reason": "headline and three runners-up visible; previous holder is pre-floor",
+      "definition_diffs": ["ucl-qualifiers", "appearances-include-subs"],
+      "needs_dob": false
+    },
+    {
+      "id": "ucl-first-n-010",
+      "corpus_ref": "A1#7",
+      "claim": "Most Champions League goals in a player's first 10 games: Haaland 12",
+      "publisher": "UEFA.com",
+      "url": ["https://www.uefa.com/uefachampionsleague/news/02a1-1fa9bccb78e0-1fb14d5cb64f-1000--who-has-scored-the-most-champions-league-goals-in-their-fi/"],
+      "claim_date": "2026-10-20",
+      "as_of": "2026-10-20",
+      "scope": { "competitions": ["uefa.champions"], "label": "Champions League", "publisher_era_floor": "1992-93", "qualifiers": "unstated on the page (corpus and UEFA convention: excluded)", "stages": "proper" },
+      "query": {
+        "who": { "kind": "player", "unit": "careers" },
+        "stat": { "stat": "goals" },
+        "how": { "agg": "sum", "dir": "most" },
+        "window": { "seq": "apps", "n": 10 },
+        "field": { "competitions": ["uefa.champions"], "qualifiers": false, "since": "1992-93", "label": "UCL all-time" }
+      },
+      "unit": "UCL appearances",
+      "entities": [{ "name": "Erling Haaland", "espn_id": null }, { "name": "Sébastien Haller", "espn_id": null }, { "name": "Sadio Mané", "espn_id": null }, { "name": "Harry Kane", "espn_id": null }, { "name": "Simone Inzaghi", "espn_id": null }],
+      "assertions": [
+        { "role": "headline", "subject": "Erling Haaland", "kind": "value", "n": 10, "expected": 12, "rank": 1, "checkable": "full" },
+        { "role": "runner-up", "subject": "Sébastien Haller", "kind": "value", "n": 10, "expected": 11, "rank": 2, "checkable": "full" },
+        { "role": "runner-up", "subject": "Sadio Mané", "kind": "value", "n": 10, "expected": 9, "rank": "T3", "checkable": "full", "why": "Liverpool 2017-18 played a playoff round; qualifier flag must hold" },
+        { "role": "runner-up", "subject": "Harry Kane", "kind": "value", "n": 10, "expected": 9, "rank": "T3", "checkable": "full" },
+        { "role": "runner-up", "subject": "Simone Inzaghi", "kind": "value", "n": 10, "expected": 9, "rank": "T3", "checkable": "no", "why": "Lazio 1999-2001, pre-ESPN" },
+        { "role": "derived", "kind": "visible-leader", "expected": { "subject": "Erling Haaland", "value": 12 }, "checkable": "full" }
+      ],
+      "ledger_view": { "can_see": "Haaland, Haller, Mané, Kane", "cannot_see": "Simone Inzaghi (gapped)" },
+      "era_wall": "reproducible-partial",
+      "status": "reproducible-partial",
+      "status_reason": "leader visible; one T3 name pre-floor",
+      "definition_diffs": ["ucl-qualifiers", "appearances-include-subs"],
+      "needs_dob": false
+    },
+    {
+      "id": "ucl-first-n-020",
+      "corpus_ref": "A1#7",
+      "claim": "Most Champions League goals in a player's first 20 games: Haaland 25",
+      "publisher": "UEFA.com",
+      "url": ["https://www.uefa.com/uefachampionsleague/news/02a1-1fa9bccb78e0-1fb14d5cb64f-1000--who-has-scored-the-most-champions-league-goals-in-their-fi/"],
+      "claim_date": "2026-10-20",
+      "as_of": "2026-10-20",
+      "scope": { "competitions": ["uefa.champions"], "label": "Champions League", "publisher_era_floor": "1992-93", "qualifiers": "unstated (convention: excluded)", "stages": "proper" },
+      "query": { "who": { "kind": "player", "unit": "careers" }, "stat": { "stat": "goals" }, "how": { "agg": "sum", "dir": "most" }, "window": { "seq": "apps", "n": 20 }, "field": { "competitions": ["uefa.champions"], "qualifiers": false, "since": "1992-93", "label": "UCL all-time" } },
+      "unit": "UCL appearances",
+      "entities": [{ "name": "Erling Haaland", "espn_id": null }, { "name": "Roberto Soldado", "espn_id": null }, { "name": "Ruud van Nistelrooy", "espn_id": null }, { "name": "Serhou Guirassy", "espn_id": null }, { "name": "Victor Osimhen", "espn_id": null }, { "name": "Harry Kane", "espn_id": null }],
+      "assertions": [
+        { "role": "headline", "subject": "Erling Haaland", "kind": "value", "n": 20, "expected": 25, "rank": 1, "checkable": "full" },
+        { "role": "runner-up", "subject": "Roberto Soldado", "kind": "value", "n": 20, "expected": 16, "rank": "T2", "checkable": "full" },
+        { "role": "runner-up", "subject": "Ruud van Nistelrooy", "kind": "value", "n": 20, "expected": 16, "rank": "T2", "checkable": "no", "why": "PSV and 2001-02 Man Utd games pre-floor" },
+        { "role": "runner-up", "subject": "Serhou Guirassy", "kind": "value", "n": 20, "expected": 16, "rank": "T2", "checkable": "full" },
+        { "role": "runner-up", "subject": "Victor Osimhen", "kind": "value", "n": 20, "expected": 15, "rank": "T5", "checkable": "full" },
+        { "role": "runner-up", "subject": "Harry Kane", "kind": "value", "n": 20, "expected": 15, "rank": "T5", "checkable": "full" }
+      ],
+      "ledger_view": { "can_see": "all but Van Nistelrooy", "cannot_see": "Van Nistelrooy (gapped)" },
+      "era_wall": "reproducible-partial", "status": "reproducible-partial", "status_reason": "leader visible; one T2 name pre-floor",
+      "definition_diffs": ["ucl-qualifiers", "appearances-include-subs"], "needs_dob": false
+    },
+    {
+      "id": "ucl-first-n-030",
+      "corpus_ref": "A1#7",
+      "claim": "Most Champions League goals in a player's first 30 games: Haaland 35",
+      "publisher": "UEFA.com",
+      "url": ["https://www.uefa.com/uefachampionsleague/news/02a1-1fa9bccb78e0-1fb14d5cb64f-1000--who-has-scored-the-most-champions-league-goals-in-their-fi/"],
+      "claim_date": "2026-10-20", "as_of": "2026-10-20",
+      "scope": { "competitions": ["uefa.champions"], "label": "Champions League", "publisher_era_floor": "1992-93", "qualifiers": "unstated (convention: excluded)", "stages": "proper" },
+      "query": { "who": { "kind": "player", "unit": "careers" }, "stat": { "stat": "goals" }, "how": { "agg": "sum", "dir": "most" }, "window": { "seq": "apps", "n": 30 }, "field": { "competitions": ["uefa.champions"], "qualifiers": false, "since": "1992-93", "label": "UCL all-time" } },
+      "unit": "UCL appearances",
+      "entities": [{ "name": "Erling Haaland", "espn_id": null }, { "name": "Harry Kane", "espn_id": null }],
+      "assertions": [
+        { "role": "headline", "subject": "Erling Haaland", "kind": "value", "n": 30, "expected": 35, "rank": 1, "checkable": "full" },
+        { "role": "runner-up", "subject": "Ruud van Nistelrooy", "kind": "value", "n": 30, "expected": 26, "rank": 2, "checkable": "no", "why": "pre-floor" },
+        { "role": "runner-up", "subject": "Filippo Inzaghi", "kind": "value", "n": 30, "expected": 25, "rank": 3, "checkable": "no", "why": "Juventus 1997-, pre-floor" },
+        { "role": "runner-up", "subject": "Harry Kane", "kind": "value", "n": 30, "expected": 21, "rank": 4, "checkable": "full" },
+        { "role": "runner-up", "subject": "Alessandro Del Piero", "kind": "value", "n": 30, "expected": 20, "rank": 5, "checkable": "no", "why": "1990s" },
+        { "role": "derived", "kind": "visible-top2", "expected": [{ "subject": "Erling Haaland", "value": 35 }, { "subject": "Harry Kane", "value": 21, "note": "second among the publisher's in-era names; an unlisted in-era player with 21-25 could sit between and is not a failure" }], "checkable": "full" }
+      ],
+      "ledger_view": { "can_see": "Haaland, Kane", "cannot_see": "Van Nistelrooy, F. Inzaghi, Del Piero" },
+      "era_wall": "reproducible-partial", "status": "reproducible-partial", "status_reason": "three of five names pre-floor",
+      "definition_diffs": ["ucl-qualifiers", "appearances-include-subs"], "needs_dob": false
+    },
+    {
+      "id": "ucl-first-n-040",
+      "corpus_ref": "A1#7",
+      "claim": "Most Champions League goals in a player's first 40 games: Haaland 41",
+      "publisher": "UEFA.com",
+      "url": ["https://www.uefa.com/uefachampionsleague/news/02a1-1fa9bccb78e0-1fb14d5cb64f-1000--who-has-scored-the-most-champions-league-goals-in-their-fi/"],
+      "claim_date": "2026-10-20", "as_of": "2026-10-20",
+      "scope": { "competitions": ["uefa.champions"], "label": "Champions League", "publisher_era_floor": "1992-93", "qualifiers": "unstated (convention: excluded)", "stages": "proper" },
+      "query": { "who": { "kind": "player", "unit": "careers" }, "stat": { "stat": "goals" }, "how": { "agg": "sum", "dir": "most" }, "window": { "seq": "apps", "n": 40 }, "field": { "competitions": ["uefa.champions"], "qualifiers": false, "since": "1992-93", "label": "UCL all-time" } },
+      "unit": "UCL appearances",
+      "entities": [{ "name": "Erling Haaland", "espn_id": null }, { "name": "Harry Kane", "espn_id": null }, { "name": "Mario Gomez", "espn_id": null }],
+      "assertions": [
+        { "role": "headline", "subject": "Erling Haaland", "kind": "value", "n": 40, "expected": 41, "rank": 1, "checkable": "full" },
+        { "role": "runner-up", "subject": "Ruud van Nistelrooy", "kind": "value", "n": 40, "expected": 34, "rank": 2, "checkable": "no", "why": "pre-floor" },
+        { "role": "runner-up", "subject": "Harry Kane", "kind": "value", "n": 40, "expected": 27, "rank": "T3", "checkable": "full" },
+        { "role": "runner-up", "subject": "Filippo Inzaghi", "kind": "value", "n": 40, "expected": 27, "rank": "T3", "checkable": "no", "why": "pre-floor" },
+        { "role": "runner-up", "subject": "Mario Gomez", "kind": "value", "n": 40, "expected": 25, "rank": 5, "checkable": "full" }
+      ],
+      "ledger_view": { "can_see": "Haaland, Kane, Gomez", "cannot_see": "Van Nistelrooy, F. Inzaghi" },
+      "era_wall": "reproducible-partial", "status": "reproducible-partial", "status_reason": "leader visible; two names pre-floor",
+      "definition_diffs": ["ucl-qualifiers", "appearances-include-subs"], "needs_dob": false
+    },
+    {
+      "id": "ucl-first-n-050",
+      "corpus_ref": "A1#7",
+      "claim": "Most Champions League goals in a player's first 50 games: Haaland 52",
+      "publisher": "UEFA.com",
+      "url": ["https://www.uefa.com/uefachampionsleague/news/02a1-1fa9bccb78e0-1fb14d5cb64f-1000--who-has-scored-the-most-champions-league-goals-in-their-fi/"],
+      "claim_date": "2026-10-20", "as_of": "2026-10-20",
+      "scope": { "competitions": ["uefa.champions"], "label": "Champions League", "publisher_era_floor": "1992-93", "qualifiers": "unstated (convention: excluded)", "stages": "proper" },
+      "query": { "who": { "kind": "player", "unit": "careers" }, "stat": { "stat": "goals" }, "how": { "agg": "sum", "dir": "most" }, "window": { "seq": "apps", "n": 50 }, "field": { "competitions": ["uefa.champions"], "qualifiers": false, "since": "1992-93", "label": "UCL all-time" } },
+      "unit": "UCL appearances",
+      "entities": [{ "name": "Erling Haaland", "espn_id": null }, { "name": "Harry Kane", "espn_id": null }, { "name": "Lionel Messi", "espn_id": 45843 }, { "name": "Robert Lewandowski", "espn_id": null }, { "name": "Edinson Cavani", "espn_id": null }],
+      "assertions": [
+        { "role": "headline", "subject": "Erling Haaland", "kind": "value", "n": 50, "expected": 52, "rank": 1, "checkable": "full" },
+        { "role": "runner-up", "subject": "Ruud van Nistelrooy", "kind": "value", "n": 50, "expected": 43, "rank": 2, "checkable": "no", "why": "pre-floor" },
+        { "role": "runner-up", "subject": "Harry Kane", "kind": "value", "n": 50, "expected": 34, "rank": 3, "checkable": "full" },
+        { "role": "runner-up", "subject": "Lionel Messi", "kind": "value", "n": 50, "expected": 31, "rank": "T4", "checkable": "full" },
+        { "role": "runner-up", "subject": "Robert Lewandowski", "kind": "value", "n": 50, "expected": 31, "rank": "T4", "checkable": "full" },
+        { "role": "runner-up", "subject": "Edinson Cavani", "kind": "value", "n": 50, "expected": 31, "rank": "T4", "checkable": "full" },
+        { "role": "derived", "kind": "visible-top", "expected": [{ "subject": "Erling Haaland", "value": 52 }, { "subject": "Harry Kane", "value": 34 }, { "subject": "Lionel Messi", "value": 31 }, { "subject": "Robert Lewandowski", "value": 31 }, { "subject": "Edinson Cavani", "value": 31 }], "checkable": "full", "why": "every name but Van Nistelrooy is in era; the visible top five should be exactly these" }
+      ],
+      "ledger_view": { "can_see": "five of six names", "cannot_see": "Van Nistelrooy" },
+      "era_wall": "reproducible-partial", "status": "reproducible-partial", "status_reason": "runner-up pre-floor",
+      "definition_diffs": ["ucl-qualifiers", "appearances-include-subs"], "needs_dob": false
+    },
+    {
+      "id": "ucl-first-n-060",
+      "corpus_ref": "A1#7",
+      "claim": "Most Champions League goals in a player's first 60 games: Haaland 61",
+      "publisher": "UEFA.com",
+      "url": ["https://www.uefa.com/uefachampionsleague/news/02a1-1fa9bccb78e0-1fb14d5cb64f-1000--who-has-scored-the-most-champions-league-goals-in-their-fi/"],
+      "claim_date": "2026-10-20", "as_of": "2026-10-20",
+      "scope": { "competitions": ["uefa.champions"], "label": "Champions League", "publisher_era_floor": "1992-93", "qualifiers": "unstated (convention: excluded)", "stages": "proper" },
+      "query": { "who": { "kind": "player", "unit": "careers" }, "stat": { "stat": "goals" }, "how": { "agg": "sum", "dir": "most" }, "window": { "seq": "apps", "n": 60 }, "field": { "competitions": ["uefa.champions"], "qualifiers": false, "since": "1992-93", "label": "UCL all-time" } },
+      "unit": "UCL appearances",
+      "entities": [{ "name": "Erling Haaland", "espn_id": null }, { "name": "Harry Kane", "espn_id": null }, { "name": "Kylian Mbappé", "espn_id": null }, { "name": "Lionel Messi", "espn_id": 45843 }, { "name": "Robert Lewandowski", "espn_id": null }],
+      "assertions": [
+        { "role": "headline", "subject": "Erling Haaland", "kind": "value", "n": 60, "expected": 61, "rank": 1, "checkable": "full" },
+        { "role": "runner-up", "subject": "Ruud van Nistelrooy", "kind": "value", "n": 60, "expected": 48, "rank": 2, "checkable": "no", "why": "pre-floor" },
+        { "role": "runner-up", "subject": "Harry Kane", "kind": "value", "n": 60, "expected": 45, "rank": 3, "checkable": "full" },
+        { "role": "runner-up", "subject": "Kylian Mbappé", "kind": "value", "n": 60, "expected": 40, "rank": 4, "checkable": "full", "why": "Monaco 2016-17 played qualifiers; flag must hold" },
+        { "role": "runner-up", "subject": "Lionel Messi", "kind": "value", "n": 60, "expected": 39, "rank": "T5", "checkable": "full" },
+        { "role": "runner-up", "subject": "Robert Lewandowski", "kind": "value", "n": 60, "expected": 39, "rank": "T5", "checkable": "full" }
+      ],
+      "ledger_view": { "can_see": "five of six names", "cannot_see": "Van Nistelrooy" },
+      "era_wall": "reproducible-partial", "status": "reproducible-partial", "status_reason": "runner-up pre-floor",
+      "definition_diffs": ["ucl-qualifiers", "appearances-include-subs"], "needs_dob": false
+    },
+    {
+      "id": "ucl-first-n-070",
+      "corpus_ref": "A1#7",
+      "claim": "Most Champions League goals in a player's first 70 games: Van Nistelrooy 55",
+      "publisher": "UEFA.com",
+      "url": ["https://www.uefa.com/uefachampionsleague/news/02a1-1fa9bccb78e0-1fb14d5cb64f-1000--who-has-scored-the-most-champions-league-goals-in-their-fi/"],
+      "claim_date": "2026-10-20", "as_of": "2026-10-20",
+      "scope": { "competitions": ["uefa.champions"], "label": "Champions League", "publisher_era_floor": "1992-93", "qualifiers": "unstated (convention: excluded)", "stages": "proper" },
+      "query": { "who": { "kind": "player", "unit": "careers" }, "stat": { "stat": "goals" }, "how": { "agg": "sum", "dir": "most" }, "window": { "seq": "apps", "n": 70 }, "field": { "competitions": ["uefa.champions"], "qualifiers": false, "since": "1992-93", "label": "UCL all-time" } },
+      "unit": "UCL appearances",
+      "entities": [{ "name": "Harry Kane", "espn_id": null }, { "name": "Lionel Messi", "espn_id": 45843 }, { "name": "Kylian Mbappé", "espn_id": null }, { "name": "Robert Lewandowski", "espn_id": null }],
+      "assertions": [
+        { "role": "headline", "subject": "Ruud van Nistelrooy", "kind": "value", "n": 70, "expected": 55, "rank": 1, "checkable": "no", "why": "pre-floor; UEFA notes he finished on 56 in 73 games" },
+        { "role": "runner-up", "subject": "Harry Kane", "kind": "value", "n": 70, "expected": 54, "rank": 2, "checkable": "full" },
+        { "role": "runner-up", "subject": "Lionel Messi", "kind": "value", "n": 70, "expected": 53, "rank": 3, "checkable": "full" },
+        { "role": "runner-up", "subject": "Kylian Mbappé", "kind": "value", "n": 70, "expected": 46, "rank": 4, "checkable": "full" },
+        { "role": "runner-up", "subject": "Robert Lewandowski", "kind": "value", "n": 70, "expected": 45, "rank": 5, "checkable": "full" },
+        { "role": "runner-up", "subject": "Filippo Inzaghi", "kind": "value", "n": 70, "expected": 42, "rank": 6, "checkable": "no", "why": "pre-floor" },
+        { "role": "derived", "kind": "visible-leader", "expected": { "subject": "Harry Kane", "value": 54 }, "checkable": "full", "why": "our board's leader differs from UEFA's because Van Nistelrooy sits out; the sentence must carry the era bound ('since 2002-03'). Haaland (fewer than 70 apps as of 2026-10-20) is absent from this N" }
+      ],
+      "ledger_view": { "can_see": "Kane, Messi, Mbappé, Lewandowski", "cannot_see": "Van Nistelrooy (the leader) and F. Inzaghi" },
+      "era_wall": "reproducible-partial", "status": "reproducible-partial", "status_reason": "headline holder pre-floor; our board will name Kane and must say why",
+      "definition_diffs": ["ucl-qualifiers", "appearances-include-subs"], "needs_dob": false
+    },
+    {
+      "id": "ucl-first-n-080",
+      "corpus_ref": "A1#7",
+      "claim": "Most Champions League goals in a player's first 80 games: Messi 62",
+      "publisher": "UEFA.com",
+      "url": ["https://www.uefa.com/uefachampionsleague/news/02a1-1fa9bccb78e0-1fb14d5cb64f-1000--who-has-scored-the-most-champions-league-goals-in-their-fi/"],
+      "claim_date": "2026-10-20", "as_of": "2026-10-20",
+      "scope": { "competitions": ["uefa.champions"], "label": "Champions League", "publisher_era_floor": "1992-93", "qualifiers": "unstated (convention: excluded)", "stages": "proper" },
+      "query": { "who": { "kind": "player", "unit": "careers" }, "stat": { "stat": "goals" }, "how": { "agg": "sum", "dir": "most" }, "window": { "seq": "apps", "n": 80 }, "field": { "competitions": ["uefa.champions"], "qualifiers": false, "since": "1992-93", "label": "UCL all-time" } },
+      "unit": "UCL appearances",
+      "entities": [{ "name": "Lionel Messi", "espn_id": 45843 }, { "name": "Robert Lewandowski", "espn_id": null }, { "name": "Kylian Mbappé", "espn_id": null }, { "name": "Karim Benzema", "espn_id": null }, { "name": "Mohamed Salah", "espn_id": null }],
+      "assertions": [
+        { "role": "headline", "subject": "Lionel Messi", "kind": "value", "n": 80, "expected": 62, "rank": 1, "checkable": "full" },
+        { "role": "runner-up", "subject": "Robert Lewandowski", "kind": "value", "n": 80, "expected": 53, "rank": 2, "checkable": "full" },
+        { "role": "runner-up", "subject": "Kylian Mbappé", "kind": "value", "n": 80, "expected": 51, "rank": 3, "checkable": "full" },
+        { "role": "runner-up", "subject": "Karim Benzema", "kind": "value", "n": 80, "expected": 46, "rank": 4, "checkable": "full" },
+        { "role": "runner-up", "subject": "Mohamed Salah", "kind": "value", "n": 80, "expected": 44, "rank": "T5", "checkable": "full" },
+        { "role": "runner-up", "subject": "Filippo Inzaghi", "kind": "value", "n": 80, "expected": 44, "rank": "T5", "checkable": "no", "why": "pre-floor" }
+      ],
+      "ledger_view": { "can_see": "five of six names, including the leader", "cannot_see": "F. Inzaghi" },
+      "era_wall": "reproducible-partial", "status": "reproducible-partial", "status_reason": "one T5 name pre-floor",
+      "definition_diffs": ["ucl-qualifiers", "appearances-include-subs"], "needs_dob": false
+    },
+    {
+      "id": "ucl-first-n-090",
+      "corpus_ref": "A1#7",
+      "claim": "Most Champions League goals in a player's first 90 games: Messi 71",
+      "publisher": "UEFA.com",
+      "url": ["https://www.uefa.com/uefachampionsleague/news/02a1-1fa9bccb78e0-1fb14d5cb64f-1000--who-has-scored-the-most-champions-league-goals-in-their-fi/"],
+      "claim_date": "2026-10-20", "as_of": "2026-10-20",
+      "scope": { "competitions": ["uefa.champions"], "label": "Champions League", "publisher_era_floor": "1992-93", "qualifiers": "unstated (convention: excluded)", "stages": "proper" },
+      "query": { "who": { "kind": "player", "unit": "careers" }, "stat": { "stat": "goals" }, "how": { "agg": "sum", "dir": "most" }, "window": { "seq": "apps", "n": 90 }, "field": { "competitions": ["uefa.champions"], "qualifiers": false, "since": "1992-93", "label": "UCL all-time" } },
+      "unit": "UCL appearances",
+      "entities": [{ "name": "Lionel Messi", "espn_id": 45843 }, { "name": "Robert Lewandowski", "espn_id": null }, { "name": "Kylian Mbappé", "espn_id": null }, { "name": "Karim Benzema", "espn_id": null }, { "name": "Cristiano Ronaldo", "espn_id": 22774 }],
+      "assertions": [
+        { "role": "headline", "subject": "Lionel Messi", "kind": "value", "n": 90, "expected": 71, "rank": 1, "checkable": "full" },
+        { "role": "runner-up", "subject": "Robert Lewandowski", "kind": "value", "n": 90, "expected": 68, "rank": 2, "checkable": "full" },
+        { "role": "runner-up", "subject": "Kylian Mbappé", "kind": "value", "n": 90, "expected": 60, "rank": 3, "checkable": "full" },
+        { "role": "runner-up", "subject": "Karim Benzema", "kind": "value", "n": 90, "expected": 51, "rank": 4, "checkable": "full" },
+        { "role": "runner-up", "subject": "Cristiano Ronaldo", "kind": "value", "n": 90, "expected": 49, "rank": 5, "checkable": "full", "why": "proper debut 2003-04; his 2005-06 Debrecen qualifier apps must stay flagged off or his 90-game window shifts" },
+        { "role": "derived", "kind": "visible-top", "expected": [{ "subject": "Lionel Messi", "value": 71 }, { "subject": "Robert Lewandowski", "value": 68 }, { "subject": "Kylian Mbappé", "value": 60 }, { "subject": "Karim Benzema", "value": 51 }, { "subject": "Cristiano Ronaldo", "value": 49 }], "checkable": "full" }
+      ],
+      "ledger_view": { "can_see": "all five names from UCL debut", "cannot_see": "nothing the claim needs, provided no pre-2002 player with 49+ through 90 exists (UEFA's list says none does)" },
+      "era_wall": "reproducible-in-full", "status": "reproducible-in-full", "status_reason": "the whole published top five is in era",
+      "definition_diffs": ["ucl-qualifiers", "appearances-include-subs"], "needs_dob": false
+    },
+    {
+      "id": "ucl-first-n-100",
+      "corpus_ref": "A1#7",
+      "claim": "Most Champions League goals in a player's first 100 games: Lewandowski 81",
+      "publisher": "UEFA.com",
+      "url": ["https://www.uefa.com/uefachampionsleague/news/02a1-1fa9bccb78e0-1fb14d5cb64f-1000--who-has-scored-the-most-champions-league-goals-in-their-fi/"],
+      "claim_date": "2026-10-20", "as_of": "2026-10-20",
+      "scope": { "competitions": ["uefa.champions"], "label": "Champions League", "publisher_era_floor": "1992-93", "qualifiers": "unstated (convention: excluded)", "stages": "proper" },
+      "query": { "who": { "kind": "player", "unit": "careers" }, "stat": { "stat": "goals" }, "how": { "agg": "sum", "dir": "most" }, "window": { "seq": "apps", "n": 100 }, "field": { "competitions": ["uefa.champions"], "qualifiers": false, "since": "1992-93", "label": "UCL all-time" } },
+      "unit": "UCL appearances",
+      "entities": [{ "name": "Robert Lewandowski", "espn_id": null }, { "name": "Lionel Messi", "espn_id": 45843 }, { "name": "Kylian Mbappé", "espn_id": null }, { "name": "Cristiano Ronaldo", "espn_id": 22774 }, { "name": "Karim Benzema", "espn_id": null }],
+      "assertions": [
+        { "role": "headline", "subject": "Robert Lewandowski", "kind": "value", "n": 100, "expected": 81, "rank": 1, "checkable": "full" },
+        { "role": "runner-up", "subject": "Lionel Messi", "kind": "value", "n": 100, "expected": 77, "rank": 2, "checkable": "full" },
+        { "role": "runner-up", "subject": "Kylian Mbappé", "kind": "value", "n": 100, "expected": 72, "rank": 3, "checkable": "full" },
+        { "role": "runner-up", "subject": "Cristiano Ronaldo", "kind": "value", "n": 100, "expected": 64, "rank": 4, "checkable": "full" },
+        { "role": "runner-up", "subject": "Karim Benzema", "kind": "value", "n": 100, "expected": 53, "rank": 5, "checkable": "full" },
+        { "role": "runner-up", "subject": "Raúl González", "kind": "value", "n": 100, "expected": 51, "rank": 6, "checkable": "no", "why": "Real Madrid 1995-, pre-floor" }
+      ],
+      "ledger_view": { "can_see": "top five", "cannot_see": "Raúl" },
+      "era_wall": "reproducible-partial", "status": "reproducible-partial", "status_reason": "sixth name pre-floor",
+      "definition_diffs": ["ucl-qualifiers", "appearances-include-subs"], "needs_dob": false
+    },
+    {
+      "id": "messi-youngest-50-ucl",
+      "corpus_ref": "A1#8",
+      "claim": "Messi is the youngest player to 50 Champions League goals; Mbappé second",
+      "publisher": "Opta Analyst",
+      "url": ["https://theanalyst.com/articles/kylian-mbappe-youngest-players-50-uefa-champions-league-goals"],
+      "claim_date": "2024-12-10",
+      "as_of": "2024-12-10",
+      "scope": { "competitions": ["uefa.champions"], "label": "Champions League", "publisher_era_floor": "1992-93", "qualifiers": "excluded (stated)", "stages": "proper" },
+      "query": {
+        "who": { "kind": "player", "unit": "careers" },
+        "stat": { "stat": "goals" },
+        "how": { "agg": "youngest-reach", "target": 50, "dir": "fewest", "rank_by": "age_at_reach_game" },
+        "window": { "seq": "apps", "n": null, "age": true },
+        "field": { "competitions": ["uefa.champions"], "qualifiers": false, "since": "1992-93", "label": "UCL all-time" }
+      },
+      "unit": "age in years and days at the match of the 50th UCL goal; also UCL apps at that match",
+      "entities": [
+        { "name": "Lionel Messi", "espn_id": 45843, "dob_needed": true, "dob": "1987-06-24", "dob_source": "derived from 24y 284d on 2012-04-03, matches Wikipedia" },
+        { "name": "Kylian Mbappé", "espn_id": null, "dob_needed": true, "dob": "1998-12-20", "dob_source": "derived from 25y 356d on 2024-12-10" },
+        { "name": "Cristiano Ronaldo", "espn_id": 22774, "dob_needed": true, "dob": "1985-02-05" }
+      ],
+      "assertions": [
+        { "role": "headline", "subject": "Lionel Messi", "kind": "age", "expected": "24y 284d", "rank": 1, "date": "2012-04-03", "date_source": "derived from age + DOB (Barcelona v Milan QF 2nd leg)", "checkable": "full" },
+        { "role": "headline", "subject": "Lionel Messi", "kind": "reach", "expected": 66, "checkable": "full" },
+        { "role": "runner-up", "subject": "Kylian Mbappé", "kind": "age", "expected": "25y 356d", "rank": 2, "date": "2024-12-10", "checkable": "full" },
+        { "role": "runner-up", "subject": "Kylian Mbappé", "kind": "reach", "expected": 79, "checkable": "full" },
+        { "role": "runner-up", "subject": "Cristiano Ronaldo", "kind": "age", "expected": "28y 78d", "date": "2013-04-24", "date_source": "derived from age + DOB", "checkable": "full" }
+      ],
+      "ledger_view": { "can_see": "all three from UCL debut", "cannot_see": "nothing the claim names; a pre-2002 player younger than 24y 284d at 50 would be invisible, but the record book says none exists" },
+      "era_wall": "reproducible-in-full", "status": "reproducible-in-full", "status_reason": "every named player is in era; needs DOB",
+      "definition_diffs": ["ucl-qualifiers"],
+      "needs_dob": true
+    },
+    {
+      "id": "ronaldo-140-ucl",
+      "corpus_ref": "A1#9",
+      "claim": "Ronaldo holds the Champions League record with 140 goals (141 including qualifiers)",
+      "publisher": "UEFA.com",
+      "url": ["https://www.uefa.com/uefachampionsleague/news/0257-0e910cf2494a-5185150de9d4-1000--champions-league-all-time-top-scorers-cristiano-ronaldo-/", "https://www.uefa.com/uefachampionsleague/news/0257-0e91daaa4ec8-19686ad1d08f-1000--uefa-club-competition-all-time-top-scorers-cristiano-ronaldo/"],
+      "claim_date": "2026",
+      "as_of": "2022-06-30",
+      "as_of_note": "Ronaldo's and Messi's UCL careers are closed (last seasons 2021-22 and 2022-23), so their totals are stable. Lewandowski 109 and Mbappé 72 are snapshots of an undated page and are not gated until a dated source is pinned",
+      "scope": { "competitions": ["uefa.champions"], "label": "Champions League", "publisher_era_floor": "1992-93", "qualifiers": "excluded in the headline table; UEFA publishes a separate table with them", "stages": "proper (and proper+qualifying)" },
+      "query": {
+        "who": { "kind": "player", "unit": "careers" },
+        "stat": { "stat": "goals" },
+        "how": { "agg": "sum", "dir": "most" },
+        "window": { "seq": "apps", "n": null, "note": "whole career" },
+        "field": { "competitions": ["uefa.champions"], "qualifiers": false, "since": "1992-93", "label": "UCL all-time" },
+        "variants": [{ "field": { "competitions": ["uefa.champions", "uefa.champions_qual"], "qualifiers": true }, "label": "including qualifiers" }]
+      },
+      "unit": "UCL goals",
+      "entities": [{ "name": "Cristiano Ronaldo", "espn_id": 22774 }, { "name": "Lionel Messi", "espn_id": 45843 }, { "name": "Robert Lewandowski", "espn_id": null }, { "name": "Kylian Mbappé", "espn_id": null }],
+      "assertions": [
+        { "role": "headline", "subject": "Cristiano Ronaldo", "kind": "value", "expected": 140, "rank": 1, "checkable": "full", "why": "UCL proper debut 2003-04 with Man Utd; Sporting's 2002-03 Q3 was a qualifier" },
+        { "role": "headline", "subject": "Cristiano Ronaldo", "kind": "value", "variant": "including qualifiers", "expected": 141, "checkable": "full", "why": "the one qualifier goal must come from a flagged qualifier match (likely Man Utd v Debrecen, Aug 2005; UNVERIFIED which)" },
+        { "role": "runner-up", "subject": "Lionel Messi", "kind": "value", "expected": 129, "rank": 2, "checkable": "full" },
+        { "role": "context", "subject": "Robert Lewandowski", "kind": "value", "expected": 109, "alt_expected": { "value": 105, "publisher": "Opta Analyst", "date": "2025-09" }, "checkable": "no", "why": "active; the UEFA page is undated, so there is no as_of to cut the ledger at" },
+        { "role": "context", "subject": "Kylian Mbappé", "kind": "value", "expected": 72, "checkable": "no", "why": "active; undated snapshot" },
+        { "role": "context", "subject": "Cristiano Ronaldo", "kind": "value", "variant": "all UEFA club competitions", "expected": 145, "checkable": "no", "why": "adds UEFA Super Cup and UEFA Cup goals; v1 ledger doesn't carry those competitions" },
+        { "role": "context", "subject": "Lionel Messi", "kind": "value", "variant": "all UEFA club competitions", "expected": 132, "checkable": "no", "why": "as above" }
+      ],
+      "ledger_view": { "can_see": "Ronaldo's and Messi's entire UCL careers, proper and flagged qualifiers", "cannot_see": "Super Cup and UEFA Cup (the 145/132 table)" },
+      "era_wall": "reproducible-in-full", "status": "reproducible-in-full", "status_reason": "140, 141 and 129 are all inside the ledger; the qualifier switch reproduces both UEFA tables",
+      "definition_diffs": ["ucl-qualifiers"],
+      "needs_dob": false
+    },
+    {
+      "id": "ronaldo-11-consecutive-ucl",
+      "corpus_ref": "A1#10",
+      "claim": "Ronaldo scored in 11 consecutive Champions League matches",
+      "publisher": "UEFA.com and Guinness World Records",
+      "url": ["https://www.uefa.com/uefachampionsleague/news/02aa-21cecb96be6b-415b1e767914-1000--kane-scores-nine-in-a-row-who-has-scored-in-the-most-cons/", "https://www.guinnessworldrecords.com/world-records/most-consecutive-champions-league-matches-scored-in"],
+      "claim_date": "2026-10",
+      "as_of": "2026-10-20",
+      "scope": { "competitions": ["uefa.champions"], "label": "Champions League", "publisher_era_floor": "1992-93", "qualifiers": "excluded", "stages": "proper, including the final; crosses seasons" },
+      "query": {
+        "who": { "kind": "player", "unit": "careers" },
+        "stat": { "test": [{ "stat": "goals", "min": 1 }] },
+        "how": { "agg": "streak", "dir": "most" },
+        "window": { "seq": "apps", "n": null, "span": "any", "crosses_seasons": true },
+        "field": { "competitions": ["uefa.champions"], "qualifiers": false, "since": "1992-93", "label": "UCL all-time" }
+      },
+      "unit": "consecutive UCL appearances with a goal",
+      "entities": [{ "name": "Cristiano Ronaldo", "espn_id": 22774 }, { "name": "Ruud van Nistelrooy", "espn_id": null }, { "name": "Robert Lewandowski", "espn_id": null }, { "name": "Harry Kane", "espn_id": null }],
+      "assertions": [
+        { "role": "headline", "subject": "Cristiano Ronaldo", "kind": "value", "expected": 11, "goals_in_run": 17, "rank": 1, "span": { "from": "2017-06-03", "from_match": "2017 final v Juventus", "to": "2017-18 quarter-final v Juventus" }, "checkable": "full" },
+        { "role": "runner-up", "subject": "Ruud van Nistelrooy", "kind": "value", "expected": 9, "checkable": "partial", "why": "visible only if the run falls in 2002-03 or later; dates not in the corpus" },
+        { "role": "runner-up", "subject": "Robert Lewandowski", "kind": "value", "expected": 9, "checkable": "full" },
+        { "role": "runner-up", "subject": "Harry Kane", "kind": "value", "expected": 9, "live": true, "checkable": "full", "why": "live in 2026-27; evaluate at as_of" }
+      ],
+      "ledger_view": { "can_see": "the whole Ronaldo run, Lewandowski's and Kane's", "cannot_see": "possibly Van Nistelrooy's, if any of it is 2001-02 or earlier" },
+      "era_wall": "reproducible-partial", "status": "reproducible-partial", "status_reason": "headline fully visible; one runner-up may straddle the floor",
+      "definition_diffs": ["run-span-dates"],
+      "definition_note": "GWR gives a start of 29 Sep 2017; UEFA's span starts at the 2017 final. Pin UEFA's (11 matches only works from the final)",
+      "needs_dob": false
+    },
+    {
+      "id": "lewandowski-41-bundesliga",
+      "corpus_ref": "A1#11",
+      "claim": "Lewandowski's 41 Bundesliga goals break Gerd Müller's 49-year record",
+      "publisher": "TNT Sports",
+      "url": ["https://www.tntsports.co.uk/football/bundesliga/2020-2021/robert-lewandowski-breaks-gerd-mullers-49-year-record-with-41st-bundesliga-goal-of-season_sto8331331/story.shtml"],
+      "claim_date": "2021-05-22", "as_of": "2021-06-30",
+      "scope": { "competitions": ["ger.1"], "label": "Bundesliga, one season", "publisher_era_floor": "1963-64", "qualifiers": "n/a", "stages": "league" },
+      "query": { "who": { "kind": "player", "unit": "player-seasons" }, "stat": { "stat": "goals" }, "how": { "agg": "sum", "dir": "most" }, "window": { "seq": "season", "n": null }, "field": { "competitions": ["ger.1"], "since": "1963-64", "label": "Bundesliga all-time" } },
+      "unit": "goals in one Bundesliga season",
+      "entities": [{ "name": "Robert Lewandowski", "espn_id": null }, { "name": "Gerd Müller", "espn_id": null }],
+      "assertions": [
+        { "role": "headline", "subject": "Robert Lewandowski", "season": "2020-21", "kind": "value", "expected": 41, "apps": 29, "rank": 1, "checkable": "full", "note": "41st came in the 90th minute of the final matchday" },
+        { "role": "previous-holder", "subject": "Gerd Müller", "season": "1971-72", "kind": "value", "expected": 40, "source_note": "the page names the season, not the number", "checkable": "no", "why": "1971-72" }
+      ],
+      "ledger_view": { "can_see": "every Bundesliga season since 2002-03", "cannot_see": "Müller's 40" },
+      "era_wall": "reproducible-partial", "status": "reproducible-partial", "status_reason": "previous holder pre-floor",
+      "definition_diffs": [], "needs_dob": false
+    },
+    {
+      "id": "kane-36-bundesliga-debut",
+      "corpus_ref": "A1#12",
+      "claim": "Kane's 36 Bundesliga goals are the most by a player in his debut season",
+      "publisher": "Bundesliga.com / Flashscore (search summaries; UNVERIFIED on a fetched page)",
+      "url": [],
+      "claim_date": "2024-05", "as_of": "2024-06-30",
+      "scope": { "competitions": ["ger.1"], "label": "Bundesliga", "publisher_era_floor": "1963-64", "qualifiers": "n/a", "stages": "league" },
+      "query": { "who": { "kind": "player", "unit": "player-seasons" }, "stat": { "stat": "goals" }, "how": { "agg": "sum", "dir": "most" }, "window": { "seq": "seasons", "n": 1, "note": "the player's first season in this league" }, "field": { "competitions": ["ger.1"], "since": "1963-64", "label": "Bundesliga debut seasons" } },
+      "unit": "goals in the player's first Bundesliga season",
+      "entities": [{ "name": "Harry Kane", "espn_id": null }, { "name": "Uwe Seeler", "espn_id": null }],
+      "assertions": [
+        { "role": "headline", "subject": "Harry Kane", "season": "2023-24", "kind": "value", "expected": 36, "apps": 32, "rank": 1, "checkable": "full" },
+        { "role": "previous-holder", "subject": "Uwe Seeler", "season": "1963-64", "kind": "value", "expected": 30, "checkable": "no", "why": "1963-64" }
+      ],
+      "ledger_view": { "can_see": "Kane's season; every debut season that starts 2002-03 or later", "cannot_see": "Seeler; and a debut season is only a debut if the ledger saw the player's whole league career, so pre-2002 entrants sit out" },
+      "era_wall": "reproducible-partial", "status": "reproducible-partial", "status_reason": "record comparison pre-floor; source unverified",
+      "definition_diffs": [], "needs_dob": false
+    },
+    {
+      "id": "kane-fastest-100-bundesliga",
+      "corpus_ref": "A1#13",
+      "claim": "Kane becomes the fastest player to 100 Bundesliga goals",
+      "publisher": "Arab News (AFP)",
+      "url": ["https://arabnews.pk/sport/bayern-star-kane-becomes-fastest-player-to-score-100-bundesliga-goals-3001671"],
+      "claim_date": "2026-09-18", "as_of": "2026-09-18",
+      "scope": { "competitions": ["ger.1"], "label": "Bundesliga", "publisher_era_floor": "1963-64", "qualifiers": "n/a", "stages": "league" },
+      "query": { "who": { "kind": "player", "unit": "careers" }, "stat": { "stat": "goals" }, "how": { "agg": "reach", "target": 100, "dir": "fewest" }, "window": { "seq": "apps", "n": null }, "field": { "competitions": ["ger.1"], "since": "1963-64", "label": "Bundesliga all-time" } },
+      "unit": "Bundesliga appearances",
+      "entities": [{ "name": "Harry Kane", "espn_id": null }, { "name": "Dieter Müller", "espn_id": null }],
+      "assertions": [
+        { "role": "headline", "subject": "Harry Kane", "kind": "reach", "expected": 98, "alt_expected": { "value": 99, "publisher": "another report (corpus)" }, "rank": 1, "date": "2026-09-18", "match": "Bayern 7-0 Union Berlin", "checkable": "full" },
+        { "role": "previous-holder", "subject": "Dieter Müller", "kind": "reach", "expected": 129, "alt_expected": { "value": 123, "publisher": "another report (corpus)" }, "checkable": "no", "why": "1970s" }
+      ],
+      "ledger_view": { "can_see": "Kane's whole Bundesliga career", "cannot_see": "Dieter Müller" },
+      "era_wall": "reproducible-partial", "status": "reproducible-partial", "status_reason": "headline visible; publishers disagree by one game, so the gate pins AFP's 98 and names AFP",
+      "definition_diffs": ["publisher-count-disagreement", "appearances-include-subs"], "needs_dob": false
+    },
+    {
+      "id": "messi-474-laliga",
+      "corpus_ref": "A1#14",
+      "claim": "Messi, most goals in a La Liga career: 474 in 520 games",
+      "publisher": "Guinness World Records",
+      "url": ["https://www.guinnessworldrecords.com/world-records/382108-most-goals-scored-in-a-la-liga-career"],
+      "claim_date": "2021", "as_of": "2021-06-30",
+      "scope": { "competitions": ["esp.1"], "label": "La Liga", "publisher_era_floor": "1929", "qualifiers": "n/a", "stages": "league" },
+      "query": { "who": { "kind": "player", "unit": "careers" }, "stat": { "stat": "goals" }, "how": { "agg": "sum", "dir": "most" }, "window": { "seq": "apps", "n": null, "note": "whole career" }, "field": { "competitions": ["esp.1"], "since": "1929", "label": "La Liga all-time" } },
+      "unit": "La Liga goals and appearances",
+      "entities": [{ "name": "Lionel Messi", "espn_id": 45843 }, { "name": "Telmo Zarra", "espn_id": null }],
+      "assertions": [
+        { "role": "headline", "subject": "Lionel Messi", "kind": "value", "expected": 474, "apps": 520, "rank": 1, "checkable": "full", "why": "La Liga debut Oct 2004; 2004-05 to 2008-09 already gate-exact in club-seasons.json" },
+        { "role": "previous-holder", "subject": "Telmo Zarra", "kind": "value", "expected": 251, "checkable": "no", "why": "1940-55" },
+        { "role": "derived", "subject": "Lionel Messi", "kind": "reach", "target": 252, "expected_date": "2014-11-22", "source_note": "passed Zarra in Nov 2014 (corpus); exact date UNVERIFIED", "checkable": "full" },
+        { "role": "derived", "kind": "visible-leader", "expected": { "subject": "Lionel Messi", "value": 474 }, "checkable": "full" }
+      ],
+      "ledger_view": { "can_see": "Messi's whole La Liga career", "cannot_see": "Zarra and everyone else pre-2002" },
+      "era_wall": "reproducible-partial", "status": "reproducible-partial", "status_reason": "474 and 520 fully visible; the 'most ever' rank relies on the record book for pre-2002 careers",
+      "definition_diffs": ["appearances-include-subs"], "needs_dob": false
+    },
+    {
+      "id": "yamal-youngest-laliga-scorer",
+      "corpus_ref": "A1#15",
+      "claim": "Lamine Yamal becomes the youngest La Liga scorer",
+      "publisher": "FC Barcelona (search summary)",
+      "url": ["https://www.fcbarcelona.com/en/news/3731136"],
+      "claim_date": "2023-10-08", "as_of": "2023-10-08",
+      "scope": { "competitions": ["esp.1"], "label": "La Liga", "publisher_era_floor": "1929", "qualifiers": "n/a", "stages": "league" },
+      "query": { "who": { "kind": "player", "unit": "careers" }, "stat": { "stat": "goals" }, "how": { "agg": "youngest-reach", "target": 1, "dir": "fewest", "rank_by": "age_at_reach_game" }, "window": { "seq": "apps", "n": null, "age": true }, "field": { "competitions": ["esp.1"], "since": "1929", "label": "La Liga all-time" } },
+      "unit": "age at first La Liga goal",
+      "entities": [
+        { "name": "Lamine Yamal", "espn_id": null, "dob_needed": true, "dob": "2007-07-13", "dob_source": "derived from 16y 87d on 2023-10-08" },
+        { "name": "Fabrice Olinga", "espn_id": null, "dob_needed": true, "dob": null, "dob_source": "needed; his record goal was for Mallorca in 2012-13 (in era)" }
+      ],
+      "assertions": [
+        { "role": "headline", "subject": "Lamine Yamal", "kind": "age", "expected": "16y 87d", "rank": 1, "date": "2023-10-08", "match": "Granada v Barcelona", "checkable": "full" },
+        { "role": "previous-holder", "subject": "Fabrice Olinga", "kind": "age", "expected": "16y 98d", "rank": 2, "checkable": "full", "why": "2012-13, inside the ledger" }
+      ],
+      "ledger_view": { "can_see": "both record holders", "cannot_see": "pre-2002 scorers, but the previous record (Olinga) is in era so anyone earlier was older" },
+      "era_wall": "reproducible-in-full", "status": "reproducible-in-full", "status_reason": "both holders in era; needs DOB for every La Liga scorer, not only these two",
+      "definition_diffs": [], "needs_dob": true
+    },
+    {
+      "id": "messi-91-calendar-2012",
+      "corpus_ref": "A1#16",
+      "claim": "Messi scored 91 goals in calendar year 2012, the most ever",
+      "publisher": "Guinness World Records",
+      "url": ["https://www.guinnessworldrecords.com/world-records/106274-most-football-goals-scored-in-a-calendar-year"],
+      "claim_date": "2012-12", "as_of": "2012-12-31",
+      "scope": { "competitions": ["all official club", "senior internationals (competitive only)"], "label": "club + country, competitive only", "publisher_era_floor": "n/a", "qualifiers": "included", "stages": "all", "notes": "5 friendly goals excluded" },
+      "query": { "who": { "kind": "player", "unit": "careers" }, "stat": { "stat": "goals" }, "how": { "agg": "sum", "dir": "most" }, "window": { "seq": "calendar-year", "year": 2012 }, "field": { "competitions": ["career-basis-competitive"], "label": "all time" } },
+      "unit": "goals in one calendar year",
+      "entities": [{ "name": "Lionel Messi", "espn_id": 45843 }],
+      "assertions": [
+        { "role": "headline", "subject": "Lionel Messi", "kind": "value", "expected": 91, "checkable": "no", "why": "needs Copa del Rey, Supercopa and Argentina competitive matches; v1 carries La Liga and UCL only" },
+        { "role": "previous-holder", "subject": "Gerd Müller", "kind": "value", "year": 1972, "expected": 85, "checkable": "no" },
+        { "role": "partial", "subject": "Lionel Messi", "kind": "visible-sum", "window": { "calendar_year": 2012, "competitions": ["esp.1", "uefa.champions"] }, "expected": null, "checkable": "partial", "why": "the ledger can compute the La Liga + UCL slice but no publisher number exists to compare; record it, don't gate it" }
+      ],
+      "ledger_view": { "can_see": "La Liga and UCL goals in 2012", "cannot_see": "cups and internationals" },
+      "era_wall": "not-reproducible", "status": "not-reproducible", "status_reason": "stat scope (club + country, competitive) the v1 ledger doesn't carry",
+      "definition_diffs": ["calendar-year-competitive-only"], "needs_dob": false
+    },
+    {
+      "id": "mbappe-300-before-25",
+      "corpus_ref": "A1#17",
+      "claim": "Mbappé scores his 300th career goal before turning 25; Messi was older",
+      "publisher": "Flashscore (AP agrees on the date)",
+      "url": ["https://www.flashscore.com/news/mbappe-scores-300th-career-goal-but-focuses-on-france-s-record-win/W2MhuNmA"],
+      "claim_date": "2023-11-18", "as_of": "2023-11-18",
+      "scope": { "competitions": ["all official club", "senior internationals"], "label": "club + country, senior official (Flashscore's exact basis unclear)", "publisher_era_floor": "n/a", "qualifiers": "included", "stages": "all" },
+      "query": { "who": { "kind": "player", "unit": "careers" }, "stat": { "stat": "goals" }, "how": { "agg": "youngest-reach", "target": 300, "dir": "fewest", "rank_by": "age_at_reach_game" }, "window": { "seq": "apps", "n": null, "age": true }, "field": { "competitions": ["career-basis"], "label": "all time" } },
+      "unit": "age at the 300th career goal",
+      "entities": [
+        { "name": "Kylian Mbappé", "espn_id": null, "dob_needed": true, "dob": "1998-12-20" },
+        { "name": "Lionel Messi", "espn_id": 45843, "dob_needed": true, "dob": "1987-06-24" },
+        { "name": "Cristiano Ronaldo", "espn_id": 22774, "dob_needed": true, "dob": "1985-02-05" }
+      ],
+      "assertions": [
+        { "role": "headline", "subject": "Kylian Mbappé", "kind": "age", "expected": "24y 333d", "expected_alt_format": "24y 10m 29d", "date": "2023-11-18", "match": "France 14-0 Gibraltar", "checkable": "no", "why": "needs Coupe de France, Trophée des Champions and France caps" },
+        { "role": "runner-up", "subject": "Lionel Messi", "kind": "age", "expected": "25y 4m 3d", "checkable": "no" },
+        { "role": "runner-up", "subject": "Cristiano Ronaldo", "kind": "age", "expected": "27y 90d", "source_note": "UNVERIFIED (90min table, game counts 412/418/554 also unverified)", "checkable": "no" },
+        { "role": "partial", "subject": "Kylian Mbappé", "kind": "visible-sum", "window": { "until": "2023-11-18", "competitions": ["fra.1", "uefa.champions"] }, "expected": null, "checkable": "partial", "why": "the Ligue 1 + UCL slice is computable, no publisher number for it" }
+      ],
+      "ledger_view": { "can_see": "Ligue 1 and UCL goals", "cannot_see": "domestic cups, super cups, internationals" },
+      "era_wall": "not-reproducible", "status": "not-reproducible", "status_reason": "career basis (club + country) not carried in v1; Flashscore's '24y 10m 29d' and AP's '24y 333d' are the same day, not a disagreement",
+      "definition_diffs": ["youth-caps-and-b-teams"], "needs_dob": true
+    },
+    {
+      "id": "ronaldo-900-981-career",
+      "corpus_ref": "A1#19",
+      "claim": "Ronaldo, first man to 900 official career goals; the tracker now reads 981",
+      "publisher": "CBS Sports, Opta Analyst, ESPN tracker",
+      "url": ["https://www.cbssports.com/soccer/news/cristiano-ronaldo-becomes-the-first-man-to-score-900-goals-after-scoring-for-portugal-in-nations-league/", "https://theanalyst.com/articles/cristiano-ronaldo-900-goals-stats-opta", "https://www.espn.com/soccer/story/_/id/46751020/cristiano-ronaldo-goal-tracker-road-1000-career-goals"],
+      "claim_date": "2024-09-05", "as_of": "2026-10-12",
+      "scope": { "competitions": ["all official senior club", "senior A internationals incl. friendlies"], "label": "career basis (Opta/ESPN)", "publisher_era_floor": "n/a", "qualifiers": "included", "stages": "all", "notes": "excludes Sporting B (2 apps), club friendlies, youth caps" },
+      "query": { "who": { "kind": "player", "unit": "careers" }, "stat": { "stat": "goals" }, "how": { "agg": "reach", "target": 900, "dir": "fewest" }, "window": { "seq": "apps", "n": null }, "field": { "competitions": ["career-basis"], "label": "all time" } },
+      "unit": "goals in senior official matches, club + country",
+      "entities": [{ "name": "Cristiano Ronaldo", "espn_id": 22774 }],
+      "assertions": [
+        { "role": "headline", "subject": "Cristiano Ronaldo", "kind": "value", "date": "2024-09-05", "expected": 900, "parts": { "club": 769, "portugal": 131 }, "checkable": "no" },
+        { "role": "headline", "subject": "Cristiano Ronaldo", "kind": "value", "date": "2026-10-12", "expected": 981, "apps": 1338, "checkable": "no" },
+        { "role": "context", "kind": "publisher-totals", "expected": { "Transfermarkt (Apr 2026, excl. Arab Club Champions Cup)": 961, "ESPN/Sofascore (Apr 2026, incl.)": 967, "ESPN/messivsronaldo.app (Oct 2026)": 981, "RSSSF (Jul 2026, incl. youth)": 994 }, "checkable": "no" }
+      ],
+      "ledger_view": { "can_see": "PL, La Liga, Serie A, UCL goals (and ksa.1 if the outer ring is added)", "cannot_see": "Sporting 2002-03 (por.1 empty), cups, super cups, Club World Cup, Arab Club Champions Cup, internationals" },
+      "era_wall": "not-reproducible", "status": "not-reproducible", "status_reason": "career basis not carried in v1; league-scoped slices are gated separately (ronaldo-pl-career, ronaldo-140-ucl)",
+      "definition_diffs": ["arab-club-champions-cup", "youth-caps-and-b-teams"], "needs_dob": false
+    },
+    {
+      "id": "ronaldo-100-international",
+      "corpus_ref": "A1#20",
+      "claim": "Ronaldo reaches 100 international goals, the second man to do so; breaks Daei's record with 111",
+      "publisher": "Jakarta Post (AFP)",
+      "url": ["https://www.thejakartapost.com/news/2020/09/09/ronaldo-nets-100th-international-goal-as-portugal-down-sweden"],
+      "claim_date": "2020-09-08", "as_of": "2021-09-01",
+      "scope": { "competitions": ["senior A internationals incl. friendlies"], "label": "country only", "publisher_era_floor": "n/a", "qualifiers": "included", "stages": "all" },
+      "query": { "who": { "kind": "player", "unit": "careers" }, "stat": { "stat": "goals" }, "how": { "agg": "reach", "target": 100, "dir": "fewest" }, "window": { "seq": "caps", "n": null }, "field": { "competitions": ["internationals"], "label": "all time" } },
+      "unit": "senior caps",
+      "entities": [{ "name": "Cristiano Ronaldo", "espn_id": 22774 }, { "name": "Ali Daei", "espn_id": null }],
+      "assertions": [
+        { "role": "headline", "subject": "Cristiano Ronaldo", "kind": "reach", "target": 100, "date": "2020-09-08", "match": "Sweden v Portugal", "expected": null, "checkable": "no" },
+        { "role": "previous-holder", "subject": "Ali Daei", "kind": "value", "expected": 109, "checkable": "no" },
+        { "role": "headline", "subject": "Cristiano Ronaldo", "kind": "reach", "target": 110, "date": "2021-09-01", "match": "Portugal v Ireland (goals 110 and 111)", "source_note": "secondary source", "checkable": "no" }
+      ],
+      "ledger_view": { "can_see": "nothing (internationals out of v1)", "cannot_see": "all of it; RSSSF per-cap logs are the route if internationals are added" },
+      "era_wall": "not-reproducible", "status": "not-reproducible", "status_reason": "internationals not carried",
+      "definition_diffs": ["youth-caps-and-b-teams"], "needs_dob": false
+    },
+    {
+      "id": "ronaldo-six-world-cups",
+      "corpus_ref": "A1#21",
+      "claim": "Ronaldo becomes the first player to score at six World Cups",
+      "publisher": "Flashscore",
+      "url": ["https://www.flashscore.com/news/cristiano-ronaldo-becomes-first-player-to-score-at-six-different-world-cup-tournaments/EcmzTlTq/"],
+      "claim_date": "2026-06-23", "as_of": "2026-06-23",
+      "scope": { "competitions": ["fifa.world"], "label": "World Cup finals", "publisher_era_floor": "1930", "qualifiers": "excluded", "stages": "finals" },
+      "query": { "who": { "kind": "player", "unit": "careers" }, "stat": { "test": [{ "stat": "goals", "min": 1 }] }, "how": { "agg": "count", "of": "tournaments", "dir": "most" }, "window": { "seq": "tournaments", "n": null }, "field": { "competitions": ["fifa.world"], "since": "1930", "label": "World Cup all-time" } },
+      "unit": "World Cup tournaments with a goal",
+      "entities": [{ "name": "Cristiano Ronaldo", "espn_id": 22774 }],
+      "assertions": [
+        { "role": "headline", "subject": "Cristiano Ronaldo", "kind": "value", "expected": 6, "tournaments": [2006, 2010, 2014, 2018, 2022, 2026], "wc_goals": 10, "checkable": "no", "why": "v1 has no international ring; a tournament ledger from ESPN (WC 1998-) could carry it, and the probe matched Ronaldo's apps and goals in 11 of 11 tournaments" },
+        { "role": "context", "subject": "Cristiano Ronaldo", "kind": "value", "expected": { "goals": 145, "caps": 230 }, "alt_expected": { "goals": 144, "publisher": "Reuters" }, "checkable": "no" }
+      ],
+      "ledger_view": { "can_see": "nothing in v1", "cannot_see": "World Cups" },
+      "era_wall": "not-reproducible", "status": "not-reproducible", "status_reason": "competition not carried in v1 (in principle buildable later)",
+      "definition_diffs": [], "needs_dob": false
+    },
+    {
+      "id": "yamal-youngest-euros-scorer",
+      "corpus_ref": "A1#22",
+      "claim": "Yamal, youngest Euros scorer; joint record 4 assists in one tournament",
+      "publisher": "beIN Sports, wire reports",
+      "url": ["https://www.beinsports.com/en-us/soccer/uefa-european-championship-3/articles-video/lamine-yamal-equals-historic-euro-assist-record-2024-07-14"],
+      "claim_date": "2024-07-14", "as_of": "2024-07-14",
+      "scope": { "competitions": ["uefa.euro"], "label": "Euros finals", "publisher_era_floor": "1960", "qualifiers": "excluded", "stages": "finals" },
+      "query": { "who": { "kind": "player", "unit": "careers" }, "stat": { "stat": "goals" }, "how": { "agg": "youngest-reach", "target": 1, "dir": "fewest", "rank_by": "age_at_reach_game" }, "window": { "seq": "apps", "n": null, "age": true }, "field": { "competitions": ["uefa.euro"], "since": "1960", "label": "Euros all-time" } },
+      "unit": "age at first Euros goal; assists in one tournament",
+      "entities": [{ "name": "Lamine Yamal", "espn_id": null, "dob_needed": true, "dob": "2007-07-13" }, { "name": "Johan Vonlanthen", "espn_id": null, "dob_needed": true }],
+      "assertions": [
+        { "role": "headline", "subject": "Lamine Yamal", "kind": "age", "expected": "16y 362d", "date": "2024-07-09", "match": "Spain v France (semi-final)", "checkable": "no" },
+        { "role": "previous-holder", "subject": "Johan Vonlanthen", "kind": "age", "expected": "18y 141d", "checkable": "no", "why": "Euro 2004, inside ESPN's tournament coverage but not in v1" },
+        { "role": "headline", "subject": "Lamine Yamal", "kind": "value", "stat": "assists", "expected": 4, "tournament": "Euro 2024", "checkable": "no" }
+      ],
+      "ledger_view": { "can_see": "nothing in v1", "cannot_see": "Euros" },
+      "era_wall": "not-reproducible", "status": "not-reproducible", "status_reason": "competition not carried in v1",
+      "definition_diffs": ["opta-assists"], "needs_dob": true
+    },
+    {
+      "id": "vannistelrooy-12-ucl-2002-03",
+      "corpus_ref": "probe: espn-coverage-ucl-intl.md UCL gates",
+      "claim": "Van Nistelrooy scored 12 Champions League goals in 2002-03 (14 including qualifiers)",
+      "publisher": "Wikipedia (known answer); ESPN probe",
+      "url": ["https://en.wikipedia.org/wiki/Ruud_van_Nistelrooy"],
+      "claim_date": "2003-05", "as_of": "2003-06-30",
+      "scope": { "competitions": ["uefa.champions"], "label": "Champions League, one season", "publisher_era_floor": "1992-93", "qualifiers": "12 excludes them; Wikipedia's Europe column (14) includes Q3", "stages": "proper; Q3 v Zalaegerszeg separately" },
+      "query": { "who": { "kind": "player", "unit": "player-seasons" }, "stat": { "stat": "goals" }, "how": { "agg": "sum", "dir": "most" }, "window": { "seq": "season", "season": "2002-03" }, "field": { "competitions": ["uefa.champions"], "qualifiers": false, "since": "1992-93", "label": "UCL season" }, "variants": [{ "field": { "qualifiers": true }, "label": "including qualifiers" }] },
+      "unit": "UCL goals and appearances in one season",
+      "entities": [{ "name": "Ruud van Nistelrooy", "espn_id": null }],
+      "assertions": [
+        { "role": "headline", "subject": "Ruud van Nistelrooy", "season": "2002-03", "kind": "value", "expected": 12, "apps": 9, "starts": 8, "sub_apps": 1, "checkable": "full", "probe": "ESPN pass, exactly 12" },
+        { "role": "headline", "subject": "Ruud van Nistelrooy", "season": "2002-03", "kind": "value", "variant": "including qualifiers", "expected": 14, "apps": 11, "checkable": "full", "probe": "ESPN 2 qualifier apps, 2 goals (Zalaegerszeg 2nd leg), flagged", "note": "Wikipedia writes the apps as '10(1)'" }
+      ],
+      "ledger_view": { "can_see": "every 2002-03 Man Utd UCL match, proper and qualifier", "cannot_see": "nothing" },
+      "era_wall": "reproducible-in-full", "status": "reproducible-in-full", "status_reason": "probe-exact; proves the qualifier flag separates 12 from 14",
+      "definition_diffs": ["ucl-qualifiers"], "needs_dob": false
+    },
+    {
+      "id": "ronaldo-pl-career",
+      "corpus_ref": "Part B: premierleague.com",
+      "claim": "Cristiano Ronaldo's Premier League career: 236 appearances, 103 goals, 37 assists",
+      "publisher": "premierleague.com",
+      "url": ["https://www.premierleague.com/en/players/14937/cristiano-ronaldo/stats"],
+      "claim_date": "2026-10-21", "as_of": "2023-06-30",
+      "scope": { "competitions": ["eng.1"], "label": "Premier League", "publisher_era_floor": "1992-93", "qualifiers": "n/a", "stages": "league", "notes": "sub appearances inside the count, shown as '10 (6)'; Opta assists" },
+      "query": { "who": { "kind": "player", "unit": "careers" }, "stat": { "stat": "goals" }, "how": { "agg": "sum", "dir": "most" }, "window": { "seq": "apps", "n": null, "note": "whole PL career, 2003-09 and 2021-23" }, "field": { "competitions": ["eng.1"], "since": "1992-93", "label": "PL all-time" } },
+      "unit": "PL appearances, goals, assists",
+      "entities": [{ "name": "Cristiano Ronaldo", "espn_id": 22774 }],
+      "assertions": [
+        { "role": "headline", "subject": "Cristiano Ronaldo", "kind": "value", "stat": "goals", "expected": 103, "checkable": "full" },
+        { "role": "headline", "subject": "Cristiano Ronaldo", "kind": "value", "stat": "apps", "expected": 236, "espn_expected_without_corrections": 235, "checkable": "full", "why": "ESPN is one app short in 2003-04 (one of five Man Utd rosters omits him); the corrections layer must add it" },
+        { "role": "headline", "subject": "Cristiano Ronaldo", "kind": "value", "stat": "assists", "expected": 37, "checkable": "partial", "why": "2003-04 and 2004-05 are below the PL assists floor (2005-06), and ESPN's stats A is not Opta's" }
+      ],
+      "ledger_view": { "can_see": "every Ronaldo PL match", "cannot_see": "trustworthy assists for 2003-05" },
+      "era_wall": "reproducible-in-full", "status": "publisher-definition-differs", "status_reason": "goals and apps reproducible (apps via one correction); assists are Opta's and partly below the floor",
+      "definition_diffs": ["appearances-include-subs", "opta-assists"], "needs_dob": false
+    },
+    {
+      "id": "dunne-own-goals-red-cards",
+      "corpus_ref": "A2 extras: premierleague.com records page",
+      "claim": "Richard Dunne has 10 Premier League own goals and shares the record of 8 red cards",
+      "publisher": "premierleague.com",
+      "url": ["https://www.premierleague.com/en/stats/records"],
+      "claim_date": "2026-10-21", "as_of": "2013-06-30",
+      "scope": { "competitions": ["eng.1"], "label": "Premier League", "publisher_era_floor": "1992-93", "qualifiers": "n/a", "stages": "league" },
+      "query": { "who": { "kind": "player", "unit": "careers" }, "stat": { "stat": "own_goals" }, "how": { "agg": "sum", "dir": "most" }, "window": { "seq": "apps", "n": null }, "field": { "competitions": ["eng.1"], "since": "1992-93", "label": "PL all-time" } },
+      "unit": "PL own goals; PL red cards",
+      "entities": [{ "name": "Richard Dunne", "espn_id": null }],
+      "assertions": [
+        { "role": "headline", "subject": "Richard Dunne", "kind": "value", "stat": "own_goals", "expected": 10, "checkable": "partial", "why": "PL career began with Everton in the 1990s; own goals come from own-goal keyEvents' participants[0], which the builder currently discards" },
+        { "role": "headline", "subject": "Richard Dunne", "kind": "value", "stat": "red_cards", "expected": 8, "checkable": "partial", "why": "card events not yet verified in the probe; pre-2002 part invisible" }
+      ],
+      "ledger_view": { "can_see": "Dunne's 2002-03 onward (Man City, Villa, QPR)", "cannot_see": "his Everton and early City years; cards are an unverified stat" },
+      "era_wall": "reproducible-partial", "status": "reproducible-partial", "status_reason": "career straddles the floor; both stats need new ledger columns",
+      "definition_diffs": [], "needs_dob": false
+    }
+  ],
+  "excluded": [
+    { "corpus_ref": "A1#18", "claim": "Messi wins a record eighth Ballon d'Or", "why": "an award count, not a match stat; no ledger can reproduce it" },
+    { "corpus_ref": "Part A notes", "claim": "Zlatan scored in every league he played in", "why": "UNVERIFIED in the corpus; no reliable page" },
+    { "corpus_ref": "Part A notes", "claim": "Messi's international assists record", "why": "secondary sources only; internationals out of v1" }
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "schema": "football-comparator/gates/club-seasons/v1",
+  "doc": "data/gates/README.md",
+  "generated": "2026-10-21",
+  "source": "research/espn-coverage-leagues.md §3 (13 league club-seasons) and research/espn-coverage-ucl-intl.md (5 UCL club-seasons). Known answers from Wikipedia career tables and club season articles, BDFutbol for Messi's starts and minutes; '?' figures were FBref search snippets or other weak sources and are marked weak",
+  "fields": {
+    "known": "the publisher's figure the gate compares against (null where none exists)",
+    "espn_probe": "what the probe's repaired ESPN count produced (apps = starter && !subbedIn, or subbedIn; goals = keyEvents with scoringPlay, excluding own-goal; minutes from sub clocks capped at 90)",
+    "expected_after_repair": "what the harvested ledger must produce once the nine builder repairs and the corrections layer are in; the gate asserts this",
+    "gate_fields": "which fields are asserted; others are recorded only (below a floor or no solid known answer)"
+  },
+  "rows": [
+    {
+      "player": "Lionel Messi", "espn_id": 45843, "club": "Barcelona", "competition": "esp.1", "season": "2004-05",
+      "known": { "apps": 7, "starts": 0, "goals": 1, "assists": null, "minutes": null },
+      "espn_probe": { "matches": 38, "no_roster": 0, "apps": 7, "starts": 0, "goals_keyevents": 1, "goals_stats": 1, "pens": 0, "assists_stats": 0, "minutes": 72 },
+      "expected_after_repair": { "apps": 7, "starts": 0, "goals": 1, "minutes": 72 },
+      "gate_fields": ["apps", "starts", "goals"],
+      "source": "Wikipedia; BDFutbol", "verdict": "exact"
+    },
+    {
+      "player": "Lionel Messi", "espn_id": 45843, "club": "Barcelona", "competition": "esp.1", "season": "2005-06",
+      "known": { "apps": 17, "starts": 11, "goals": 6, "assists": null, "minutes": null },
+      "espn_probe": { "matches": 38, "no_roster": 0, "apps": 17, "starts": 11, "goals_keyevents": 6, "goals_stats": 6, "pens": 0, "assists_stats": 2, "minutes": 915 },
+      "expected_after_repair": { "apps": 17, "starts": 11, "goals": 6, "minutes": 915 },
+      "gate_fields": ["apps", "starts", "goals"],
+      "source": "Wikipedia; BDFutbol", "verdict": "exact"
+    },
+    {
+      "player": "Lionel Messi", "espn_id": 45843, "club": "Barcelona", "competition": "esp.1", "season": "2006-07",
+      "known": { "apps": 26, "starts": 23, "goals": 14, "assists": null, "minutes": null },
+      "espn_probe": { "matches": 38, "no_roster": 0, "apps": 26, "starts": 23, "goals_keyevents": 15, "goals_stats": 14, "pens": 0, "assists_stats": 2, "minutes": 2005 },
+      "expected_after_repair": { "apps": 26, "starts": 23, "goals": 14, "minutes": 2005 },
+      "gate_fields": ["apps", "starts", "goals"],
+      "repair": "Sevilla v Barcelona 2006-10-15 duplicates every goal event (Messi at 80' and 81'); reconcile keyEvent goals to the final score",
+      "source": "Wikipedia; BDFutbol", "verdict": "exact after repair 4"
+    },
+    {
+      "player": "Lionel Messi", "espn_id": 45843, "club": "Barcelona", "competition": "esp.1", "season": "2008-09",
+      "known": { "apps": 31, "starts": 27, "goals": 23, "assists": null, "minutes": 2516 },
+      "espn_probe": { "matches": 38, "no_roster": 0, "apps": 31, "starts": 27, "goals_keyevents": 23, "goals_stats": 23, "pens": 3, "assists_stats": 11, "minutes": 2517 },
+      "expected_after_repair": { "apps": 31, "starts": 27, "goals": 23, "minutes": 2517 },
+      "gate_fields": ["apps", "starts", "goals", "minutes"],
+      "tolerance": { "minutes": 1 },
+      "note": "minutes within 1 of BDFutbol (capping and stoppage-time convention)",
+      "source": "Wikipedia; BDFutbol", "verdict": "exact (minutes ±1)"
+    },
+    {
+      "player": "Cristiano Ronaldo", "espn_id": 22774, "club": "Manchester United", "competition": "eng.1", "season": "2003-04",
+      "known": { "apps": 29, "starts": 15, "goals": 4, "assists": null, "minutes": null },
+      "espn_probe": { "matches": 38, "no_roster": 0, "apps": 28, "starts": 14, "goals_keyevents": 4, "goals_stats": 4, "pens": 0, "assists_stats": 4, "minutes": 1463 },
+      "expected_after_repair": { "apps": 29, "starts": 15, "goals": 4 },
+      "gate_fields": ["apps", "starts", "goals"],
+      "repair": "corrections layer: one of five Man Utd rosters that omit him (2003-12-28 at Middlesbrough, 2004-01-07 at Bolton, 2004-01-11 v Newcastle, 2004-03-28 at Arsenal, 2004-05-01 at Blackburn) wrongly lists another player in his start; identify the match from a second source before adding the row",
+      "source": "Wikipedia", "verdict": "one app/start short until corrected"
+    },
+    {
+      "player": "Cristiano Ronaldo", "espn_id": 22774, "club": "Manchester United", "competition": "eng.1", "season": "2006-07",
+      "known": { "apps": 34, "starts": 31, "goals": 17, "assists": 8, "assists_weak": true, "minutes": null },
+      "espn_probe": { "matches": 38, "no_roster": 0, "apps": 34, "starts": 31, "goals_keyevents": 17, "goals_stats": 17, "pens": 3, "assists_stats": 14, "minutes": 2788 },
+      "expected_after_repair": { "apps": 34, "starts": 31, "goals": 17, "minutes": 2788 },
+      "gate_fields": ["apps", "starts", "goals"],
+      "note": "assists 14 (ESPN) vs 8? (weak source): not gated; a second assist source is needed",
+      "source": "Wikipedia", "verdict": "exact on apps/starts/goals"
+    },
+    {
+      "player": "Cristiano Ronaldo", "espn_id": 22774, "club": "Manchester United", "competition": "eng.1", "season": "2007-08",
+      "known": { "apps": 34, "starts": 31, "goals": 31, "pens": 4, "assists": null, "minutes": null },
+      "espn_probe": { "matches": 38, "no_roster": 0, "apps": 34, "starts": 31, "goals_keyevents": 31, "goals_stats": 31, "pens": 4, "assists_stats": 7, "minutes": 2753 },
+      "expected_after_repair": { "apps": 34, "starts": 31, "goals": 31, "pens": 4, "minutes": 2753 },
+      "gate_fields": ["apps", "starts", "goals", "pens"],
+      "source": "Wikipedia", "verdict": "exact"
+    },
+    {
+      "player": "Thierry Henry", "espn_id": 8039, "club": "Arsenal", "competition": "eng.1", "season": "2002-03",
+      "known": { "apps": 37, "starts": 37, "goals": 24, "pens": 3, "pens_weak": true, "assists": 20, "minutes": null },
+      "espn_probe": { "matches": 38, "no_roster": 0, "apps": 37, "starts": 37, "goals_keyevents": 24, "goals_stats": 24, "pens": 0, "assists_stats": 23, "minutes": 3301 },
+      "expected_after_repair": { "apps": 37, "starts": 37, "goals": 24, "minutes": 3301 },
+      "gate_fields": ["apps", "starts", "goals"],
+      "note": "EPL 2002-03 has no penalty typing at all (pens 0 vs 3); assists 23 vs 20 and 2002-03 is below the PL assists floor (2005-06): neither gated",
+      "source": "Wikipedia", "verdict": "exact on apps/starts/goals"
+    },
+    {
+      "player": "Thierry Henry", "espn_id": 8039, "club": "Arsenal", "competition": "eng.1", "season": "2003-04",
+      "known": { "apps": 37, "starts": 37, "goals": 30, "pens": 7, "pens_weak": true, "assists": null, "minutes": null },
+      "espn_probe": { "matches": 38, "no_roster": 0, "apps": 37, "starts": 37, "goals_keyevents": 30, "goals_stats": 30, "pens": 7, "assists_stats": 9, "minutes": 3330 },
+      "expected_after_repair": { "apps": 37, "starts": 37, "goals": 30, "pens": 7, "minutes": 3330 },
+      "gate_fields": ["apps", "starts", "goals"],
+      "source": "Wikipedia", "verdict": "exact"
+    },
+    {
+      "player": "Francesco Totti", "espn_id": 10293, "club": "AS Roma", "competition": "ita.1", "season": "2003-04",
+      "known": { "apps": 31, "starts": null, "goals": 20, "assists": null, "minutes": null },
+      "espn_probe": { "matches": 34, "no_roster": 1, "apps": 30, "starts": 30, "goals_keyevents": 19, "goals_stats": 0, "pens": 6, "assists_stats": 0, "minutes": 2679 },
+      "expected_after_repair": { "apps": 31, "goals": 20 },
+      "gate_fields": ["apps", "goals"],
+      "repair": "Bologna v Roma 2003-11-23 has a collapsed roster (every entry one athlete); count its keyEvents (Totti 16') for 19 + 1 = 20 goals, and recover the appearance from the core-API athlete store (espn-core-probe.md) or a corrections row",
+      "source": "Wikipedia", "verdict": "one app and one goal short until repaired"
+    },
+    {
+      "player": "Francesco Totti", "espn_id": 10293, "club": "AS Roma", "competition": "ita.1", "season": "2006-07",
+      "known": { "apps": 35, "starts": 35, "goals": 26, "pens": 5, "assists": null, "minutes": null },
+      "espn_probe": { "matches": 38, "no_roster": 0, "apps": 35, "starts": 35, "goals_keyevents": 26, "goals_stats": 24, "pens": 5, "assists_stats": 9, "minutes": 3026 },
+      "expected_after_repair": { "apps": 35, "starts": 35, "goals": 26, "pens": 5, "minutes": 3026 },
+      "gate_fields": ["apps", "starts", "goals", "pens"],
+      "note": "stats G reads 0 against real goals in Chievo 2006-10-22 and Ascoli 2006-10-25; keyEvents win on goals. Serie A assists floor is 2008-09",
+      "source": "Wikipedia", "verdict": "exact on keyEvents"
+    },
+    {
+      "player": "Miroslav Klose", "espn_id": 10955, "club": "Werder Bremen", "competition": "ger.1", "season": "2005-06",
+      "known": { "apps": 26, "starts": 25, "starts_weak": true, "goals": 25, "assists": [11, 14, 16], "assists_weak": true, "minutes": null },
+      "espn_probe": { "matches": 34, "no_roster": 0, "apps": 26, "starts": 23, "goals_keyevents": 25, "goals_stats": 0, "pens": 2, "assists_stats": 0, "minutes": 2059 },
+      "expected_after_repair": { "apps": 26, "goals": 25 },
+      "gate_fields": ["apps", "goals"],
+      "note": "starts 23 vs 25? (FBref snippet) not gated until a solid source exists; 2005-06 Bundesliga has no stat arrays, so no assists (floor 2006-07); publishers disagree 11/14/16",
+      "source": "Wikipedia; FBref snippet (weak)", "verdict": "exact on apps/goals"
+    },
+    {
+      "player": "Franck Ribéry", "espn_id": 42968, "club": "Marseille", "competition": "fra.1", "season": "2006-07",
+      "known": { "apps": 25, "starts": 25, "starts_weak": true, "goals": 5, "assists": 8, "assists_weak": true, "minutes": null },
+      "espn_probe": { "matches": 38, "no_roster": 0, "apps": 25, "starts": 25, "goals_keyevents": 5, "goals_stats": 5, "pens": 0, "assists_stats": 8, "minutes": 2167 },
+      "expected_after_repair": { "apps": 25, "starts": 25, "goals": 5, "minutes": 2167 },
+      "gate_fields": ["apps", "goals"],
+      "note": "assists 8 = FBref 8 but Ligue 1 assists floor is 2007-08, so recorded only",
+      "source": "Wikipedia; FBref (weak)", "verdict": "exact"
+    },
+    {
+      "player": "Ruud van Nistelrooy", "espn_id": null, "club": "Manchester United", "competition": "uefa.champions", "season": "2002-03",
+      "known": { "apps": null, "goals": 12, "goals_incl_qualifiers": 14, "wikipedia_europe_column": "10(1) apps, 14 goals" },
+      "espn_probe": { "matches": 16, "apps": 9, "starts": 8, "sub_apps": 1, "goals": 12, "qualifier_apps": 2, "qualifier_goals": 2, "stats_arrays": false },
+      "expected_after_repair": { "apps": 9, "starts": 8, "goals": 12, "qualifiers": { "apps": 2, "goals": 2 } },
+      "gate_fields": ["goals", "qualifiers.goals"],
+      "source": "Wikipedia; espn-coverage-ucl-intl.md", "verdict": "exact; proves the qualifier flag"
+    },
+    {
+      "player": "Lionel Messi", "espn_id": 45843, "club": "Barcelona", "competition": "uefa.champions", "season": "2005-06",
+      "known": { "apps": 6, "goals": 1 },
+      "espn_probe": { "matches": 13, "apps_by_flag": 6, "apps_by_APP": 5, "goals": 1 },
+      "expected_after_repair": { "apps": 6, "goals": 1 },
+      "gate_fields": ["apps", "goals"],
+      "repair": "flag count is right by accident: it includes the phantom 2006 final (197123, a 20-man squad list flagged as starters, Messi injured) and misses Barcelona v Udinese 2005-09-27 (collapsed roster; a substitution event shows Ezquerro on for Messi at 70'). Rule: appearance = APP >= 1 where stats exist, and rebuild collapsed rosters from substitution events",
+      "source": "Wikipedia; espn-coverage-ucl-intl.md", "verdict": "pass on goals; apps pass only after repair"
+    },
+    {
+      "player": "Cristiano Ronaldo", "espn_id": 22774, "club": "Manchester United", "competition": "uefa.champions", "season": "2007-08",
+      "known": { "apps": 11, "starts": 11, "goals": 8 },
+      "espn_probe": { "matches": 13, "apps": 11, "starts": 11, "goals": 8, "assists_stats": 1 },
+      "expected_after_repair": { "apps": 11, "starts": 11, "goals": 8 },
+      "gate_fields": ["apps", "starts", "goals"],
+      "source": "Wikipedia; espn-coverage-ucl-intl.md", "verdict": "exact"
+    },
+    {
+      "player": "Lionel Messi", "espn_id": 45843, "club": "Barcelona", "competition": "uefa.champions", "season": "2008-09",
+      "known": { "apps": 12, "goals": 9 },
+      "espn_probe": { "matches": 15, "apps": 12, "starts": 10, "goals": 9, "assists_stats": 5, "qualifiers_flagged": 2, "qualifier_apps": 0 },
+      "expected_after_repair": { "apps": 12, "starts": 10, "goals": 9 },
+      "gate_fields": ["apps", "goals"],
+      "note": "two Wisła qualifiers flagged; Messi absent (Olympics). Assists not independently verified",
+      "source": "Wikipedia; espn-coverage-ucl-intl.md", "verdict": "exact"
+    },
+    {
+      "player": "Cristiano Ronaldo", "espn_id": 22774, "club": "Real Madrid", "competition": "uefa.champions", "season": "2013-14",
+      "known": { "apps": 11, "goals": 17 },
+      "espn_probe": { "matches": 13, "apps": 11, "starts": 11, "goals": 17, "assists_stats": 4, "assists_keyevents": 4 },
+      "expected_after_repair": { "apps": 11, "starts": 11, "goals": 17 },
+      "gate_fields": ["goals", "apps"],
+      "note": "missed Galatasaray at home and Dortmund away; 11 apps consistent, Wikipedia tables truncated",
+      "source": "Wikipedia; espn-coverage-ucl-intl.md", "verdict": "exact"
+    }
+  ]
+}

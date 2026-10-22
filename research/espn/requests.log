@@ -1,0 +1,20 @@
+2026-10-21T16:59:58.845Z	probe-enum	misses=3	hits=0	retries=0
+2026-10-21T17:00:09.257Z	probe-enum2	misses=2	hits=0	retries=0
+2026-10-21T17:02:26.020Z	enumerate	misses=74	hits=1	retries=0
+2026-10-21T17:03:19.754Z	probe-summary 179089	misses=1	hits=0	retries=0
+2026-10-21T17:25:57.218Z	sweep	misses=807	hits=0	retries=3
+2026-10-21T17:37:53.243Z	gate fetch	misses=463	hits=23	retries=0
+2026-10-21T17:39:51.521Z	probe-id	misses=1	hits=0	retries=0
+2026-10-21T17:39:55.768Z	probe-id	misses=1	hits=0	retries=0
+2026-10-21T18:00:41.044Z	core-get 12	misses=10	hits=0	retries=0
+2026-10-21T18:01:11.498Z	core-get 11	misses=9	hits=0	retries=0
+2026-10-21T18:01:43.435Z	core-get 8	misses=6	hits=0	retries=0
+2026-10-21T18:02:37.216Z	core-get 8	misses=6	hits=0	retries=0
+2026-10-21T18:07:34.293Z	core-q1	misses=102	hits=17	retries=0
+2026-10-21T18:13:26.411Z	core-q2	misses=116	hits=1	retries=0
+2026-10-21T18:25:27.011Z	core-q345	misses=478	hits=46	retries=0
+2026-10-21T18:29:20.616Z	core-q2b	misses=156	hits=1	retries=0
+2026-10-21T18:29:47.616Z	core-q3fix	misses=18	hits=15	retries=0
+2026-10-21T18:30:39.348Z	core-q2c	misses=21	hits=0	retries=0
+2026-10-21T18:31:05.705Z	core-evstat	misses=5	hits=0	retries=0
+2026-10-21T18:31:47.947Z	core-evstat	misses=3	hits=0	retries=0

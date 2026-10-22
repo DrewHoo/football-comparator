@@ -1,0 +1,19 @@
+pre2001 86 1999 undefined 0
+pre2001 360 1999 undefined 0
+pre2001 86 2000 undefined 0
+pre2001 86 2001 2001/02 UEFA Champions League 17
+qual uefa.champions 20090818 5 play-off-round r36 st0 g2/2 | play-off-round r36 st0 g1/1 {"hits":0,"misses":7,"retries":0}
+qual uefa.champions 20100817 5 play-off-round r36 st0 g1/1 | play-off-round r36 st0 g2/2 {"hits":0,"misses":10,"retries":0}
+qual uefa.champions 20110816 5 play-off-round r38 st36 g1/1 | play-off-round r36 st0 g2/2 {"hits":0,"misses":13,"retries":0}
+qual uefa.champions 20050712 6 qualifying-first-round r2 st0 g2/2 | qualifying-first-round r2 st0 g2/2 {"hits":0,"misses":16,"retries":0}
+qual uefa.champions 20080729 3 qualifying-second-round r0 st0 g0/2 | qualifying-second-round r0 st0 g3/3 {"hits":0,"misses":19,"retries":0}
+qual uefa.champions 20130716 8 qualifying-second-round r36 st0 g7/7 | qualifying-second-round r36 st0 g1/1 {"hits":0,"misses":22,"retries":0}
+qual uefa.champions 20200818 1 semifinals r46 st46 g3/3 {"hits":0,"misses":24,"retries":0}
+qual uefa.champions_qual 20200818 5 first-round r36 st0 g4/4 | first-round r36 st0 g1/1 {"hits":0,"misses":27,"retries":0}
+qual uefa.champions 20230822 0  {"hits":0,"misses":29,"retries":0}
+qual uefa.champions_qual 20230822 3 playoff-round r45 st45 g1/1 | playoff-round r41 st41 g1/1 {"hits":0,"misses":32,"retries":0}
+por fifa.worldq.uefa 2009 2010 World Cup Qualifying - UEFA events=7 2009-11-18 r36 g1/1 | 2009-11-14 r36 g1/1 | 2009-10-14 r36 g4/4 | 2009-10-10 r36 g3/3 CR0 | 2009-09-09 r39 g1/1 CR0 | 2009-09-05 r36 g2/2 CR0 | 2009-06-06 r36 g3/3 CR0 {"hits":0,"misses":40,"retries":0}
+por fifa.worldq.uefa 2008 2010 World Cup Qualifying - UEFA events=5 2009-03-28 r36 g0/0 CR0 | 2008-10-15 r36 g0/0 CR0 | 2008-10-11 r36 g0/0 CR0 | 2008-09-10 r36 g5/5 | 2008-09-06 r36 g4/4 {"hits":0,"misses":46,"retries":0}
+por fifa.friendly 2014 2014 International Friendly events=4 2015-06-16 r46 g1/1 | 2015-03-31 r44 g2/2 | 2014-11-18 r59 g1/1 CR0 | 2014-10-11 r46 g3/3 CR0 {"hits":0,"misses":51,"retries":0}
+por fifa.friendly 2008 2008 International Friendly events=5 2008-11-20 r0 g8/8 | 2008-08-20 r40 g5/5 | 2008-05-31 r43 g2/2 CR0 | 2008-03-26 r40 g3/3 | 2008-02-06 r38 g4/4 CR0 {"hits":0,"misses":57,"retries":0}
+done {"hits":0,"misses":57,"retries":0}

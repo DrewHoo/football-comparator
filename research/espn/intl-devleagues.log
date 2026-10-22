@@ -1,0 +1,34 @@
+por.1 20021006 events=0  {"hits":0,"misses":3,"retries":0}
+por.1 20030209 events=0  {"hits":0,"misses":6,"retries":0}
+por.1 20050925 events=0  {"hits":0,"misses":9,"retries":0}
+por.1 20060205 events=0  {"hits":0,"misses":12,"retries":0}
+espn 502 on https://site.api.espn.com/apis/site/v2/sports/soccer/ned.1/summary?event=23193; backing off 5s
+espn 502 on https://site.api.espn.com/apis/site/v2/sports/soccer/ned.1/summary?event=23193; backing off 15s
+ned.1 20020210 events=3 Feyenoord Rotterdam at FC Groningen: r36 s22 st0 ke7 g1=1 | RKC Waalwijk at Ajax Amsterdam: r35 s22 st0 ke12 g4=4 {"hits":0,"misses":15,"retries":2}
+ned.1 20031019 events=5 Feyenoord Rotterdam at Roda JC Kerkrade: r36 s22 st0 ke9 g2=2 | FC Groningen at FC Twente: r36 s22 st0 ke16 g8=8 {"hits":0,"misses":18,"retries":2}
+ned.1 20100131 events=4 Ajax Amsterdam at Feyenoord Rotterdam: r36 s22 st0 ke12 g2=2 | Roda JC Kerkrade at FC Twente: r36 s22 st0 ke11 g2=2 {"hits":0,"misses":21,"retries":2}
+aut.1 20190810 events=3 LASK Linz at FC Admira Wacker Modling: r36 s22 st0 ke11 g1=1 | SC Rheindorf Altach at Rapid Vienna: r35 s22 st0 ke13 g3=3 {"hits":0,"misses":24,"retries":2}
+aut.1 20191006 events=3 LASK Linz at TSV Hartberg: r36 s22 st0 ke15 g3=3 | St. Pölten at Wolfsberger: r36 s22 st0 ke13 g4=4 {"hits":0,"misses":27,"retries":2}
+aut.1 20191130 events=3 TSV Hartberg at Austria Vienna: r36 s22 st0 ke15 g5=5 | SV Mattersburg at St. Pölten: r36 s22 st0 ke12 g0=0 {"hits":0,"misses":30,"retries":2}
+nor.1 20170521 events=5 Sandefjord at Aalesund: r35 s22 st0 ke11 g2=2 | Haugesund at Kristiansund BK: r36 s22 st0 ke14 g5=5 {"hits":0,"misses":33,"retries":2}
+nor.1 20180812 events=6 Kristiansund BK at Bodo/Glimt: r36 s22 st0 ke14 g3=3 | Ranheim at IK Start: r35 s22 st0 ke7 g0=0 {"hits":0,"misses":36,"retries":2}
+nor.1 20190630 events=6 Odds BK at Bodo/Glimt: r36 s22 st0 ke12 g3=3 | Valerenga at Haugesund: r35 s22 st0 ke15 g5=5 {"hits":0,"misses":39,"retries":2}
+usa.1 20230826 events=13 Nashville SC at Atlanta United FC: r40 s22 st40 ke20 g4=4 | New England Revolution at CF Montréal: r40 s22 st40 ke14 g1=1 {"hits":0,"misses":42,"retries":2}
+usa.1 20240302 events=13 Columbus Crew at Minnesota United FC: r40 s22 st40 ke14 g2=2 | LAFC at Real Salt Lake: r39 s22 st39 ke22 g3=3 {"hits":0,"misses":45,"retries":2}
+usa.1 20250412 events=12 Minnesota United FC at Toronto FC: r40 s22 st40 ke15 g0=0 | New England Revolution at Atlanta United FC: r40 s22 st40 ke17 g1=1 {"hits":0,"misses":48,"retries":2}
+ksa.1 20230825 events=4 Al Hazem at Al Fayha: r40 s22 st0 ke12 g0=0 | Al Nassr at Al Fateh: r40 s22 st0 ke17 g5=5 {"hits":0,"misses":51,"retries":2}
+ksa.1 20240302 events=3 Al Shabab at Al Khaleej: r40 s22 st0 ke8 g0=0 | Al Ettifaq at Damac: r40 s22 st0 ke12 g2=2 {"hits":0,"misses":54,"retries":2}
+ksa.1 20250404 events=3 Al Taawoun at Al Kholood: r40 s22 st40 ke13 g2=2 | Al Okhdood at Al Orobah: r40 s22 st40 ke10 g1=1 {"hits":0,"misses":57,"retries":2}
+tur.1 20051023 events=0  {"hits":0,"misses":60,"retries":2}
+tur.1 20150412 events=2 Eskisehirspor at Erciyesspor: r0 s0 st0 ke1 g0=0 | Balikesirspor at Sivasspor: r0 s0 st0 ke1 g0=0 {"hits":0,"misses":63,"retries":2}
+tur.1 20231105 events=4 Adana Demirspor at Sivasspor: r42 s22 st0 ke15 g2=2 | Ankaragucu at Istanbul Basaksehir: r42 s22 st0 ke18 g6=6 {"hits":0,"misses":66,"retries":2}
+bra.1 20090802 events=7 Fluminense at Athletico Paranaense: r39 s25 st0 ke10 g1=1 | Avaí at Corinthians: r41 s26 st0 ke10 g0=0 {"hits":0,"misses":69,"retries":2}
+bra.1 20110911 events=8 Atlético Goianiense at Ceará: r36 s22 st28 ke12 g2=2 | Botafogo at Coritiba: r37 s23 st28 ke15 g5=5 {"hits":0,"misses":72,"retries":2}
+bra.1 20121014 events=7 Sport at Atlético-MG: r37 s23 st28 ke13 g3=3 | Bahia at Coritiba: r36 s22 st28 ke13 g3=3 {"hits":0,"misses":75,"retries":2}
+arg.1 20051023 events=0  {"hits":0,"misses":78,"retries":2}
+arg.1 20120916 events=4 Independiente at Boca Juniors: r41 s23 st28 ke12 g3=3 | San Lorenzo at Newell's Old Boys: r38 s24 st29 ke11 g1=1 {"hits":0,"misses":81,"retries":2}
+arg.1 20230805 events=0  {"hits":0,"misses":84,"retries":2}
+sco.1 20051022 events=6 Hibernian at Aberdeen: r36 s22 st0 ke9 g1=1 | Dundee United at Falkirk: r36 s22 st0 ke11 g4=4 {"hits":0,"misses":87,"retries":2}
+sco.1 20120915 events=5 Celtic at St Johnstone: r36 s22 st36 ke22 g3=3 | Motherwell at Dundee: r36 s22 st36 ke15 g3=3 {"hits":0,"misses":90,"retries":2}
+sco.1 20231028 events=0  {"hits":0,"misses":93,"retries":2}
+done {"hits":0,"misses":93,"retries":2}

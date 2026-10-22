@@ -1,0 +1,714 @@
+[
+ {
+  "name": "soccernet match",
+  "pat": "soccernet.espn.go.com/match",
+  "urls": 10000,
+  "capped": true,
+  "matchLike": 0,
+  "years": {},
+  "sample": [],
+  "err": null,
+  "ms": 10
+ },
+ {
+  "name": "soccernet report",
+  "pat": "soccernet.espn.go.com/report",
+  "urls": 10000,
+  "capped": true,
+  "matchLike": 0,
+  "years": {},
+  "sample": [],
+  "err": null,
+  "ms": 7
+ },
+ {
+  "name": "soccernet gamecast",
+  "pat": "soccernet.espn.go.com/gamecast",
+  "urls": 10000,
+  "capped": true,
+  "matchLike": 0,
+  "years": {},
+  "sample": [],
+  "err": null,
+  "ms": 4
+ },
+ {
+  "name": "soccernet lineups",
+  "pat": "soccernet.espn.go.com/lineups",
+  "urls": 0,
+  "capped": false,
+  "matchLike": 0,
+  "years": {},
+  "sample": [],
+  "err": null,
+  "ms": 1
+ },
+ {
+  "name": "soccernet.com",
+  "pat": "www.soccernet.com/",
+  "urls": 10000,
+  "capped": true,
+  "matchLike": 8443,
+  "years": {
+   "2000": 1860,
+   "2001": 3712,
+   "2002": 1618,
+   "2003": 234,
+   "2004": 16,
+   "2005": 187,
+   "2006": 814,
+   "2007": 2
+  },
+  "sample": [
+   "20001017103455 http://www.soccernet.com:80/&cdt=00008000",
+   "20020220011501 http://soccernet.com:80/ad/471079-champ_468_anim.gif",
+   "20060324084610 http://www.soccernet.com/ad/adidas/WorldCupLiveDraw/adidas_header.swf?clicktag=http://ad.doubleclick.net/clk;24268708;12290297;m%3Fhttp://www.adidas.com/campaigns/verticalsfootball/content/index2.asp%3FstrCountry_adidascom=us&cmp=RAC-RZ3274011830&link=wcmbeswc"
+  ],
+  "err": null,
+  "ms": 6
+ },
+ {
+  "name": "espn api (site.api)",
+  "pat": "site.api.espn.com/apis/site/v2/sports/soccer/",
+  "urls": 0,
+  "capped": false,
+  "matchLike": 0,
+  "years": {},
+  "sample": [],
+  "err": null,
+  "ms": 0
+ },
+ {
+  "name": "espn api (site.web.api)",
+  "pat": "site.web.api.espn.com/apis/site/v2/sports/soccer/",
+  "urls": 0,
+  "capped": false,
+  "matchLike": 0,
+  "years": {},
+  "sample": [],
+  "err": null,
+  "ms": 0
+ },
+ {
+  "name": "bbc sport1 internationals",
+  "pat": "news.bbc.co.uk/sport1/hi/football/internationals/",
+  "urls": 4067,
+  "capped": false,
+  "matchLike": 4025,
+  "years": {
+   "2002": 295,
+   "2003": 917,
+   "2004": 486,
+   "2005": 281,
+   "2006": 544,
+   "2007": 696,
+   "2008": 500,
+   "2009": 301,
+   "2012": 5
+  },
+  "sample": [
+   "20020919184557 http://news.bbc.co.uk:80/sport1/hi/football/internationals/2193630.stm",
+   "20030612113718 http://news.bbc.co.uk:80/sport1/hi/football/internationals/2199652.stm",
+   "20021015203836 http://news.bbc.co.uk:80/sport1/hi/football/internationals/2199657.stm"
+  ],
+  "err": null,
+  "ms": 2
+ },
+ {
+  "name": "bbc sport2 internationals",
+  "pat": "news.bbc.co.uk/sport2/hi/football/internationals/",
+  "urls": 4904,
+  "capped": false,
+  "matchLike": 4865,
+  "years": {
+   "2002": 254,
+   "2003": 793,
+   "2004": 387,
+   "2005": 170,
+   "2006": 321,
+   "2007": 910,
+   "2008": 802,
+   "2009": 1010,
+   "2010": 72,
+   "2011": 69,
+   "2012": 77
+  },
+  "sample": [
+   "20020815040952 http://news.bbc.co.uk:80/sport2/hi/football/internationals/2193630.stm",
+   "20030901212931 http://news.bbc.co.uk:80/sport2/hi/football/internationals/2227592.stm",
+   "20021229005653 http://news.bbc.co.uk:80/sport2/hi/football/internationals/2238161.stm"
+  ],
+  "err": null,
+  "ms": 5
+ },
+ {
+  "name": "bbc sport1 euro_2000",
+  "pat": "news.bbc.co.uk/sport1/hi/football/euro_2000/",
+  "urls": 0,
+  "capped": false,
+  "matchLike": 0,
+  "years": {},
+  "sample": [],
+  "err": null,
+  "ms": 1
+ },
+ {
+  "name": "bbc sport1 world_cup_2002",
+  "pat": "news.bbc.co.uk/sport1/hi/football/world_cup_2002/",
+  "urls": 484,
+  "capped": false,
+  "matchLike": 482,
+  "years": {
+   "2002": 316,
+   "2003": 146,
+   "2004": 14,
+   "2006": 2,
+   "2007": 1,
+   "2009": 1,
+   "2012": 2
+  },
+  "sample": [
+   "20030106085915 http://news.bbc.co.uk:80/sport1/hi/football/world_cup_2002/1000155.stm",
+   "20030216200111 http://news.bbc.co.uk:80/sport1/hi/football/world_cup_2002/1000218.stm",
+   "20030202192110 http://news.bbc.co.uk:80/sport1/hi/football/world_cup_2002/1000399.stm"
+  ],
+  "err": null,
+  "ms": 1
+ },
+ {
+  "name": "bbc sport1 teams",
+  "pat": "news.bbc.co.uk/sport1/hi/football/teams/",
+  "urls": 10000,
+  "capped": true,
+  "matchLike": 9729,
+  "years": {
+   "2002": 846,
+   "2003": 1636,
+   "2004": 1533,
+   "2005": 512,
+   "2006": 1388,
+   "2007": 1669,
+   "2008": 1323,
+   "2009": 790,
+   "2010": 2,
+   "2011": 2,
+   "2012": 28
+  },
+  "sample": [
+   "20021225141204 http://news.bbc.co.uk:80/sport1/hi/football/teams/a/aberdeen/1035110.stm",
+   "20021226210701 http://news.bbc.co.uk:80/sport1/hi/football/teams/a/aberdeen/1117382.stm",
+   "20021227043419 http://news.bbc.co.uk:80/sport1/hi/football/teams/a/aberdeen/1173914.stm"
+  ],
+  "err": null,
+  "ms": 5
+ },
+ {
+  "name": "bbc sport new (/sport/football/)",
+  "pat": "www.bbc.co.uk/sport/football/",
+  "urls": 0,
+  "capped": false,
+  "matchLike": 0,
+  "years": {},
+  "sample": [],
+  "err": "wb 504 http://web.archive.org/cdx/search/cdx?url=www.bbc.co.uk%2Fsport%2Ffootbal",
+  "ms": 614146
+ },
+ {
+  "name": "bbc sport /sport/0/football/",
+  "pat": "www.bbc.co.uk/sport/0/football/",
+  "urls": 10000,
+  "capped": true,
+  "matchLike": 9834,
+  "years": {
+   "2012": 9834
+  },
+  "sample": [
+   "20120409185658 http://www.bbc.co.uk/sport/0/football/12674613",
+   "20120614004731 http://www.bbc.co.uk:80/sport/0/football/12782156",
+   "20120315171700 http://www.bbc.co.uk:80/sport/0/football/12830836"
+  ],
+  "err": null,
+  "ms": 172258
+ },
+ {
+  "name": "uefa.com competitions/euro",
+  "pat": "www.uefa.com/competitions/euro/",
+  "urls": 10000,
+  "capped": true,
+  "matchLike": 5032,
+  "years": {
+   "2002": 746,
+   "2003": 711,
+   "2004": 15,
+   "2006": 690,
+   "2007": 2533,
+   "2008": 280,
+   "2012": 57
+  },
+  "sample": [
+   "20021219055044 http://www.uefa.com:80/Competitions/Euro/1579/Match=68970/index.html",
+   "20030418130250 http://www.uefa.com:80/competitions/euro/1579/Match=68973/index.html",
+   "20030418130210 http://www.uefa.com:80/competitions/euro/1579/Match=68974/index.html"
+  ],
+  "err": null,
+  "ms": 53972
+ },
+ {
+  "name": "uefa.com uefaeuro",
+  "pat": "www.uefa.com/uefaeuro/",
+  "urls": 10000,
+  "capped": true,
+  "matchLike": 3388,
+  "years": {
+   "2011": 572,
+   "2012": 2816
+  },
+  "sample": [
+   "20120511205940 http://www.uefa.com:80/uefaeuro/season=1960/matches/round=159/match=3997/index.html",
+   "20120510044447 http://www.uefa.com:80/uefaeuro/season=1960/matches/round=159/match=3998/index.html",
+   "20120505073054 http://www.uefa.com:80/uefaeuro/season=1960/matches/round=160/match=3999/index.html"
+  ],
+  "err": null,
+  "ms": 117874
+ },
+ {
+  "name": "uefa.com worldcup",
+  "pat": "www.uefa.com/worldcup/",
+  "urls": 5588,
+  "capped": false,
+  "matchLike": 1703,
+  "years": {
+   "2010": 636,
+   "2011": 86,
+   "2012": 981
+  },
+  "sample": [
+   "20121113072140 http://www.uefa.com/worldcup/friendlies/season=2014/matches/round=2000374/match=2010434/index.html",
+   "20121127092946 http://www.uefa.com:80/worldcup/friendlies/season=2014/matches/round=2000374/match=2010438/index.html",
+   "20121202072637 http://www.uefa.com/worldcup/friendlies/season=2014/matches/round=2000374/match=2010439/index.html"
+  ],
+  "err": null,
+  "ms": 21040
+ },
+ {
+  "name": "uefa.com nationalassociations",
+  "pat": "www.uefa.com/uefa/memberassociations/",
+  "urls": 0,
+  "capped": false,
+  "matchLike": 0,
+  "years": {},
+  "sample": [],
+  "err": null,
+  "ms": 27080
+ },
+ {
+  "name": "uefa.com competitions/worldcup",
+  "pat": "www.uefa.com/competitions/worldcup/",
+  "urls": 10000,
+  "capped": true,
+  "matchLike": 9338,
+  "years": {
+   "2001": 232,
+   "2002": 1576,
+   "2003": 2647,
+   "2004": 3064,
+   "2005": 492,
+   "2006": 119,
+   "2007": 135,
+   "2008": 525,
+   "2009": 535,
+   "2010": 13
+  },
+  "sample": [
+   "20021221133011 http://www.uefa.com:80/Competitions/WorldCup/1577/Match=69788/index.html",
+   "20030219144339 http://www.uefa.com:80/Competitions/WorldCup/1578/Match=69789/",
+   "20021221132553 http://www.uefa.com:80/Competitions/WorldCup/1578/Match=69789/index.html"
+  ],
+  "err": null,
+  "ms": 18271
+ },
+ {
+  "name": "euro2000.org",
+  "pat": "www.euro2000.org/",
+  "urls": 10000,
+  "capped": true,
+  "matchLike": 10000,
+  "years": {
+   "2000": 2209,
+   "2001": 5743,
+   "2002": 1987,
+   "2006": 14,
+   "2007": 36,
+   "2008": 1,
+   "2012": 10
+  },
+  "sample": [
+   "20000510042436 http://www.euro2000.org:80/",
+   "20061011174552 http://www.euro2000.org:80/%20",
+   "20010307211357 http://www.euro2000.org:80/0,1310,55653,00.html"
+  ],
+  "err": null,
+  "ms": 118956
+ },
+ {
+  "name": "fifa.com worldcup",
+  "pat": "www.fifa.com/worldcup/",
+  "urls": 10000,
+  "capped": true,
+  "matchLike": 3559,
+  "years": {
+   "2007": 2240,
+   "2008": 91,
+   "2009": 1,
+   "2010": 196,
+   "2011": 234,
+   "2012": 797
+  },
+  "sample": [
+   "20071001044125 http://www.fifa.com/worldcup/archive/edition=1/results/matches/match=1084/report.html",
+   "20071016183957 http://fifa.com:80/worldcup/archive/edition=1/results/matches/match=1085/report.html",
+   "20071016184002 http://fifa.com:80/worldcup/archive/edition=1/results/matches/match=1086/report.html"
+  ],
+  "err": null,
+  "ms": 32853
+ },
+ {
+  "name": "fifa.com tournaments archive",
+  "pat": "www.fifa.com/tournaments/archive/",
+  "urls": 10000,
+  "capped": true,
+  "matchLike": 3042,
+  "years": {
+   "2007": 1281,
+   "2008": 386,
+   "2009": 311,
+   "2010": 72,
+   "2011": 258,
+   "2012": 734
+  },
+  "sample": [
+   "20080803064629 http://www.fifa.com:80/tournaments/archive/beachsoccerworldcup/brazil2007/results/match=61205/index.html",
+   "20080803160809 http://www.fifa.com:80/tournaments/archive/beachsoccerworldcup/brazil2007/results/match=61205/report.html",
+   "20110824003833 http://www.fifa.com/tournaments/archive/beachsoccerworldcup/brazil2007/results/match=61206/632/004/picture.html"
+  ],
+  "err": null,
+  "ms": 170508
+ },
+ {
+  "name": "fifa.com en/tournaments",
+  "pat": "www.fifa.com/en/tournaments/",
+  "urls": 0,
+  "capped": false,
+  "matchLike": 0,
+  "years": {},
+  "sample": [],
+  "err": null,
+  "ms": 50113
+ },
+ {
+  "name": "fifa.com associations",
+  "pat": "www.fifa.com/associations/",
+  "urls": 9728,
+  "capped": false,
+  "matchLike": 939,
+  "years": {
+   "2007": 417,
+   "2008": 10,
+   "2009": 34,
+   "2010": 59,
+   "2011": 176,
+   "2012": 243
+  },
+  "sample": [
+   "20091101155348 http://www.fifa.com:80/associations/association%3Dafg/fixturesresults/gender%3Df/",
+   "20100501231009 http://www.fifa.com:80/associations/association=afg/fixturesresults/gender=f/index.html",
+   "20070607234650 http://www.fifa.com:80/associations/association=afg/fixturesresults/gender=m/index.html"
+  ],
+  "err": null,
+  "ms": 471585
+ },
+ {
+  "name": "fifa.com live/competitions",
+  "pat": "www.fifa.com/live/competitions/",
+  "urls": 1996,
+  "capped": false,
+  "matchLike": 1934,
+  "years": {
+   "2007": 263,
+   "2008": 151,
+   "2009": 390,
+   "2010": 659,
+   "2011": 289,
+   "2012": 182
+  },
+  "sample": [
+   "20080604010112 http://www.fifa.com:80/live/competitions/africa/matchday=1/day=1/match=300036622/index.html",
+   "20071123022710 http://www.fifa.com:80/live/competitions/africa/matchheader/match=300032119/_header.html",
+   "20071016162207 http://fifa.com:80/live/competitions/africa/matchheader/match=300032121/_header.html"
+  ],
+  "err": null,
+  "ms": 34744
+ },
+ {
+  "name": "soccerway int matches",
+  "pat": "int.soccerway.com/matches/",
+  "urls": 0,
+  "capped": false,
+  "matchLike": 0,
+  "years": {},
+  "sample": [],
+  "err": "wb 504 http://web.archive.org/cdx/search/cdx?url=int.soccerway.com%2Fmatches%2F&",
+  "ms": 610931
+ },
+ {
+  "name": "soccerway uk matches",
+  "pat": "uk.soccerway.com/matches/",
+  "urls": 10000,
+  "capped": true,
+  "matchLike": 9339,
+  "years": {
+   "2009": 883,
+   "2010": 5265,
+   "2011": 2350,
+   "2012": 841
+  },
+  "sample": [
+   "20100907023433 http://uk.soccerway.com:80/matches/1934/05/27/world/world-cup/germany/belgium/157029/",
+   "20121011061812 http://uk.soccerway.com/matches/1934/05/27/world/world-cup/hungary/egypt/157033/",
+   "20121011061852 http://uk.soccerway.com/matches/1934/05/31/world/world-cup/austria/hungary/157037/"
+  ],
+  "err": null,
+  "ms": 14523
+ },
+ {
+  "name": "soccerway www matches",
+  "pat": "www.soccerway.com/matches/",
+  "urls": 10000,
+  "capped": true,
+  "matchLike": 9213,
+  "years": {
+   "2009": 4259,
+   "2010": 3161,
+   "2011": 971,
+   "2012": 822
+  },
+  "sample": [
+   "20090805234457 http://www.soccerway.com:80/matches/0/00/00/australia/northern/nakara-azzurri/casuarina/776791/",
+   "20090201065130 http://www.soccerway.com:80/matches/0/00/00/brazil/paulista-a1/esporte-clube-noroeste/santos-futebol-clube-sao-paulo/731699/",
+   "20090201065135 http://www.soccerway.com:80/matches/0/00/00/brazil/paulista-a1/gremio-recreativo-barueri/oeste-futebol-club/731705/"
+  ],
+  "err": null,
+  "ms": 44005
+ },
+ {
+  "name": "national-football-teams",
+  "pat": "www.national-football-teams.com/",
+  "urls": 0,
+  "capped": false,
+  "matchLike": 0,
+  "years": {},
+  "sample": [],
+  "err": "wb 503 http://web.archive.org/cdx/search/cdx?url=www.national-football-teams.com",
+  "ms": 555860
+ },
+ {
+  "name": "eu-football.info",
+  "pat": "eu-football.info/_match.php",
+  "urls": 3144,
+  "capped": false,
+  "matchLike": 3143,
+  "years": {
+   "2009": 20,
+   "2010": 31,
+   "2011": 371,
+   "2012": 2721
+  },
+  "sample": [
+   "20120513083610 http://eu-football.info/_match.php?id=1",
+   "20120513121510 http://eu-football.info/_match.php?id=10007",
+   "20111009173516 http://eu-football.info/_match.php?id=10013"
+  ],
+  "err": null,
+  "ms": 39942
+ },
+ {
+  "name": "11v11",
+  "pat": "www.11v11.com/matches/",
+  "urls": 0,
+  "capped": false,
+  "matchLike": 0,
+  "years": {},
+  "sample": [],
+  "err": "The operation was aborted due to timeout",
+  "ms": 120005
+ },
+ {
+  "name": "worldfootball.net report",
+  "pat": "www.worldfootball.net/report/",
+  "urls": 0,
+  "capped": false,
+  "matchLike": 0,
+  "years": {},
+  "sample": [],
+  "err": "wb 503 http://web.archive.org/cdx/search/cdx?url=www.worldfootball.net%2Freport%",
+  "ms": 390990
+ },
+ {
+  "name": "skysports match_report",
+  "pat": "www.skysports.com/football/match_report/",
+  "urls": 10000,
+  "capped": true,
+  "matchLike": 9999,
+  "years": {
+   "2007": 456,
+   "2008": 2262,
+   "2009": 2792,
+   "2010": 1693,
+   "2011": 1243,
+   "2012": 1553
+  },
+  "sample": [
+   "20111209091703 http://www.skysports.com:80/football/match_report/0,,11065_2392033,00+en-USS_01DBC.html",
+   "20071217105648 http://www.skysports.com:80/football/match_report/0,,11065_2665667,00.html",
+   "20081122062336 http://www.skysports.com/football/match_report/0,,11065_2665792,00.html"
+  ],
+  "err": null,
+  "ms": 241581
+ },
+ {
+  "name": "skysports story",
+  "pat": "www1.skysports.com/football/",
+  "urls": 10000,
+  "capped": true,
+  "matchLike": 9999,
+  "years": {
+   "2001": 1,
+   "2007": 4,
+   "2008": 4,
+   "2009": 4081,
+   "2010": 5038,
+   "2011": 871
+  },
+  "sample": [
+   "20011019040257 http://www.skysports.com:80/football",
+   "20080918131011 http://www.skysports.com:80/football/0,,,00+en-USS_01DBC.html",
+   "20080918055303 http://www.skysports.com:80/football/0,,11065,00.html"
+  ],
+  "err": null,
+  "ms": 527282
+ },
+ {
+  "name": "guardian football",
+  "pat": "football.guardian.co.uk/",
+  "urls": 0,
+  "capped": false,
+  "matchLike": 0,
+  "years": {},
+  "sample": [],
+  "err": null,
+  "ms": 21754
+ },
+ {
+  "name": "telegraph sport",
+  "pat": "www.telegraph.co.uk/sport/",
+  "urls": 0,
+  "capped": false,
+  "matchLike": 0,
+  "years": {},
+  "sample": [],
+  "err": "The operation was aborted due to timeout",
+  "ms": 119967
+ },
+ {
+  "name": "thefa.com",
+  "pat": "www.thefa.com/",
+  "urls": 0,
+  "capped": false,
+  "matchLike": 0,
+  "years": {},
+  "sample": [],
+  "err": "wb 504 http://web.archive.org/cdx/search/cdx?url=www.thefa.com%2F&output=json&ma",
+  "ms": 501015
+ },
+ {
+  "name": "fpf.pt",
+  "pat": "www.fpf.pt/",
+  "urls": 10000,
+  "capped": true,
+  "matchLike": 228,
+  "years": {
+   "2000": 1,
+   "2001": 38,
+   "2002": 43,
+   "2003": 55,
+   "2004": 12,
+   "2005": 9,
+   "2006": 4,
+   "2010": 2,
+   "2011": 4,
+   "2012": 60
+  },
+  "sample": [
+   "20040823051653 http://www.fpf.pt:80/aa/imagens/jogos.gif",
+   "20040823052823 http://www.fpf.pt:80/aa/imagens/jogos1.gif",
+   "20031227074702 http://www.fpf.pt:80/aa/jogos.htm"
+  ],
+  "err": null,
+  "ms": 84910
+ },
+ {
+  "name": "afa.org.ar",
+  "pat": "www.afa.org.ar/",
+  "urls": 10000,
+  "capped": true,
+  "matchLike": 9939,
+  "years": {
+   "2000": 218,
+   "2001": 631,
+   "2002": 3023,
+   "2003": 167,
+   "2004": 228,
+   "2005": 196,
+   "2006": 334,
+   "2007": 4522,
+   "2008": 211,
+   "2009": 148,
+   "2010": 50,
+   "2011": 134,
+   "2012": 77
+  },
+  "sample": [
+   "20000302013222 http://www.afa.org.ar:80/",
+   "20100514170459 http://www.afa.org.ar:80/%20INFANTILES",
+   "20000415085926 http://www.afa.org.ar:80/10_98.htm"
+  ],
+  "err": null,
+  "ms": 51125
+ },
+ {
+  "name": "dfb.de",
+  "pat": "www.dfb.de/",
+  "urls": 10000,
+  "capped": true,
+  "matchLike": 1112,
+  "years": {
+   "2000": 4,
+   "2001": 594,
+   "2002": 206,
+   "2003": 104,
+   "2004": 76,
+   "2005": 1,
+   "2006": 2,
+   "2007": 42,
+   "2008": 81,
+   "2009": 2
+  },
+  "sample": [
+   "20070520021540 http://www.dfb.de:80/?id=500014&tx_dfbnews_pi1[showUid]=10317&no_cache=1",
+   "20070707051357 http://www.dfb.de:80/?id=500014&tx_dfbnews_pi1[showUid]=10519&no_cache=1",
+   "20070704062242 http://www.dfb.de:80/?id=500014&tx_dfbnews_pi1[showUid]=10602&no_cache=1"
+  ],
+  "err": null,
+  "ms": 39086
+ }
+]

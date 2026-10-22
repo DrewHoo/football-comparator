@@ -1,0 +1,46 @@
+ids { Portugal: '482', Argentina: '202' }
+fifa.world 1998 Argentina matches=5 apps=0 keG=0 statG=0 expect=null {"hits":0,"misses":10,"retries":0}
+fifa.world 2002 Portugal matches=3 apps=0 keG=0 statG=0 expect=null {"hits":0,"misses":16,"retries":0}
+fifa.world 2002 Argentina matches=3 apps=0 keG=0 statG=0 expect=null {"hits":0,"misses":20,"retries":0}
+fifa.world 2006 Portugal matches=7 apps=6 keG=1 statG=1 expect=1 {"hits":0,"misses":30,"retries":0}
+fifa.world 2006 Argentina matches=5 apps=3 keG=1 statG=1 expect=1 {"hits":0,"misses":36,"retries":0}
+fifa.world 2010 Portugal matches=4 apps=4 keG=1 statG=1 expect=1 {"hits":0,"misses":43,"retries":0}
+fifa.world 2010 Argentina matches=5 apps=4 keG=0 statG=0 expect=0 {"hits":0,"misses":49,"retries":0}
+fifa.world 2014 Portugal matches=3 apps=3 keG=1 statG=1 expect=1 {"hits":0,"misses":55,"retries":0}
+fifa.world 2014 Argentina matches=7 apps=6 keG=4 statG=4 expect=4 {"hits":1,"misses":62,"retries":0}
+fifa.world 2018 Portugal matches=4 apps=4 keG=4 statG=4 expect=4 {"hits":1,"misses":69,"retries":0}
+fifa.world 2018 Argentina matches=4 apps=4 keG=1 statG=1 expect=1 {"hits":1,"misses":74,"retries":0}
+fifa.world 2022 Portugal matches=5 apps=5 keG=1 statG=1 expect=1 {"hits":2,"misses":81,"retries":0}
+fifa.world 2022 Argentina matches=7 apps=7 keG=7 statG=7 expect=7 {"hits":3,"misses":88,"retries":0}
+uefa.euro 2000 Portugal matches=0 apps=0 keG=0 statG=0 expect=null {"hits":3,"misses":90,"retries":0}
+uefa.euro 2004 Portugal matches=6 apps=6 keG=2 statG=2 expect=2 {"hits":4,"misses":98,"retries":0}
+uefa.euro 2008 Portugal matches=4 apps=3 keG=1 statG=1 expect=1 {"hits":4,"misses":105,"retries":0}
+uefa.euro 2012 Portugal matches=5 apps=5 keG=3 statG=3 expect=3 {"hits":4,"misses":113,"retries":0}
+uefa.euro 2016 Portugal matches=7 apps=7 keG=3 statG=3 expect=3 {"hits":6,"misses":121,"retries":0}
+uefa.euro 2020 Portugal matches=4 apps=4 keG=5 statG=5 expect=5 {"hits":6,"misses":128,"retries":0}
+uefa.euro 2024 Portugal matches=5 apps=5 keG=0 statG=0 expect=0 {"hits":6,"misses":136,"retries":0}
+fifa.worldq.uefa 20040908 events=22 16/0/6=6 6/0/3=3 35/0/2=2 {"hits":6,"misses":140,"retries":0}
+fifa.worldq.uefa 20041009 events=23 36/0/2=2 36/0/4=4 36/0/1=1 {"hits":6,"misses":144,"retries":0}
+fifa.worldq.uefa 20050326 events=17 36/0/3=3 36/0/4=4 36/0/2=2 {"hits":6,"misses":148,"retries":0}
+fifa.worldq.uefa 20050903 events=22 36/0/0=0 36/0/2=2 36/0/1=1 {"hits":6,"misses":152,"retries":0}
+fifa.worldq.uefa 20080906 events=24 36/36/1=1 36/36/1=1 36/0/2=2 {"hits":6,"misses":156,"retries":0}
+fifa.worldq.uefa 20081011 events=24 36/0/1=1 37/36/0=0 36/0/2=2 {"hits":6,"misses":160,"retries":0}
+fifa.worldq.uefa 20090401 events=23 36/0/6=6 36/0/2=2 36/0/1=1 {"hits":6,"misses":164,"retries":0}
+fifa.worldq.uefa 20091014 events=24 36/0/6=6 36/0/3=3 36/0/2=2 {"hits":6,"misses":168,"retries":0}
+fifa.worldq.conmebol 20040905 events=4 1/0/1=1 4/0/4=4 1/0/1=1 {"hits":6,"misses":172,"retries":0}
+fifa.worldq.conmebol 20050326 events=2 3/0/3=3 0/0/0=0 {"hits":6,"misses":175,"retries":0}
+fifa.worldq.conmebol 20051012 events=5 48/0/3=3 48/0/0=0 50/0/1=1 {"hits":6,"misses":179,"retries":0}
+fifa.worldq.conmebol 20080907 events=1 39/30/6=3 {"hits":6,"misses":181,"retries":0}
+fifa.worldq.conmebol 20090328 events=3 44/31/2=2 54/38/8=4 39/29/4=2 {"hits":6,"misses":185,"retries":0}
+fifa.worldq.conmebol 20091014 events=5 60/31/1=1 58/30/0=0 55/29/1=1 {"hits":6,"misses":189,"retries":0}
+uefa.euroq 20070328 events=20 36/35/1=1 36/36/0=0 36/36/1=1 {"hits":6,"misses":193,"retries":0}
+uefa.euroq 20110325 events=6 36/36/2=2 36/36/4=4 36/36/3=3 {"hits":6,"misses":197,"retries":0}
+uefa.euroq 20150329 events=8 46/46/3=3 44/44/2=2 46/46/3=3 {"hits":6,"misses":201,"retries":0}
+uefa.euroq 20191015 events=9 46/46/3=3 45/45/1=1 42/42/5=5 {"hits":6,"misses":205,"retries":0}
+fifa.friendly 20040818 events=22 3/0/3=3 7/0/7=7 1/0/1=1 {"hits":6,"misses":209,"retries":0}
+fifa.friendly 20080820 events=33 0/0/0=4 0/0/0=3 0/0/0=2 {"hits":6,"misses":213,"retries":0}
+fifa.friendly 20110209 events=29 0/0/0=3 0/0/0=1 0/0/0=3 {"hits":6,"misses":217,"retries":0}
+fifa.friendly 20140305 events=39 0/0/0=6 31/0/2=2 46/46/2=2 {"hits":6,"misses":221,"retries":0}
+fifa.friendly 20180323 events=30 43/43/2=2 49/0/4=2 34/0/5=5 {"hits":6,"misses":225,"retries":0}
+fifa.friendly 20240326 events=36 44/0/3=3 0/0/0=4 46/0/4=4 {"hits":6,"misses":229,"retries":0}
+done {"hits":6,"misses":229,"retries":0}

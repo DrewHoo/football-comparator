@@ -1,0 +1,2725 @@
+{
+ "club": [
+  {
+   "p": "ronaldo",
+   "y": 2003,
+   "league": "eng.charity",
+   "team": "360",
+   "eventlogPlayed": 0,
+   "eventlogAll": 1,
+   "apps": 0,
+   "g": 0,
+   "a": 0,
+   "okFilter": false,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022"
+   ]
+  },
+  {
+   "p": "ronaldo",
+   "y": 2003,
+   "league": "eng.1",
+   "team": "360",
+   "eventlogPlayed": 33,
+   "eventlogAll": 39,
+   "apps": 33,
+   "g": 4,
+   "a": 4,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022",
+    "2021",
+    "2008",
+    "2007",
+    "2006",
+    "2005",
+    "2004",
+    "2003"
+   ]
+  },
+  {
+   "p": "ronaldo",
+   "y": 2003,
+   "league": "uefa.champions",
+   "team": "360",
+   "eventlogPlayed": 7,
+   "eventlogAll": 8,
+   "apps": 7,
+   "g": 0,
+   "a": 0,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022",
+    "2021",
+    "2020",
+    "2019",
+    "2018",
+    "2017",
+    "2016",
+    "2015",
+    "2014",
+    "2013",
+    "2012",
+    "2011",
+    "2010",
+    "2009",
+    "2008",
+    "2007"
+   ]
+  },
+  {
+   "p": "ronaldo",
+   "y": 2003,
+   "league": "eng.league_cup",
+   "team": "360",
+   "eventlogPlayed": 1,
+   "eventlogAll": 2,
+   "apps": 1,
+   "g": 0,
+   "a": 0,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022",
+    "2008",
+    "2006",
+    "2005",
+    "2004",
+    "2003"
+   ]
+  },
+  {
+   "p": "ronaldo",
+   "y": 2003,
+   "league": "eng.fa",
+   "team": "360",
+   "eventlogPlayed": 5,
+   "eventlogAll": 6,
+   "apps": 5,
+   "g": 2,
+   "a": 0,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022",
+    "2021",
+    "2008",
+    "2007",
+    "2006",
+    "2005",
+    "2004",
+    "2003"
+   ]
+  },
+  {
+   "p": "ronaldo",
+   "y": 2007,
+   "league": "eng.charity",
+   "team": "360",
+   "eventlogPlayed": 0,
+   "eventlogAll": 1,
+   "apps": 0,
+   "g": 0,
+   "a": 0,
+   "okFilter": false,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022"
+   ]
+  },
+  {
+   "p": "ronaldo",
+   "y": 2007,
+   "league": "eng.1",
+   "team": "360",
+   "eventlogPlayed": 34,
+   "eventlogAll": 39,
+   "apps": 34,
+   "g": 31,
+   "a": 7,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022",
+    "2021",
+    "2008",
+    "2007",
+    "2006",
+    "2005",
+    "2004",
+    "2003"
+   ]
+  },
+  {
+   "p": "ronaldo",
+   "y": 2007,
+   "league": "uefa.champions",
+   "team": "360",
+   "eventlogPlayed": 12,
+   "eventlogAll": 13,
+   "apps": 12,
+   "g": 8,
+   "a": 1,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022",
+    "2021",
+    "2020",
+    "2019",
+    "2018",
+    "2017",
+    "2016",
+    "2015",
+    "2014",
+    "2013",
+    "2012",
+    "2011",
+    "2010",
+    "2009",
+    "2008",
+    "2007"
+   ]
+  },
+  {
+   "p": "ronaldo",
+   "y": 2007,
+   "league": "eng.league_cup",
+   "team": "360",
+   "eventlogPlayed": 0,
+   "eventlogAll": 1,
+   "apps": 0,
+   "g": 0,
+   "a": 0,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022",
+    "2008",
+    "2006",
+    "2005",
+    "2004",
+    "2003"
+   ]
+  },
+  {
+   "p": "ronaldo",
+   "y": 2007,
+   "league": "eng.fa",
+   "team": "360",
+   "eventlogPlayed": 3,
+   "eventlogAll": 4,
+   "apps": 3,
+   "g": 3,
+   "a": 0,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022",
+    "2021",
+    "2008",
+    "2007",
+    "2006",
+    "2005",
+    "2004",
+    "2003"
+   ]
+  },
+  {
+   "p": "ronaldo",
+   "y": 2011,
+   "league": "esp.super_cup",
+   "team": "86",
+   "eventlogPlayed": 2,
+   "eventlogAll": 2,
+   "apps": 2,
+   "g": 1,
+   "a": 0,
+   "okFilter": false,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022",
+    "2017",
+    "2014",
+    "2012",
+    "2011"
+   ]
+  },
+  {
+   "p": "ronaldo",
+   "y": 2011,
+   "league": "esp.1",
+   "team": "86",
+   "eventlogPlayed": 37,
+   "eventlogAll": 38,
+   "apps": 37,
+   "g": 45,
+   "a": 12,
+   "okFilter": false,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022",
+    "2017",
+    "2016",
+    "2015",
+    "2014",
+    "2013",
+    "2012",
+    "2011",
+    "2010",
+    "2009"
+   ]
+  },
+  {
+   "p": "ronaldo",
+   "y": 2011,
+   "league": "uefa.champions",
+   "team": "86",
+   "eventlogPlayed": 11,
+   "eventlogAll": 12,
+   "apps": 11,
+   "g": 10,
+   "a": 3,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022",
+    "2021",
+    "2020",
+    "2019",
+    "2018",
+    "2017",
+    "2016",
+    "2015",
+    "2014",
+    "2013",
+    "2012",
+    "2011",
+    "2010",
+    "2009",
+    "2008",
+    "2007"
+   ]
+  },
+  {
+   "p": "ronaldo",
+   "y": 2011,
+   "league": "esp.copa_del_rey",
+   "team": "86",
+   "eventlogPlayed": 5,
+   "eventlogAll": 6,
+   "apps": 5,
+   "g": 3,
+   "a": 0,
+   "okFilter": false,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022",
+    "2016",
+    "2013",
+    "2012",
+    "2011",
+    "2010"
+   ]
+  },
+  {
+   "p": "messi",
+   "y": 2005,
+   "league": "esp.1",
+   "team": "83",
+   "eventlogPlayed": 18,
+   "eventlogAll": 38,
+   "apps": 18,
+   "g": 6,
+   "a": 2,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2020",
+    "2019",
+    "2018",
+    "2017",
+    "2016",
+    "2015",
+    "2014",
+    "2013",
+    "2012",
+    "2011",
+    "2010",
+    "2009",
+    "2008",
+    "2007",
+    "2006",
+    "2005",
+    "2004"
+   ]
+  },
+  {
+   "p": "messi",
+   "y": 2005,
+   "league": "uefa.champions",
+   "team": "83",
+   "eventlogPlayed": 7,
+   "eventlogAll": 13,
+   "apps": 7,
+   "g": 1,
+   "a": 0,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022",
+    "2021",
+    "2020",
+    "2019",
+    "2018",
+    "2017",
+    "2016",
+    "2015",
+    "2014",
+    "2013",
+    "2012",
+    "2011",
+    "2010",
+    "2009",
+    "2008",
+    "2007"
+   ]
+  },
+  {
+   "p": "messi",
+   "y": 2008,
+   "league": "uefa.champions",
+   "team": "83",
+   "eventlogPlayed": 12,
+   "eventlogAll": 15,
+   "apps": 12,
+   "g": 9,
+   "a": 5,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022",
+    "2021",
+    "2020",
+    "2019",
+    "2018",
+    "2017",
+    "2016",
+    "2015",
+    "2014",
+    "2013",
+    "2012",
+    "2011",
+    "2010",
+    "2009",
+    "2008",
+    "2007"
+   ]
+  },
+  {
+   "p": "messi",
+   "y": 2008,
+   "league": "esp.1",
+   "team": "83",
+   "eventlogPlayed": 33,
+   "eventlogAll": 38,
+   "apps": 33,
+   "g": 23,
+   "a": 11,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2020",
+    "2019",
+    "2018",
+    "2017",
+    "2016",
+    "2015",
+    "2014",
+    "2013",
+    "2012",
+    "2011",
+    "2010",
+    "2009",
+    "2008",
+    "2007",
+    "2006",
+    "2005",
+    "2004"
+   ]
+  },
+  {
+   "p": "messi",
+   "y": 2008,
+   "league": "esp.copa_del_rey",
+   "team": "83",
+   "eventlogPlayed": 8,
+   "eventlogAll": 9,
+   "apps": 8,
+   "g": 6,
+   "a": 0,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2020",
+    "2019",
+    "2018",
+    "2017",
+    "2016",
+    "2015",
+    "2014",
+    "2013",
+    "2012",
+    "2011",
+    "2010",
+    "2009",
+    "2008",
+    "2007",
+    "2006"
+   ]
+  },
+  {
+   "p": "messi",
+   "y": 2011,
+   "league": "esp.super_cup",
+   "team": "83",
+   "eventlogPlayed": 2,
+   "eventlogAll": 2,
+   "apps": 2,
+   "g": 3,
+   "a": 2,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2020",
+    "2019",
+    "2018",
+    "2017",
+    "2016",
+    "2015",
+    "2013",
+    "2012",
+    "2011"
+   ]
+  },
+  {
+   "p": "messi",
+   "y": 2011,
+   "league": "uefa.super_cup",
+   "team": "83",
+   "eventlogPlayed": 1,
+   "eventlogAll": 1,
+   "apps": 1,
+   "g": 1,
+   "a": 0,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2015",
+    "2011",
+    "2009",
+    "2006"
+   ]
+  },
+  {
+   "p": "messi",
+   "y": 2011,
+   "league": "esp.1",
+   "team": "83",
+   "eventlogPlayed": 36,
+   "eventlogAll": 38,
+   "apps": 36,
+   "g": 50,
+   "a": 15,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2020",
+    "2019",
+    "2018",
+    "2017",
+    "2016",
+    "2015",
+    "2014",
+    "2013",
+    "2012",
+    "2011",
+    "2010",
+    "2009",
+    "2008",
+    "2007",
+    "2006",
+    "2005",
+    "2004"
+   ]
+  },
+  {
+   "p": "messi",
+   "y": 2011,
+   "league": "uefa.champions",
+   "team": "83",
+   "eventlogPlayed": 11,
+   "eventlogAll": 12,
+   "apps": 11,
+   "g": 14,
+   "a": 5,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022",
+    "2021",
+    "2020",
+    "2019",
+    "2018",
+    "2017",
+    "2016",
+    "2015",
+    "2014",
+    "2013",
+    "2012",
+    "2011",
+    "2010",
+    "2009",
+    "2008",
+    "2007"
+   ]
+  },
+  {
+   "p": "messi",
+   "y": 2011,
+   "league": "esp.copa_del_rey",
+   "team": "83",
+   "eventlogPlayed": 7,
+   "eventlogAll": 9,
+   "apps": 7,
+   "g": 3,
+   "a": 0,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2020",
+    "2019",
+    "2018",
+    "2017",
+    "2016",
+    "2015",
+    "2014",
+    "2013",
+    "2012",
+    "2011",
+    "2010",
+    "2009",
+    "2008",
+    "2007",
+    "2006"
+   ]
+  },
+  {
+   "p": "messi",
+   "y": 2011,
+   "league": "fifa.cwc",
+   "team": "83",
+   "eventlogPlayed": 2,
+   "eventlogAll": 2,
+   "apps": 2,
+   "g": 2,
+   "a": 1,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2015",
+    "2011",
+    "2009"
+   ]
+  },
+  {
+   "p": "henry",
+   "y": 2002,
+   "league": "eng.charity",
+   "team": "359",
+   "eventlogPlayed": 1,
+   "eventlogAll": 1,
+   "apps": 1,
+   "g": 0,
+   "a": 0,
+   "okFilter": false,
+   "seasonOpts": [
+    "2014",
+    "2013",
+    "2012",
+    "2011",
+    "2010",
+    "2005",
+    "2004",
+    "2003",
+    "2002"
+   ]
+  },
+  {
+   "p": "henry",
+   "y": 2002,
+   "league": "eng.1",
+   "team": "359",
+   "eventlogPlayed": 37,
+   "eventlogAll": 48,
+   "apps": 37,
+   "g": 24,
+   "a": 23,
+   "okFilter": true,
+   "seasonOpts": [
+    "2014",
+    "2013",
+    "2012",
+    "2011",
+    "2010",
+    "2006",
+    "2005",
+    "2004",
+    "2003",
+    "2002",
+    "2001"
+   ]
+  },
+  {
+   "p": "henry",
+   "y": 2002,
+   "league": "uefa.champions",
+   "team": "359",
+   "eventlogPlayed": 0,
+   "eventlogAll": 12,
+   "apps": 0,
+   "g": 0,
+   "a": 0,
+   "okFilter": true,
+   "seasonOpts": [
+    "2014",
+    "2013",
+    "2012",
+    "2011",
+    "2010",
+    "2009",
+    "2008",
+    "2007"
+   ]
+  },
+  {
+   "p": "henry",
+   "y": 2002,
+   "league": "eng.league_cup",
+   "team": "359",
+   "eventlogPlayed": 0,
+   "eventlogAll": 1,
+   "apps": 0,
+   "g": 0,
+   "a": 0,
+   "okFilter": false,
+   "seasonOpts": [
+    "2014",
+    "2013",
+    "2012",
+    "2011",
+    "2010",
+    "2005"
+   ]
+  },
+  {
+   "p": "henry",
+   "y": 2002,
+   "league": "eng.fa",
+   "team": "359",
+   "eventlogPlayed": 5,
+   "eventlogAll": 7,
+   "apps": 0,
+   "g": 0,
+   "a": 0,
+   "okFilter": false,
+   "seasonOpts": [
+    "2014",
+    "2013",
+    "2012",
+    "2011",
+    "2010",
+    "2006",
+    "2004",
+    "2003",
+    "2002",
+    "2001"
+   ]
+  },
+  {
+   "p": "henry",
+   "y": 2003,
+   "league": "eng.charity",
+   "team": "359",
+   "eventlogPlayed": 1,
+   "eventlogAll": 1,
+   "apps": 1,
+   "g": 1,
+   "a": 0,
+   "okFilter": false,
+   "seasonOpts": [
+    "2014",
+    "2013",
+    "2012",
+    "2011",
+    "2010",
+    "2005",
+    "2004",
+    "2003",
+    "2002"
+   ]
+  },
+  {
+   "p": "henry",
+   "y": 2003,
+   "league": "eng.1",
+   "team": "359",
+   "eventlogPlayed": 37,
+   "eventlogAll": 41,
+   "apps": 0,
+   "g": 0,
+   "a": 0,
+   "okFilter": true,
+   "seasonOpts": [
+    "2014",
+    "2013",
+    "2012",
+    "2011",
+    "2010",
+    "2006",
+    "2005",
+    "2004",
+    "2003",
+    "2002",
+    "2001"
+   ]
+  },
+  {
+   "p": "henry",
+   "y": 2003,
+   "league": "uefa.champions",
+   "team": "359",
+   "eventlogPlayed": 10,
+   "eventlogAll": 10,
+   "apps": 10,
+   "g": 5,
+   "a": 0,
+   "okFilter": true,
+   "seasonOpts": [
+    "2014",
+    "2013",
+    "2012",
+    "2011",
+    "2010",
+    "2009",
+    "2008",
+    "2007"
+   ]
+  },
+  {
+   "p": "henry",
+   "y": 2003,
+   "league": "eng.league_cup",
+   "team": "359",
+   "eventlogPlayed": 0,
+   "eventlogAll": 6,
+   "apps": 0,
+   "g": 0,
+   "a": 0,
+   "okFilter": false,
+   "seasonOpts": [
+    "2014",
+    "2013",
+    "2012",
+    "2011",
+    "2010",
+    "2005"
+   ]
+  },
+  {
+   "p": "henry",
+   "y": 2003,
+   "league": "eng.fa",
+   "team": "359",
+   "eventlogPlayed": 3,
+   "eventlogAll": 5,
+   "apps": 3,
+   "g": 3,
+   "a": 0,
+   "okFilter": false,
+   "seasonOpts": [
+    "2014",
+    "2013",
+    "2012",
+    "2011",
+    "2010",
+    "2006",
+    "2004",
+    "2003",
+    "2002",
+    "2001"
+   ]
+  },
+  {
+   "p": "henry",
+   "y": 2008,
+   "league": "uefa.champions",
+   "team": "83",
+   "eventlogPlayed": 14,
+   "eventlogAll": 15,
+   "apps": 14,
+   "g": 6,
+   "a": 3,
+   "okFilter": true,
+   "seasonOpts": [
+    "2014",
+    "2013",
+    "2012",
+    "2011",
+    "2010",
+    "2009",
+    "2008",
+    "2007"
+   ]
+  },
+  {
+   "p": "henry",
+   "y": 2008,
+   "league": "esp.1",
+   "team": "83",
+   "eventlogPlayed": 33,
+   "eventlogAll": 38,
+   "apps": 0,
+   "g": 0,
+   "a": 0,
+   "okFilter": true,
+   "seasonOpts": [
+    "2014",
+    "2013",
+    "2012",
+    "2011",
+    "2010",
+    "2009",
+    "2008",
+    "2007"
+   ]
+  },
+  {
+   "p": "henry",
+   "y": 2008,
+   "league": "esp.copa_del_rey",
+   "team": "83",
+   "eventlogPlayed": 2,
+   "eventlogAll": 9,
+   "apps": 2,
+   "g": 1,
+   "a": 0,
+   "okFilter": false,
+   "seasonOpts": [
+    "2014",
+    "2013",
+    "2012",
+    "2011",
+    "2010",
+    "2009",
+    "2008",
+    "2007"
+   ]
+  },
+  {
+   "p": "totti",
+   "y": 2003,
+   "league": "ita.1",
+   "team": "104",
+   "eventlogPlayed": 31,
+   "eventlogAll": 35,
+   "apps": 0,
+   "g": 0,
+   "a": 0,
+   "okFilter": true,
+   "seasonOpts": [
+    "2016",
+    "2015",
+    "2014",
+    "2013",
+    "2012",
+    "2011",
+    "2010",
+    "2009",
+    "2008",
+    "2007",
+    "2006",
+    "2005",
+    "2004",
+    "2003",
+    "2002",
+    "2001"
+   ]
+  },
+  {
+   "p": "totti",
+   "y": 2003,
+   "league": "uefa.uefa",
+   "team": "104",
+   "eventlogPlayed": 3,
+   "eventlogAll": 8,
+   "apps": 3,
+   "g": 0,
+   "a": 0,
+   "okFilter": false,
+   "seasonOpts": [
+    "2016",
+    "2015",
+    "2014",
+    "2013",
+    "2012",
+    "2011",
+    "2010",
+    "2009",
+    "2008",
+    "2007",
+    "2006",
+    "2005",
+    "2004",
+    "2003",
+    "2002",
+    "2001"
+   ]
+  },
+  {
+   "p": "totti",
+   "y": 2006,
+   "league": "ita.1",
+   "team": "104",
+   "eventlogPlayed": 35,
+   "eventlogAll": 43,
+   "apps": 0,
+   "g": 0,
+   "a": 0,
+   "okFilter": true,
+   "seasonOpts": [
+    "2016",
+    "2015",
+    "2014",
+    "2013",
+    "2012",
+    "2011",
+    "2010",
+    "2009",
+    "2008",
+    "2007",
+    "2006",
+    "2005",
+    "2004",
+    "2003",
+    "2002",
+    "2001"
+   ]
+  },
+  {
+   "p": "totti",
+   "y": 2006,
+   "league": "uefa.champions",
+   "team": "104",
+   "eventlogPlayed": 9,
+   "eventlogAll": 10,
+   "apps": 9,
+   "g": 4,
+   "a": 2,
+   "okFilter": true,
+   "seasonOpts": [
+    "2016",
+    "2015",
+    "2014",
+    "2013",
+    "2012",
+    "2011",
+    "2010",
+    "2009",
+    "2008",
+    "2007",
+    "2006",
+    "2005",
+    "2004",
+    "2003",
+    "2002",
+    "2001"
+   ]
+  },
+  {
+   "p": "totti",
+   "y": 2006,
+   "league": "ita.coppa_italia",
+   "team": "104",
+   "eventlogPlayed": 6,
+   "eventlogAll": 8,
+   "apps": 6,
+   "g": 2,
+   "a": 0,
+   "okFilter": true,
+   "seasonOpts": [
+    "2016",
+    "2015",
+    "2014",
+    "2013",
+    "2012",
+    "2011",
+    "2010",
+    "2009",
+    "2008",
+    "2007",
+    "2006",
+    "2005",
+    "2004",
+    "2003",
+    "2002",
+    "2001"
+   ]
+  },
+  {
+   "p": "totti",
+   "y": 2010,
+   "league": "ita.1",
+   "team": "104",
+   "eventlogPlayed": 34,
+   "eventlogAll": 39,
+   "apps": 33,
+   "g": 15,
+   "a": 8,
+   "okFilter": true,
+   "seasonOpts": [
+    "2016",
+    "2015",
+    "2014",
+    "2013",
+    "2012",
+    "2011",
+    "2010",
+    "2009",
+    "2008",
+    "2007",
+    "2006",
+    "2005",
+    "2004",
+    "2003",
+    "2002",
+    "2001"
+   ]
+  },
+  {
+   "p": "totti",
+   "y": 2010,
+   "league": "uefa.champions",
+   "team": "104",
+   "eventlogPlayed": 8,
+   "eventlogAll": 8,
+   "apps": 8,
+   "g": 2,
+   "a": 1,
+   "okFilter": true,
+   "seasonOpts": [
+    "2016",
+    "2015",
+    "2014",
+    "2013",
+    "2012",
+    "2011",
+    "2010",
+    "2009",
+    "2008",
+    "2007",
+    "2006",
+    "2005",
+    "2004",
+    "2003",
+    "2002",
+    "2001"
+   ]
+  },
+  {
+   "p": "totti",
+   "y": 2010,
+   "league": "ita.coppa_italia",
+   "team": "104",
+   "eventlogPlayed": 0,
+   "eventlogAll": 5,
+   "apps": 0,
+   "g": 0,
+   "a": 0,
+   "okFilter": true,
+   "seasonOpts": [
+    "2016",
+    "2015",
+    "2014",
+    "2013",
+    "2012",
+    "2011",
+    "2010",
+    "2009",
+    "2008",
+    "2007",
+    "2006",
+    "2005",
+    "2004",
+    "2003",
+    "2002",
+    "2001"
+   ]
+  },
+  {
+   "p": "haaland",
+   "y": 2019,
+   "league": "aut.1",
+   "team": "2790",
+   "eventlogPlayed": 14,
+   "eventlogAll": 32,
+   "apps": 14,
+   "g": 16,
+   "a": 0,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022",
+    "2019",
+    "2018"
+   ]
+  },
+  {
+   "p": "haaland",
+   "y": 2019,
+   "league": "ger.super_cup",
+   "team": "124",
+   "eventlogPlayed": 0,
+   "eventlogAll": 1,
+   "apps": 0,
+   "g": 0,
+   "a": 0,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022",
+    "2021",
+    "2020"
+   ]
+  },
+  {
+   "p": "haaland",
+   "y": 2019,
+   "league": "ger.dfb_pokal",
+   "team": "124",
+   "eventlogPlayed": 1,
+   "eventlogAll": 3,
+   "apps": 1,
+   "g": 1,
+   "a": 0,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022",
+    "2021",
+    "2020",
+    "2019"
+   ]
+  },
+  {
+   "p": "haaland",
+   "y": 2019,
+   "league": "ger.1",
+   "team": "124",
+   "eventlogPlayed": 15,
+   "eventlogAll": 34,
+   "apps": 15,
+   "g": 13,
+   "a": 2,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022",
+    "2021",
+    "2020",
+    "2019"
+   ]
+  },
+  {
+   "p": "haaland",
+   "y": 2019,
+   "league": "uefa.champions",
+   "team": "124",
+   "eventlogPlayed": 2,
+   "eventlogAll": 8,
+   "apps": 2,
+   "g": 2,
+   "a": 0,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022",
+    "2021",
+    "2020",
+    "2019"
+   ]
+  },
+  {
+   "p": "haaland",
+   "y": 2019,
+   "league": "uefa.champions",
+   "team": "2790",
+   "eventlogPlayed": 6,
+   "eventlogAll": 6,
+   "apps": 6,
+   "g": 8,
+   "a": 1,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022",
+    "2021",
+    "2020",
+    "2019"
+   ]
+  },
+  {
+   "p": "haaland",
+   "y": 2019,
+   "league": "uefa.europa",
+   "team": "2790",
+   "eventlogPlayed": 0,
+   "eventlogAll": 2,
+   "apps": 0,
+   "g": 0,
+   "a": 0,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022",
+    "2018"
+   ]
+  },
+  {
+   "p": "haaland",
+   "y": 2022,
+   "league": "ger.dfb_pokal",
+   "team": "124",
+   "eventlogPlayed": 0,
+   "eventlogAll": 4,
+   "apps": 0,
+   "g": 0,
+   "a": 0,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022",
+    "2021",
+    "2020",
+    "2019"
+   ]
+  },
+  {
+   "p": "haaland",
+   "y": 2022,
+   "league": "eng.charity",
+   "team": "382",
+   "eventlogPlayed": 1,
+   "eventlogAll": 1,
+   "apps": 1,
+   "g": 0,
+   "a": 0,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022"
+   ]
+  },
+  {
+   "p": "haaland",
+   "y": 2022,
+   "league": "ger.1",
+   "team": "124",
+   "eventlogPlayed": 0,
+   "eventlogAll": 34,
+   "apps": 0,
+   "g": 0,
+   "a": 0,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022",
+    "2021",
+    "2020",
+    "2019"
+   ]
+  },
+  {
+   "p": "haaland",
+   "y": 2022,
+   "league": "eng.1",
+   "team": "382",
+   "eventlogPlayed": 36,
+   "eventlogAll": 38,
+   "apps": 36,
+   "g": 36,
+   "a": 8,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022"
+   ]
+  },
+  {
+   "p": "haaland",
+   "y": 2022,
+   "league": "uefa.champions",
+   "team": "124",
+   "eventlogPlayed": 2,
+   "eventlogAll": 8,
+   "apps": 2,
+   "g": 1,
+   "a": 0,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022",
+    "2021",
+    "2020",
+    "2019"
+   ]
+  },
+  {
+   "p": "haaland",
+   "y": 2022,
+   "league": "uefa.champions",
+   "team": "382",
+   "eventlogPlayed": 12,
+   "eventlogAll": 13,
+   "apps": 12,
+   "g": 12,
+   "a": 1,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022",
+    "2021",
+    "2020",
+    "2019"
+   ]
+  },
+  {
+   "p": "haaland",
+   "y": 2022,
+   "league": "eng.league_cup",
+   "team": "382",
+   "eventlogPlayed": 3,
+   "eventlogAll": 3,
+   "apps": 3,
+   "g": 1,
+   "a": 0,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022"
+   ]
+  },
+  {
+   "p": "haaland",
+   "y": 2022,
+   "league": "eng.fa",
+   "team": "382",
+   "eventlogPlayed": 6,
+   "eventlogAll": 6,
+   "apps": 6,
+   "g": 3,
+   "a": 0,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022"
+   ]
+  },
+  {
+   "p": "haaland",
+   "y": 2024,
+   "league": "eng.charity",
+   "team": "382",
+   "eventlogPlayed": 1,
+   "eventlogAll": 1,
+   "apps": 1,
+   "g": 0,
+   "a": 0,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022"
+   ]
+  },
+  {
+   "p": "haaland",
+   "y": 2024,
+   "league": "eng.1",
+   "team": "382",
+   "eventlogPlayed": 32,
+   "eventlogAll": 38,
+   "apps": 32,
+   "g": 22,
+   "a": 3,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022"
+   ]
+  },
+  {
+   "p": "haaland",
+   "y": 2024,
+   "league": "uefa.champions",
+   "team": "382",
+   "eventlogPlayed": 10,
+   "eventlogAll": 10,
+   "apps": 10,
+   "g": 8,
+   "a": 0,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022",
+    "2021",
+    "2020",
+    "2019"
+   ]
+  },
+  {
+   "p": "haaland",
+   "y": 2024,
+   "league": "eng.league_cup",
+   "team": "382",
+   "eventlogPlayed": 1,
+   "eventlogAll": 2,
+   "apps": 1,
+   "g": 0,
+   "a": 0,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022"
+   ]
+  },
+  {
+   "p": "haaland",
+   "y": 2024,
+   "league": "eng.fa",
+   "team": "382",
+   "eventlogPlayed": 4,
+   "eventlogAll": 6,
+   "apps": 4,
+   "g": 1,
+   "a": 1,
+   "okFilter": true,
+   "seasonOpts": [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022"
+   ]
+  }
+ ],
+ "intl": [
+  {
+   "p": "ronaldo",
+   "y": 2004,
+   "league": "fifa.friendly",
+   "apps": 2,
+   "g": 0,
+   "okFilter": true
+  },
+  {
+   "p": "ronaldo",
+   "y": 2004,
+   "league": "uefa.euro",
+   "apps": 6,
+   "g": 2,
+   "okFilter": true
+  },
+  {
+   "p": "ronaldo",
+   "y": 2005,
+   "league": "fifa.friendly",
+   "apps": 2,
+   "g": 0,
+   "okFilter": true
+  },
+  {
+   "p": "ronaldo",
+   "y": 2006,
+   "league": "fifa.worldq.uefa",
+   "apps": 12,
+   "g": 7,
+   "okFilter": true
+  },
+  {
+   "p": "ronaldo",
+   "y": 2006,
+   "league": "fifa.friendly",
+   "apps": 3,
+   "g": 2,
+   "okFilter": true
+  },
+  {
+   "p": "ronaldo",
+   "y": 2006,
+   "league": "fifa.world",
+   "apps": 7,
+   "g": 1,
+   "okFilter": true
+  },
+  {
+   "p": "ronaldo",
+   "y": 2008,
+   "league": "uefa.euroq",
+   "apps": 13,
+   "g": 8,
+   "okFilter": true
+  },
+  {
+   "p": "ronaldo",
+   "y": 2008,
+   "league": "fifa.friendly",
+   "apps": 1,
+   "g": 0,
+   "okFilter": true
+  },
+  {
+   "p": "ronaldo",
+   "y": 2008,
+   "league": "uefa.euro",
+   "apps": 4,
+   "g": 1,
+   "okFilter": true
+  },
+  {
+   "p": "ronaldo",
+   "y": 2008,
+   "league": "fifa.worldq.uefa",
+   "apps": 3,
+   "g": 0,
+   "okFilter": true
+  },
+  {
+   "p": "ronaldo",
+   "y": 2009,
+   "league": "fifa.friendly",
+   "apps": 0,
+   "g": 0,
+   "okFilter": true
+  },
+  {
+   "p": "ronaldo",
+   "y": 2009,
+   "league": "fifa.worldq.uefa",
+   "apps": 4,
+   "g": 0,
+   "okFilter": true
+  },
+  {
+   "p": "ronaldo",
+   "y": 2010,
+   "league": "fifa.friendly",
+   "apps": 4,
+   "g": 0,
+   "okFilter": true
+  },
+  {
+   "p": "ronaldo",
+   "y": 2010,
+   "league": "fifa.world",
+   "apps": 4,
+   "g": 1,
+   "okFilter": true
+  },
+  {
+   "p": "ronaldo",
+   "y": 2010,
+   "league": "uefa.euroq",
+   "apps": 2,
+   "g": 2,
+   "okFilter": true
+  },
+  {
+   "p": "ronaldo",
+   "y": 2011,
+   "league": "fifa.friendly",
+   "apps": 3,
+   "g": 2,
+   "okFilter": true
+  },
+  {
+   "p": "ronaldo",
+   "y": 2011,
+   "league": "uefa.euroq",
+   "apps": 6,
+   "g": 5,
+   "okFilter": true
+  },
+  {
+   "p": "ronaldo",
+   "y": 2012,
+   "league": "fifa.friendly",
+   "apps": 4,
+   "g": 1,
+   "okFilter": true
+  },
+  {
+   "p": "ronaldo",
+   "y": 2012,
+   "league": "uefa.euro",
+   "apps": 5,
+   "g": 3,
+   "okFilter": true
+  },
+  {
+   "p": "ronaldo",
+   "y": 2013,
+   "league": "fifa.worldq.uefa",
+   "apps": 5,
+   "g": 7,
+   "okFilter": true
+  },
+  {
+   "p": "ronaldo",
+   "y": 2013,
+   "league": "fifa.friendly",
+   "apps": 3,
+   "g": 3,
+   "okFilter": true
+  },
+  {
+   "p": "ronaldo",
+   "y": 2014,
+   "league": "fifa.world",
+   "apps": 3,
+   "g": 1,
+   "okFilter": true
+  },
+  {
+   "p": "ronaldo",
+   "y": 2014,
+   "league": "uefa.euroq",
+   "apps": 2,
+   "g": 2,
+   "okFilter": true
+  },
+  {
+   "p": "ronaldo",
+   "y": 2014,
+   "league": "fifa.friendly",
+   "apps": 2,
+   "g": 0,
+   "okFilter": true
+  },
+  {
+   "p": "messi",
+   "y": 2006,
+   "league": "fifa.worldq.conmebol",
+   "apps": 3,
+   "g": 0,
+   "okFilter": true
+  },
+  {
+   "p": "messi",
+   "y": 2006,
+   "league": "fifa.friendly",
+   "apps": 4,
+   "g": 1,
+   "okFilter": true
+  },
+  {
+   "p": "messi",
+   "y": 2006,
+   "league": "fifa.world",
+   "apps": 5,
+   "g": 1,
+   "okFilter": true
+  },
+  {
+   "p": "messi",
+   "y": 2007,
+   "league": "fifa.friendly",
+   "apps": 0,
+   "g": 0,
+   "okFilter": true
+  },
+  {
+   "p": "messi",
+   "y": 2007,
+   "league": "conmebol.america",
+   "apps": 0,
+   "g": 0,
+   "okFilter": true
+  },
+  {
+   "p": "messi",
+   "y": 2008,
+   "league": "fifa.friendly",
+   "apps": 0,
+   "g": 0,
+   "okFilter": true
+  },
+  {
+   "p": "messi",
+   "y": 2008,
+   "league": "fifa.olympics",
+   "apps": 5,
+   "g": 2,
+   "okFilter": false
+  },
+  {
+   "p": "messi",
+   "y": 2009,
+   "league": "fifa.worldq.conmebol",
+   "apps": 12,
+   "g": 2,
+   "okFilter": true
+  },
+  {
+   "p": "messi",
+   "y": 2009,
+   "league": "fifa.friendly",
+   "apps": 1,
+   "g": 1,
+   "okFilter": true
+  },
+  {
+   "p": "messi",
+   "y": 2010,
+   "league": "fifa.friendly",
+   "apps": 1,
+   "g": 0,
+   "okFilter": true
+  },
+  {
+   "p": "messi",
+   "y": 2010,
+   "league": "fifa.world",
+   "apps": 5,
+   "g": 0,
+   "okFilter": true
+  },
+  {
+   "p": "messi",
+   "y": 2011,
+   "league": "fifa.friendly",
+   "apps": 4,
+   "g": 2,
+   "okFilter": true
+  },
+  {
+   "p": "messi",
+   "y": 2011,
+   "league": "conmebol.america",
+   "apps": 4,
+   "g": 0,
+   "okFilter": true
+  },
+  {
+   "p": "messi",
+   "y": 2012,
+   "league": "fifa.friendly",
+   "apps": 4,
+   "g": 7,
+   "okFilter": true
+  },
+  {
+   "p": "messi",
+   "y": 2013,
+   "league": "fifa.worldq.conmebol",
+   "apps": 7,
+   "g": 5,
+   "okFilter": true
+  },
+  {
+   "p": "messi",
+   "y": 2013,
+   "league": "fifa.friendly",
+   "apps": 4,
+   "g": 1,
+   "okFilter": true
+  },
+  {
+   "p": "messi",
+   "y": 2014,
+   "league": "fifa.world",
+   "apps": 7,
+   "g": 4,
+   "okFilter": true
+  },
+  {
+   "p": "messi",
+   "y": 2014,
+   "league": "fifa.friendly",
+   "apps": 5,
+   "g": 3,
+   "okFilter": true
+  },
+  {
+   "p": "henry",
+   "y": 1998,
+   "league": "fifa.world",
+   "apps": 4,
+   "g": 3,
+   "okFilter": true
+  },
+  {
+   "p": "henry",
+   "y": 2002,
+   "league": "fifa.friendly",
+   "apps": 5,
+   "g": 1,
+   "okFilter": false
+  },
+  {
+   "p": "henry",
+   "y": 2002,
+   "league": "fifa.world",
+   "apps": 2,
+   "g": 0,
+   "okFilter": true
+  },
+  {
+   "p": "henry",
+   "y": 2003,
+   "league": "fifa.friendly",
+   "apps": 4,
+   "g": 3,
+   "okFilter": false
+  },
+  {
+   "p": "henry",
+   "y": 2003,
+   "league": "fifa.confederations",
+   "apps": 2,
+   "g": 2,
+   "okFilter": true
+  },
+  {
+   "p": "henry",
+   "y": 2004,
+   "league": "uefa.euroq",
+   "apps": 7,
+   "g": 6,
+   "okFilter": true
+  },
+  {
+   "p": "henry",
+   "y": 2004,
+   "league": "fifa.friendly",
+   "apps": 6,
+   "g": 0,
+   "okFilter": false
+  },
+  {
+   "p": "henry",
+   "y": 2004,
+   "league": "uefa.euro",
+   "apps": 4,
+   "g": 2,
+   "okFilter": false
+  },
+  {
+   "p": "henry",
+   "y": 2005,
+   "league": "fifa.friendly",
+   "apps": 4,
+   "g": 2,
+   "okFilter": false
+  },
+  {
+   "p": "henry",
+   "y": 2006,
+   "league": "fifa.worldq.uefa",
+   "apps": 7,
+   "g": 2,
+   "okFilter": false
+  },
+  {
+   "p": "henry",
+   "y": 2006,
+   "league": "fifa.friendly",
+   "apps": 6,
+   "g": 3,
+   "okFilter": false
+  },
+  {
+   "p": "henry",
+   "y": 2006,
+   "league": "fifa.world",
+   "apps": 7,
+   "g": 3,
+   "okFilter": true
+  },
+  {
+   "p": "henry",
+   "y": 2008,
+   "league": "uefa.euroq",
+   "apps": 8,
+   "g": 7,
+   "okFilter": true
+  },
+  {
+   "p": "henry",
+   "y": 2008,
+   "league": "fifa.friendly",
+   "apps": 2,
+   "g": 0,
+   "okFilter": false
+  },
+  {
+   "p": "henry",
+   "y": 2008,
+   "league": "uefa.euro",
+   "apps": 3,
+   "g": 1,
+   "okFilter": false
+  },
+  {
+   "p": "henry",
+   "y": 2008,
+   "league": "fifa.worldq.uefa",
+   "apps": 5,
+   "g": 1,
+   "okFilter": false
+  },
+  {
+   "p": "henry",
+   "y": 2009,
+   "league": "fifa.friendly",
+   "apps": 1,
+   "g": 0,
+   "okFilter": false
+  },
+  {
+   "p": "henry",
+   "y": 2009,
+   "league": "fifa.worldq.uefa",
+   "apps": 6,
+   "g": 3,
+   "okFilter": false
+  },
+  {
+   "p": "henry",
+   "y": 2010,
+   "league": "fifa.friendly",
+   "apps": 4,
+   "g": 0,
+   "okFilter": false
+  },
+  {
+   "p": "henry",
+   "y": 2010,
+   "league": "fifa.world",
+   "apps": 3,
+   "g": 0,
+   "okFilter": true
+  },
+  {
+   "p": "henry",
+   "y": 2010,
+   "league": "uefa.euroq",
+   "apps": 0,
+   "g": 0,
+   "okFilter": true
+  },
+  {
+   "p": "totti",
+   "y": 2001,
+   "league": "fifa.friendly",
+   "apps": 1,
+   "g": 0,
+   "okFilter": false
+  },
+  {
+   "p": "totti",
+   "y": 2002,
+   "league": "fifa.friendly",
+   "apps": 2,
+   "g": 0,
+   "okFilter": false
+  },
+  {
+   "p": "totti",
+   "y": 2002,
+   "league": "fifa.world",
+   "apps": 4,
+   "g": 0,
+   "okFilter": true
+  },
+  {
+   "p": "totti",
+   "y": 2003,
+   "league": "fifa.friendly",
+   "apps": 2,
+   "g": 0,
+   "okFilter": false
+  },
+  {
+   "p": "totti",
+   "y": 2004,
+   "league": "uefa.euroq",
+   "apps": 3,
+   "g": 1,
+   "okFilter": false
+  },
+  {
+   "p": "totti",
+   "y": 2004,
+   "league": "fifa.friendly",
+   "apps": 3,
+   "g": 0,
+   "okFilter": false
+  },
+  {
+   "p": "totti",
+   "y": 2004,
+   "league": "uefa.euro",
+   "apps": 1,
+   "g": 0,
+   "okFilter": false
+  },
+  {
+   "p": "totti",
+   "y": 2005,
+   "league": "fifa.friendly",
+   "apps": 1,
+   "g": 0,
+   "okFilter": false
+  },
+  {
+   "p": "totti",
+   "y": 2006,
+   "league": "fifa.worldq.uefa",
+   "apps": 6,
+   "g": 2,
+   "okFilter": false
+  },
+  {
+   "p": "totti",
+   "y": 2006,
+   "league": "fifa.friendly",
+   "apps": 2,
+   "g": 0,
+   "okFilter": false
+  },
+  {
+   "p": "totti",
+   "y": 2006,
+   "league": "fifa.world",
+   "apps": 7,
+   "g": 1,
+   "okFilter": true
+  },
+  {
+   "p": "haaland",
+   "y": 2019,
+   "league": "uefa.euroq",
+   "apps": 4,
+   "g": 0,
+   "okFilter": true
+  },
+  {
+   "p": "haaland",
+   "y": 2020,
+   "league": "fifa.friendly",
+   "apps": 0,
+   "g": 0,
+   "okFilter": true
+  },
+  {
+   "p": "haaland",
+   "y": 2020,
+   "league": "uefa.nations",
+   "apps": 4,
+   "g": 6,
+   "okFilter": true
+  },
+  {
+   "p": "haaland",
+   "y": 2021,
+   "league": "fifa.worldq.uefa",
+   "apps": 6,
+   "g": 5,
+   "okFilter": true
+  },
+  {
+   "p": "haaland",
+   "y": 2021,
+   "league": "fifa.friendly",
+   "apps": 2,
+   "g": 1,
+   "okFilter": true
+  },
+  {
+   "p": "haaland",
+   "y": 2022,
+   "league": "fifa.friendly",
+   "apps": 2,
+   "g": 3,
+   "okFilter": true
+  },
+  {
+   "p": "haaland",
+   "y": 2022,
+   "league": "uefa.nations",
+   "apps": 6,
+   "g": 6,
+   "okFilter": true
+  },
+  {
+   "p": "haaland",
+   "y": 2023,
+   "league": "uefa.euroq",
+   "apps": 5,
+   "g": 6,
+   "okFilter": true
+  },
+  {
+   "p": "haaland",
+   "y": 2023,
+   "league": "fifa.friendly",
+   "apps": 2,
+   "g": 0,
+   "okFilter": true
+  },
+  {
+   "p": "haaland",
+   "y": 2024,
+   "league": "fifa.friendly",
+   "apps": 4,
+   "g": 4,
+   "okFilter": true
+  },
+  {
+   "p": "haaland",
+   "y": 2024,
+   "league": "uefa.nations",
+   "apps": 6,
+   "g": 7,
+   "okFilter": true
+  },
+  {
+   "p": "haaland",
+   "y": 2025,
+   "league": "fifa.worldq.uefa",
+   "apps": 8,
+   "g": 16,
+   "okFilter": true
+  },
+  {
+   "p": "haaland",
+   "y": 2025,
+   "league": "fifa.friendly",
+   "apps": 1,
+   "g": 1,
+   "okFilter": true
+  },
+  {
+   "p": "haaland",
+   "y": 2026,
+   "league": "fifa.friendly",
+   "apps": 2,
+   "g": 0,
+   "okFilter": true
+  },
+  {
+   "p": "haaland",
+   "y": 2026,
+   "league": "fifa.world",
+   "apps": 6,
+   "g": 7,
+   "okFilter": true
+  },
+  {
+   "p": "haaland",
+   "y": 2026,
+   "league": "uefa.nations",
+   "apps": 4,
+   "g": 3,
+   "okFilter": true
+  }
+ ],
+ "caps_ronaldo": {
+  "2004": {
+   "apps": 13,
+   "g": 7,
+   "friendly": 2,
+   "qualifier": 5,
+   "tournament": 6
+  },
+  "2005": {
+   "apps": 9,
+   "g": 2,
+   "friendly": 2,
+   "qualifier": 7,
+   "tournament": 0
+  },
+  "2006": {
+   "apps": 14,
+   "g": 6,
+   "friendly": 3,
+   "qualifier": 4,
+   "tournament": 7
+  },
+  "2007": {
+   "apps": 9,
+   "g": 5,
+   "friendly": 0,
+   "qualifier": 9,
+   "tournament": 0
+  },
+  "2008": {
+   "apps": 7,
+   "g": 1,
+   "friendly": 1,
+   "qualifier": 2,
+   "tournament": 4
+  },
+  "2009": {
+   "apps": 5,
+   "g": 0,
+   "friendly": 0,
+   "qualifier": 5,
+   "tournament": 0
+  },
+  "2010": {
+   "apps": 11,
+   "g": 3,
+   "friendly": 5,
+   "qualifier": 2,
+   "tournament": 4
+  },
+  "2011": {
+   "apps": 8,
+   "g": 7,
+   "friendly": 2,
+   "qualifier": 6,
+   "tournament": 0
+  },
+  "2012": {
+   "apps": 9,
+   "g": 4,
+   "friendly": 4,
+   "qualifier": 0,
+   "tournament": 5
+  },
+  "2013": {
+   "apps": 6,
+   "g": 8,
+   "friendly": 1,
+   "qualifier": 5,
+   "tournament": 0
+  },
+  "2014": {
+   "apps": 9,
+   "g": 5,
+   "friendly": 4,
+   "qualifier": 2,
+   "tournament": 3
+  }
+ },
+ "caps_messi": {
+  "2005": {
+   "apps": 3,
+   "g": 0,
+   "friendly": 0,
+   "qualifier": 3,
+   "tournament": 0
+  },
+  "2006": {
+   "apps": 9,
+   "g": 2,
+   "friendly": 4,
+   "qualifier": 0,
+   "tournament": 5
+  },
+  "2008": {
+   "apps": 9,
+   "g": 3,
+   "friendly": 0,
+   "qualifier": 4,
+   "tournament": 5
+  },
+  "2009": {
+   "apps": 9,
+   "g": 2,
+   "friendly": 1,
+   "qualifier": 8,
+   "tournament": 0
+  },
+  "2010": {
+   "apps": 7,
+   "g": 1,
+   "friendly": 2,
+   "qualifier": 0,
+   "tournament": 5
+  },
+  "2011": {
+   "apps": 7,
+   "g": 1,
+   "friendly": 3,
+   "qualifier": 0,
+   "tournament": 4
+  },
+  "2012": {
+   "apps": 7,
+   "g": 9,
+   "friendly": 4,
+   "qualifier": 3,
+   "tournament": 0
+  },
+  "2013": {
+   "apps": 5,
+   "g": 3,
+   "friendly": 1,
+   "qualifier": 4,
+   "tournament": 0
+  },
+  "2014": {
+   "apps": 14,
+   "g": 8,
+   "friendly": 7,
+   "qualifier": 0,
+   "tournament": 7
+  },
+  "2015": {
+   "apps": 1,
+   "g": 0,
+   "friendly": 1,
+   "qualifier": 0,
+   "tournament": 0
+  }
+ },
+ "caps_henry": {
+  "1998": {
+   "apps": 4,
+   "g": 3,
+   "friendly": 0,
+   "qualifier": 0,
+   "tournament": 4
+  },
+  "2002": {
+   "apps": 9,
+   "g": 3,
+   "friendly": 5,
+   "qualifier": 2,
+   "tournament": 2
+  },
+  "2003": {
+   "apps": 11,
+   "g": 9,
+   "friendly": 4,
+   "qualifier": 5,
+   "tournament": 2
+  },
+  "2004": {
+   "apps": 14,
+   "g": 3,
+   "friendly": 6,
+   "qualifier": 4,
+   "tournament": 4
+  },
+  "2005": {
+   "apps": 7,
+   "g": 3,
+   "friendly": 4,
+   "qualifier": 3,
+   "tournament": 0
+  },
+  "2006": {
+   "apps": 17,
+   "g": 9,
+   "friendly": 6,
+   "qualifier": 4,
+   "tournament": 7
+  },
+  "2007": {
+   "apps": 4,
+   "g": 4,
+   "friendly": 0,
+   "qualifier": 4,
+   "tournament": 0
+  },
+  "2008": {
+   "apps": 8,
+   "g": 2,
+   "friendly": 2,
+   "qualifier": 3,
+   "tournament": 3
+  },
+  "2009": {
+   "apps": 9,
+   "g": 3,
+   "friendly": 1,
+   "qualifier": 8,
+   "tournament": 0
+  },
+  "2010": {
+   "apps": 7,
+   "g": 0,
+   "friendly": 4,
+   "qualifier": 0,
+   "tournament": 3
+  }
+ },
+ "caps_totti": {
+  "2001": {
+   "apps": 1,
+   "g": 0,
+   "friendly": 1,
+   "qualifier": 0,
+   "tournament": 0
+  },
+  "2002": {
+   "apps": 6,
+   "g": 0,
+   "friendly": 2,
+   "qualifier": 0,
+   "tournament": 4
+  },
+  "2003": {
+   "apps": 5,
+   "g": 1,
+   "friendly": 2,
+   "qualifier": 3,
+   "tournament": 0
+  },
+  "2004": {
+   "apps": 6,
+   "g": 2,
+   "friendly": 3,
+   "qualifier": 2,
+   "tournament": 1
+  },
+  "2005": {
+   "apps": 5,
+   "g": 0,
+   "friendly": 1,
+   "qualifier": 4,
+   "tournament": 0
+  },
+  "2006": {
+   "apps": 9,
+   "g": 1,
+   "friendly": 2,
+   "qualifier": 0,
+   "tournament": 7
+  }
+ },
+ "caps_haaland": {
+  "2019": {
+   "apps": 3,
+   "g": 0,
+   "friendly": 0,
+   "qualifier": 3,
+   "tournament": 0
+  },
+  "2020": {
+   "apps": 5,
+   "g": 6,
+   "friendly": 0,
+   "qualifier": 1,
+   "tournament": 4
+  },
+  "2021": {
+   "apps": 8,
+   "g": 6,
+   "friendly": 2,
+   "qualifier": 6,
+   "tournament": 0
+  },
+  "2022": {
+   "apps": 8,
+   "g": 9,
+   "friendly": 2,
+   "qualifier": 0,
+   "tournament": 6
+  },
+  "2023": {
+   "apps": 7,
+   "g": 6,
+   "friendly": 2,
+   "qualifier": 5,
+   "tournament": 0
+  },
+  "2024": {
+   "apps": 10,
+   "g": 11,
+   "friendly": 4,
+   "qualifier": 0,
+   "tournament": 6
+  },
+  "2025": {
+   "apps": 9,
+   "g": 17,
+   "friendly": 1,
+   "qualifier": 8,
+   "tournament": 0
+  },
+  "2026": {
+   "apps": 12,
+   "g": 10,
+   "friendly": 2,
+   "qualifier": 0,
+   "tournament": 10
+  }
+ },
+ "statSample": [
+  [
+   "defensive",
+   "blockedShots=0,effectiveClearance=0,effectiveTackles=0,inneffectiveTackles=0,interceptions=0,tacklePct=0,totalClearance=0,totalTackles=0"
+  ],
+  [
+   "general",
+   "appearances=1,avgRatingFromCorrespondent=0,avgRatingFromDataFeed=0,avgRatingFromEditor=0,avgRatingFromUser=0,dnp=0,draws=1,foulsCommitted=0,foulsSuffered=2,goalDifference=0,handBalls=0,losses=0,lostCorners=3,minutes=90,ownGoals=0,passPct=0,redCards=0,starts=1,subIns=0,subOuts=0,suspensions=0,timeEnded=5400,timeStarted=0,winPct=0,wins=0,wonCorners=12,yellowCards=0"
+  ],
+  [
+   "goalKeeping",
+   "cleanSheet=1,crossesCaught=0,goalsConceded=0,partialCleenSheet=0,penaltyKickConceded=0,penaltyKickSavePct=0,penaltyKicksFaced=0,penaltyKicksSaved=0,punches=0,saves=0,shootOutKicksFaced=0,shootOutKicksSaved=0,shootOutSavePct=0,shotsFaced=0,smothers=0,unclaimedCrosses=0"
+  ],
+  [
+   "offensive",
+   "accurateCrosses=0,accurateLongBalls=0,accuratePasses=0,accurateThroughBalls=0,crossPct=0,freeKickGoals=0,freeKickPct=0,freeKickShots=2,gameWinningAssists=0,gameWinningGoals=0,goalAssists=0,headedGoals=0,inaccurateCrosses=0,inaccurateLongBalls=0,inaccuratePasses=0,inaccurateThroughBalls=0,leftFootedShots=3,longballPct=0,offsides=2,penaltyKickGoals=0,penaltyKickPct=0,penaltyKickShots=0,penaltyKicksMissed=0,rightFootedShots=4,secondAssists=0,shootOutGoals=0,shootOutMisses=0,shootOutPct=0,shotAssists=0,shotPct=0.429,shotsHeaded=0,shotsOffTarget=4,shotsOnPost=0,shotsOnTarget=3,throughBallPct=0,totalCrosses=4,totalGoals=0,totalLongBalls=0,totalPasses=0,totalShots=7,totalThroughBalls=0"
+  ]
+ ]
+}

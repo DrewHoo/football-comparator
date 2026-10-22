@@ -1,0 +1,9 @@
+{
+ "about": "Corrections to the team ledger (pipeline/lib/ledger/team.mjs). Applied over matches.jsonl at build time; never edits a source file. Format: pipeline/docs/compact.md §Team corrections.",
+ "schema": {
+  "deductions": "{ id, added, slug, season ('2009-10'), teamId (ESPN team id), team, points (positive number deducted), from ('YYYY-MM-DD' the table first shows it, or null = whole season), source: { publisher, url, quote }, note }",
+  "results": "{ id, added, matchId (ESPN event id), homeScore, awayScore, reason ('awarded 3-0', 'abandoned, result stood'), source: { publisher, url, quote } }"
+ },
+ "deductions": [],
+ "results": []
+}

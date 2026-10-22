@@ -1,0 +1,2620 @@
+{
+ "about": "Corrections to the international ledger (data/ledger/intl/). Each is applied last, over the merged rows, and never edits a source file. A correction names the source record it overrides, what it changes, and receipts; receipts with a `cache` path are string-checked against the cached page on every build (pipeline/build-intl.mjs). Schema: pipeline/docs/intl.md §Corrections.",
+ "corrections": [
+  {
+   "id": "intl-0001",
+   "added": "2026-10-21",
+   "match": {
+    "date": "2001-09-01",
+    "home": "Germany",
+    "away": "England",
+    "match_id": "2001-09-01_germany_england"
+   },
+   "source": {
+    "family": "fifa2002",
+    "source_id": "19743",
+    "url": "https://web.archive.org/web/20070702022521/http://www.fifa.com:80/worldcup/archive/edition=4395/preliminaries/preliminary=3835/matches/match=19743/report.html"
+   },
+   "kind": "reassign_lineup_entry",
+   "from": {
+    "name_as_written": "MURPHY Danny",
+    "shirt": 4
+   },
+   "to": {
+    "player_key": "ip:gerrard-intlg",
+    "name": "Steven Gerrard"
+   },
+   "set": {
+    "goals": 1,
+    "goal_minutes": [
+     45
+    ]
+   },
+   "reason": "FIFA's report lists Danny Murphy (#4) as a starter, off 78', scoring England's second goal at 48+'. Murphy did not play. The line is Steven Gerrard's: he started, scored just before half-time and was replaced by Hargreaves. BBC's team line and post-match report name Gerrard; RSSSF's Gerrard log has the cap with a goal and has no Murphy log.",
+   "receipts": [
+    {
+     "source": "BBC Sport clockwatch (cited in the archive record's warning)",
+     "url": "https://web.archive.org/web/20010904192843/http://news.bbc.co.uk:80/sport/hi/english/football/world_cup_2002/newsid_1520000/1520626.stm",
+     "quote": null,
+     "note": "The cached copy (data/raw/wayback/68/68eee125...) is a failed fetch of the Wayback root, so no quote from this page is on disk. Refetch through research/wayback/wb.mjs when the Wayback host is free."
+    },
+    {
+     "source": "BBC Sport, 'Beckham passes fitness test' (team news, 1 Sep 2001)",
+     "url": "https://web.archive.org/web/20010903004421/http://news.bbc.co.uk:80/sport/hi/english/football/world_cup_2002/newsid_1519000/1519295.stm",
+     "cache": "data/raw/wayback/60/605505dca7466a19ee2cae7188b433fba73c9910.bin",
+     "quote": "Beckham (capt), Gerrard, Scholes, Barmby; Owen, Heskey."
+    },
+    {
+     "source": "BBC Sport, 'England look ahead to Albania' (post-match, Owen quoted)",
+     "url": "https://web.archive.org/web/20011202090354/http://news.bbc.co.uk:80/sport/hi/english/football/world_cup_2002/newsid_1520000/1520656.stm",
+     "cache": "data/raw/wayback/14/14fbdcbcb75bd126f33517a88627571226a459eb.bin",
+     "quote": "Steven Gerrard scored a great goal."
+    },
+    {
+     "source": "RSSSF, Steven Gerrard's international log",
+     "url": "https://www.rsssf.org/miscellaneous/gerrard-intlg.html",
+     "quote": "  6  1    1    1- 9-01\tMünchen \tGermany \t5-1\tWorld Cup Qualifier"
+    }
+   ]
+  },
+  {
+   "id": "intl-0002",
+   "added": "2026-10-22",
+   "match": {
+    "date": "1998-10-14",
+    "home": "Bulgaria",
+    "away": "Sweden",
+    "match_id": "1998-10-14_bulgaria_sweden"
+   },
+   "source": {
+    "family": "euro2000",
+    "source_id": "55298",
+    "url": "https://web.archive.org/web/20161002180536/http://www.uefa.com/uefaeuro/season=2000/matches/round=1165/match=55298/postmatch/lineups/index.html"
+   },
+   "kind": "reassign_lineup_entry",
+   "from": {
+    "name_as_written": "Stoytcho Stoilov",
+    "shirt": 8
+   },
+   "to": {
+    "player_key": "ip:stoichkov-intlg",
+    "name": "Hristo Stoichkov"
+   },
+   "reason": "UEFA's lineup page lists Bulgaria's #8, a starter who played the whole match, as 'Stoytcho Stoilov'. Wikidata's lineup for the match (Q115935574) has #8 as Hristo Stoichkov, captain, and RSSSF's Stoichkov log has this match as his cap 77. Stoycho Stoilov (Q932974) is a real, different player, so the name is not a transliteration. Two sources against one, both checked against the cached copies. The ledger already paired the UEFA line with Stoichkov's RSSSF cap; this correction records why, and keeps the entry from being linked to Stoilov.",
+   "receipts": [
+    {
+     "source": "UEFA, Euro 2000 qualifying, Bulgaria 0-1 Sweden, line-ups (Wayback 2016-10-02)",
+     "url": "https://web.archive.org/web/20161002180536/http://www.uefa.com/uefaeuro/season=2000/matches/round=1165/match=55298/postmatch/lineups/index.html",
+     "timestamp": "20161002180536",
+     "cache": "data/raw/wayback/5e/5e16e866ee83a5356a94640e5d3a8db06c4eb3e3.bin",
+     "quote": "Stoytcho Stoilov"
+    },
+    {
+     "source": "Wikidata, Bulgaria v Sweden 1998-10-14 (Q115935574), P710 participant Hristo Stoichkov (Q187125), shirt number 8",
+     "url": "https://www.wikidata.org/wiki/Q115935574",
+     "item": "Q115935574",
+     "statement": "Q115935574-23B8B17C-70C3-41CB-A9E8-F09E511C8764",
+     "cache": "data/raw/wikidata/sparql/55/554ab2555bfdc232f30c6e48794332798b46a17f.json",
+     "binding": {
+      "p": "P710",
+      "v": "Q187125",
+      "pq": "P1618",
+      "qv": "8"
+     }
+    },
+    {
+     "source": "RSSSF, Hristo Stoichkov's international log",
+     "url": "https://www.rsssf.org/miscellaneous/stoichkov-intlg.html",
+     "quote": "77      36   14-10-98\tBurgas  \tSweden  \t0-1\tEuropean Champ. Qual."
+    }
+   ]
+  },
+  {
+   "id": "intl-0003",
+   "added": "2026-10-22",
+   "match": {
+    "date": "1996-04-24",
+    "home": "North Macedonia",
+    "away": "Liechtenstein",
+    "match_id": "1996-04-24_north-macedonia_liechtenstein"
+   },
+   "source": {
+    "family": "fifa1998",
+    "source_id": "8267",
+    "url": "https://web.archive.org/web/20120827194745/http://www.fifa.com:80/worldcup/archive/edition=1013/preliminaries/preliminary=893/matches/match=8267/report.html"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:north-macedonia:srdjan-zaharievski:1996",
+   "player": "Srdjan Zaharievski",
+   "wrong_source": "archive",
+   "wrong_value": "60",
+   "right_value": "78",
+   "reason": "The fifa1998 report has Srdjan Zaharievski's goal at 60'; Wikidata has 78' and martj42 78' (within a minute). A 18-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "fifa1998 match report (Wayback 20120827194745)",
+     "url": "https://web.archive.org/web/20120827194745/http://www.fifa.com:80/worldcup/archive/edition=1013/preliminaries/preliminary=893/matches/match=8267/report.html",
+     "timestamp": "20120827194745",
+     "cache": "data/raw/wayback/0b/0b05b6b8b2bb444e0958e2e5deffb9c4eb886521.bin",
+     "quote": "Srdjan ZAHARIEVSKI (MKD) 60'"
+    },
+    {
+     "source": "Wikidata, North Macedonia v Liechtenstein 1996-04-24 (Q115905781), P1363 goal by Srdjan Zaharievski: second half +33",
+     "url": "https://www.wikidata.org/wiki/Q115905781",
+     "item": "Q115905781",
+     "statement": "Q115905781-C93E8279-F279-44E3-BE80-31854B91E604",
+     "cache": "data/raw/wikidata/sparql/70/70831a130d30ec7433112fa120693ab692881c35.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "33"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      15889
+     ],
+     "minutes": [
+      78
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0004",
+   "added": "2026-10-22",
+   "match": {
+    "date": "1997-08-20",
+    "home": "Romania",
+    "away": "North Macedonia",
+    "match_id": "1997-08-20_romania_north-macedonia"
+   },
+   "source": {
+    "family": "fifa1998",
+    "source_id": "8621",
+    "url": "https://web.archive.org/web/20120902022527/http://www.fifa.com:80/worldcup/archive/edition=1013/preliminaries/preliminary=893/matches/match=8621/report.html"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:north-macedonia:miroslav-gokic:1997",
+   "player": "Miroslav Ǵokić",
+   "wrong_source": "archive",
+   "wrong_value": "58",
+   "right_value": "52",
+   "reason": "The fifa1998 report has Miroslav Ǵokić's goal at 58'; Wikidata has 52' and martj42 52/90' (within a minute). A 6-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "fifa1998 match report (Wayback 20120902022527)",
+     "url": "https://web.archive.org/web/20120902022527/http://www.fifa.com:80/worldcup/archive/edition=1013/preliminaries/preliminary=893/matches/match=8621/report.html",
+     "timestamp": "20120902022527",
+     "cache": "data/raw/wayback/c0/c030aec94fd25e86039af6fe3a6b577513f44f1a.bin",
+     "quote": "Miroslav DJOKIC (MKD) 58'"
+    },
+    {
+     "source": "Wikidata, Romania v North Macedonia 1997-08-20 (Q115905793), P1363 goal by Miroslav Ǵokić: second half +7, second half +45",
+     "url": "https://www.wikidata.org/wiki/Q115905793",
+     "item": "Q115905793",
+     "statement": "Q115905793-5F423FF5-CF2C-4C04-BC76-CADB9FF3F310",
+     "cache": "data/raw/wikidata/sparql/29/296eba6181f6c5ed4ebf50f40377c78d8ea809f9.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "7"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      17595,
+      17598
+     ],
+     "minutes": [
+      52,
+      90
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0005",
+   "added": "2026-10-22",
+   "match": {
+    "date": "1996-04-24",
+    "home": "Serbia",
+    "away": "Faroe Islands",
+    "match_id": "1996-04-24_serbia_faroe-islands"
+   },
+   "source": {
+    "family": "wikidata",
+    "item": "Q115905843",
+    "statement": "Q115905843-C0EAE45F-7348-41D1-BBE0-A340A8346D86",
+    "url": "https://www.wikidata.org/wiki/Q115905843"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:savicevic-intlg",
+   "player": "Dejan Savicevic",
+   "wrong_source": "wikidata",
+   "wrong_value": "19",
+   "right_value": "29",
+   "reason": "Wikidata has Dejan Savicevic's goal at 19'; the fifa1998 report has 29' and martj42 3/29' (within a minute). A 10-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "fifa1998 match report (Wayback 20120914162723)",
+     "url": "https://web.archive.org/web/20120914162723/http://www.fifa.com:80/worldcup/archive/edition=1013/preliminaries/preliminary=893/matches/match=8232/report.html",
+     "timestamp": "20120914162723",
+     "cache": "data/raw/wayback/fa/fa432b545268d2554ee60e375f2edcb7f6800507.bin",
+     "quote": "Dejan SAVICEVIC (YUG) 29'"
+    },
+    {
+     "source": "Wikidata, Serbia v Faroe Islands 1996-04-24 (Q115905843), P1363 goal by Dejan Savicevic: first half +19, first half +18",
+     "url": "https://www.wikidata.org/wiki/Q115905843",
+     "item": "Q115905843",
+     "statement": "Q115905843-C0EAE45F-7348-41D1-BBE0-A340A8346D86",
+     "cache": "data/raw/wikidata/sparql/98/9877dca9a9d3c5eb6ec6a279bba247ca842e5ed2.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "19"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      15890,
+      15891
+     ],
+     "minutes": [
+      3,
+      29
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0006",
+   "added": "2026-10-22",
+   "match": {
+    "date": "1996-04-24",
+    "home": "Serbia",
+    "away": "Faroe Islands",
+    "match_id": "1996-04-24_serbia_faroe-islands"
+   },
+   "source": {
+    "family": "wikidata",
+    "item": "Q115905843",
+    "statement": "Q115905843-24F1CFF6-11A6-47CC-93C5-3ECAF68A046B",
+    "url": "https://www.wikidata.org/wiki/Q115905843"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:savicevic-intlg",
+   "player": "Dejan Savicevic",
+   "wrong_source": "wikidata",
+   "wrong_value": "18",
+   "right_value": "3",
+   "reason": "Wikidata has Dejan Savicevic's goal at 18'; the fifa1998 report has 3' and martj42 3/29' (within a minute). A 15-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "fifa1998 match report (Wayback 20120914162723)",
+     "url": "https://web.archive.org/web/20120914162723/http://www.fifa.com:80/worldcup/archive/edition=1013/preliminaries/preliminary=893/matches/match=8232/report.html",
+     "timestamp": "20120914162723",
+     "cache": "data/raw/wayback/fa/fa432b545268d2554ee60e375f2edcb7f6800507.bin",
+     "quote": "Dejan SAVICEVIC (YUG) 3'"
+    },
+    {
+     "source": "Wikidata, Serbia v Faroe Islands 1996-04-24 (Q115905843), P1363 goal by Dejan Savicevic: first half +19, first half +18",
+     "url": "https://www.wikidata.org/wiki/Q115905843",
+     "item": "Q115905843",
+     "statement": "Q115905843-24F1CFF6-11A6-47CC-93C5-3ECAF68A046B",
+     "cache": "data/raw/wikidata/sparql/98/9877dca9a9d3c5eb6ec6a279bba247ca842e5ed2.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "18"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      15890,
+      15891
+     ],
+     "minutes": [
+      3,
+      29
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0007",
+   "added": "2026-10-22",
+   "match": {
+    "date": "1997-04-30",
+    "home": "Serbia",
+    "away": "Spain",
+    "match_id": "1997-04-30_serbia_spain"
+   },
+   "source": {
+    "family": "fifa1998",
+    "source_id": "8249",
+    "url": "https://web.archive.org/web/20120501183654/http://www.fifa.com:80/worldcup/archive/edition=1013/preliminaries/preliminary=893/matches/match=8249/report.html"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:mijatovic-intlg",
+   "player": "Predrag Mijatovic",
+   "wrong_source": "archive",
+   "wrong_value": "80",
+   "right_value": "87",
+   "reason": "The fifa1998 report has Predrag Mijatovic's goal at 80'; Wikidata has 87' and martj42 87' (within a minute). A 7-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "fifa1998 match report (Wayback 20120501183654)",
+     "url": "https://web.archive.org/web/20120501183654/http://www.fifa.com:80/worldcup/archive/edition=1013/preliminaries/preliminary=893/matches/match=8249/report.html",
+     "timestamp": "20120501183654",
+     "cache": "data/raw/wayback/46/46277865bb156573fc183d85b1045af5970841cc.bin",
+     "quote": "Predrag MIJATOVIC (YUG) 80'"
+    },
+    {
+     "source": "Wikidata, Serbia v Spain 1997-04-30 (Q115905842), P1363 goal by Predrag Mijatovic: second half +42",
+     "url": "https://www.wikidata.org/wiki/Q115905842",
+     "item": "Q115905842",
+     "statement": "Q115905842-D939C0BA-2CAD-4991-AA69-C65B8D696412",
+     "cache": "data/raw/wikidata/sparql/98/9877dca9a9d3c5eb6ec6a279bba247ca842e5ed2.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "42"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      17052
+     ],
+     "minutes": [
+      87
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0008",
+   "added": "2026-10-22",
+   "match": {
+    "date": "1996-10-06",
+    "home": "Faroe Islands",
+    "away": "Serbia",
+    "match_id": "1996-10-06_faroe-islands_serbia"
+   },
+   "source": {
+    "family": "wikidata",
+    "item": "Q115905826",
+    "statement": "Q115905826-CF0F0529-F5F7-4070-A61A-B6CC0929A9EF",
+    "url": "https://www.wikidata.org/wiki/Q115905826"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:sjokanovic-intl",
+   "player": "Slavisa Jokanovic",
+   "wrong_source": "wikidata",
+   "wrong_value": "20",
+   "right_value": "11",
+   "reason": "Wikidata has Slavisa Jokanovic's goal at 20'; the fifa1998 report has 11' and martj42 11/57' (within a minute). A 9-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "fifa1998 match report (Wayback 20120815165346)",
+     "url": "https://web.archive.org/web/20120815165346/http://www.fifa.com:80/worldcup/archive/edition=1013/preliminaries/preliminary=893/matches/match=8238/report.html",
+     "timestamp": "20120815165346",
+     "cache": "data/raw/wayback/75/75bfb8a5f8b79132d50268f267c2a85aaf82c49d.bin",
+     "quote": "Slavisa JOKANOVIC (YUG) 11'"
+    },
+    {
+     "source": "Wikidata, Faroe Islands v Serbia 1996-10-06 (Q115905826), P1363 goal by Slavisa Jokanovic: second half +12, first half +20",
+     "url": "https://www.wikidata.org/wiki/Q115905826",
+     "item": "Q115905826",
+     "statement": "Q115905826-CF0F0529-F5F7-4070-A61A-B6CC0929A9EF",
+     "cache": "data/raw/wikidata/sparql/29/296eba6181f6c5ed4ebf50f40377c78d8ea809f9.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "20"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      16318,
+      16323
+     ],
+     "minutes": [
+      11,
+      57
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0009",
+   "added": "2026-10-22",
+   "match": {
+    "date": "1997-10-11",
+    "home": "Germany",
+    "away": "Albania",
+    "match_id": "1997-10-11_germany_albania"
+   },
+   "source": {
+    "family": "wikidata",
+    "item": "Q115905739",
+    "statement": "Q115905739-9917705A-BE82-4831-94AA-28F4269DC8D8",
+    "url": "https://www.wikidata.org/wiki/Q115905739"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:bierhoff-intl",
+   "player": "Oliver Bierhoff",
+   "wrong_source": "wikidata",
+   "wrong_value": "73",
+   "right_value": "78",
+   "reason": "Wikidata has Oliver Bierhoff's goal at 73'; the fifa1998 report has 78' and martj42 78/90' (within a minute). A 5-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "fifa1998 match report (Wayback 20120310012534)",
+     "url": "https://web.archive.org/web/20120310012534/http://www.fifa.com:80/worldcup/archive/edition=1013/preliminaries/preliminary=893/matches/match=8637/report.html",
+     "timestamp": "20120310012534",
+     "cache": "data/raw/wayback/91/919c739fccd50267e44f2f3d95f56d1fd08a4096.bin",
+     "quote": "Oliver BIERHOFF (GER) 78'"
+    },
+    {
+     "source": "Wikidata, Germany v Albania 1997-10-11 (Q115905739), P1363 goal by Oliver Bierhoff: second half +45, second half +28",
+     "url": "https://www.wikidata.org/wiki/Q115905739",
+     "item": "Q115905739",
+     "statement": "Q115905739-9917705A-BE82-4831-94AA-28F4269DC8D8",
+     "cache": "data/raw/wikidata/sparql/70/70831a130d30ec7433112fa120693ab692881c35.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "28"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      17828,
+      17832
+     ],
+     "minutes": [
+      78,
+      90
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0010",
+   "added": "2026-10-22",
+   "match": {
+    "date": "1999-03-27",
+    "home": "Northern Ireland",
+    "away": "Germany",
+    "match_id": "1999-03-27_northern-ireland_germany"
+   },
+   "source": {
+    "family": "euro2000",
+    "source_id": "54925",
+    "url": "https://web.archive.org/web/20120430103212/http://www.uefa.com:80/uefaeuro/season=2000/matches/round=1165/match=54925/index.html"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:bode-intl",
+   "player": "Marco Bode",
+   "wrong_source": "archive",
+   "wrong_value": "19",
+   "right_value": "11",
+   "reason": "The euro2000 report has Marco Bode's goal at 19'; Wikidata has 11' and martj42 11/43' (within a minute). A 8-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "euro2000 match report (Wayback 20120430103212)",
+     "url": "https://web.archive.org/web/20120430103212/http://www.uefa.com:80/uefaeuro/season=2000/matches/round=1165/match=54925/index.html",
+     "timestamp": "20120430103212",
+     "cache": "data/raw/wayback/21/213a333715501d6bf2fc7427b259355bc02dcb11.bin",
+     "quote": "Bode 19, 43"
+    },
+    {
+     "source": "Wikidata, Northern Ireland v Germany 1999-03-27 (Q115935591), P1363 goal by Marco Bode: first half +43, first half +11",
+     "url": "https://www.wikidata.org/wiki/Q115935591",
+     "item": "Q115935591",
+     "statement": "Q115935591-10EE4B88-B974-4F01-959F-6A1C45A4A3BA",
+     "cache": "data/raw/wikidata/sparql/e2/e2f57c1369dfe8b2ce78cf5ade209c7c92b56bf7.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "11"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      18666,
+      18667
+     ],
+     "minutes": [
+      11,
+      43
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0011",
+   "added": "2026-10-22",
+   "match": {
+    "date": "1997-09-10",
+    "home": "Germany",
+    "away": "Armenia",
+    "match_id": "1997-09-10_germany_armenia"
+   },
+   "source": {
+    "family": "fifa1998",
+    "source_id": "8636",
+    "url": "https://web.archive.org/web/20120914162747/http://www.fifa.com:80/worldcup/archive/edition=1013/preliminaries/preliminary=893/matches/match=8636/report.html"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:klinsmann-intl",
+   "player": "Jürgen Klinsmann",
+   "wrong_source": "archive",
+   "wrong_value": "75",
+   "right_value": "70",
+   "reason": "The fifa1998 report has Jürgen Klinsmann's goal at 75'; Wikidata has 70' and martj42 70/84' (within a minute). A 5-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "fifa1998 match report (Wayback 20120914162747)",
+     "url": "https://web.archive.org/web/20120914162747/http://www.fifa.com:80/worldcup/archive/edition=1013/preliminaries/preliminary=893/matches/match=8636/report.html",
+     "timestamp": "20120914162747",
+     "cache": "data/raw/wayback/21/215556007e015ec5507bd54babc06c2e7f125762.bin",
+     "quote": "Juergen KLINSMANN (GER) 75'"
+    },
+    {
+     "source": "Wikidata, Germany v Armenia 1997-09-10 (Q115905740), P1363 goal by Jürgen Klinsmann: second half +25, second half +39",
+     "url": "https://www.wikidata.org/wiki/Q115905740",
+     "item": "Q115905740",
+     "statement": "Q115905740-7BDB63D4-2E9F-4A45-84C7-C6736F174DBC",
+     "cache": "data/raw/wikidata/sparql/70/70831a130d30ec7433112fa120693ab692881c35.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "25"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      17704,
+      17705
+     ],
+     "minutes": [
+      70,
+      84
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0012",
+   "added": "2026-10-22",
+   "match": {
+    "date": "1997-03-29",
+    "home": "Cyprus",
+    "away": "Russia",
+    "match_id": "1997-03-29_cyprus_russia"
+   },
+   "source": {
+    "family": "fifa1998",
+    "source_id": "8225",
+    "url": "https://web.archive.org/web/20120903074954/http://www.fifa.com:80/worldcup/archive/edition=1013/preliminaries/preliminary=893/matches/match=8225/report.html"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:simutenkov-intlg",
+   "player": "Igor Vitalyevich Simutenkov",
+   "wrong_source": "archive",
+   "wrong_value": "1",
+   "right_value": "33",
+   "reason": "The fifa1998 report has Igor Vitalyevich Simutenkov's goal at 1'; Wikidata has 33' and martj42 32' (within a minute). A 32-minute gap is a data-entry error, not clock convention; two sources against one. FIFA's 1998 reports of 1997-03-29 give 1' for goals scored after half an hour (the cached page reads \"Igor SIMUTENKOV (RUS) 1'\").",
+   "receipts": [
+    {
+     "source": "fifa1998 match report (Wayback 20120903074954)",
+     "url": "https://web.archive.org/web/20120903074954/http://www.fifa.com:80/worldcup/archive/edition=1013/preliminaries/preliminary=893/matches/match=8225/report.html",
+     "timestamp": "20120903074954",
+     "cache": "data/raw/wayback/a2/a2cf608bc21008f29adddbca5c6e67eece0571e2.bin",
+     "quote": "Igor SIMUTENKOV (RUS) 1'"
+    },
+    {
+     "source": "Wikidata, Cyprus v Russia 1997-03-29 (Q115916699), P1363 goal by Igor Vitalyevich Simutenkov: first half +33",
+     "url": "https://www.wikidata.org/wiki/Q115916699",
+     "item": "Q115916699",
+     "statement": "Q115916699-B8C610DD-10E6-442F-8226-010393A18250",
+     "cache": "data/raw/wikidata/sparql/11/11eee751620e5c444cce5c1007742ecaf4de3490.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "33"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      16819
+     ],
+     "minutes": [
+      32
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0013",
+   "added": "2026-10-22",
+   "match": {
+    "date": "2008-10-11",
+    "home": "Romania",
+    "away": "France",
+    "match_id": "2008-10-11_romania_france"
+   },
+   "source": {
+    "family": "wikidata",
+    "item": "Q115699686",
+    "statement": "Q115699686-627EC606-8648-4A4B-B9A4-60ECCB0B4214",
+    "url": "https://www.wikidata.org/wiki/Q115699686"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:france:yoann-gourcuff:2008",
+   "player": "Yoann Gourcuff",
+   "wrong_source": "wikidata",
+   "wrong_value": "80",
+   "right_value": "68",
+   "reason": "Wikidata has Yoann Gourcuff's goal at 80'; the fifa2010 report has 68' and martj42 69' (within a minute). A 12-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "fifa2010 match report (Wayback 20120113120426)",
+     "url": "https://web.archive.org/web/20120113120426/http://www.fifa.com/worldcup/archive/southafrica2010/preliminaries/europe/matches/round=250471/match=300040874/report.html",
+     "timestamp": "20120113120426",
+     "cache": "data/raw/wayback/6e/6efb116888d2a11c5e72ac5fc9f00f23a13194f1.bin",
+     "quote": "Yoann GOURCUFF (FRA) 68'"
+    },
+    {
+     "source": "Wikidata, Romania v France 2008-10-11 (Q115699686), P1363 goal by Yoann Gourcuff: second half +35",
+     "url": "https://www.wikidata.org/wiki/Q115699686",
+     "item": "Q115699686",
+     "statement": "Q115699686-627EC606-8648-4A4B-B9A4-60ECCB0B4214",
+     "cache": "data/raw/wikidata/sparql/02/02ec7ebdd743125c5b6d3be6326314cb46491826.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "35"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      28651
+     ],
+     "minutes": [
+      69
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0014",
+   "added": "2026-10-22",
+   "match": {
+    "date": "1997-03-29",
+    "home": "Albania",
+    "away": "Ukraine",
+    "match_id": "1997-03-29_albania_ukraine"
+   },
+   "source": {
+    "family": "fifa1998",
+    "source_id": "8297",
+    "url": "https://web.archive.org/web/20120625141630/http://www.fifa.com:80/worldcup/archive/edition=1013/preliminaries/preliminary=893/matches/match=8297/report.html"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:rebrov-intl",
+   "player": "Serhiy Rebrov",
+   "wrong_source": "archive",
+   "wrong_value": "1",
+   "right_value": "40",
+   "reason": "The fifa1998 report has Serhiy Rebrov's goal at 1'; Wikidata has 40' and martj42 40' (within a minute). A 39-minute gap is a data-entry error, not clock convention; two sources against one. FIFA's 1998 reports of 1997-03-29 give 1' for goals scored after half an hour (the cached page reads \"Serhiy REBROV (UKR) 1'\").",
+   "receipts": [
+    {
+     "source": "fifa1998 match report (Wayback 20120625141630)",
+     "url": "https://web.archive.org/web/20120625141630/http://www.fifa.com:80/worldcup/archive/edition=1013/preliminaries/preliminary=893/matches/match=8297/report.html",
+     "timestamp": "20120625141630",
+     "cache": "data/raw/wayback/18/182261cedc6da91cdffb670019c9cba3de1c5411.bin",
+     "quote": "Serhiy REBROV (UKR) 1'"
+    },
+    {
+     "source": "Wikidata, Albania v Ukraine 1997-03-29 (Q115905738), P1363 goal by Serhiy Rebrov: first half +40",
+     "url": "https://www.wikidata.org/wiki/Q115905738",
+     "item": "Q115905738",
+     "statement": "Q115905738-D43135B6-7737-4CD3-A204-9A77F9C0C894",
+     "cache": "data/raw/wikidata/sparql/70/70831a130d30ec7433112fa120693ab692881c35.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "40"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      16815
+     ],
+     "minutes": [
+      40
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0015",
+   "added": "2026-10-22",
+   "match": {
+    "date": "1996-09-22",
+    "home": "Slovakia",
+    "away": "Malta",
+    "match_id": "1996-09-22_slovakia_malta"
+   },
+   "source": {
+    "family": "wikidata",
+    "item": "Q115905839",
+    "statement": "Q115905839-A1B04FD1-3C64-434E-892D-E3628425AA79",
+    "url": "https://www.wikidata.org/wiki/Q115905839"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:dc-tittel-intl",
+   "player": "Dusan Tittel",
+   "wrong_source": "wikidata",
+   "wrong_value": "82",
+   "right_value": "90",
+   "reason": "Wikidata has Dusan Tittel's goal at 82'; the fifa1998 report has 90' and martj42 13/90' (within a minute). A 8-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "fifa1998 match report (Wayback 20120828224742)",
+     "url": "https://web.archive.org/web/20120828224742/http://www.fifa.com:80/worldcup/archive/edition=1013/preliminaries/preliminary=893/matches/match=8237/report.html",
+     "timestamp": "20120828224742",
+     "cache": "data/raw/wayback/66/660ccb589ae0cdbb85b6a35cd62f3f33a8447201.bin",
+     "quote": "Dusan TITTEL (SVK) 90'"
+    },
+    {
+     "source": "Wikidata, Slovakia v Malta 1996-09-22 (Q115905839), P1363 goal by Dusan Tittel: second half +37, first half +13",
+     "url": "https://www.wikidata.org/wiki/Q115905839",
+     "item": "Q115905839",
+     "statement": "Q115905839-A1B04FD1-3C64-434E-892D-E3628425AA79",
+     "cache": "data/raw/wikidata/sparql/98/9877dca9a9d3c5eb6ec6a279bba247ca842e5ed2.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "37"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      16274,
+      16279
+     ],
+     "minutes": [
+      13,
+      90
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0016",
+   "added": "2026-10-22",
+   "match": {
+    "date": "1996-10-09",
+    "home": "Belarus",
+    "away": "Latvia",
+    "match_id": "1996-10-09_belarus_latvia"
+   },
+   "source": {
+    "family": "fifa1998",
+    "source_id": "8204",
+    "url": "https://web.archive.org/web/20120902024311/http://www.fifa.com:80/worldcup/archive/edition=1013/preliminaries/preliminary=893/matches/match=8204/report.html"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:belarus:vladimir-makouski:1995",
+   "player": "Vladimir Makouski",
+   "wrong_source": "archive",
+   "wrong_value": "65",
+   "right_value": "78",
+   "reason": "The fifa1998 report has Vladimir Makouski's goal at 65'; Wikidata has 78' and martj42 78' (within a minute). A 13-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "fifa1998 match report (Wayback 20120902024311)",
+     "url": "https://web.archive.org/web/20120902024311/http://www.fifa.com:80/worldcup/archive/edition=1013/preliminaries/preliminary=893/matches/match=8204/report.html",
+     "timestamp": "20120902024311",
+     "cache": "data/raw/wayback/8e/8eb8a0ecfaeb1dabec00a0d956f23ad405053001.bin",
+     "quote": "Vladimir MAKOVSKI (BLR) 65'"
+    },
+    {
+     "source": "Wikidata, Belarus v Latvia 1996-10-09 (Q115905896), P1363 goal by Vladimir Makouski: second half +33",
+     "url": "https://www.wikidata.org/wiki/Q115905896",
+     "item": "Q115905896",
+     "statement": "Q115905896-0C8E10A0-EFE6-4BA7-904E-F2DD55200FFE",
+     "cache": "data/raw/wikidata/sparql/0f/0f68bc2d8e9c1384331f23c686ced3dd81380c1e.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "33"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      16354
+     ],
+     "minutes": [
+      78
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0017",
+   "added": "2026-10-22",
+   "match": {
+    "date": "2009-03-28",
+    "home": "Belgium",
+    "away": "Bosnia and Herzegovina",
+    "match_id": "2009-03-28_belgium_bosnia-and-herzegovina"
+   },
+   "source": {
+    "family": "wikidata",
+    "item": "Q115906299",
+    "statement": "Q115906299-C0E16427-9675-4333-978A-FFB762B84BCC",
+    "url": "https://www.wikidata.org/wiki/Q115906299"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:misimovic-intlg",
+   "player": "Zvjezdan Misimovic",
+   "wrong_source": "wikidata",
+   "wrong_value": "86",
+   "right_value": "81",
+   "reason": "Wikidata has Zvjezdan Misimovic's goal at 86'; the fifa2010 report has 81' and martj42 81' (within a minute). A 5-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "fifa2010 match report (Wayback 20120718053144)",
+     "url": "https://web.archive.org/web/20120718053144/http://www.fifa.com/worldcup/archive/southafrica2010/preliminaries/europe/matches/round=250471/match=300042905/report.html",
+     "timestamp": "20120718053144",
+     "cache": "data/raw/wayback/00/00fe675185961353d89ea796efeaacb8f0a8bdac.bin",
+     "quote": "Zvjezdan MISIMOVIC (BIH) 81'"
+    },
+    {
+     "source": "Wikidata, Belgium v Bosnia and Herzegovina 2009-03-28 (Q115906299), P1363 goal by Zvjezdan Misimovic: second half +41",
+     "url": "https://www.wikidata.org/wiki/Q115906299",
+     "item": "Q115906299",
+     "statement": "Q115906299-C0E16427-9675-4333-978A-FFB762B84BCC",
+     "cache": "data/raw/wikidata/sparql/da/dae61c39d7b05f51bbd55e2836354328f538b03e.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "41"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      28869
+     ],
+     "minutes": [
+      81
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0018",
+   "added": "2026-10-22",
+   "match": {
+    "date": "2009-08-12",
+    "home": "Belarus",
+    "away": "Croatia",
+    "match_id": "2009-08-12_belarus_croatia"
+   },
+   "source": {
+    "family": "wikidata",
+    "item": "Q115906322",
+    "statement": "Q115906322-C608F0BD-8EF8-41FA-85F2-70446D33DC07",
+    "url": "https://www.wikidata.org/wiki/Q115906322"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:olic-intlg",
+   "player": "Ivica Olic",
+   "wrong_source": "wikidata",
+   "wrong_value": "46",
+   "right_value": "22",
+   "reason": "Wikidata has Ivica Olic's goal at 46'; the fifa2010 report has 22' and martj42 22/85' (within a minute). A 24-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "fifa2010 match report (Wayback 20110826012139)",
+     "url": "https://web.archive.org/web/20110826012139/http://www.fifa.com/worldcup/archive/southafrica2010/preliminaries/europe/matches/round=250471/match=300041072/report.html",
+     "timestamp": "20110826012139",
+     "cache": "data/raw/wayback/d0/d094d9264125ef87b7de7bd93c8337686bf0dc88.bin",
+     "quote": "Ivica OLIC (CRO) 22'"
+    },
+    {
+     "source": "Wikidata, Belarus v Croatia 2009-08-12 (Q115906322), P1363 goal by Ivica Olic: second half +38, second half +1",
+     "url": "https://www.wikidata.org/wiki/Q115906322",
+     "item": "Q115906322",
+     "statement": "Q115906322-C608F0BD-8EF8-41FA-85F2-70446D33DC07",
+     "cache": "data/raw/wikidata/sparql/53/5383ce4b0c00cbea8b70acf352e3898e37130879.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "1"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      29331,
+      29334
+     ],
+     "minutes": [
+      22,
+      85
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0019",
+   "added": "2026-10-22",
+   "match": {
+    "date": "2005-08-17",
+    "home": "Faroe Islands",
+    "away": "Cyprus",
+    "match_id": "2005-08-17_faroe-islands_cyprus"
+   },
+   "source": {
+    "family": "wikidata",
+    "item": "Q115906066",
+    "statement": "Q115906066-CE237EE8-CE30-4932-867D-9BA2491F3785",
+    "url": "https://www.wikidata.org/wiki/Q115906066"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:cyprus:asimakis-krassas:2004",
+   "player": "Asimakis Krassas",
+   "wrong_source": "wikidata",
+   "wrong_value": "90+2",
+   "right_value": "95",
+   "reason": "Wikidata has Asimakis Krassas's goal at 90+2'; the fifa2006 report has 95' and martj42 95' (within a minute). A 5-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "fifa2006 match report (Wayback 20071023022203)",
+     "url": "https://web.archive.org/web/20071023022203/http://fifa.com:80/worldcup/archive/germany2006/preliminaries/preliminary=8071/matches/match=36785/report.html",
+     "timestamp": "20071023022203",
+     "cache": "data/raw/wayback/43/43929d161426d696c7fe1a6ffa5c5ee40c31542c.bin",
+     "quote": "KRASSAS Asimakis (CYP) 95'"
+    },
+    {
+     "source": "Wikidata, Faroe Islands v Cyprus 2005-08-17 (Q115906066), P1363 goal by Asimakis Krassas: second half +47",
+     "url": "https://www.wikidata.org/wiki/Q115906066",
+     "item": "Q115906066",
+     "statement": "Q115906066-CE237EE8-CE30-4932-867D-9BA2491F3785",
+     "cache": "data/raw/wikidata/sparql/dd/dd52cd499b5df9c0f70e04e73cbbf101f1f8350a.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "47"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      25561
+     ],
+     "minutes": [
+      95
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0020",
+   "added": "2026-10-22",
+   "match": {
+    "date": "1997-03-29",
+    "home": "Cyprus",
+    "away": "Russia",
+    "match_id": "1997-03-29_cyprus_russia"
+   },
+   "source": {
+    "family": "fifa1998",
+    "source_id": "8225",
+    "url": "https://web.archive.org/web/20120903074954/http://www.fifa.com:80/worldcup/archive/edition=1013/preliminaries/preliminary=893/matches/match=8225/report.html"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:cyprus:sinisa-gogic:1994",
+   "player": "Siniša Gogić",
+   "wrong_source": "archive",
+   "wrong_value": "1",
+   "right_value": "31",
+   "reason": "The fifa1998 report has Siniša Gogić's goal at 1'; Wikidata has 31' and martj42 31' (within a minute). A 30-minute gap is a data-entry error, not clock convention; two sources against one. FIFA's 1998 reports of 1997-03-29 give 1' for goals scored after half an hour (the cached page reads \"Sinisa GOGIC (CYP) 1'\").",
+   "receipts": [
+    {
+     "source": "fifa1998 match report (Wayback 20120903074954)",
+     "url": "https://web.archive.org/web/20120903074954/http://www.fifa.com:80/worldcup/archive/edition=1013/preliminaries/preliminary=893/matches/match=8225/report.html",
+     "timestamp": "20120903074954",
+     "cache": "data/raw/wayback/a2/a2cf608bc21008f29adddbca5c6e67eece0571e2.bin",
+     "quote": "Sinisa GOGIC (CYP) 1'"
+    },
+    {
+     "source": "Wikidata, Cyprus v Russia 1997-03-29 (Q115916699), P1363 goal by Siniša Gogić: first half +31",
+     "url": "https://www.wikidata.org/wiki/Q115916699",
+     "item": "Q115916699",
+     "statement": "Q115916699-2793C388-774A-4566-8B07-426C5BA2E383",
+     "cache": "data/raw/wikidata/sparql/11/11eee751620e5c444cce5c1007742ecaf4de3490.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "31"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      16818
+     ],
+     "minutes": [
+      31
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0021",
+   "added": "2026-10-22",
+   "match": {
+    "date": "1996-09-18",
+    "home": "Czech Republic",
+    "away": "Malta",
+    "match_id": "1996-09-18_czech-republic_malta"
+   },
+   "source": {
+    "family": "wikidata",
+    "item": "Q115905834",
+    "statement": "Q115905834-52E492A6-3215-4A4A-ADC8-FE63F2FBD967",
+    "url": "https://www.wikidata.org/wiki/Q115905834"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:nedved-intl",
+   "player": "Pavel Nedved",
+   "wrong_source": "wikidata",
+   "wrong_value": "23",
+   "right_value": "29",
+   "reason": "Wikidata has Pavel Nedved's goal at 23'; the fifa1998 report has 29' and martj42 29' (within a minute). A 6-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "fifa1998 match report (Wayback 20120925111917)",
+     "url": "https://web.archive.org/web/20120925111917/http://www.fifa.com:80/worldcup/archive/edition=1013/preliminaries/preliminary=893/matches/match=8236/report.html",
+     "timestamp": "20120925111917",
+     "cache": "data/raw/wayback/34/34aad5c971927fc9bd2fcb6509a0fe7a00304e06.bin",
+     "quote": "Pavel NEDVED (CZE) 29'"
+    },
+    {
+     "source": "Wikidata, Czech Republic v Malta 1996-09-18 (Q115905834), P1363 goal by Pavel Nedved: first half +23",
+     "url": "https://www.wikidata.org/wiki/Q115905834",
+     "item": "Q115905834",
+     "statement": "Q115905834-52E492A6-3215-4A4A-ADC8-FE63F2FBD967",
+     "cache": "data/raw/wikidata/sparql/29/296eba6181f6c5ed4ebf50f40377c78d8ea809f9.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "23"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      16252
+     ],
+     "minutes": [
+      29
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0022",
+   "added": "2026-10-22",
+   "match": {
+    "date": "2005-06-08",
+    "home": "Czech Republic",
+    "away": "North Macedonia",
+    "match_id": "2005-06-08_czech-republic_north-macedonia"
+   },
+   "source": {
+    "family": "wikidata",
+    "item": "Q115904851",
+    "statement": "Q115904851-2FF02383-419D-4A35-AEB1-5C25DCA73112",
+    "url": "https://www.wikidata.org/wiki/Q115904851"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:rosicky-intl",
+   "player": "Tomas Rosicky",
+   "wrong_source": "wikidata",
+   "wrong_value": "62",
+   "right_value": "73",
+   "reason": "Wikidata has Tomas Rosicky's goal at 62'; the fifa2006 report has 73' and martj42 73' (within a minute). A 11-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "fifa2006 match report (Wayback 20071023021311)",
+     "url": "https://web.archive.org/web/20071023021311/http://fifa.com:80/worldcup/archive/germany2006/preliminaries/preliminary=8071/matches/match=36514/report.html",
+     "timestamp": "20071023021311",
+     "cache": "data/raw/wayback/95/956d5bc1f94494dce1794bf1a6ad628d081100c0.bin",
+     "quote": "ROSICKY Tomas (CZE) 73'"
+    },
+    {
+     "source": "Wikidata, Czech Republic v North Macedonia 2005-06-08 (Q115904851), P1363 goal by Tomas Rosicky: second half +17",
+     "url": "https://www.wikidata.org/wiki/Q115904851",
+     "item": "Q115904851",
+     "statement": "Q115904851-2FF02383-419D-4A35-AEB1-5C25DCA73112",
+     "cache": "data/raw/wikidata/sparql/80/80bebc3916f9e84f0010ee34d71d11043bcbff7d.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "17"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      25338
+     ],
+     "minutes": [
+      73
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0023",
+   "added": "2026-10-22",
+   "match": {
+    "date": "2005-06-08",
+    "home": "Czech Republic",
+    "away": "North Macedonia",
+    "match_id": "2005-06-08_czech-republic_north-macedonia"
+   },
+   "source": {
+    "family": "wikidata",
+    "item": "Q115904851",
+    "statement": "Q115904851-B81B5276-2C42-4474-BD82-E1E7D535D29E",
+    "url": "https://www.wikidata.org/wiki/Q115904851"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:baros-intlg",
+   "player": "Milan Baros",
+   "wrong_source": "wikidata",
+   "wrong_value": "73",
+   "right_value": "87",
+   "reason": "Wikidata has Milan Baros's goal at 73'; the fifa2006 report has 87' and martj42 87' (within a minute). A 14-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "fifa2006 match report (Wayback 20071023021311)",
+     "url": "https://web.archive.org/web/20071023021311/http://fifa.com:80/worldcup/archive/germany2006/preliminaries/preliminary=8071/matches/match=36514/report.html",
+     "timestamp": "20071023021311",
+     "cache": "data/raw/wayback/95/956d5bc1f94494dce1794bf1a6ad628d081100c0.bin",
+     "quote": "BAROS Milan (CZE) 87'"
+    },
+    {
+     "source": "Wikidata, Czech Republic v North Macedonia 2005-06-08 (Q115904851), P1363 goal by Milan Baros: second half +28",
+     "url": "https://www.wikidata.org/wiki/Q115904851",
+     "item": "Q115904851",
+     "statement": "Q115904851-B81B5276-2C42-4474-BD82-E1E7D535D29E",
+     "cache": "data/raw/wikidata/sparql/80/80bebc3916f9e84f0010ee34d71d11043bcbff7d.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "28"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      25339
+     ],
+     "minutes": [
+      87
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0024",
+   "added": "2026-10-22",
+   "match": {
+    "date": "2008-11-19",
+    "home": "San Marino",
+    "away": "Czech Republic",
+    "match_id": "2008-11-19_san-marino_czech-republic"
+   },
+   "source": {
+    "family": "wikidata",
+    "item": "Q115907072",
+    "statement": "Q115907072-D6AB0242-2756-40F5-8D79-90187EB1B11D",
+    "url": "https://www.wikidata.org/wiki/Q115907072"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:czech-republic:tomas-necid:2008",
+   "player": "Tomas Necid",
+   "wrong_source": "wikidata",
+   "wrong_value": "83",
+   "right_value": "66",
+   "reason": "Wikidata has Tomas Necid's goal at 83'; the fifa2010 report has 66' and martj42 66' (within a minute). A 17-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "fifa2010 match report (Wayback 20120828084645)",
+     "url": "https://web.archive.org/web/20120828084645/http://www.fifa.com:80/worldcup/archive/southafrica2010/preliminaries/europe/matches/round=250471/match=300040514/report.html",
+     "timestamp": "20120828084645",
+     "cache": "data/raw/wayback/0a/0ac7c325be7d84e1bcea826c4713a44266e8d094.bin",
+     "quote": "Tomas NECID (CZE) 66'"
+    },
+    {
+     "source": "Wikidata, San Marino v Czech Republic 2008-11-19 (Q115907072), P1363 goal by Tomas Necid: second half +38",
+     "url": "https://www.wikidata.org/wiki/Q115907072",
+     "item": "Q115907072",
+     "statement": "Q115907072-D6AB0242-2756-40F5-8D79-90187EB1B11D",
+     "cache": "data/raw/wikidata/sparql/62/624d726aa1e9d446f0bfe1d3f10a0352f3515982.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "38"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      28826
+     ],
+     "minutes": [
+      66
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0025",
+   "added": "2026-10-22",
+   "match": {
+    "date": "1997-04-02",
+    "home": "Czech Republic",
+    "away": "Serbia",
+    "match_id": "1997-04-02_czech-republic_serbia"
+   },
+   "source": {
+    "family": "fifa1998",
+    "source_id": "8247",
+    "url": "https://web.archive.org/web/20120915163840/http://www.fifa.com:80/worldcup/archive/edition=1013/preliminaries/preliminary=893/matches/match=8247/report.html"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:czech-republic:radek-bejbl:1993",
+   "player": "Radek Bejbl",
+   "wrong_source": "archive",
+   "wrong_value": "69",
+   "right_value": "75",
+   "reason": "The fifa1998 report has Radek Bejbl's goal at 69'; Wikidata has 75' and martj42 75' (within a minute). A 6-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "fifa1998 match report (Wayback 20120915163840)",
+     "url": "https://web.archive.org/web/20120915163840/http://www.fifa.com:80/worldcup/archive/edition=1013/preliminaries/preliminary=893/matches/match=8247/report.html",
+     "timestamp": "20120915163840",
+     "cache": "data/raw/wayback/d3/d37aa2573af0cb83dcbecec5ab880cfe6efbb55e.bin",
+     "quote": "Radek BEJBL (CZE) 69'"
+    },
+    {
+     "source": "Wikidata, Czech Republic v Serbia 1997-04-02 (Q115905836), P1363 goal by Radek Bejbl: second half +30",
+     "url": "https://www.wikidata.org/wiki/Q115905836",
+     "item": "Q115905836",
+     "statement": "Q115905836-C8B044AF-1EE4-49AF-959B-3EAB34458294",
+     "cache": "data/raw/wikidata/sparql/98/9877dca9a9d3c5eb6ec6a279bba247ca842e5ed2.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "30"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      16887
+     ],
+     "minutes": [
+      75
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0026",
+   "added": "2026-10-22",
+   "match": {
+    "date": "2001-03-28",
+    "home": "Albania",
+    "away": "England",
+    "match_id": "2001-03-28_albania_england"
+   },
+   "source": {
+    "family": "wikidata",
+    "item": "Q115905450",
+    "statement": "Q115905450-2F9A327C-B7DE-4CFF-BA90-94774370B615",
+    "url": "https://www.wikidata.org/wiki/Q115905450"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:owen-intlg",
+   "player": "Michael James Owen",
+   "wrong_source": "wikidata",
+   "wrong_value": "65",
+   "right_value": "73",
+   "reason": "Wikidata has Michael James Owen's goal at 65'; the fifa2002 report has 73' and martj42 74' (within a minute). A 8-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "fifa2002 match report (Wayback 20071126044516)",
+     "url": "https://web.archive.org/web/20071126044516/http://www.fifa.com:80/worldcup/archive/edition=4395/preliminaries/preliminary=3835/matches/match=19737/report.html",
+     "timestamp": "20071126044516",
+     "cache": "data/raw/wayback/89/89788954e80292e95b00556d4b24b7290fc2efd7.bin",
+     "quote": "OWEN Michael (ENG) 73'"
+    },
+    {
+     "source": "Wikidata, Albania v England 2001-03-28 (Q115905450), P1363 goal by Michael James Owen: second half +20",
+     "url": "https://www.wikidata.org/wiki/Q115905450",
+     "item": "Q115905450",
+     "statement": "Q115905450-2F9A327C-B7DE-4CFF-BA90-94774370B615",
+     "cache": "data/raw/wikidata/sparql/f5/f53e8c5d60ac38958a572aa3aa8dc1a8a14c85bf.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "20"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      20620
+     ],
+     "minutes": [
+      74
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0027",
+   "added": "2026-10-22",
+   "match": {
+    "date": "1996-08-31",
+    "home": "Faroe Islands",
+    "away": "Slovakia",
+    "match_id": "1996-08-31_faroe-islands_slovakia"
+   },
+   "source": {
+    "family": "wikidata",
+    "item": "Q115905824",
+    "statement": "Q115905824-96B1E523-8669-4616-84B1-73FB46B56ECD",
+    "url": "https://www.wikidata.org/wiki/Q115905824"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:faroe-islands:jan-allan-muller:1991",
+   "player": "Jan Allan Müller",
+   "wrong_source": "wikidata",
+   "wrong_value": "66",
+   "right_value": "60",
+   "reason": "Wikidata has Jan Allan Müller's goal at 66'; the fifa1998 report has 60' and martj42 60' (within a minute). A 6-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "fifa1998 match report (Wayback 20120816071406)",
+     "url": "https://web.archive.org/web/20120816071406/http://www.fifa.com:80/worldcup/archive/edition=1013/preliminaries/preliminary=893/matches/match=8234/report.html",
+     "timestamp": "20120816071406",
+     "cache": "data/raw/wayback/d1/d13820d1d014c6992a6001b5e532643e8d51de42.bin",
+     "quote": "Jan Allan MULLER (FRO) 60'"
+    },
+    {
+     "source": "Wikidata, Faroe Islands v Slovakia 1996-08-31 (Q115905824), P1363 goal by Jan Allan Müller: second half +21",
+     "url": "https://www.wikidata.org/wiki/Q115905824",
+     "item": "Q115905824",
+     "statement": "Q115905824-96B1E523-8669-4616-84B1-73FB46B56ECD",
+     "cache": "data/raw/wikidata/sparql/29/296eba6181f6c5ed4ebf50f40377c78d8ea809f9.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "21"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      16185
+     ],
+     "minutes": [
+      60
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0028",
+   "added": "2026-10-22",
+   "match": {
+    "date": "2001-10-06",
+    "home": "Romania",
+    "away": "Georgia",
+    "match_id": "2001-10-06_romania_georgia"
+   },
+   "source": {
+    "family": "wikidata",
+    "item": "Q115905542",
+    "statement": "Q115905542-AFF0E8A8-9BB1-422B-B3DB-21CB4594C96D",
+    "url": "https://www.wikidata.org/wiki/Q115905542"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:georgia:alexander-iashvili:1997",
+   "player": "Alexander Iashvili",
+   "wrong_source": "wikidata",
+   "wrong_value": "88",
+   "right_value": "55",
+   "reason": "Wikidata has Alexander Iashvili's goal at 88'; the fifa2002 report has 55' and martj42 55' (within a minute). A 33-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "fifa2002 match report (Wayback 20071126044932)",
+     "url": "https://web.archive.org/web/20071126044932/http://www.fifa.com:80/worldcup/archive/edition=4395/preliminaries/preliminary=3835/matches/match=19860/report.html",
+     "timestamp": "20071126044932",
+     "cache": "data/raw/wayback/a4/a43a66dc85de9f11c860e2efac05515f3485e26a.bin",
+     "quote": "IASHVILI Alexander (GEO) 55'"
+    },
+    {
+     "source": "Wikidata, Romania v Georgia 2001-10-06 (Q115905542), P1363 goal by Alexander Iashvili: second half +43",
+     "url": "https://www.wikidata.org/wiki/Q115905542",
+     "item": "Q115905542",
+     "statement": "Q115905542-AFF0E8A8-9BB1-422B-B3DB-21CB4594C96D",
+     "cache": "data/raw/wikidata/sparql/62/62968563c5c25daf2f65de5e6e0b3896dddd463a.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "43"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      21952
+     ],
+     "minutes": [
+      55
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0029",
+   "added": "2026-10-22",
+   "match": {
+    "date": "1996-11-10",
+    "home": "Azerbaijan",
+    "away": "Hungary",
+    "match_id": "1996-11-10_azerbaijan_hungary"
+   },
+   "source": {
+    "family": "wikidata",
+    "item": "Q115905920",
+    "statement": "Q115905920-A53EFF6D-1A88-42D4-B503-EAB5B1200A39",
+    "url": "https://www.wikidata.org/wiki/Q115905920"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:hungary:florian-urban:1991",
+   "player": "Flórián Urbán",
+   "wrong_source": "wikidata",
+   "wrong_value": "83",
+   "right_value": "77",
+   "reason": "Wikidata has Flórián Urbán's goal at 83'; the fifa1998 report has 77' and martj42 77' (within a minute). A 6-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "fifa1998 match report (Wayback 20120822113247)",
+     "url": "https://web.archive.org/web/20120822113247/http://www.fifa.com:80/worldcup/archive/edition=1013/preliminaries/preliminary=893/matches/match=8191/report.html",
+     "timestamp": "20120822113247",
+     "cache": "data/raw/wayback/a2/a286ab935542500cb359f420d749134cde10f5f4.bin",
+     "quote": "Florian URBAN (HUN) 77'"
+    },
+    {
+     "source": "Wikidata, Azerbaijan v Hungary 1996-11-10 (Q115905920), P1363 goal by Flórián Urbán: second half +38",
+     "url": "https://www.wikidata.org/wiki/Q115905920",
+     "item": "Q115905920",
+     "statement": "Q115905920-A53EFF6D-1A88-42D4-B503-EAB5B1200A39",
+     "cache": "data/raw/wikidata/sparql/0f/0f68bc2d8e9c1384331f23c686ced3dd81380c1e.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "38"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      16481
+     ],
+     "minutes": [
+      77
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0030",
+   "added": "2026-10-22",
+   "match": {
+    "date": "2005-10-12",
+    "home": "Sweden",
+    "away": "Iceland",
+    "match_id": "2005-10-12_sweden_iceland"
+   },
+   "source": {
+    "family": "wikidata",
+    "item": "Q115906017",
+    "statement": "Q115906017-76D99767-2951-43F6-8629-5F53087D5A55",
+    "url": "https://www.wikidata.org/wiki/Q115906017"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:ijs-arnason-intl",
+   "player": "Kári Árnason",
+   "wrong_source": "wikidata",
+   "wrong_value": "25",
+   "right_value": "11",
+   "reason": "Wikidata has Kári Árnason's goal at 25'; the fifa2006 report has 11' and martj42 11' (within a minute). A 14-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "fifa2006 match report (Wayback 20071023022106)",
+     "url": "https://web.archive.org/web/20071023022106/http://fifa.com:80/worldcup/archive/germany2006/preliminaries/preliminary=8071/matches/match=36720/report.html",
+     "timestamp": "20071023022106",
+     "cache": "data/raw/wayback/34/34c9501efe0c707c8a87bfb961660ad0aac29afb.bin",
+     "quote": "ARNASON Kari (ISL) 11'"
+    },
+    {
+     "source": "Wikidata, Sweden v Iceland 2005-10-12 (Q115906017), P1363 goal by Kári Árnason: first half +25",
+     "url": "https://www.wikidata.org/wiki/Q115906017",
+     "item": "Q115906017",
+     "statement": "Q115906017-76D99767-2951-43F6-8629-5F53087D5A55",
+     "cache": "data/raw/wikidata/sparql/4b/4b1f02eadf9721c86d46ee9c0237d10e254875ea.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "25"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      25979
+     ],
+     "minutes": [
+      11
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0031",
+   "added": "2026-10-22",
+   "match": {
+    "date": "2003-08-20",
+    "home": "Faroe Islands",
+    "away": "Iceland",
+    "match_id": "2003-08-20_faroe-islands_iceland"
+   },
+   "source": {
+    "family": "wikidata",
+    "item": "Q115935863",
+    "statement": "Q115935863-0B045848-F1D7-4CD2-A1FC-4E05427C9D5F",
+    "url": "https://www.wikidata.org/wiki/Q115935863"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:iceland:petur-marteinsson:1998",
+   "player": "Petur Marteinsson",
+   "wrong_source": "wikidata",
+   "wrong_value": "75",
+   "right_value": "70",
+   "reason": "Wikidata has Petur Marteinsson's goal at 75'; the euro2004q report has 70' and martj42 70' (within a minute). A 5-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "euro2004q match report (Wayback 20141102224732)",
+     "url": "https://web.archive.org/web/20141102224732/http://www.uefa.com/uefaeuro/season=2004/matches/round=1579/match=69017/index.html",
+     "timestamp": "20141102224732",
+     "cache": "data/raw/wayback/88/88eda27a325402f050d1064d590a703344cbae2f.bin",
+     "quote": "Marteinsson 70"
+    },
+    {
+     "source": "Wikidata, Faroe Islands v Iceland 2003-08-20 (Q115935863), P1363 goal by Petur Marteinsson: second half +30",
+     "url": "https://www.wikidata.org/wiki/Q115935863",
+     "item": "Q115935863",
+     "statement": "Q115935863-0B045848-F1D7-4CD2-A1FC-4E05427C9D5F",
+     "cache": "data/raw/wikidata/sparql/fe/fee8d794a4ab00189cd1258e10435ebba204298d.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "30"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      22876
+     ],
+     "minutes": [
+      70
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0032",
+   "added": "2026-10-22",
+   "match": {
+    "date": "2005-03-26",
+    "home": "Israel",
+    "away": "Republic of Ireland",
+    "match_id": "2005-03-26_israel_republic-of-ireland"
+   },
+   "source": {
+    "family": "wikidata",
+    "item": "Q115906072",
+    "statement": "Q115906072-C86152AB-059C-405B-9D02-4B280AAB19AA",
+    "url": "https://www.wikidata.org/wiki/Q115906072"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:republic-of-ireland:clinton-morrison:2001",
+   "player": "Clinton Morrison",
+   "wrong_source": "wikidata",
+   "wrong_value": "4",
+   "right_value": "43",
+   "reason": "Wikidata has Clinton Morrison's goal at 4'; the fifa2006 report has 43' and martj42 43' (within a minute). A 39-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "fifa2006 match report (Wayback 20071023031058)",
+     "url": "https://web.archive.org/web/20071023031058/http://fifa.com:80/worldcup/archive/germany2006/preliminaries/preliminary=8071/matches/match=36779/report.html",
+     "timestamp": "20071023031058",
+     "cache": "data/raw/wayback/53/53497b8dff3237b616f44d216f07c5d9e71644a5.bin",
+     "quote": "MORRISON Clinton (IRL) 43'"
+    },
+    {
+     "source": "Wikidata, Israel v Republic of Ireland 2005-03-26 (Q115906072), P1363 goal by Clinton Morrison: first half +4",
+     "url": "https://www.wikidata.org/wiki/Q115906072",
+     "item": "Q115906072",
+     "statement": "Q115906072-C86152AB-059C-405B-9D02-4B280AAB19AA",
+     "cache": "data/raw/wikidata/sparql/dd/dd52cd499b5df9c0f70e04e73cbbf101f1f8350a.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "4"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      25030
+     ],
+     "minutes": [
+      43
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0033",
+   "added": "2026-10-22",
+   "match": {
+    "date": "1999-06-09",
+    "home": "Republic of Ireland",
+    "away": "North Macedonia",
+    "match_id": "1999-06-09_republic-of-ireland_north-macedonia"
+   },
+   "source": {
+    "family": "euro2000",
+    "source_id": "55007",
+    "url": "https://web.archive.org/web/20190719162313/https://www.uefa.com/uefaeuro/season=2000/matches/round=1165/match=55007/postmatch/lineups/index.html"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:quinn-intlg",
+   "player": "Niall John Quinn",
+   "wrong_source": "archive",
+   "wrong_value": "65",
+   "right_value": "60",
+   "reason": "The euro2000 report has Niall John Quinn's goal at 65'; Wikidata has 60' and martj42 60' (within a minute). A 5-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "euro2000 match report (Wayback 20190719162313)",
+     "url": "https://web.archive.org/web/20190719162313/https://www.uefa.com/uefaeuro/season=2000/matches/round=1165/match=55007/postmatch/lineups/index.html",
+     "timestamp": "20190719162313",
+     "cache": "data/raw/wayback/f7/f79948fa85a8a7b126073e113a447cd8169c28cd.bin",
+     "quote": "Quinn 65"
+    },
+    {
+     "source": "Wikidata, Republic of Ireland v North Macedonia 1999-06-09 (Q115935645), P1363 goal by Niall John Quinn: second half +15",
+     "url": "https://www.wikidata.org/wiki/Q115935645",
+     "item": "Q115935645",
+     "statement": "Q115935645-CDC60A07-38EF-4983-A9F4-34E939A5B41C",
+     "cache": "data/raw/wikidata/sparql/8b/8bffc050709a55cfcc182c084b6403022b764d3d.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "15"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      18843
+     ],
+     "minutes": [
+      60
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0034",
+   "added": "2026-10-22",
+   "match": {
+    "date": "2008-10-11",
+    "home": "Luxembourg",
+    "away": "Israel",
+    "match_id": "2008-10-11_luxembourg_israel"
+   },
+   "source": {
+    "family": "wikidata",
+    "item": "Q115906778",
+    "statement": "Q115906778-E34096DA-899C-40C5-95ED-5A558D32F039",
+    "url": "https://www.wikidata.org/wiki/Q115906778"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:israel:omer-golan:2004",
+   "player": "Omer Golan",
+   "wrong_source": "wikidata",
+   "wrong_value": "63",
+   "right_value": "54",
+   "reason": "Wikidata has Omer Golan's goal at 63'; the fifa2010 report has 54' and martj42 54' (within a minute). A 9-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "fifa2010 match report (Wayback 20120124190703)",
+     "url": "https://web.archive.org/web/20120124190703/http://www.fifa.com/worldcup/archive/southafrica2010/preliminaries/europe/matches/round=250471/match=300042881/report.html",
+     "timestamp": "20120124190703",
+     "cache": "data/raw/wayback/6b/6bcbfa688cde2db6469a12204664faeff8810960.bin",
+     "quote": "Omer GOLAN (ISR) 54'"
+    },
+    {
+     "source": "Wikidata, Luxembourg v Israel 2008-10-11 (Q115906778), P1363 goal by Omer Golan: second half +18",
+     "url": "https://www.wikidata.org/wiki/Q115906778",
+     "item": "Q115906778",
+     "statement": "Q115906778-E34096DA-899C-40C5-95ED-5A558D32F039",
+     "cache": "data/raw/wikidata/sparql/f5/f5f79ca685121608fed6868839ea0e8856e7e46b.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "18"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      28619
+     ],
+     "minutes": [
+      54
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0035",
+   "added": "2026-10-22",
+   "match": {
+    "date": "2004-10-13",
+    "home": "Latvia",
+    "away": "Estonia",
+    "match_id": "2004-10-13_latvia_estonia"
+   },
+   "source": {
+    "family": "wikidata",
+    "item": "Q115905697",
+    "statement": "Q115905697-3C7757F0-E017-4DA9-B406-5D03F112B734",
+    "url": "https://www.wikidata.org/wiki/Q115905697"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:astafjevs-intl",
+   "player": "Vitalijs Astafjevs",
+   "wrong_source": "wikidata",
+   "wrong_value": "54",
+   "right_value": "65",
+   "reason": "Wikidata has Vitalijs Astafjevs's goal at 54'; the fifa2006 report has 65' and martj42 65' (within a minute). A 11-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "fifa2006 match report (Wayback 20071023025154)",
+     "url": "https://web.archive.org/web/20071023025154/http://fifa.com:80/worldcup/archive/germany2006/preliminaries/preliminary=8071/matches/match=36545/report.html",
+     "timestamp": "20071023025154",
+     "cache": "data/raw/wayback/a5/a52319d4b5d83aa1d88144075e5f6f6a43a0eb39.bin",
+     "quote": "ASTAFJEVS Vitalijs (LVA) 65'"
+    },
+    {
+     "source": "Wikidata, Latvia v Estonia 2004-10-13 (Q115905697), P1363 goal by Vitalijs Astafjevs: second half +9",
+     "url": "https://www.wikidata.org/wiki/Q115905697",
+     "item": "Q115905697",
+     "statement": "Q115905697-3C7757F0-E017-4DA9-B406-5D03F112B734",
+     "cache": "data/raw/wikidata/sparql/05/0510e5fa940b4cf03dc5ede10ceeda458bba05d5.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "9"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      24719
+     ],
+     "minutes": [
+      65
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0036",
+   "added": "2026-10-22",
+   "match": {
+    "date": "2001-10-06",
+    "home": "Romania",
+    "away": "Georgia",
+    "match_id": "2001-10-06_romania_georgia"
+   },
+   "source": {
+    "family": "wikidata",
+    "item": "Q115905542",
+    "statement": "Q115905542-7E845988-D1C3-4BE4-9C55-17371FC57255",
+    "url": "https://www.wikidata.org/wiki/Q115905542"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:popescu-intl",
+   "player": "Gheorghe Popescu",
+   "wrong_source": "wikidata",
+   "wrong_value": "55",
+   "right_value": "88",
+   "reason": "Wikidata has Gheorghe Popescu's goal at 55'; the fifa2002 report has 88' and martj42 88' (within a minute). A 33-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "fifa2002 match report (Wayback 20071126044932)",
+     "url": "https://web.archive.org/web/20071126044932/http://www.fifa.com:80/worldcup/archive/edition=4395/preliminaries/preliminary=3835/matches/match=19860/report.html",
+     "timestamp": "20071126044932",
+     "cache": "data/raw/wayback/a4/a43a66dc85de9f11c860e2efac05515f3485e26a.bin",
+     "quote": "POPESCU Gheorghe (ROU) 88'"
+    },
+    {
+     "source": "Wikidata, Romania v Georgia 2001-10-06 (Q115905542), P1363 goal by Gheorghe Popescu: second half +10",
+     "url": "https://www.wikidata.org/wiki/Q115905542",
+     "item": "Q115905542",
+     "statement": "Q115905542-7E845988-D1C3-4BE4-9C55-17371FC57255",
+     "cache": "data/raw/wikidata/sparql/62/62968563c5c25daf2f65de5e6e0b3896dddd463a.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "10"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      21953
+     ],
+     "minutes": [
+      88
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0037",
+   "added": "2026-10-22",
+   "match": {
+    "date": "1996-11-13",
+    "home": "Spain",
+    "away": "Slovakia",
+    "match_id": "1996-11-13_spain_slovakia"
+   },
+   "source": {
+    "family": "wikidata",
+    "item": "Q115905819",
+    "statement": "Q115905819-4638F121-C6D5-4D9D-A1A0-2E83975C37C6",
+    "url": "https://www.wikidata.org/wiki/Q115905819"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:pizzi-intlg",
+   "player": "Juan Antonio Pizzi Torroja",
+   "wrong_source": "wikidata",
+   "wrong_value": "39",
+   "right_value": "30",
+   "reason": "Wikidata has Juan Antonio Pizzi Torroja's goal at 39'; the fifa1998 report has 30' and martj42 31' (within a minute). A 9-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "fifa1998 match report (Wayback 20120501190403)",
+     "url": "https://web.archive.org/web/20120501190403/http://www.fifa.com:80/worldcup/archive/edition=1013/preliminaries/preliminary=893/matches/match=8242/report.html",
+     "timestamp": "20120501190403",
+     "cache": "data/raw/wayback/e6/e63dd3bef2b82f8c1c56a1e8556c587992b254d1.bin",
+     "quote": "PIZZI (ESP) 30'"
+    },
+    {
+     "source": "Wikidata, Spain v Slovakia 1996-11-13 (Q115905819), P1363 goal by Juan Antonio Pizzi Torroja: first half +39",
+     "url": "https://www.wikidata.org/wiki/Q115905819",
+     "item": "Q115905819",
+     "statement": "Q115905819-4638F121-C6D5-4D9D-A1A0-2E83975C37C6",
+     "cache": "data/raw/wikidata/sparql/29/296eba6181f6c5ed4ebf50f40377c78d8ea809f9.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "39"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      16551
+     ],
+     "minutes": [
+      31
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0038",
+   "added": "2026-10-22",
+   "match": {
+    "date": "1998-09-05",
+    "home": "Cyprus",
+    "away": "Spain",
+    "match_id": "1998-09-05_cyprus_spain"
+   },
+   "source": {
+    "family": "euro2000",
+    "source_id": "54969",
+    "url": "https://web.archive.org/web/20111123193545/http://www.uefa.com:80/uefaeuro/season=2000/matches/round=1165/match=54969/index.html"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:morientes-intl",
+   "player": "Fernando Morientes Sánchez",
+   "wrong_source": "archive",
+   "wrong_value": "80",
+   "right_value": "90",
+   "reason": "The euro2000 report has Fernando Morientes Sánchez's goal at 80'; Wikidata has 90' and martj42 90' (within a minute). A 10-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "euro2000 match report (Wayback 20111123193545)",
+     "url": "https://web.archive.org/web/20111123193545/http://www.uefa.com:80/uefaeuro/season=2000/matches/round=1165/match=54969/index.html",
+     "timestamp": "20111123193545",
+     "cache": "data/raw/wayback/09/09c1cee93e8664530f6833685219b1567e65d1a1.bin",
+     "quote": "Morientes 80"
+    },
+    {
+     "source": "Wikidata, Cyprus v Spain 1998-09-05 (Q115935529), P1363 goal by Fernando Morientes Sánchez: second half +45",
+     "url": "https://www.wikidata.org/wiki/Q115935529",
+     "item": "Q115935529",
+     "statement": "Q115935529-AD5DDA75-B312-4B51-A060-D9E09B6DF253",
+     "cache": "data/raw/wikidata/sparql/55/554ab2555bfdc232f30c6e48794332798b46a17f.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "45"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      18396
+     ],
+     "minutes": [
+      90
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0039",
+   "added": "2026-10-22",
+   "match": {
+    "date": "2005-10-08",
+    "home": "Belgium",
+    "away": "Spain",
+    "match_id": "2005-10-08_belgium_spain"
+   },
+   "source": {
+    "family": "wikidata",
+    "item": "Q115905959",
+    "statement": "Q115905959-76E0C9D0-707F-439F-AC8C-43A39D0F34C2",
+    "url": "https://www.wikidata.org/wiki/Q115905959"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:ftorres-intlg",
+   "player": "Fernando José Sanz Torres Fernando Torres",
+   "wrong_source": "wikidata",
+   "wrong_value": "59",
+   "right_value": "66",
+   "reason": "Wikidata has Fernando José Sanz Torres Fernando Torres's goal at 59'; the fifa2006 report has 66' and martj42 56/66' (within a minute). A 7-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "fifa2006 match report (Wayback 20071023021918)",
+     "url": "https://web.archive.org/web/20071023021918/http://fifa.com:80/worldcup/archive/germany2006/preliminaries/preliminary=8071/matches/match=36671/report.html",
+     "timestamp": "20071023021918",
+     "cache": "data/raw/wayback/56/56f98d8a9e13e3f2f09583dfa19b8e7ed156db3f.bin",
+     "quote": "TORRES Fernando (ESP) 66'"
+    },
+    {
+     "source": "Wikidata, Belgium v Spain 2005-10-08 (Q115905959), P1363 goal by Fernando José Sanz Torres Fernando Torres: second half +12, second half +14",
+     "url": "https://www.wikidata.org/wiki/Q115905959",
+     "item": "Q115905959",
+     "statement": "Q115905959-76E0C9D0-707F-439F-AC8C-43A39D0F34C2",
+     "cache": "data/raw/wikidata/sparql/d6/d6f16a6fc12d5f6afe673a129acf6416dd8adc31.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "14"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      25816,
+      25817
+     ],
+     "minutes": [
+      56,
+      66
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0040",
+   "added": "2026-10-22",
+   "match": {
+    "date": "2005-06-08",
+    "home": "Spain",
+    "away": "Bosnia and Herzegovina",
+    "match_id": "2005-06-08_spain_bosnia-and-herzegovina"
+   },
+   "source": {
+    "family": "fifa2006",
+    "source_id": "36663",
+    "url": "https://web.archive.org/web/20071023030225/http://fifa.com:80/worldcup/archive/germany2006/preliminaries/preliminary=8071/matches/match=36663/report.html"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:spain:carlos-marchena:2002",
+   "player": "Carlos Marchena",
+   "wrong_source": "archive",
+   "wrong_value": "96",
+   "right_value": "90",
+   "reason": "The fifa2006 report has Carlos Marchena's goal at 96'; Wikidata has 90' and martj42 90' (within a minute). A 6-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "fifa2006 match report (Wayback 20071023030225)",
+     "url": "https://web.archive.org/web/20071023030225/http://fifa.com:80/worldcup/archive/germany2006/preliminaries/preliminary=8071/matches/match=36663/report.html",
+     "timestamp": "20071023030225",
+     "cache": "data/raw/wayback/3e/3e89b3df9d8dac8b3b5c7a39062ebd9a019b078e.bin",
+     "quote": "MARCHENA Carlos (ESP) 96'"
+    },
+    {
+     "source": "Wikidata, Spain v Bosnia and Herzegovina 2005-06-08 (Q115905970), P1363 goal by Carlos Marchena: second half +45",
+     "url": "https://www.wikidata.org/wiki/Q115905970",
+     "item": "Q115905970",
+     "statement": "Q115905970-15BCAD7E-9711-4AA4-854D-645B358FAD85",
+     "cache": "data/raw/wikidata/sparql/d6/d6f16a6fc12d5f6afe673a129acf6416dd8adc31.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "45"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      25392
+     ],
+     "minutes": [
+      90
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0041",
+   "added": "2026-10-22",
+   "match": {
+    "date": "2009-10-14",
+    "home": "Bosnia and Herzegovina",
+    "away": "Spain",
+    "match_id": "2009-10-14_bosnia-and-herzegovina_spain"
+   },
+   "source": {
+    "family": "wikidata",
+    "item": "Q115906338",
+    "statement": "Q115906338-D2689A0E-67FE-4288-BB9F-AF57EA1F2AF3",
+    "url": "https://www.wikidata.org/wiki/Q115906338"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:spain:juan-mata:2009",
+   "player": "Juan Mata",
+   "wrong_source": "wikidata",
+   "wrong_value": "89",
+   "right_value": "81",
+   "reason": "Wikidata has Juan Mata's goal at 89'; the fifa2010 report has 81' and martj42 81' (within a minute). A 8-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "fifa2010 match report (Wayback 20110116092925)",
+     "url": "https://web.archive.org/web/20110116092925/http://www.fifa.com:80/worldcup/archive/southafrica2010/preliminaries/europe/matches/round=250471/match=300042920/report.html",
+     "timestamp": "20110116092925",
+     "cache": "data/raw/wayback/c5/c566a4a43a8105c6821a1147d5e0187c2598b276.bin",
+     "quote": "Juan Manuel MATA (ESP) 81'"
+    },
+    {
+     "source": "Wikidata, Bosnia and Herzegovina v Spain 2009-10-14 (Q115906338), P1363 goal by Juan Mata: second half +44",
+     "url": "https://www.wikidata.org/wiki/Q115906338",
+     "item": "Q115906338",
+     "statement": "Q115906338-D2689A0E-67FE-4288-BB9F-AF57EA1F2AF3",
+     "cache": "data/raw/wikidata/sparql/53/5383ce4b0c00cbea8b70acf352e3898e37130879.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "44"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      29689
+     ],
+     "minutes": [
+      81
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0042",
+   "added": "2026-10-22",
+   "match": {
+    "date": "1999-10-09",
+    "home": "Sweden",
+    "away": "Poland",
+    "match_id": "1999-10-09_sweden_poland"
+   },
+   "source": {
+    "family": "euro2000",
+    "source_id": "55347",
+    "url": "https://web.archive.org/web/20120203034109/http://www.uefa.com/uefaeuro/season=2000/matches/round=1165/match=55347/index.html"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:kandersson-intlg",
+   "player": "Kennet Andersson",
+   "wrong_source": "archive",
+   "wrong_value": "54",
+   "right_value": "64",
+   "reason": "The euro2000 report has Kennet Andersson's goal at 54'; Wikidata has 64' and martj42 64' (within a minute). A 10-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "euro2000 match report (Wayback 20120203034109)",
+     "url": "https://web.archive.org/web/20120203034109/http://www.uefa.com/uefaeuro/season=2000/matches/round=1165/match=55347/index.html",
+     "timestamp": "20120203034109",
+     "cache": "data/raw/wayback/aa/aafee24c07484d3a614b4b2a4a67b64ef1a44aa3.bin",
+     "quote": "Andersson 54"
+    },
+    {
+     "source": "Wikidata, Sweden v Poland 1999-10-09 (Q115935720), P1363 goal by Kennet Andersson: second half +19",
+     "url": "https://www.wikidata.org/wiki/Q115935720",
+     "item": "Q115935720",
+     "statement": "Q115935720-FF1FE4CD-D557-4DC1-BEC0-FA97BEE0E113",
+     "cache": "data/raw/wikidata/sparql/99/99c663c1c23cff5fa51755a9575253ab7dea4586.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "19"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      19179
+     ],
+     "minutes": [
+      64
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0043",
+   "added": "2026-10-22",
+   "match": {
+    "date": "2005-06-04",
+    "home": "Faroe Islands",
+    "away": "Switzerland",
+    "match_id": "2005-06-04_faroe-islands_switzerland"
+   },
+   "source": {
+    "family": "wikidata",
+    "item": "Q115906069",
+    "statement": "Q115906069-5CB2C35B-81FA-4643-B11E-D17AFDC45E33",
+    "url": "https://www.wikidata.org/wiki/Q115906069"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:frei-intlg",
+   "player": "Alexander Frei",
+   "wrong_source": "wikidata",
+   "wrong_value": "78",
+   "right_value": "72",
+   "reason": "Wikidata has Alexander Frei's goal at 78'; the fifa2006 report has 72' and martj42 72/84' (within a minute). A 6-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "fifa2006 match report (Wayback 20071023022153)",
+     "url": "https://web.archive.org/web/20071023022153/http://fifa.com:80/worldcup/archive/germany2006/preliminaries/preliminary=8071/matches/match=36782/report.html",
+     "timestamp": "20071023022153",
+     "cache": "data/raw/wayback/6a/6ab25c6cb81f23b5e321735fb6221df85d0701d5.bin",
+     "quote": "FREI Alexander (SUI) 72'"
+    },
+    {
+     "source": "Wikidata, Faroe Islands v Switzerland 2005-06-04 (Q115906069), P1363 goal by Alexander Frei: second half +33, second half +39",
+     "url": "https://www.wikidata.org/wiki/Q115906069",
+     "item": "Q115906069",
+     "statement": "Q115906069-5CB2C35B-81FA-4643-B11E-D17AFDC45E33",
+     "cache": "data/raw/wikidata/sparql/dd/dd52cd499b5df9c0f70e04e73cbbf101f1f8350a.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "33"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      25236,
+      25237
+     ],
+     "minutes": [
+      72,
+      84
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0044",
+   "added": "2026-10-22",
+   "match": {
+    "date": "2005-06-08",
+    "home": "Kazakhstan",
+    "away": "Turkey",
+    "match_id": "2005-06-08_kazakhstan_turkey"
+   },
+   "source": {
+    "family": "wikidata",
+    "item": "Q65251588",
+    "statement": "Q65251588-894F8610-82C6-44BF-BBF8-BCD15DA166B2",
+    "url": "https://www.wikidata.org/wiki/Q65251588"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:turkey:fatih-tekke:2000",
+   "player": "Fatih Tekke",
+   "wrong_source": "wikidata",
+   "wrong_value": "80",
+   "right_value": "85",
+   "reason": "Wikidata has Fatih Tekke's goal at 80'; the fifa2006 report has 85' and martj42 13/85' (within a minute). A 5-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "fifa2006 match report (Wayback 20071023031311)",
+     "url": "https://web.archive.org/web/20071023031311/http://fifa.com:80/worldcup/archive/germany2006/preliminaries/preliminary=8071/matches/match=36927/report.html",
+     "timestamp": "20071023031311",
+     "cache": "data/raw/wayback/b4/b4f5ac929eeca7bbc600e5d908cf3731104e5651.bin",
+     "quote": "TEKKE Fatih (TUR) 85'"
+    },
+    {
+     "source": "Wikidata, Kazakhstan v Turkey 2005-06-08 (Q65251588), P1363 goal by Fatih Tekke: first half +13, second half +35",
+     "url": "https://www.wikidata.org/wiki/Q65251588",
+     "item": "Q65251588",
+     "statement": "Q65251588-894F8610-82C6-44BF-BBF8-BCD15DA166B2",
+     "cache": "data/raw/wikidata/sparql/9a/9a1ac362c2ee3b654d9f7e9d5b14e72bf5baaa35.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "35"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      25358,
+      25361
+     ],
+     "minutes": [
+      13,
+      85
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0045",
+   "added": "2026-10-22",
+   "match": {
+    "date": "2005-10-08",
+    "home": "Northern Ireland",
+    "away": "Wales",
+    "match_id": "2005-10-08_northern-ireland_wales"
+   },
+   "source": {
+    "family": "wikidata",
+    "item": "Q115906101",
+    "statement": "Q115906101-A7EEEDD5-9090-4C53-A0FE-2F43E0120A30",
+    "url": "https://www.wikidata.org/wiki/Q115906101"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:wales:ryan-giggs:1991",
+   "player": "Ryan Giggs",
+   "wrong_source": "wikidata",
+   "wrong_value": "61",
+   "right_value": "81",
+   "reason": "Wikidata has Ryan Giggs's goal at 61'; the fifa2006 report has 81' and martj42 81' (within a minute). A 20-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "fifa2006 match report (Wayback 20071023025613)",
+     "url": "https://web.archive.org/web/20071023025613/http://fifa.com:80/worldcup/archive/germany2006/preliminaries/preliminary=8071/matches/match=36640/report.html",
+     "timestamp": "20071023025613",
+     "cache": "data/raw/wayback/96/96868ffedc8a3b8f1a640a5738d9da336ee8af48.bin",
+     "quote": "GIGGS Ryan (WAL) 81'"
+    },
+    {
+     "source": "Wikidata, Northern Ireland v Wales 2005-10-08 (Q115906101), P1363 goal by Ryan Giggs: second half +16",
+     "url": "https://www.wikidata.org/wiki/Q115906101",
+     "item": "Q115906101",
+     "statement": "Q115906101-A7EEEDD5-9090-4C53-A0FE-2F43E0120A30",
+     "cache": "data/raw/wikidata/sparql/9d/9dff92627c51684e376a851dbb536dddb37c3ca3.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "16"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      25875
+     ],
+     "minutes": [
+      81
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0046",
+   "added": "2026-10-22",
+   "match": {
+    "date": "1998-10-14",
+    "home": "Wales",
+    "away": "Belarus",
+    "match_id": "1998-10-14_wales_belarus"
+   },
+   "source": {
+    "family": "euro2000",
+    "source_id": "55042",
+    "url": "https://web.archive.org/web/20171027185641/http://www.uefa.com:80/uefaeuro/season=2000/matches/round=1165/match=55042/index.html"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:wales:kit-symons:1992",
+   "player": "Kit Symons",
+   "wrong_source": "archive",
+   "wrong_value": "80",
+   "right_value": "85",
+   "reason": "The euro2000 report has Kit Symons's goal at 80'; Wikidata has 85' and martj42 84' (within a minute). A 5-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "euro2000 match report (Wayback 20171027185641)",
+     "url": "https://web.archive.org/web/20171027185641/http://www.uefa.com:80/uefaeuro/season=2000/matches/round=1165/match=55042/index.html",
+     "timestamp": "20171027185641",
+     "cache": "data/raw/wayback/38/38200602c1057b1159efdc58fccee19ec43ecf2d.bin",
+     "quote": "Symons 80"
+    },
+    {
+     "source": "Wikidata, Wales v Belarus 1998-10-14 (Q115935568), P1363 goal by Kit Symons: second half +40",
+     "url": "https://www.wikidata.org/wiki/Q115935568",
+     "item": "Q115935568",
+     "statement": "Q115935568-5746E512-F9A5-4139-B8D2-E1E26DD8FF3E",
+     "cache": "data/raw/wikidata/sparql/55/554ab2555bfdc232f30c6e48794332798b46a17f.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "40"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      18618
+     ],
+     "minutes": [
+      84
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0047",
+   "added": "2026-10-22",
+   "match": {
+    "date": "1997-04-02",
+    "home": "Scotland",
+    "away": "Austria",
+    "match_id": "1997-04-02_scotland_austria"
+   },
+   "source": {
+    "family": "fifa1998",
+    "source_id": "8209",
+    "url": "https://web.archive.org/web/20121029100449/http://www.fifa.com:80/worldcup/archive/edition=1013/preliminaries/preliminary=893/matches/match=8209/report.html"
+   },
+   "kind": "goal_minute",
+   "player_key": "ip:scotland:kevin-gallacher:1991",
+   "player": "Kevin Gallacher",
+   "wrong_source": "archive",
+   "wrong_value": "72",
+   "right_value": "78",
+   "reason": "The fifa1998 report has Kevin Gallacher's goal at 72'; Wikidata has 78' and martj42 25/78' (within a minute). A 6-minute gap is a data-entry error, not clock convention; two sources against one.",
+   "receipts": [
+    {
+     "source": "fifa1998 match report (Wayback 20121029100449)",
+     "url": "https://web.archive.org/web/20121029100449/http://www.fifa.com:80/worldcup/archive/edition=1013/preliminaries/preliminary=893/matches/match=8209/report.html",
+     "timestamp": "20121029100449",
+     "quote": null,
+     "note": "no cached copy of this capture on disk; the minute is the parsed record's"
+    },
+    {
+     "source": "Wikidata, Scotland v Austria 1997-04-02 (Q115905898), P1363 goal by Kevin Gallacher: second half +33, first half +24",
+     "url": "https://www.wikidata.org/wiki/Q115905898",
+     "item": "Q115905898",
+     "statement": "Q115905898-DA3EAACE-B35F-460F-A2BD-2051C70B9C1E",
+     "cache": "data/raw/wikidata/sparql/0f/0f68bc2d8e9c1384331f23c686ced3dd81380c1e.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "33"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0), third source",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      16900,
+      16901
+     ],
+     "minutes": [
+      25,
+      78
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl-0048",
+   "added": "2026-10-22",
+   "match": {
+    "date": "2007-06-02",
+    "home": "Latvia",
+    "away": "Spain",
+    "match_id": "2007-06-02_latvia_spain"
+   },
+   "source": {
+    "family": "rsssf",
+    "source_id": "dvilla-intlg",
+    "url": "https://www.rsssf.org/miscellaneous/dvilla-intlg.html"
+   },
+   "kind": "cap_goals",
+   "player_key": "ip:dvilla-intlg",
+   "player": "David Villa",
+   "wrong_source": "rsssf",
+   "wrong_value": 0,
+   "right_value": 1,
+   "reason": "Latvia 0-2 Spain, Riga, Euro 2008 qualifying Group F (UEFA match 83726). RSSSF's Villa log (cap 22, goals cell blank, running total 10 before and after), Wikipedia's list of Villa's international goals and Wikidata (no goal for Villa, Q83006, in the match item) all give him nothing. UEFA's contemporary pages, captured two to twelve days after the match, credit him with the opener on 45': the scorer line and the goal event on the events page, and the match report's text ('Villa bundled in' Angulo's cross on the stroke of half-time; Xavi's 60' shot deflected in off Iniesta). martj42 and Wikipedia's Group F page agree with UEFA. Decided by the match report, not by count: RSSSF's log and Wikipedia's goal list are both one short, so Villa's ledger total is 60, not the widely cited 59. Why the national-team tallies omit it (an own goal by Zakresevskis, who challenged for the cross, in the federation's books?) is not verified.",
+   "receipts": [
+    {
+     "source": "UEFA.com events page, Latvia v Spain (match 83726), Wayback 20070608094241",
+     "url": "https://web.archive.org/web/20070608094241/http://www.uefa.com:80/competitions/euro/fixturesresults/round=2241/match=83726/report=ev.html",
+     "timestamp": "20070608094241",
+     "cache": "data/raw/wayback/a6/a62f210c3f3b47dd77d4c34f1f6d7b2f66413623.bin",
+     "quote": "45 7 David Villa Spain",
+     "note": "the row's icon is goals.gif, alt 'Goals'; the header scorer line reads 'Villa 45 , Xavi 60'"
+    },
+    {
+     "source": "UEFA.com match report, Latvia v Spain (match 83726), Wayback 20070604140151",
+     "url": "https://web.archive.org/web/20070604140151/http://www.uefa.com:80/competitions/euro/fixturesresults/round=2241/match=83726/report=rp.html",
+     "timestamp": "20070604140151",
+     "cache": "data/raw/wayback/05/05cb4a3726a1ce08aa400b0ef4c792717685bdec.bin",
+     "quote": "a goal in each half from David Villa and Xavi"
+    },
+    {
+     "source": "UEFA.com lineups page, Latvia v Spain (match 83726), Wayback 20070614162427",
+     "url": "https://web.archive.org/web/20070614162427/http://www.uefa.com:80/competitions/euro/fixturesresults/round=2241/match=83726/report=lu.html",
+     "timestamp": "20070614162427",
+     "cache": "data/raw/wayback/ba/bac2f43aa37dc04abd674da1e9902c8a6eafe4af.bin",
+     "quote": "Villa 45 , Xavi 60",
+     "note": "Villa (7) in the Spain XI"
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0)",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      26652
+     ],
+     "minutes": [
+      45
+     ]
+    },
+    {
+     "source": "RSSSF, David Villa's international log (the row being corrected)",
+     "url": "https://www.rsssf.org/miscellaneous/dvilla-intlg.html",
+     "quote": "22      10    2- 6-07   Riga            Latvia          2-0     European Ch. Qual."
+    }
+   ]
+  },
+  {
+   "id": "intl-0049",
+   "added": "2026-10-22",
+   "match": {
+    "date": "2023-03-24",
+    "home": "France",
+    "away": "Netherlands",
+    "match_id": "2023-03-24_france_netherlands"
+   },
+   "source": {
+    "family": "rsssf",
+    "source_id": "griezmann-intlg",
+    "url": "https://www.rsssf.org/miscellaneous/griezmann-intlg.html"
+   },
+   "kind": "cap_goals",
+   "player_key": "ip:griezmann-intlg",
+   "player": "Antoine Griezmann",
+   "wrong_source": "rsssf",
+   "wrong_value": 0,
+   "right_value": 1,
+   "reason": "France 4-0 Netherlands, Saint-Denis, Euro 2024 qualifying. RSSSF's Griezmann log leaves the goals cell of cap 118 blank but its own running total rises 42 -> 43 on that row. Since 2026-10-22 the parser reads the goals column, never the running total, so the row is 0 with a cumulative_mismatch warning. Wikidata (goal at first half +2) and martj42 (2') both have his goal; the page's running total agrees with them. The blank cell is RSSSF's slip.",
+   "receipts": [
+    {
+     "source": "Wikidata, France v Netherlands 2023-03-24 (Q115936852), P1363 goal by Antoine Griezmann (Q455462): first half +2",
+     "url": "https://www.wikidata.org/wiki/Q115936852",
+     "item": "Q115936852",
+     "statement": "Q115936852-A8581B95-E8FE-45BA-BD3A-EC201E581EEC",
+     "cache": "data/raw/wikidata/sparql/c3/c3c3b78b40a48d5e101b1f7fbce1c43614e2428b.json",
+     "binding": {
+      "pq": "P1390",
+      "qv": "2"
+     }
+    },
+    {
+     "source": "martj42 goalscorers.csv (CC0)",
+     "file": "data/raw/martj42/goalscorers-2026-10-21.csv",
+     "lines": [
+      43098
+     ],
+     "minutes": [
+      2
+     ]
+    },
+    {
+     "source": "RSSSF, Antoine Griezmann's international log (blank goals cell, running total 43)",
+     "url": "https://www.rsssf.org/miscellaneous/griezmann-intlg.html",
+     "quote": "118\t43   24- 3-23\tSaint-Denis\tNetherlands\t4-0\tEuropean Ch. Qual."
+    }
+   ]
+  }
+ ]
+}
