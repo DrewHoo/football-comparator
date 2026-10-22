@@ -4,7 +4,7 @@ The running list of data surprises. Add to it whenever a gate or a reader's corr
 
 ## Ground rules
 
-- No `git init` until Drew says so. Raw response caches live under `data/raw/` and must never be committed to a public repo; they go to a private data store.
+- This repo is public (DrewHoo/football-comparator, created 2026-10-22). `data/raw/`, `data/index/` and `data/ledger/` are gitignored and live in the private store DrewHoo/football-comparator-data (pipeline/sync-data.mjs). Stage with an explicit file list, never `git add -A`. Don't commit or push without Drew's go.
 - The sport is "football" in every file name and page word.
 - Every ESPN request goes through `research/espn/espn.mjs` (one per 1.5 s, disk cache, backoff). Every Wayback request goes through `research/wayback/wb.mjs` (one per 2 s, cross-process lock). Every RSSSF request goes through `pipeline/lib/rsssf.mjs`. Every Wikidata request (query.wikidata.org, Special:EntityData) goes through `pipeline/lib/wikidata.mjs` (1 per s, cache, splits a VALUES batch on a 60 s timeout). One process per host at a time. Never call `fetch` directly.
 - Nothing StatsBomb-derived ships in the public repo or in the JSON the page downloads. StatsBomb's Messi La Liga set is a test gate, fetched into the private store.
