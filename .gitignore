@@ -21,3 +21,6 @@ dist/
 *.tmp
 *.log.bak
 .claude/settings.local.json
+
+# wrangler local state
+.wrangler/

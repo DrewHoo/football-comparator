@@ -83,14 +83,40 @@ function stubMatch(ev, summary) {
 }
 
 // ---- season-level passes over the cached part of each league-season
+// One ESPN id listed for both sides of a match is a misidentification on one side: Inter's goalkeeper
+// Júlio César (#12) carries Julio César De León's id (Reggina #27) in 205790 and 224342. Keep the row on
+// the side of the club he plays for in his other matches that competition-season; drop the other, whose
+// real player the summary can't name (full-scope build, 2026-10-22: 4 rows in 4 matches).
+{
+  const clubCount = new Map() // espnId|slug|season -> Map(teamId -> n)
+  for (const p of players) { const k = `${p.espnId}|${p.slug}|${p.season}`; const m = clubCount.get(k) || new Map(); m.set(p.teamId, (m.get(p.teamId) || 0) + 1); clubCount.set(k, m) }
+  const byKey = new Map()
+  for (const p of players) { const k = `${p.id}|${p.espnId}`; const l = byKey.get(k) || []; l.push(p); byKey.set(k, l) }
+  const drop = new Set()
+  for (const l of byKey.values()) {
+    if (l.length < 2) continue
+    const counts = clubCount.get(`${l[0].espnId}|${l[0].slug}|${l[0].season}`)
+    const score = (p) => (counts.get(p.teamId) || 0) - 1 // other matches for that club
+    const keep = [...l].sort((a, b) => score(b) - score(a))[0]
+    for (const p of l) if (p !== keep) {
+      drop.add(p)
+      anomalies.push({ id: p.id, slug: p.slug, season: p.season, date: p.date, rule: 'athlete-id-both-sides', athlete: p.espnId, team: p.teamId, detail: `${p.name} (${p.espnId}) listed for both sides; kept on team ${keep.teamId} (${score(keep)} other matches that season), dropped on team ${p.teamId} (${score(p)}); that side's real player is unnamed` })
+    }
+  }
+  if (drop.size) for (let i = players.length - 1; i >= 0; i--) if (drop.has(players[i])) players.splice(i, 1)
+}
 const bySeason = new Map()
 for (const m of matches) { if (m.summary !== 'ok') continue; const k = `${m.slug}|${m.season}`; const v = bySeason.get(k) || { matches: 0, stats: 0, goals: 0, pens: 0 }; v.matches++; if (m.stats) v.stats++; bySeason.set(k, v) }
 for (const p of players) { const v = bySeason.get(`${p.slug}|${p.season}`); if (p.goals) v.goals += p.goals; if (p.pens) v.pens += p.pens }
 const untypedPens = new Set()
 for (const [k, v] of bySeason) {
   const [slug, season] = k.split('|')
-  // penalty typing: a league-season with 40+ goals and not one `penalty---scored` event has no typing at all
-  if (v.goals >= 40 && v.pens === 0) { untypedPens.add(k); anomalies.push({ id: null, slug, season: Number(season), rule: 'penalty-typing-absent', detail: `${v.goals} goals, 0 typed penalties in ${v.matches} cached matches; pens null for the season` }) }
+  // penalty typing is judged by share, not presence: penalties are 6-10% of goals in a typed season, and
+  // EPL 2002-03 has 11 typed in 963 goals (1.1%), i.e. typing in a handful of matches only (full-scope build,
+  // 2026-10-22). Under 3%: untyped, pens null. 3-5%: partial (La Liga and Bundesliga 2004-05), kept and flagged.
+  const penShare = v.goals ? v.pens / v.goals : 0
+  if (v.goals >= 300 && penShare < 0.03) { untypedPens.add(k); anomalies.push({ id: null, slug, season: Number(season), rule: 'penalty-typing-absent', detail: `${v.goals} goals, ${v.pens} typed penalties (${(100 * penShare).toFixed(1)}%) in ${v.matches} cached matches; pens null for the season` }) }
+  else if (v.goals >= 300 && penShare < 0.05) anomalies.push({ id: null, slug, season: Number(season), rule: 'penalty-typing-partial', detail: `${v.goals} goals, ${v.pens} typed penalties (${(100 * penShare).toFixed(1)}%) in ${v.matches} cached matches; pens kept but likely undercounted` })
   // assists: stats A exist only where stats arrays do
   if (v.stats === 0) anomalies.push({ id: null, slug, season: Number(season), rule: 'assists-null-season', detail: `no stats arrays in ${v.matches} cached matches; assists null` })
   else if (v.stats < v.matches) anomalies.push({ id: null, slug, season: Number(season), rule: 'assists-partial-season', detail: `stats arrays in ${v.stats} of ${v.matches} cached matches; assists null in the rest` })
@@ -105,6 +131,10 @@ for (const k of bySeason.keys()) { const [slug, season] = k.split('|'); if (Numb
 const merge = buildMergeTable(players, splitPairs)
 for (const p of players) p.athleteId = merge.map[p.espnId] ?? p.espnId
 for (const [id, name] of Object.entries(STAR_IDS)) if (merge.map[id]) throw new Error(`star id ${id} (${name}) was merged into ${merge.map[id]}; star ids must stay canonical`)
+{ // a canonical player can have at most one row per match; two means a false merge
+  const seenRow = new Map()
+  for (const p of players) { const k = `${p.id}|${p.athleteId}`; if (seenRow.has(k)) throw new Error(`false merge: ${p.athleteId} has two rows in match ${p.id} (${seenRow.get(k)} and ${p.espnId}, ${p.name})`); seenRow.set(k, p.espnId) }
+}
 for (const c of merge.candidates) if (c.merged) anomalies.push({ id: null, rule: 'athlete-id-merged', athlete: c.ids.find((x) => merge.map[x]) ?? c.ids[1], detail: `${c.name}: ${c.ids.join(' + ')} -> ${merge.map[c.ids[0]] ?? c.ids[0]} (${c.level} ${c.confidence})` })
 
 // ---- ordinals (second pass)

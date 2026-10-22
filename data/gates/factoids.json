@@ -507,7 +507,7 @@
       "publisher": "UEFA.com",
       "url": ["https://www.uefa.com/uefachampionsleague/news/0257-0e910cf2494a-5185150de9d4-1000--champions-league-all-time-top-scorers-cristiano-ronaldo-/", "https://www.uefa.com/uefachampionsleague/news/0257-0e91daaa4ec8-19686ad1d08f-1000--uefa-club-competition-all-time-top-scorers-cristiano-ronaldo/"],
       "claim_date": "2026",
-      "as_of": "2022-06-30",
+      "as_of": "2026-10-20",
       "as_of_note": "Ronaldo's and Messi's UCL careers are closed (last seasons 2021-22 and 2022-23), so their totals are stable. Lewandowski 109 and Mbappé 72 are snapshots of an undated page and are not gated until a dated source is pinned",
       "scope": { "competitions": ["uefa.champions"], "label": "Champions League", "publisher_era_floor": "1992-93", "qualifiers": "excluded in the headline table; UEFA publishes a separate table with them", "stages": "proper (and proper+qualifying)" },
       "query": {

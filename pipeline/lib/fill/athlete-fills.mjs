@@ -35,7 +35,7 @@ const readJson = (f, d) => { try { return JSON.parse(fs.readFileSync(f, 'utf8'))
 
 /** Every broken team-match to fill: ledger anomalies (read now; the list grows with the harvest) + SPECIAL. */
 export function loadTargets({ includeQualifiers = true, includeOptional = true } = {}) {
-  const anomalies = readJsonl(path.join(LEDGER, 'anomalies.jsonl')).filter((a) => a.rule === 'roster-collapsed' || a.rule === 'roster-missing')
+  const anomalies = readJsonl(path.join(LEDGER, 'anomalies.jsonl')).filter((a) => ['roster-collapsed', 'roster-missing', 'roster-invalid', 'roster-starters-missing'].includes(a.rule))
   const matches = new Map()
   const want = new Set(anomalies.map((a) => String(a.id)))
   for (const l of fs.readFileSync(path.join(LEDGER, 'matches.jsonl'), 'utf8').split('\n')) {

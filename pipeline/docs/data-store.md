@@ -98,3 +98,14 @@ node pipeline/sync-data.mjs pack --only index,ledger --commit
 - ESPN league-seasons still harvesting (above), and ESPN cache files that are neither a summary of an indexed event nor a year/month scoreboard: probe-era core API, athlete eventlogs, day scoreboards, about 1,500 files today. They need a unit (`raw/espn/other`) once the backfill has given them URLs.
 - `data/raw/wikipedia/` (two article JSONs) and `data/raw/logs/` (request logs, which the incident note says get checked). Neither is in a group. Both are small and should probably go in.
 - The StatsBomb Messi fixture, once it's fetched. It goes in `raw/statsbomb/` and stays research-only.
+
+## R2 mirror (added 2026-10-22)
+
+The packed store is mirrored to the private R2 bucket `football-comparator-data` on Drew's Cloudflare account (`fd9fcbf0…`), created with `npx wrangler r2 bucket create football-comparator-data`. R2 holds the same files under the same relative keys as the git clone, plus `MANIFEST.json`, so a pull reproduces the clone's packed layout without git.
+
+- `node pipeline/r2-sync.mjs push [--only groups]`: uploads every manifest file whose sha256 the bucket doesn't have, downloads each one back and compares sha256 before recording it in `.r2-state.json` in the clone (gitignored there), then uploads `MANIFEST.json`.
+- `node pipeline/r2-sync.mjs pull --to DIR`: fetches the manifest and every file, verifying sha256; then `FC_DATA_REPO=DIR node pipeline/sync-data.mjs unpack` rebuilds `data/`.
+- `status` compares the state file to the manifest; `verify --sample N` re-downloads N random objects.
+- Transport is `wrangler r2 object put|get --remote` through the wrangler OAuth login, so no S3 keys live on this machine. CI will use a read-only R2 API token scoped to the bucket (Access Key ID + Secret as GitHub secrets, plus the account id) with the S3 endpoint `https://<account>.r2.cloudflarestorage.com`; that path isn't written yet because CI only needs the compact ledger, which the public repo commits.
+- Cost: about 1.4 GB today, under the 10 GB free tier; no egress charges. Each season adds about 50 MB packed.
+- The git clone remains the source of truth and the manifest's home. If the clone grows past comfort, the `raw/espn/*` units can be dropped from git and kept in R2 only; `pull` then restores them.

@@ -80,8 +80,8 @@ export function buildTeamLedger(matches, { corrections = teamCorrections(), asOf
   const rows = [], seasons = []
   for (const g of [...groups.values()].sort((a, b) => (a.comp < b.comp ? -1 : a.comp > b.comp ? 1 : a.season - b.season))) {
     const out = seasonTable(g, corrections.deductions)
-    rows.push(...out.rows)
-    seasons.push(...out.seasons)
+    for (const r of out.rows) rows.push(r)
+    for (const s of out.seasons) seasons.push(s)
   }
   const runs = computeRuns(rows, minRun)
   return { rows, seasons, runs }

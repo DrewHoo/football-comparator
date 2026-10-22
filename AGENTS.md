@@ -4,7 +4,7 @@ The running list of data surprises. Add to it whenever a gate or a reader's corr
 
 ## Ground rules
 
-- This repo is public (DrewHoo/football-comparator, created 2026-10-22). `data/raw/`, `data/index/` and `data/ledger/` are gitignored and live in the private store DrewHoo/football-comparator-data (pipeline/sync-data.mjs). Stage with an explicit file list, never `git add -A`. Don't commit or push without Drew's go.
+- This repo is public (DrewHoo/football-comparator, created 2026-10-22). `data/raw/`, `data/index/` and `data/ledger/` are gitignored and live in the private store DrewHoo/football-comparator-data (pipeline/sync-data.mjs), mirrored to the private R2 bucket `football-comparator-data` (pipeline/r2-sync.mjs; pipeline/docs/data-store.md). Stage with an explicit file list, never `git add -A`. Don't commit or push without Drew's go.
 - The sport is "football" in every file name and page word.
 - Every ESPN request goes through `research/espn/espn.mjs` (one per 1.5 s, disk cache, backoff). Every Wayback request goes through `research/wayback/wb.mjs` (one per 2 s, cross-process lock). Every RSSSF request goes through `pipeline/lib/rsssf.mjs`. Every Wikidata request (query.wikidata.org, Special:EntityData) goes through `pipeline/lib/wikidata.mjs` (1 per s, cache, splits a VALUES batch on a 60 s timeout). One process per host at a time. Never call `fetch` directly.
 - Nothing StatsBomb-derived ships in the public repo or in the JSON the page downloads. StatsBomb's Messi La Liga set is a test gate, fetched into the private store.
@@ -98,6 +98,17 @@ The running list of data surprises. Add to it whenever a gate or a reader's corr
 - Messi 474 La Liga goals in 520 (Guinness); 91 in 2012 competitive only (5 friendly goals excluded).
 - Transfermarkt showed Ronaldo 961 vs ESPN 967 in April 2026 (Arab Club Champions Cup). RSSSF 994 = 976 senior + 18 youth. No Guinness page exists for Ronaldo's 900.
 - Derby 11 points (2007-08), Sheffield United 104 conceded (2023-24), Wolves 18-game winless start (2025-26), Arsenal 49 unbeaten, City 100 points. 1992-95 were 42-game seasons; publishers say so.
+
+## Full-scope build (2026-10-22, after the 20-hour harvest)
+
+- Penalty typing is judged by share, not presence. Penalties are 6-10% of goals in a typed season. EPL 2002-03 has 11 typed in 963 goals (1.1%), so it's untyped in all but a handful of matches; under 3% the season's pens are null. 3-5% is `penalty-typing-partial` (La Liga and Bundesliga 2004-05, UCL 2002-07): kept, flagged. Seasons under 300 goals (the running season) aren't judged. EPL 2009-10, "untyped" in the probe sample, is fully typed (8.5%).
+- Zero starters on a side is two defects. All listed players flagged as subs on (the stuck La Liga round of 2023-02-11, 20-23 a side) is a hollow summary: `roster-invalid`, rows withheld (218 phantom rows). Only the 1-5 subs who came on listed (66 sides, 2002-11) means the starting XI is missing: `roster-starters-missing`, sub rows kept. Both go to the athlete-store fill.
+- The id-merge veto must hold for groups, not pairs: merging is transitive, and Jorge López (12194, Zaragoza) reached Pedro López (103012, Valladolid) through a third id although both started match 275895. Strongest merges go first and a merge that would put two ids from one match in a group is refused (7 at full scope). The builder now throws if a canonical player has two rows in one match.
+- One ESPN id on both sides of a match is a misidentification: Inter's goalkeeper Júlio César (#12) carries Reggina's Julio César De León's id in 205790 and 224342. Keep the row with the club he plays for that season; drop the other (`athlete-id-both-sides`, 4 rows).
+- ESPN writes A = -1 in a few stat arrays (3 rows): null, `stat-negative`.
+- Full-scope ledger: 48,994 matches, 1,366,150 player rows, 899 ids merged. Compact files 0.9-1.2 MB gzipped per league; every row round-trips.
+- Transfermarkt at scale (47,316 player-seasons, 2012-26): apps 98.6% exact, goals 99.7%, assists 97.5% within tolerance, minutes 99.4%. Short by a whole match: ESPN 558 player-seasons, Transfermarkt 788 (it has whole seasons missing for Benzema 2020-21, Müller 2014-15, Bacca 2014-15). Goal credited to a different player: 99.
+- A gate cut at an old `as_of` reads a stale runner-up: `ronaldo-140-ucl` at 2022-06-30 gave Messi 125 for UEFA's 129 (his four 2022-23 goals came later). Cut gates at the claim date, again.
 
 ## Team ledger and compact files (2026-10-21)
 

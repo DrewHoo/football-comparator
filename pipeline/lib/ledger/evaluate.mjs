@@ -15,7 +15,7 @@ const ymd = (d) => d.slice(0, 10)
 /** decoded club files -> one view: rows (with ord), matches, coverage by comp-season */
 export function clubView(decodedFiles) {
   const rows = [], matches = []
-  for (const d of decodedFiles) { rows.push(...d.rows); matches.push(...d.matches) }
+  for (const d of decodedFiles) { for (const r of d.rows) rows.push(r); for (const m of d.matches) matches.push(m) }
   const cov = new Map() // `${slug}|${season}` -> { n, ok }
   for (const m of matches) { const k = `${m.slug}|${m.season}`; const c = cov.get(k) || { n: 0, ok: 0 }; c.n++; if (m.summary === 'ok') c.ok++; cov.set(k, c) }
   const names = new Map()

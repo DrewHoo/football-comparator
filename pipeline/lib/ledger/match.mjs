@@ -97,6 +97,17 @@ export function buildMatch(ev, s) {
     info.subsIn = out.filter((x) => x.appeared && !x.started).length
     info.used = out.filter((x) => x.appeared).length
     info.bench = out.length - info.used
+    // No starters is two different defects (full-scope build, 2026-10-22):
+    //  - every listed player flagged as having come on (the stuck La Liga round of 2023-02-11: 20-23 "subs" a side)
+    //    is a hollow summary: withhold the rows, the athlete store fills the side;
+    //  - only the 1-5 subs who came on are listed (49 matches, 2002-11): the sub rows are real, the starting XI
+    //    is missing; keep the subs, the athlete store fills the starters.
+    if (info.starters === 0 && info.used > 11) {
+      info.invalid = true
+      flag('roster-invalid', `${side} (${sd.name}) 0 starters and ${info.used} players flagged as subs on; hollow summary, player rows withheld for the athlete-store fill`, { team: sd.id })
+      repaired.push(null); return
+    }
+    if (info.starters === 0 && info.used > 0) flag('roster-starters-missing', `${side} (${sd.name}) lists only the ${info.used} sub${info.used === 1 ? '' : 's'} who came on; the starting XI is missing; sub rows kept, starters for the athlete-store fill`, { team: sd.id })
     if (info.starters !== 11) flag('starters-not-eleven', `${side} (${sd.name}) ${info.starters} starters after repair`, { team: sd.id })
     if (match.keyEvents === 'ok' && info.subsIn !== info.subEvents) flag('subs-mismatch', `${side} (${sd.name}) ${info.subsIn} subs on in roster vs ${info.subEvents} substitution events`, { team: sd.id })
     repaired.push(out)
@@ -161,7 +172,8 @@ export function buildMatch(ev, s) {
         started: x.started, subIn: x.started ? null : clocks.onMin, subOff: offMin, sentOff: cards.rc ? cards.redMin : null, minutes,
         goals: goalsKnown[i] ? goalsBy.get(id) || 0 : null,
         pens: goalsKnown[i] ? pensBy.get(id) || 0 : null, ownGoals: match.keyEvents === 'ok' ? ogBy.get(id) || 0 : null,
-        assists: hasStats(e) ? statOf(e, 'A') ?? 0 : null,
+        // ESPN occasionally writes A = -1 (3 rows at full scope): unknown, not a count
+        assists: !hasStats(e) ? null : (statOf(e, 'A') ?? 0) < 0 ? (flag('stat-negative', `${e.athlete.displayName}: A=${statOf(e, 'A')}; assists null`, { athlete: id, team: sd.id }), null) : statOf(e, 'A') ?? 0,
         yc: cards.yc, rc: cards.rc,
         result: sd.score == null || other.score == null ? null : resultFor(sd.score, other.score),
         jersey: e.jersey ?? null, pos: e.position?.abbreviation ?? null,

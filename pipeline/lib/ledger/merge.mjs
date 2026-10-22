@@ -100,12 +100,25 @@ export function buildMergeTable(players, splitPairs = []) {
   const find = (x) => { while (parent.has(x) && parent.get(x) !== x) x = parent.get(x); return x }
   const appsOf = (id) => prof.get(id)?.apps || 0
   const better = (x, y) => (STAR_IDS[x] ? x : STAR_IDS[y] ? y : appsOf(x) !== appsOf(y) ? (appsOf(x) > appsOf(y) ? x : y) : Number(x) < Number(y) ? x : y)
-  for (const c of candidates) {
-    if (!c.merged) continue
+  // The same-match veto has to hold for whole groups, not just pairs: merging is transitive, and
+  // Jorge López (12194, Zaragoza) reached Pedro López (103012, Valladolid) through a second López id
+  // although both started match 275895 on opposite sides (full-scope build, 2026-10-22). Strongest
+  // candidates merge first; a merge that would put two ids from one match in a group is refused.
+  const groupMatches = new Map()
+  const matchesOfGroup = (r) => { if (!groupMatches.has(r)) groupMatches.set(r, new Set(prof.get(r)?.matches ?? [])); return groupMatches.get(r) }
+  const order = candidates.filter((c) => c.merged).sort((x, y) => y.confidence - x.confidence)
+  for (const c of order) {
     const ra = find(c.ids[0]), rb = find(c.ids[1])
     if (ra === rb) continue
+    const ma = matchesOfGroup(ra), mb = matchesOfGroup(rb)
+    const [small, large] = ma.size <= mb.size ? [ma, mb] : [mb, ma]
+    let clash = null
+    for (const m of small) if (large.has(m)) { clash = m; break }
+    if (clash) { Object.assign(c, { merged: false, level: 'veto', veto: `groups share match ${clash} (transitive)` }); continue }
     const keep = better(ra, rb)
+    const union = new Set([...ma, ...mb])
     parent.set(ra, keep); parent.set(rb, keep); parent.set(keep, keep)
+    groupMatches.set(keep, union)
   }
   const map = {}
   for (const id of parent.keys()) { const r = find(id); if (r !== id) map[id] = r }
