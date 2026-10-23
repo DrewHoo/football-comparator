@@ -21,6 +21,7 @@ Code: `pipeline/build-intl.mjs` (CLI, outputs), `pipeline/lib/intl/` (`io.mjs` p
 | `data/index/archive/<source>.json` | FIFA WC qualifiers 1998/2002/2006/2010, Euro 2000, Euro 2004 qualifiers: lineups, role, on/off minutes, goals, cards, receipts | the harvest was still running on 2026-10-21; everything it adds is picked up on the next build |
 | ESPN cache `data/raw/espn/` | every cached match summary whose teams carry national-team logos (348 A internationals; Olympic/youth slugs dropped) | found by scanning the cache (2-4 s), so the URL list doesn't matter. Summaries with fewer than 11 listed players, or missing a substitute their own sub events name, count as partial (no absence is inferred from them) |
 | `data/index/wikidata/matches.json`, `players.json` (built offline by `harvest-wikidata.mjs`, `pipeline/docs/wikidata.md`) | 6,790 match items: P710 lineups (team, shirt, position), P1363 goals with P6887 period and P1390 minute into the period, P793 events (subs, cards) for 660 matches; 15,599 players with labels, aliases, birth date, ESPN/Transfermarkt/FBref ids | P710 lists starters and used subs together, with no start flag except where P793 events exist |
+| `data/ledger/fills/athlete-matches.jsonl` (+ `athlete-fills.json`), the fill job's output (`pipeline/docs/fill.md`) | ESPN athlete-store rows with `intl: true`: the special sides (184000, 264119, 264123, 383241) and Vardy's and Lacazette's whole national-team careers; started, on/off, minutes, goals per appearance, with the stat record's URL as receipt | 123 senior rows; `youth` rows (U-20 World Cup, Olympics: 11) are left out. A 0 clock means not recorded. See §Athlete store |
 | `data/corrections/intl.json` | corrections, applied last | |
 
 ## Outputs (`data/ledger/intl/`)
@@ -64,14 +65,34 @@ RSSSF writes full names ("David Robert Joseph Beckham", "Pedro Miguel Carreiro R
 
 | Field | Order | When sources disagree |
 |---|---|---|
-| cap (did he appear?) | RSSSF > archive > ESPN > Wikidata P710 > martj42 scorer row | For a logged player the RSSSF log is the cap list. A source appearance in a match his log doesn't list is an `appearance_not_in_rsssf` conflict (not a row) inside the log's span, and a row flagged `beyond_rsssf_log` after its last cap (the 1-5-cap lag of active players). A cap the archive or ESPN lineup doesn't show is `rsssf_cap_not_in_lineup` (only where that source has the side's full lineup; FIFA 1998 sides with unrecorded sub minutes are skipped) or `rsssf_cap_listed_unused` |
-| started, on/off minutes, minutes | archive = ESPN > Wikidata (P793 sub and card events; 660 matches) > RSSSF (Czech logs) | the archive is taken when both have it; `started` or minutes more than 2 apart are conflicts. A FIFA 1998 substitute with no minutes counts as appeared when Wikidata lists him (`appeared_from_wikidata`); Wikidata listing an archive or ESPN unused substitute is `wikidata_lists_unused_sub` (no cap) |
+| cap (did he appear?) | RSSSF > archive > ESPN summary > athlete store > Wikidata P710 > martj42 scorer row | For a logged player the RSSSF log is the cap list. A source appearance in a match his log doesn't list is an `appearance_not_in_rsssf` conflict (not a row) inside the log's span, and a row flagged `beyond_rsssf_log` after its last cap (the 1-5-cap lag of active players). A cap the archive or ESPN lineup doesn't show is `rsssf_cap_not_in_lineup` (only where that source has the side's full lineup; FIFA 1998 sides with unrecorded sub minutes are skipped) or `rsssf_cap_listed_unused` |
+| started, on/off minutes, minutes | archive = ESPN > Wikidata (P793 sub and card events; 660 matches) > RSSSF (Czech logs) > athlete store (only where no other source has them) | the archive is taken when both have it; `started` or minutes more than 2 apart are conflicts. A FIFA 1998 substitute with no minutes counts as appeared when Wikidata lists him (`appeared_from_wikidata`); Wikidata listing an archive or ESPN unused substitute is `wikidata_lists_unused_sub` (no cap) |
 | goal minutes | archive > ESPN > Wikidata, after the clock rules below | a gap left after the rules is a `goal_minutes` conflict with all three values; martj42 decides where it equals exactly one (M42-VOTE) |
-| goals | RSSSF > archive > ESPN > Wikidata > martj42 | an archive or Wikidata 0 counts only where that source's goal list for the side adds up to the side's score (ARCH-COMPLETE; Wikidata's P1363 `P518` is the side credited, own goals included); | any two sources apart is a `goals` conflict; in competitive matches the pick must equal martj42 where martj42 lists every goal for that side, or it is `goals_vs_martj42`; a martj42 goal for a logged player in a match his log lacks is `martj42_goal_without_rsssf_cap` |
+| goals | RSSSF > archive > ESPN summary > athlete store > Wikidata > martj42 | an archive or Wikidata 0 counts only where that source's goal list for the side adds up to the side's score (ARCH-COMPLETE; Wikidata's P1363 `P518` is the side credited, own goals included); | any two sources apart is a `goals` conflict; in competitive matches the pick must equal martj42 where martj42 lists every goal for that side, or it is `goals_vs_martj42`; a martj42 goal for a logged player in a match his log lacks is `martj42_goal_without_rsssf_cap` |
 
 Minutes: a starter plays from 0, a substitute from his on-minute; to his off-minute (substitution or red card) or 90 (120 after extra time). ESPN on/off come from the substitution key events (the first participant comes on, deduped by the pair) and red-card plays; ESPN goals from scoring key events, own goals apart, near-duplicates (same scorer within 2') dropped while a side has more goals than its score.
 
-Players with no RSSSF log get rows from archive and ESPN appearances, plus martj42 scorer rows once the person has an archive or ESPN form (a scorer appeared). They are `intl_coverage: partial` with counts and a `badge` string, so the site shows "internationals not yet covered" rather than a silently short curve. Vardy and Lacazette have nothing cached at all and are explicit `none` stubs.
+Players with no RSSSF log get rows from archive, ESPN, athlete-store and Wikidata appearances, plus martj42 scorer rows once the person has another form (a scorer appeared). They are `intl_coverage: partial` with counts and a `badge` string, so the site shows "internationals not yet covered" rather than a silently short curve. The exception is a marquee player with stated totals (`STATED` in `lib/intl/athlete-store.mjs`, from `research/intl-gap.md`'s marquee table): he is `complete` when his rows and goals equal both stated totals, with `coverage_basis` saying so. The `none` stub is written only for a marquee player with no person at all (none today).
+
+## Athlete store (`lib/intl/athlete-store.mjs`)
+
+ESPN's athlete-scoped store, pulled by `pipeline/fill-espn.mjs --job athlete-fills`, attached after `build()` and before the corrections:
+
+1. **Join.** ESPN team ids are named from the cached A-international summaries' headers (`sources.mjs` now keeps `teamId` on each side); Vardy's and Lacazette's own team falls back to `athlete-fills.json` `players[].nation`. Each row joins martj42 on the two teams and the date (±2), else on its team alone within a day, if that's unique. All 123 senior rows join.
+2. **Person.** One ESPN athlete id is one person. The person is found by the id (`espn_athlete_ids`, or Wikidata's P3681 in `club_join`); 72 of the 73 ids are found this way. Otherwise he is found by name inside each shared team-match, voting across his matches: Vardy is matched in 14 of his 24. With neither, he becomes a person of his own. Each id is an `espn-athlete-store` form in `identity.json`.
+3. **Rows.**
+   - When the person already has a cap in that match, the store's detail goes to `sources.athlete_store`, with its receipt. It fills `started`, on/off and `minutes` only where no other source had them, and goals only over Wikidata or martj42. A disagreement is a `started`, `minutes` or `goals` conflict.
+   - When he has no cap there, a logged player gets an `appearance_not_in_rsssf` conflict inside his log's span, and a `beyond_rsssf_log` row after it.
+   - An unlogged player gets a new row with `cap_source: athlete-store` and martj42's goals for the competitive-goals gate.
+4. **Clocks and minutes.** Clocks and minutes use the club fill's rule (`lib/ledger/fill.mjs` `fillClocks`): a 0 clock is unknown, minutes come from the clocks, and the record's own minutes are used only when a clock is missing. Extra time comes from the ESPN header (AET/PEN), or from any record of that event above 90 minutes. Before that fix, the WC 2010 final and WC 2014 SF substitutes were capped at 90.
+
+Result (2026-10-23):
+
+- 113 rows attached to existing caps; started and minutes filled on 27 of them. 0 conflicts: the store agrees with Wikidata on every shared minute once extra time is right.
+- 10 new caps, all Vardy's friendlies.
+- **Lacazette:** 14 store caps plus Wikidata's first two (2013-06-05 Uruguay, 2013-06-09 Brazil, which the eventlog doesn't list) make 16 caps and 3 goals, equal to the stated 16 / 3. Coverage `complete`.
+- **Vardy:** 24 caps and 5 goals against the stated 26 / 7. Coverage `partial`, with the badge "24 of 26 caps and 5 of 7 goals known". The eventlog lacks two caps, most likely the March 2016 friendlies in Berlin and v Netherlands, where he scored; nothing on disk has them.
+- **Messi's debut:** the store's record for him in 184000 is a 404, confirmed live on 2026-10-23 12:00Z with 3 requests: both competitors' URLs (202, 480), and with `?lang=en&region=us`. The store holds records for Heinze and Rodríguez only, so `messi_debut` relies on the corrections row `intl-0050`.
 
 ## Wikidata: the clock and goal rules, and what the archive gate's disagreements turned out to be
 
@@ -118,6 +139,15 @@ Kind `goal_minute`: one source has a goal at the wrong minute; `{player_key, wro
 
 Kind `cap_goals`: one source has the wrong goal count for one cap; `{player_key, wrong_source, wrong_value, right_value}` sets the row's `goals` to `right_value` and resolves the player's `goals` and `goals_vs_martj42` conflicts in that match. Applied only when a receipt verifies. **The handler is not in `lib/intl/corrections.mjs` yet** (2026-10-22): until it lands, both entries below report `unknown kind cap_goals` and `corrections_applied` fails. A dry run with the handler (a copy of `pipeline/` outside the project) gave 13 pass, 0 fail, 1 pending.
 
+Kind `cap_minutes`: one cap's `started`, `on_min`, `off_min`, `off_reason` and `minutes` from receipts, where no lineup source has them (`set`). It applies only when every receipt that carries a quote verifies, and it resolves the player's `started` and `minutes` conflicts in that match.
+
+`intl-0050`: Messi's debut, Hungary 1-2 Argentina, 2005-08-17. RSSSF's cap 1 has no minutes, ESPN's summary lists only the scorers, and the athlete-store record is a 404. The correction sets started false, on 64', sent off 65' (`red`), 1 minute. Its receipts:
+- 11v11 (Wayback 20150417001754): "Lionel Messi for Lisandro Lopez 64" and "Lionel Messi 65 R".
+- Clarín, 2005-08-18 (Wayback 20080617160028): his debut lasted 93 seconds before Markus Merk showed the red card.
+- RSSSF's cap row.
+
+All 4 verify. The minute numbers are 11v11's; Clarín corroborates on-and-off within two minutes.
+
 `intl-0048`: Latvia 0-2 Spain, Riga, 2007-06-02 (Euro 2008 qualifying Group F, UEFA match 83726). RSSSF's Villa log (cap 22: blank goals cell, running total 10 before and after), Wikipedia's list of Villa's international goals and Wikidata give Villa nothing; martj42 and Wikipedia's Group F page have "Villa 45'". Settled by UEFA's own pages, captured 2 to 12 days after the match (Wayback, `round=2241/match=83726`): the events page (20070608094241) has the scorer line "Villa 45 , Xavi 60" and a goal event "45 7 David Villa Spain" with the goals icon; the lineups page (20070614162427) repeats the scorer line; the match report (20070604140151) says "a goal in each half from David Villa and Xavi" and has Villa bundling in Angulo's cross on the stroke of half-time. All three are cached and their quotes check. Villa scored. RSSSF's log and Wikipedia's goal list are both one short, which makes his ledger total 60 against the widely cited 59. Why the national-team count leaves it out (an own goal by Zakreševskis, who challenged for the cross, in the federation's books?) is not verified.
 
 `intl-0049`: France 4-0 Netherlands, 2023-03-24. RSSSF's Griezmann log leaves cap 118's goals cell blank while its running total rises 42 -> 43. Under the parser's goals-column rule (below) the row reads 0 with `cumulative_mismatch`; Wikidata (goal at first half +2) and martj42 (2') have the goal.
@@ -127,7 +157,7 @@ Kind `cap_goals`: one source has the wrong goal count for one cap; `{player_key,
 `pass`, `fail`, or `pending` (the data isn't on disk yet; a pending gate never counts as a pass).
 
 - `ronaldo_caps_goals` 233 RSSSF caps and 146 goals, plus the 24 Sep 2026 Wales cap from Wikidata (Q138338265; Wikipedia's 234), the only row allowed beyond the log; `ronaldo_debut` 2003-08-20 v Kazakhstan; `ronaldo_russia_2004_archive` 2 goals (39', 69'), started, off 85' from FIFA 36543; `ronaldo_tournament_goals_espn` 2,1,1,1,3,1,3,4,5,1 for Euro 2004 to WC 2022.
-- `messi_caps_goals` 207/125; `messi_debut` 2005-08-17 v Hungary, on 64', off 65' red; `messi_world_cup_goals_espn` 1/4/1/7.
+- `messi_caps_goals` 207/125; `messi_debut` 2005-08-17 v Hungary, on 64', off 65' red (from correction `intl-0050`: no source in the build has his minutes); `messi_world_cup_goals_espn` 1/4/1/7.
 - `first50_beckham`, `first50_van_nistelrooy`: the first 50 caps from RSSSF, with every WC 2002 qualifier among them carrying the FIFA lineup. Pending until fifa2002 holds all of them.
 - `marquee_competitive_goals_v_martj42`: the 49 marquee logs from `research/intl/marquee-caps-by-type.csv`, plus Luis Suárez (`bijtertje-intlg`), Vardy and Lacazette. Ledger competitive goals equal martj42 over the sides martj42 lists completely, and no martj42 goal falls outside the log.
 - `join_rates` (RSSSF ≥ 95%, archive ≥ 97%, ESPN ≥ 90%), `archive_harvest_complete`, `wikidata_lineups` (6,700+ of 6,790 matches joined; 97%+ of archive appearances in sides Wikidata lists carry the Wikidata entry; QIDs Q11571 / Q615 / Q459830 on Ronaldo / Messi / Gerrard; Gerrard's Munich row carries Wikidata's Gerrard over FIFA's Murphy line), `corrections_applied`.
@@ -143,6 +173,15 @@ Kind `cap_goals`: one source has the wrong goal count for one cap; `{player_key,
 Effect on all 4,702 logs: 71 rows' `player_goals` changed in 57 logs (no other field changed); 138 rows in 83 logs carry `cumulative_mismatch`; logs whose goals equal the stated goals total went from 1,113 to 1,127 of 2,771 (25 gained, 11 lost). The caps gate is unchanged at 4,618 of 4,682 (98.6%). Where martj42 can check a blank goals cell under a rising running total, it confirms no goal in 41 of 43 cases: RSSSF usually bumps the total a row early and the next row carries the goal (Messi 110/111, Mkhitaryan 77/78, Džeko 68/69, Mitrović 103/104). The exceptions are Griezmann v Netherlands 2023 (`intl-0049`) and É. Méndez v Chile 2004. Known costs: Son v Colombia 2017 friendly (page "1  20" after 18, he scored twice) is now 1, with no second source on disk; Kadir's B-team table is still misread as caps (repeated cap numbers, a separate table-kind bug), so his total moved from 72 to 76 against 70 stated.
 
 Gates after the rule and `intl-0048`/`intl-0049` (`node pipeline/build-intl.mjs --gate`): **11 pass, 2 fail, 1 pending.** Mbappé now equals martj42 (55 = 55). `marquee_competitive_goals_v_martj42` fails on Villa v Latvia and Griezmann v Netherlands, and `corrections_applied` fails on `unknown kind cap_goals`; both clear with the `cap_goals` handler (dry run: 13 pass, 0 fail, 1 pending). Pending: Messi's debut minutes.
+
+## State on 2026-10-23 (athlete store attached)
+
+From `node pipeline/build-intl.mjs --gate`:
+
+- **Rows:** 450,074 for 31,197 people (4,703 complete, 26,494 partial).
+  - Cap source: RSSSF 269,031, Wikidata 101,454, archive 64,803, ESPN 10,715, martj42 scorer 4,061, athlete store 10.
+  - The ESPN count grew because the intl-slugs job cached more summaries: 810 now, against 348 before.
+- **Gates: 14 pass, 0 fail, 0 pending.** `messi_debut` passes through `intl-0050`. `marquee_competitive_goals_v_martj42` passes for all 52 players, Vardy's and Lacazette's athlete-store rows included.
 
 ## State on 2026-10-22 (archive harvest complete; Wikidata attached)
 

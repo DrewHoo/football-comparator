@@ -1,6 +1,6 @@
 // Known-answer gates over the built ledger. `expect` is the probe's ESPN-derived number
 // (research/espn-coverage-leagues.md §3, espn-coverage-ucl-intl.md §2) adjusted only where a
-// documented repair is meant to move it; `known` is the publisher's figure (null = none solid).
+// documented repair is meant to move it (the athlete-store fill moved Totti 2003-04 and Messi UCL 2005-06); `known` is the publisher's figure (null = none solid).
 // A gate fails when the ledger differs from `expect`, except a move toward `known`, and except
 // minutes lost to a red card (the probe ran minutes to the sub clock or 90 regardless).
 import { nameKey } from './rules.mjs'
@@ -17,7 +17,7 @@ export const LEAGUE_GATES = [
   { player: 'Cristiano Ronaldo', athlete: '22774', club: 'Manchester United', slug: 'eng.1', season: 2007, expect: { apps: 34, starts: 31, goals: 31, pens: 4, assists: 7, minutes: 2753 }, known: { apps: 34, starts: 31, goals: 31, pens: 4 } },
   { player: 'Thierry Henry', athlete: '8039', club: 'Arsenal', slug: 'eng.1', season: 2002, expect: { apps: 37, starts: 37, goals: 24, pens: null, assists: 23, minutes: 3301 }, known: { apps: 37, starts: 37, goals: 24, assists: 20 }, note: 'EPL 2002-03 has no penalty typing: pens null; assists 23 v 20 is ESPN' },
   { player: 'Thierry Henry', athlete: '8039', club: 'Arsenal', slug: 'eng.1', season: 2003, expect: { apps: 37, starts: 37, goals: 30, pens: 7, assists: 9, minutes: 3330 }, known: { apps: 37, starts: 37, goals: 30 } },
-  { player: 'Francesco Totti', athlete: '10293', club: 'AS Roma', slug: 'ita.1', season: 2003, expect: { apps: 30, starts: 30, goals: 19, pens: 6, assists: null, minutes: 2679 }, known: { apps: 31, goals: 20 }, note: 'Bologna v Roma 2003-11-23 roster collapsed: one app and one goal withheld for the athlete-store fill' },
+  { player: 'Francesco Totti', athlete: '10293', club: 'AS Roma', slug: 'ita.1', season: 2003, expect: { apps: 31, starts: 31, goals: 20, pens: 6, assists: null, minutes: 2769 }, known: { apps: 31, goals: 20 }, note: 'probe 30/30/19/2679: Bologna v Roma 2003-11-23 (131335) has a collapsed roster; the athlete-store fill adds his row (started, 90 min, 1 goal, not a penalty)' },
   { player: 'Francesco Totti', athlete: '10293', club: 'AS Roma', slug: 'ita.1', season: 2006, expect: { apps: 35, starts: 35, goals: 26, pens: 5, assists: 9, minutes: 3026 }, known: { apps: 35, starts: 35, goals: 26, pens: 5 } },
   { player: 'Miroslav Klose', athlete: '10955', club: 'Werder Bremen', slug: 'ger.1', season: 2005, expect: { apps: 26, starts: 23, goals: 25, pens: 2, assists: null, minutes: 2059 }, known: { apps: 26, goals: 25 }, note: 'no stats arrays in the 2005-06 Bundesliga: assists null' },
   { player: 'Franck Ribéry', athlete: '42968', club: 'Marseille', slug: 'fra.1', season: 2006, expect: { apps: 25, starts: 25, goals: 5, pens: 0, assists: 8, minutes: 2167 }, known: { apps: 25, goals: 5 } },
@@ -26,7 +26,7 @@ export const LEAGUE_GATES = [
 // UCL: proper stages and qualifiers separately (the qualifier flag must split them)
 export const UCL_GATES = [
   { player: 'Ruud van Nistelrooy', athlete: null, club: 'Manchester United', slug: 'uefa.champions', season: 2002, expect: { apps: 9, starts: 8, goals: 12 }, known: { goals: 12 }, qual: { expect: { apps: 2, goals: 2 }, known: { goals: 2 } }, note: 'Wikipedia "Europe" 14 goals = 12 proper + 2 Q3' },
-  { player: 'Lionel Messi', athlete: '45843', club: 'Barcelona', slug: 'uefa.champions', season: 2005, expect: { apps: 5, goals: 1 }, known: { apps: 6, goals: 1 }, mustHaveAnomaly: { id: '188764', rule: 'roster-collapsed' }, mustNotAppear: '197123', note: 'Udinese 188764 collapsed (recorded, no phantom); 2006 final 197123 squad list (APP 0, no row). 5 + the Udinese fill = 6' },
+  { player: 'Lionel Messi', athlete: '45843', club: 'Barcelona', slug: 'uefa.champions', season: 2005, expect: { apps: 6, goals: 1 }, known: { apps: 6, goals: 1 }, mustHaveAnomaly: { id: '188764', rule: 'roster-collapsed' }, mustNotAppear: '197123', note: 'Udinese 188764 collapsed (recorded, no phantom; the athlete-store fill adds his row: started, off 70\'); 2006 final 197123 squad list (APP 0, no row). 5 + the Udinese fill = 6' },
   { player: 'Cristiano Ronaldo', athlete: '22774', club: 'Manchester United', slug: 'uefa.champions', season: 2007, expect: { apps: 11, starts: 11, goals: 8, assists: 1 }, known: { apps: 11, starts: 11, goals: 8 } },
   { player: 'Lionel Messi', athlete: '45843', club: 'Barcelona', slug: 'uefa.champions', season: 2008, expect: { apps: 12, starts: 10, goals: 9, assists: 5 }, known: { apps: 12, goals: 9 } },
   { player: 'Cristiano Ronaldo', athlete: '22774', club: 'Real Madrid', slug: 'uefa.champions', season: 2013, expect: { apps: 11, starts: 11, goals: 17, assists: 4 }, known: { goals: 17 } },

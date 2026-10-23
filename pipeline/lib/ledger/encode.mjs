@@ -12,7 +12,7 @@ export const FORMAT_VERSION = 1
 
 // ---- the layouts (decode.mjs reads the same names; order is free, the decoder looks columns up)
 export const SEASON_COLS = ['slug', 'season', 'matches', 'cached', 'stats', 'assists', 'pens']
-export const ENTITY_COLS = ['id', 'name', 'born', 'nat', 'pos', 'rows']
+export const ENTITY_COLS = ['id', 'name', 'born', 'nat', 'pos', 'rows'] // born YYYYMMDD, nat and pos strings (athletes.jsonl)
 export const TEAM_COLS = ['id', 'name']
 export const MATCH_COLS = ['id', 'slug', 'season', 'ymd', 'hm', 'home', 'away', 'hs', 'as', 'shH', 'shA', 'status', 'stage', 'round', 'seasonSlug',
   'qualifier', 'stuck', 'summary', 'extraTime', 'stats', 'keyEvents', 'goalsReconciled', 'quality', 'assistsReliable', 'tgnH', 'tgnA']
@@ -108,7 +108,50 @@ const byDate = (a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : Number(a.
  * @param ordOf (matchId, athleteId) -> ordinals row
  * @param team the team ledger (team.mjs buildTeamLedger) restricted to this file's comps
  */
-export function encodeClub({ comp, matches, players, ordOf, team, builtAt, source }) {
+/**
+ * The person layer of the club entities, from data/index/athletes.jsonl (the DOB job: ESPN's core athlete
+ * record). Keyed by the post-merge athlete id: a row's own id, else one of its `aliases` (merged-away ids the
+ * job folded in), else a merged-away id of the canonical that has a row of its own.
+ * @returns (id) -> { dob, nationality, position, id } | null
+ */
+export function athleteLookup(rows, mergeMap = {}) {
+  const byId = new Map(), byAlias = new Map()
+  for (const r of rows) { byId.set(String(r.id), r); for (const a of r.aliases || []) byAlias.set(String(a), r) }
+  const viaMerge = new Map()
+  for (const [e, c] of Object.entries(mergeMap)) if (byId.has(e) && !byId.has(c) && !viaMerge.has(c)) viaMerge.set(c, byId.get(e))
+  return (id) => byId.get(id) ?? byAlias.get(id) ?? viaMerge.get(id) ?? null
+}
+
+/** A DOB is plausible when the player is 15-45 at his first ledger row and under 50 at his last. Nobody younger
+ *  than 15 has played in these competitions since 2002 (the youngest on record are Nwaneri, Premier League
+ *  15y 181d, and Luka Romero, La Liga 15y 219d); a first row under 16 is listed as `dobSuspect` for review. */
+export const DOB_AGE = { min: 15, max: 45, maxLast: 50, review: 16 }
+const ageYears = (dob, date) => (Date.UTC(+date.slice(0, 4), +date.slice(5, 7) - 1, +date.slice(8, 10)) - Date.UTC(+dob.slice(0, 4), +dob.slice(5, 7) - 1, +dob.slice(8, 10))) / 31557600000
+
+/**
+ * The person fields an entity carries, from its athletes.jsonl row and the date of its first ledger row.
+ * ESPN's core athlete record for an old id is sometimes a younger namesake's (Djibril Sidibé 30302: the 1992-born
+ * Frenchman's DOB on a player whose first ledger row is 2004; Fernando Torres 24257: a Colombian born 2004; Keith
+ * Andrews 5358: 1908). An implausible DOB marks the whole record as someone else's, so nationality and position go
+ * too. The DOB is then taken from Wikidata only on its exact ESPN-id join (P3681), never on a name join (those
+ * found the namesake).
+ */
+export function personFields(a, firstDate, lastDate = firstDate) {
+  if (!a) return { dob: null, nat: null, pos: null, from: null, firstRow: firstDate }
+  return { ...personFields0(a, firstDate, lastDate), firstRow: firstDate }
+}
+function personFields0(a, firstDate, lastDate) {
+  const ok = (d) => { if (!d || !firstDate) return !!d; const age = ageYears(d, firstDate); return age >= DOB_AGE.min && age < DOB_AGE.max + 1 && ageYears(d, lastDate ?? firstDate) < DOB_AGE.maxLast }
+  if (!a.dob || ok(a.dob)) return { dob: a.dob ?? null, nat: a.nationality ?? null, pos: a.position ?? null, from: a.dob ? 'espn' : null, suspect: a.dob && firstDate && ageYears(a.dob, firstDate) < DOB_AGE.review ? Number(ageYears(a.dob, firstDate).toFixed(2)) : undefined }
+  const w = a.wikidata?.method === 'P3681' && a.wikidata.born && ok(a.wikidata.born) ? a.wikidata.born : null
+  return { dob: w, nat: null, pos: null, from: w ? 'wikidata-P3681' : null, dropped: { rule: 'dob-implausible', dob: a.dob, ageFirst: Number(ageYears(a.dob, firstDate).toFixed(2)), ageLast: Number(ageYears(a.dob, lastDate ?? firstDate).toFixed(2)), lastRow: lastDate ?? firstDate, espnNat: a.nationality ?? null, wikidata: w } }
+}
+
+/**
+ * @param person (athleteId, firstDateInThisFile) -> personFields(...) result. encode-ledger.mjs passes one keyed on
+ *   the player's first row across the whole ledger, so a DOB is kept or dropped the same way in every file.
+ */
+export function encodeClub({ comp, matches, players, ordOf, team, builtAt, source, person: personOf = () => ({ dob: null, nat: null, pos: null }), athlete = () => null }) {
   const S = new Strings()
   const floors = FLOORS[comp]
   const ms = matches.slice().sort(byDate)
@@ -179,7 +222,24 @@ export function encodeClub({ comp, matches, players, ordOf, team, builtAt, sourc
   })
   applyDeltas(rowsT, CLUB_DELTAS)
 
-  const entitiesT = table(ENTITY_COLS, ents, (e) => ({ id: Number(e.id), name: S.id(e.name), born: -1, nat: -1, pos: -1, rows: e.rows.length }))
+  // the person layer: dob, nationality, position (athleteLookup); a DOB outside DOB_AGE at the first row is dropped
+  const people = { withDob: 0, withoutDob: 0, notInIndex: 0, implausibleDob: [], suspect: [], fromWikidata: 0, withNat: 0, withPos: 0, rowsWithDob: 0, rowsWithoutDob: 0 }
+  const person = ents.map((e) => {
+    const a = athlete(e.id)
+    if (!a) people.notInIndex++
+    const f = personOf(e.id, e.rows[0].date.slice(0, 10))
+    if (f.dropped) people.implausibleDob.push({ id: e.id, name: e.name, firstRow: f.firstRow, ...f.dropped })
+    if (f.suspect != null) people.suspect.push({ id: e.id, name: e.name, dob: f.dob, firstRow: f.firstRow, age: f.suspect, wikidata: a?.wikidata?.born ? { born: a.wikidata.born, method: a.wikidata.method } : null })
+    if (f.from === 'wikidata-P3681') people.fromWikidata++
+    if (f.dob) { people.withDob++; people.rowsWithDob += e.rows.length } else { people.withoutDob++; people.rowsWithoutDob += e.rows.length }
+    if (f.nat) people.withNat++
+    if (f.pos) people.withPos++
+    return { born: f.dob ? ymdOf(f.dob) : -1, nat: S.id(f.nat), pos: S.id(f.pos) }
+  })
+  const entitiesT = table(ENTITY_COLS, ents, (e, i) => ({ id: Number(e.id), name: S.id(e.name), born: person[i].born, nat: person[i].nat, pos: person[i].pos, rows: e.rows.length }))
+  // rows from ESPN's athlete-scoped store (the fill for withheld sides), sparse like alias: [row, source]
+  const src = []
+  flat.forEach(({ r }, i) => { if (r.source && r.source !== 'summary') src.push([i, S.id(r.source)]) })
   const teamsT = table(TEAM_COLS, teamIds, (id) => ({ id: Number(id), name: S.id(teamName.get(id)) }))
   const seasonsT = table(SEASON_COLS, seasons, (s) => ({ slug: S.id(s.slug), season: s.season, matches: s.matches, cached: s.cached, stats: s.stats, assists: assistsState(s), pens: s.pens == null ? -1 : s.pens === 'typed' ? 1 : 0 }))
 
@@ -205,10 +265,13 @@ export function encodeClub({ comp, matches, players, ordOf, team, builtAt, sourc
     firstSeason: Math.min(...ms.map((m) => m.season)), lastSeason,
     floors: { ...floors, labels: Object.fromEntries(Object.entries(floors).map(([k, v]) => [k, seasonLabel(v)])) },
     deltas: CLUB_DELTAS, runMin: 3,
-    counts: { entities: ents.length, teams: teamIds.length, matches: ms.length, cachedMatches: ms.filter((m) => m.summary === 'ok').length, rows: flat.length },
+    counts: { entities: ents.length, teams: teamIds.length, matches: ms.length, cachedMatches: ms.filter((m) => m.summary === 'ok').length, rows: flat.length, fillRows: src.length,
+      dob: { with: people.withDob, without: people.withoutDob, rowsWith: people.rowsWithDob, rowsWithout: people.rowsWithoutDob, notInIndex: people.notInIndex, implausible: people.implausibleDob.length, fromWikidata: people.fromWikidata, suspect: people.suspect.length },
+      nationality: people.withNat, position: people.withPos },
+    dobDropped: people.implausibleDob, dobSuspect: people.suspect,
     strings: S.list,
     seasons: seasonsT, entities: entitiesT, teams: teamsT, matches: matchesT, rows: rowsT,
-    alias, nameAlt,
+    alias, nameAlt, src,
     teamMatches: teamMatchesT, teamSeasons: teamSeasonsT, runs: runsT,
   }
 }

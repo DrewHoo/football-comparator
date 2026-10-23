@@ -67,7 +67,7 @@ export function buildMatch(ev, s) {
     const info = { rows: raw.length, unique: new Set(raw.map((p) => p.athlete?.id)).size, starters: 0, subsIn: 0, subEvents: subs.filter((x) => String(x.team) === sd.id).length, used: 0, bench: 0, collapsed: false, missing: false, duplicates: 0 }
     match.lineup[side] = info
     if (r && String(r.team?.id) !== sd.id) flag('roster-team-mismatch', `${side} roster team ${r.team?.id} vs header ${sd.id}`, { team: sd.id })
-    if (!raw.length) { info.missing = true; flag('roster-missing', `${side} (${sd.name}) roster empty; no player rows for this side`, { team: sd.id }); repaired.push(null); return }
+    if (!raw.length) { info.missing = true; flag('roster-missing', `${side} (${sd.name}) roster empty; no player rows for this side`, { team: sd.id, evidence: athletesInEvents(ke, sd.id, ge) }); repaired.push(null); return }
     const col = detectCollapsedRoster(raw)
     if (col.collapsed) {
       info.collapsed = true
@@ -104,10 +104,10 @@ export function buildMatch(ev, s) {
     //    is missing; keep the subs, the athlete store fills the starters.
     if (info.starters === 0 && info.used > 11) {
       info.invalid = true
-      flag('roster-invalid', `${side} (${sd.name}) 0 starters and ${info.used} players flagged as subs on; hollow summary, player rows withheld for the athlete-store fill`, { team: sd.id })
+      flag('roster-invalid', `${side} (${sd.name}) 0 starters and ${info.used} players flagged as subs on; hollow summary, player rows withheld for the athlete-store fill`, { team: sd.id, evidence: athletesInEvents(ke, sd.id, ge) })
       repaired.push(null); return
     }
-    if (info.starters === 0 && info.used > 0) flag('roster-starters-missing', `${side} (${sd.name}) lists only the ${info.used} sub${info.used === 1 ? '' : 's'} who came on; the starting XI is missing; sub rows kept, starters for the athlete-store fill`, { team: sd.id })
+    if (info.starters === 0 && info.used > 0) flag('roster-starters-missing', `${side} (${sd.name}) lists only the ${info.used} sub${info.used === 1 ? '' : 's'} who came on; the starting XI is missing; sub rows kept, starters for the athlete-store fill`, { team: sd.id, evidence: athletesInEvents(ke, sd.id, ge) })
     if (info.starters !== 11) flag('starters-not-eleven', `${side} (${sd.name}) ${info.starters} starters after repair`, { team: sd.id })
     if (match.keyEvents === 'ok' && info.subsIn !== info.subEvents) flag('subs-mismatch', `${side} (${sd.name}) ${info.subsIn} subs on in roster vs ${info.subEvents} substitution events`, { team: sd.id })
     repaired.push(out)
@@ -202,6 +202,7 @@ function athletesInEvents(ke, teamId, ge) {
     const p = k.participants || []
     if (/substitution/.test(k.type?.type || '')) { add(p[0]?.athlete?.id, p[0]?.athlete?.displayName, `on ${k.clock?.displayValue || '?'}`); add(p[1]?.athlete?.id, p[1]?.athlete?.displayName, `off ${k.clock?.displayValue || '?'}`) }
     else if (k.scoringPlay && k.type?.type !== 'own-goal') add(p[0]?.athlete?.id, p[0]?.athlete?.displayName, `goal ${k.clock?.displayValue || '?'}`)
+    else if (/red-card/.test(k.type?.type || '')) add(p[0]?.athlete?.id, p[0]?.athlete?.displayName, `red ${k.clock?.displayValue || '?'}`)
   }
   void ge
   return [...ids.values()]

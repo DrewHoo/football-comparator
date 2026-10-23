@@ -1,6 +1,6 @@
 # The ledger builder
 
-`pipeline/build-ledger.mjs` turns cached ESPN match summaries into one row per player per match, with the repairs the probes proved necessary. It reads only the harvester's index (`data/index/espn-events.json`) and the disk cache (`data/raw/espn/`). It never fetches. The cache key comes from `cacheFile()` in `research/espn/espn.mjs` (sha1 of the full summary URL), which has no side effects on import.
+`pipeline/build-ledger.mjs` turns cached ESPN match summaries into one row per player per match, with the repairs the probes proved necessary, then adds ESPN athlete-store rows for the sides the summaries couldn't give (see "The athlete-store fill"). It reads only the harvester's index (`data/index/espn-events.json`), the disk cache (`data/raw/espn/`) and the fill job's output (`data/ledger/fills/athlete-matches.jsonl`). It never fetches. The cache key comes from `cacheFile()` in `research/espn/espn.mjs` (sha1 of the full summary URL), which has no side effects on import.
 
 This is the long intermediate form. The compact `COLS` encoding the site ships (see the sports-site comparator contract) comes later, built from these files.
 
@@ -11,7 +11,8 @@ node pipeline/build-ledger.mjs --leagues eng.1,esp.1 --seasons 2002-2005   # par
 node pipeline/build-ledger.mjs --gate              # the gate league-seasons only, nothing written, exit 1 on a regression
 node pipeline/build-ledger.mjs --merge-review      # also print every id-merge candidate, by confidence
 node pipeline/build-ledger.mjs --strict            # full build that exits 1 if a gate regresses
-node --test pipeline/lib/ledger/rules.test.mjs     # one unit test per repair rule (18)
+node pipeline/build-ledger.mjs --no-fill           # summary rows only (leave out data/ledger/fills/athlete-matches.jsonl)
+node --test pipeline/lib/ledger/rules.test.mjs     # one unit test per repair rule, plus the fill and person rules (21)
 ```
 
 `--seasons` takes start years: `2004`, `2004-05`, `2002-2005`, or a comma list. A full run prints the gates every time; only `--gate` and `--strict` make a regression fatal.
@@ -23,9 +24,10 @@ Code: `pipeline/build-ledger.mjs` (driver, season passes, writing) and `pipeline
 | `rules.mjs` | the repair rules, one named pure function each |
 | `match.mjs` | one summary → match row, player rows, anomalies (applies the rules in order) |
 | `merge.mjs` | the athlete id merge table |
+| `fill.mjs` | the athlete-store fill: clocks, side checks, the merge into the summary rows |
 | `ordinals.mjs` | the second pass: career, competition and team ordinals |
 | `gates.mjs` | the known-answer gates |
-| `cache.mjs` | read-only index and cache access |
+| `cache.mjs` | read-only index and cache access (summaries, and `recordCompetitor` for an athlete-store record's own side) |
 | `rules.test.mjs` | unit tests |
 
 ## Outputs (`data/ledger/`)
@@ -85,6 +87,7 @@ Appearances only (a starter or a sub who came on). The unused bench is counted i
 | `assists` | stats `A` where his entry has stats, else null. Check `matches.assistsReliable` before using |
 | `yc`, `rc` | cards from the roster `plays` (every season), stats YC/RC when he has no plays |
 | `result` | W/D/L from his team's view on the score after 90/120 minutes. A shootout is a draw; the winner is in `matches.shootout` |
+| `source`, `fill`, `receipt`, `clockUnknown` | only on athlete-store rows: `source: "athlete-store"`, the side's anomaly rule, `{url, fetchedAt}` of the per-event stat record, and which clock (`subIn`, `subOff`, `sentOff`) neither the record nor the keyEvents give. A row without `source` came from the match summary |
 
 ### `ordinals.jsonl`: the second pass
 
@@ -105,7 +108,7 @@ Every ordinal starts at 2002-03, the ledger's first season. A career that began 
 
 ### `anomalies.jsonl`: every repair and every unrepairable defect
 
-`{id, slug, season, date, rule, team?, athlete?, detail, ...}`; `id` is null for season-level rules. Collapsed rosters also carry `evidence`: the athletes the keyEvents place on that side (scorers, subs on and off with their minutes), as the starting point for the athlete-store fill. Split-id folds carry `pairs`.
+`{id, slug, season, date, rule, team?, athlete?, detail, ...}`; `id` is null for season-level rules. Every withheld or starterless side (`roster-collapsed`, `roster-missing`, `roster-invalid`, `roster-starters-missing`) carries `evidence`: the athletes the keyEvents place on that side (goals, subs on and off, red cards, with their minutes), and after the fill `filled` (athlete-store rows added; 0 when the fill gave nothing), `filledStarters` and `filledSubs`. The fill adds `fill-clock-unknown` (a side with a sub or red card whose clock neither source has), `fill-record-other-side` and `fill-both-sides` (below). Split-id folds carry `pairs`.
 
 ### `id-merge.json`
 
@@ -113,7 +116,9 @@ Every ordinal starts at 2002-03, the ledger's first season. A career that began 
 
 ### `build.json`, `gates.json`
 
-The run's scope, counts, anomalies by rule and timings; the gate results.
+The run's scope, counts (`fillRows` among them), anomalies by rule, the fill's report (`fill`: rows added by rule, starters per rule, the clock and side checks, every withheld side left `unfilled`, and `notWithheld`: athlete-store rows on sides the summary built that the summary lacks) and timings; the gate results.
+
+`matches.lineup.{home,away}.filled` is the number of athlete-store rows on that side.
 
 ## The repair rules, in the order they run
 
@@ -144,6 +149,39 @@ Each is a named function in `rules.mjs` with a unit test. The `rule` column is w
 
 Stuck rows (`stuck: true` in the index) and qualifiers come through as they are, flagged. The index has already dropped ghost postponements, relegation playoffs and the EPL 2009-10 re-ingest.
 
+## The athlete-store fill
+
+The summary can't give a side whose roster is collapsed, empty or hollow, or whose starting XI is missing. `pipeline/fill-espn.mjs --job athlete-fills` (`pipeline/docs/fill.md`) pulled those sides from ESPN's athlete-scoped store: one per-event stat record per candidate player. `build-ledger.mjs` merges the result (`lib/ledger/fill.mjs`) after the summary rows, the season passes and the id merge, and before the ordinals:
+
+1. **Scope.** Rows of the six ledger competitions (eng.1, esp.1, ita.1, ger.1, fra.1, uefa.champions and uefa.champions_qual) for a match this run built, on a side with a `roster-collapsed`, `roster-missing`, `roster-invalid` or `roster-starters-missing` anomaly. Other slugs (Vardy's and Lacazette's eng.2, FA Cup, Europa League, internationals...) are left to their own ledgers.
+2. **Side.** Taken from the stat record's own `$ref` (`competitors/{team}/roster/...`), not from the URL the fill asked: the store answers the same record under either competitor. Three rows moved (`fill-record-other-side`): Nakata, Bologna v Parma 2003-08-31 (118600), was Parma's; Simone Inzaghi (161577) and Stefano Mauri (188154) were Lazio's. If a record can't be read and one person comes back on both sides, the side of his nearest summary row by date wins (`fill-both-sides`); with no summary row, both are dropped.
+3. **Never over the summary.** A row is dropped when the summary already has that canonical athlete in the match (on either side) or a player of the same name on that side. The merge table is built from summary rows only; fill rows take their `athleteId` from it.
+4. **Context** (slug, season, date, stage, qualifier, home, opponent, result) comes from the ledger's match row.
+5. **Clocks.** The side's keyEvent `evidence` first (as rule 14), then the record's. The record writes 0 for a clock it doesn't have (`subIns`/`subOuts` are still right), so 0 is unknown. Base minutes, stoppage dropped, capped at 90, or 120 with extra time.
+6. **Minutes** by rule 14 from the clocks. The record's own `minutes` includes stoppage (Juarez on 33' at Udinese 188764: record 61, clocks 57) and is missing for whole Serie A seasons (2002-03, 2006-08), so it's used only when a needed clock is unknown.
+7. **Pens** null in a league-season the builder found untyped; goals, own goals, assists and cards as the record has them (assists still go through `assistsReliable`).
+8. **Ordinals** are computed after the merge, over summary and fill rows together.
+
+Result on the full build (2026-10-23): 1,366,150 summary rows plus 4,421 athlete-store rows = 1,370,571.
+
+| Rule | Sides | Sides filled | Rows added | Sides with 11 starters after |
+|---|---|---|---|---|
+| `roster-collapsed` | 304 (300 proper, 4 UCL qualifier) | 300 | 3,969 (3,203 starters, 766 subs) | 208 |
+| `roster-missing` | 929 (74 league, 855 UCL qualifier) | 22 | 296 | 18 |
+| `roster-invalid` | 10 | 10 | 156 | 10 |
+| `roster-starters-missing` | 66 | 0 | 0 | 0 |
+
+- **Not covered:** 977 sides.
+  - 859 UCL qualifier sides the fill never attempted. It ran with `--no-qualifiers`; the board excludes qualifiers.
+  - 52 `roster-missing` league sides where every candidate's record is a 404: La Liga 2004-05 (20 sides) and the twelve 2011-12 matches of team 3747 (24 sides, ids 420595-420607), plus 4 Ligue 1 and 4 Serie A sides.
+  - All 66 `roster-starters-missing` sides. The store mirrors the hollow summary: it holds records for the same 1-5 subs (128 rows, all already in the summary) and none for the starters.
+- **Incomplete:** 92 collapsed sides and 4 missing sides were filled with fewer than 11 starters. Their players fell outside the candidate set (`athlete-fills.json` `complete: false`).
+- **Clocks:**
+  - 1,558 rows took a clock from the keyEvents.
+  - 33 rows have a clock neither source gives. 15 of them take their minutes from the record; 18 have minutes null.
+  - In 72 rows the record's own minutes differ from the clocks by more than 2.
+- **Cross-check:** the store's 855 Vardy and Lacazette rows on sides the summary built are all already in the summary. Starts and goals agree on all 855; minutes agree within 2 on 851.
+
 ## The id merge table
 
 ESPN athlete ids never rename but often split. The probe found 185 name-plus-club pairs with two or more ids (a re-ingest around 2006, second ids mostly 50-100k) and 389 display names that are real homonyms, so a name alone never merges. Built from every appearance row:
@@ -169,6 +207,8 @@ ESPN athlete ids never rename but often split. The probe found 185 name-plus-clu
 - `expect`: the probe's ESPN-derived number, moved only where a documented repair should move it
 - `known`: the publisher's figure
 
+The athlete-store fill moved two `expect`s, as documented repairs: Totti 2003-04 from 30/30/19/2679 to 31 apps, 31 starts, 20 goals, 2,769 minutes (Bologna v Roma 131335: started, 90', 1 goal, not a penalty), and Messi UCL 2005-06 from 5 to 6 apps (Udinese 188764: started, off 70').
+
 For apps, starts, goals, penalties, assists and minutes, the printout shows ledger / expect / known. A gate fails on any difference from `expect`, with two exceptions: a move closer to `known`, and minutes lost to a red card (the probe ran minutes to 90 regardless). A gate whose matches aren't all cached prints `SKIP` with the count.
 
 Results on 2026-10-21 (all 18 cached, all pass):
@@ -183,6 +223,8 @@ Results on 2026-10-21 (all 18 cached, all pass):
 - **Ronaldo 2013-14:** 11 apps, 17 goals.
 - **Messi 2005-06 UCL:** 5 apps and 1 goal. The 2006 final (197123) has no row for him, and Udinese 188764 is recorded as `roster-collapsed` with the keyEvent showing him off at 70'. Known is 6 = 5 + that fill.
 
+Results on 2026-10-23, after the athlete-store fill: all 18 pass. Totti 2003-04 is 31/31/20 (2,769 minutes), and Messi UCL 2005-06 is 6 apps and 1 goal, with the 188764 anomaly still recorded and no row in 197123.
+
 ## Rerunning as the harvest fills
 
 Rebuild everything every time; there's no incremental state to go stale. The build re-reads every cached summary (about 0.8-1.2 ms each).
@@ -195,7 +237,7 @@ Files are written in 20k-row chunks to a `.tmp` and renamed, so a reader never s
 ## Known residual errors
 
 - **Ronaldo 2003-04 is one appearance and one start short** (28/29, 14/15). One of five Man Utd rosters silently lists someone else in his place, and nothing in the summary can tell which. Corrections layer.
-- **Serie A 2002-08 collapsed rosters** (7-29% of matches per season in the probe; 68 collapsed sides in the cached sample so far: 62 Serie A 2002-08, the two Barca-Udinese matches, one Ligue 1 2006-07 match). Those sides have no player rows, so Totti 2003-04 reads 30 apps and 19 goals against 31 and 20. The `roster-collapsed` anomalies carry the keyEvent evidence. The fill comes from the athlete-scoped store (`.../athletes/{id}/eventlog` and the per-event statistics record), which the probe showed is right for 131335 and 188764. Not yet harvested.
+- **Withheld sides the athlete store couldn't fill.** 977 sides, listed under "The athlete-store fill": 859 UCL qualifier sides that were never attempted, 52 league sides with no records, and the 66 starterless sides. Another 96 filled sides have fewer than 11 starters. The 304 collapsed rosters (Serie A 2002-08 above all) are filled, which is how Totti 2003-04 reaches 31 apps and 20 goals.
 - **EPL 2011-12 assists are half missing** (stat arrays absent in about half the matches). Assists are null there, never 0, and `assists-partial-season` names it. The keyEvent assister exists from 2011-12, but AGENTS.md says stats `A` only.
 - **Penalty typing gaps.** EPL 2002-03 and 2009-10 have none (`pens` null). Elsewhere typing is per event and can't be checked: Serie A 2002-03 roster plays flag 64 penalty goals where keyEvents type 70. `pens` counts typed keyEvents, so treat it as a floor.
 - **Assists before the floors** undercount (EPL 2002-03 overall) and can also overcount for one player (Henry 2002-03: 23 against Wikipedia's 20). `assistsReliable: false`.

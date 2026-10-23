@@ -12,7 +12,7 @@ node --max-old-space-size=8000 pipeline/encode-ledger.mjs --gate      # decode t
 node --test pipeline/lib/ledger/compact.test.mjs                 # team rules, delta coding, 2,000-row round trips (club and intl)
 ```
 
-Nothing here fetches. The inputs are files on disk: `matches.jsonl`, `player-matches.jsonl`, `ordinals.jsonl`, `id-merge.json` and `build.json`, plus `intl/player-matches.jsonl`, `intl/players.json` and `data/corrections/teams.json`. Rerun after every `build-ledger.mjs` or `build-intl.mjs` run. Every output is rebuilt from scratch.
+Nothing here fetches. The inputs are files on disk: `matches.jsonl`, `player-matches.jsonl`, `ordinals.jsonl`, `id-merge.json` and `build.json`, plus `intl/player-matches.jsonl`, `intl/players.json`, `data/corrections/teams.json` and `data/index/athletes.jsonl` (the DOB job's person layer, `pipeline/docs/fill.md` job 2). Rerun after every `build-ledger.mjs` or `build-intl.mjs` run. Every output is rebuilt from scratch.
 
 Code (`pipeline/lib/ledger/`):
 
@@ -104,15 +104,16 @@ One file per competition: `eng.1.json`, `esp.1.json`, `ita.1.json`, `ger.1.json`
 
 | Key | What |
 |---|---|
-| header | `v` (1), `kind: "club"`, `comp`, `label`, `builtAt`, `source` (the long ledger's builtAt, rules version, merge table, summaries built), `firstSeason`, `lastSeason`, `floors`, `deltas`, `runMin` (3), `counts` |
+| header | `v` (1), `kind: "club"`, `comp`, `label`, `builtAt`, `source` (the long ledger's builtAt, rules version, merge table, summaries built), `firstSeason`, `lastSeason`, `floors`, `deltas`, `runMin` (3), `counts` (with `fillRows`, `dob {with, without, rowsWith, rowsWithout, notInIndex, implausible, fromWikidata, suspect}`, `nationality`, `position`) |
 | `floors` | first season (start year) where each stat is reliable: `{ apps, starts, minutes, goals, assists, labels: { assists: "2005-06", ... } }`, so the engine can print "assists since 2005-06" |
 | `seasons` | per competition-season: `slug, season, matches, cached, stats` (matches with stat arrays), `assists` (−1 uncached, 0 no stat arrays, 1 below the floor, 2 partial stat arrays, 3 reliable), `pens` (1 typed, 0 untyped = null, −1 unknown) |
-| `entities` | `id` (post-merge ESPN athlete id), `name` (the most frequent spelling), `born`, `nat`, `pos` (placeholders: −1 until the DOB/nationality/position layer lands), `rows` |
+| `entities` | `id` (post-merge ESPN athlete id), `name` (the most frequent spelling), `born` (YYYYMMDD; the decoder gives `YYYY-MM-DD`), `nat`, `pos` (strings: ESPN's citizenship and position), `rows`. The person layer is below |
 | `teams` | `id` (ESPN team id), `name` (latest) |
 | `matches` | every match of the competition, cached or pending: `id, slug, season, ymd, hm, home, away` (team indexes), `hs, as, shH, shA`, `status, stage, round, seasonSlug` (strings), `qualifier, stuck, summary, extraTime, stats, keyEvents, goalsReconciled, quality, assistsReliable`, `tgnH, tgnA` |
 | `rows` (`COLS`) | one per appearance: `e` (entity), `m` (match), `home, started, subIn, subOff, sentOff, min, goals, pens, og, ast, yc, rc, result`, then the ordinals: `cApp, cStart, cSeason` (within the competition: league, UCL proper or UCL qualifiers), `app, start, aSeason` (across every league and UCL-proper match in the ledger; null for qualifiers) |
 | `alias` | sparse `[row, espnId]` where the roster used an id the merge table folded away (722 rows) |
 | `nameAlt` | sparse `[row, string]` where the match listed a spelling other than the entity's (36 athletes) |
+| `src` | sparse `[row, string]` for rows that didn't come from the match summary: `"athlete-store"` (the fill for withheld sides, `pipeline/docs/ledger.md`). The decoder gives `source` (null for a summary row) |
 | `teamMatches` | `m, side` (0 home, 1 away), `tgn, pos, tied`. The decoder recomputes GF/GA/result and the running P/W/D/L/GF/GA/points |
 | `teamSeasons` | `t, comp, season, P, W, D, L, GF, GA, pitch, ded, pts, pos, tied, margin, winlessStart, titleLeft, titleM, relLeft, relM, complete` (`*M` = match index of the clinch) |
 | `runs` | `t, comp, test, len, from, to` (match indexes), `W, D, L, GF, GA, ongoing, truncated`; runs of 3 or more |
@@ -129,6 +130,50 @@ Team, opponent, date, season, stage and the qualifier flag of a row come from it
 | ger.1 | 2002-03 | 2006-07 |
 | fra.1 | 2003-04 | 2007-08 |
 | uefa.champions | 2002-03 (proper stages) | 2006-07 |
+
+### The person layer (entities `born`, `nat`, `pos`)
+
+From `data/index/athletes.jsonl`: one ESPN core athlete record per canonical id, 26,649 ids, with 885 merged-away ids folded in as `aliases`. An entity looks up its post-merge id, then an alias, then a merged-away id of the canonical that has a row of its own (`encode.mjs` `athleteLookup`).
+
+ESPN's core record for an old id is sometimes a younger namesake's:
+
+- Djibril Sidibé (30302) has the 1992-born Frenchman's DOB, on a player whose first ledger row is 2004.
+- Fernando Torres (24257) is a Colombian born 2004.
+- Luis Enrique (Barcelona 2002-04, ESPN "Luis Martínez", 12912) is a Mexican born 1987.
+- Keith Andrews (5358) is born 1908.
+
+So the encoder judges each DOB against the player's first row anywhere in the ledger (`personFields`):
+
+- **Plausible** (aged 15 to 45 at the first row and under 50 at the last): ESPN's DOB, nationality and position are used. Nobody younger than 15 has played in these competitions since 2002; the youngest on record are Nwaneri (Premier League, 15y 181d) and Luka Romero (La Liga, 15y 219d).
+- **Implausible:** the whole record is treated as someone else's, so nationality and position go too. The DOB is then taken from Wikidata only through its exact ESPN-id join (P3681). A name join is not used, because those joins found the namesake.
+- **Under 16 at the first row:** kept, and listed in the manifest's `dobSuspect` for review.
+
+**Corrections first.** `data/corrections/athletes.json` (`lib/ledger/athlete-corrections.mjs`) is applied before the rule. Kind `dob` sets a player's birth date, and his nationality or position where given (null removes ESPN's). It applies only when every receipt verifies: a Wikidata receipt against `data/index/wikidata/players.json` (item, field, value), an RSSSF receipt against the cap row's `line_quote`. `ath-0001` gives Luis Enrique (12912) 1970-05-08 and Spain, from Wikidata Q222789 and his RSSSF log `luisenrique-intlg`, whose 62 caps run from 1991-04-17 to 2002-06-22. The report is in `manifest.json` `athleteCorrections`.
+
+**Review list.** `data/ledger/compact/dob-disagreements.csv` lists players whose DOB on a unique Wikidata item differs from ESPN's by more than a year, joined on the exact normalised name (label, labels or aliases) plus nationality, not on ESPN id. ESPN's country names are mapped to Wikidata's (England is United Kingdom, Czechia is Czech Republic, and so on). Nothing in it is applied.
+- On 2026-10-23: 170 players, of 6,784 joined to a unique item (66 ambiguous joins skipped).
+- One-word names join namesakes (Alemão, William), so read every row before writing a correction.
+
+Every nulled DOB is a `dob-implausible` anomaly in `data/ledger/compact/anomalies.jsonl` (`id, name, dob, ageFirst, firstRow, ageLast, lastRow, espnNationality, replacedBy`). The review lists (`dobDropped`, `dobSuspect`) go to `manifest.json`, not into the shipped files. The window can't catch a namesake whose DOB still gives a plausible age: Luis Enrique (12912, 1987 DOB) is 15.34 at his first row and about 17 at his last.
+
+Coverage on 2026-10-23, among the 26,649 players who appear in the six club files:
+
+- **With a DOB:** 24,957 players (93.7%), carrying 98.8% of club rows.
+- **Without one:** 1,692 players. 1,427 have no DOB in ESPN's record. 269 had an implausible record (`dob-implausible`); 4 of those took their DOB from Wikidata P3681 (Yaya Touré, Torres, Lassana Diarra, Izaguirre).
+- **Listed for review:** 30 players under 16 at their first row.
+
+Per file:
+
+| File | Entities with DOB | Rows with DOB |
+|---|---|---|
+| eng.1 | 3,914 / 3,946 | 99.3% |
+| esp.1 | 4,196 / 4,394 | 98.4% |
+| ita.1 | 4,085 / 4,186 | 99.1% |
+| ger.1 | 3,712 / 3,793 | 99.3% |
+| fra.1 | 4,427 / 4,610 | 98.6% |
+| uefa.champions | 13,919 / 15,115 | 97.2% |
+
+The intl file's `born` is still Wikidata P569 through `club_join`.
 
 **Not shipped from the long rows:** the per-match `lineup` block on matches and the anomalies. The site has no use for either, and both stay in `data/ledger/`.
 
@@ -154,6 +199,8 @@ Receipts, `sources` and `field_source` stay in `data/ledger/intl/player-matches.
 | Club, every match | 48,994 matches | 0 |
 | Intl, stratified sample | 2,000 rows | 0 |
 | Intl, every row | 441,678 rows | 0 |
+
+On 2026-10-23, after the athlete-store fill and the person layer: club sample 2,000 rows over 157 competition-seasons, every row 1,370,571, every match 48,994, and every entity's `born`, `nat` and `pos` (36,044 entities across the six files, checked against `personFields`): 0 differences. Intl every row 450,074: 0 differences. `source` is one of the compared row fields.
 
 The only transform is assists, nulled where `assistsReliable` is false. The ordinals (`compApp`, `compStart`, `compSeason`, `tgn`, `app`, `start`, `season`) round-trip too; `tgn` comes from the match's `tgnH`/`tgnA`. The test file repeats both 2,000-row samples.
 
@@ -199,4 +246,16 @@ How the projection works:
    - `messi-youngest-50-ucl`, `ronaldo-140-ucl` and its qualifiers variant, `yamal-youngest-laliga-scorer`: each needs about 20 UCL or La Liga seasons
 3. **Team gates:** these run over the decoded `matches` tables, with the same `team.mjs`. The result matches `build-teams.mjs` (49 pass, 1 FAIL as above). The shipped `teamSeasons` table equals a rebuild from the shipped matches on all 4,601 rows.
 
-`evaluate.mjs` is a gate harness for these shapes, not the site's engine. It has no board ties, gapping or variants beyond the qualifier switch. The youngest-to gates need the DOB layer; the entity `born` column exists for it.
+`evaluate.mjs` is a gate harness for these shapes, not the site's engine. It has no board ties, gapping or variants beyond the qualifier switch. The youngest-to gates read the DOB from the decoded entity tables, never the gate file's `dob`, which was derived from the claim itself. A youngest-to `rank` is the subject's place among everyone in the field who reached the target and has a DOB (`board.withoutDob` counts the rest).
+
+### Results on 2026-10-23 (athlete-store fill and person layer)
+
+- **Club-season gates: 17 pass, 1 fail** (15 and 3 before).
+  - Totti 2003-04 now reads 31 apps and 20 goals, through Bologna v Roma 131335.
+  - Messi UCL 2005-06 now reads 6 apps, through Udinese 188764.
+  - Ronaldo 2003-04 still fails at 28/14 against 29/15. That needs the corrections layer; the fill doesn't touch it.
+- **Factoid gates: 9 pass, 0 fail, 3 skip.**
+  - `messi-youngest-50-ucl` passes all five assertions: Messi 24y 284d, rank 1, reached in 66 apps (65 before the Udinese fill); Mbappé 25y 356d, rank 2, in 79; Ronaldo 28y 78d.
+  - `yamal-youngest-laliga-scorer` passes after `ath-0001`: Yamal 16y 87d, rank 1; Olinga 16y 98d, rank 2. Before the correction, ESPN 12912 "Luis Martínez" (Luis Enrique) ranked first at 15y 125d on a Mexican namesake's 1987 DOB.
+  - The 3 skips are boards whose UCL seasons still have 18 uncached matches.
+- **Team gates:** 49 pass, 1 recorded, 13 not checkable in full. The shipped team-seasons equal a rebuild on all 4,603 rows.

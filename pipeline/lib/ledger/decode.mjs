@@ -45,7 +45,7 @@ function decodeClub(f) {
 
   const E = columns(f.entities, ['id', 'name', 'born', 'nat', 'pos', 'rows'])
   const entities = []
-  for (let i = 0; i < E.n; i++) entities.push({ id: String(E.col('id')[i]), name: S[E.col('name')[i]], born: nul(E.col('born')[i]), nat: str(S, E.col('nat')[i]), pos: str(S, E.col('pos')[i]), rows: E.col('rows')[i] })
+  for (let i = 0; i < E.n; i++) { const b = E.col('born')[i]; entities.push({ id: String(E.col('id')[i]), name: S[E.col('name')[i]], born: b === -1 ? null : iso(b, -1), nat: str(S, E.col('nat')[i]), pos: str(S, E.col('pos')[i]), rows: E.col('rows')[i] }) }
 
   const SE = columns(f.seasons, ['slug', 'season', 'matches', 'cached', 'stats', 'assists', 'pens'])
   const ASSISTS = { '-1': 'uncached', 0: 'none', 1: 'below-floor', 2: 'partial', 3: 'reliable' }
@@ -78,7 +78,7 @@ function decodeClub(f) {
   const e = R.col('e')
   const cols = {}
   for (const k of f.rows.cols) cols[k] = f.deltas.includes(k) ? undelta(e, R.col(k)) : R.col(k)
-  const alias = new Map(f.alias), nameAlt = new Map(f.nameAlt)
+  const alias = new Map(f.alias), nameAlt = new Map(f.nameAlt), src = new Map(f.src ?? [])
   const rows = new Array(R.n)
   for (let i = 0; i < R.n; i++) {
     const g = (k) => cols[k][i]
@@ -92,6 +92,7 @@ function decodeClub(f) {
       started: bool(g('started')), subIn: nul(g('subIn')), subOff: nul(g('subOff')), sentOff: nul(g('sentOff')), minutes: nul(g('min')),
       goals: nul(g('goals')), pens: nul(g('pens')), ownGoals: nul(g('og')), assists: nul(g('ast')), yc: nul(g('yc')), rc: nul(g('rc')),
       result: RESULT[g('result')],
+      source: src.has(i) ? S[src.get(i)] : null, // null: the match summary; 'athlete-store': the fill
     }
     row.ord = {
       id: m.id, athleteId: ent.id, comp: compOf(row), compApp: g('cApp'), compStart: nul(g('cStart')), compSeason: g('cSeason'),
@@ -137,7 +138,7 @@ function decodeClub(f) {
       from: { matchId: a.id, date: a.date.slice(0, 10), season: a.seasonLabel }, to: { matchId: b.id, date: b.date.slice(0, 10), season: b.seasonLabel },
       W: g('W'), D: g('D'), L: g('L'), GF: g('GF'), GA: g('GA'), ongoing: g('ongoing') === 1, truncated: g('truncated') === 1 })
   }
-  const { strings, entities: _e, teams: _t, matches: _m, rows: _r, alias: _a, nameAlt: _n, teamMatches: _tm, teamSeasons: _ts, runs: _ru, seasons: _s, ...header } = f
+  const { strings, entities: _e, teams: _t, matches: _m, rows: _r, alias: _a, nameAlt: _n, src: _src, teamMatches: _tm, teamSeasons: _ts, runs: _ru, seasons: _s, ...header } = f
   return { header, seasons, entities, teams, matches, rows, teamMatches, teamSeasons, runs }
 }
 

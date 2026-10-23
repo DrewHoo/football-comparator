@@ -12,13 +12,15 @@ import path from 'node:path'
 import zlib from 'node:zlib'
 import readline from 'node:readline'
 import { fileURLToPath } from 'node:url'
-import { encodeClub, encodeIntl, CLUB_FILES, fileOf } from './lib/ledger/encode.mjs'
+import { encodeClub, encodeIntl, CLUB_FILES, fileOf, athleteLookup, personFields } from './lib/ledger/encode.mjs'
 import { decodeCompact } from './lib/ledger/decode.mjs'
 import { buildTeamLedger, teamCorrections } from './lib/ledger/team.mjs'
-import { compareClub, compareMatches, compareIntl, stratifiedSample, intlKey } from './lib/ledger/roundtrip.mjs'
+import { compareClub, compareMatches, compareIntl, compareEntities, stratifiedSample, intlKey } from './lib/ledger/roundtrip.mjs'
 import { clubView, runClubSeasonGates, runFactoidGates } from './lib/ledger/evaluate.mjs'
 import { runTeamGates } from './lib/ledger/team-gates.mjs'
 import { computeOrdinals } from './lib/ledger/ordinals.mjs'
+import { loadAthleteCorrections, applyAthleteCorrections } from './lib/ledger/athlete-corrections.mjs'
+import { normKey } from './lib/intl/names.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const LEDGER = path.join(ROOT, 'data/ledger')
@@ -52,7 +54,7 @@ async function readIntl() {
 
 function sizes(file) {
   const parts = {}
-  for (const k of ['rows', 'matches', 'entities', 'teamMatches', 'teamSeasons', 'runs', 'strings', 'alias', 'nameAlt']) if (file[k]) { const s = JSON.stringify(file[k]); parts[k] = { raw: s.length, gz: gz(s) } }
+  for (const k of ['rows', 'matches', 'entities', 'teamMatches', 'teamSeasons', 'runs', 'strings', 'alias', 'nameAlt', 'src']) if (file[k]) { const s = JSON.stringify(file[k]); parts[k] = { raw: s.length, gz: gz(s) } }
   const s = JSON.stringify(file)
   return { raw: s.length, gz: gz(s), parts, text: s }
 }
@@ -67,6 +69,26 @@ const ordinals = readJsonl(path.join(LEDGER, 'ordinals.jsonl'))
 const build = readJson(path.join(LEDGER, 'build.json'))
 const merge = readJson(path.join(LEDGER, 'id-merge.json'))
 const ordMap = new Map(ordinals.map((o) => [`${o.id}|${o.athleteId}`, o]))
+// the person layer (DOB job: data/index/athletes.jsonl, one ESPN core athlete record per canonical id)
+const athletesFile = path.join(ROOT, 'data/index/athletes.jsonl')
+const athleteRaw = fs.existsSync(athletesFile) ? readJsonl(athletesFile) : []
+if (!athleteRaw.length) console.log('athletes: data/index/athletes.jsonl not on disk; entities carry no dob/nationality/position')
+// data/corrections/athletes.json, applied before the plausibility rule (lib/ledger/athlete-corrections.mjs)
+const athleteCorr = await loadAthleteCorrections(ROOT)
+for (const c of athleteCorr.report) console.log(`athlete correction ${c.id} (${c.kind}, ${c.target}): ${c.applied ? 'applied' : 'NOT applied: ' + c.why}; receipts verified ${c.receipts.filter((r) => r.verified).length}/${c.receipts.length}`)
+const athleteRows = applyAthleteCorrections(athleteRaw, athleteCorr.corrections)
+const athlete = athleteLookup(athleteRows, merge.map)
+// what the round trip expects an entity to carry (the encoder's rule, restated): ESPN's dob unless implausible at the first row
+// a player's first row across the whole ledger (every file): the DOB plausibility check is made once per person
+const firstById = new Map(), lastById = new Map()
+for (const p of players) {
+  const d = p.date.slice(0, 10)
+  const f = firstById.get(p.athleteId); if (!f || d < f) firstById.set(p.athleteId, d)
+  const l = lastById.get(p.athleteId); if (!l || d > l) lastById.set(p.athleteId, d)
+}
+const personCache = new Map()
+const person = (id) => { if (!personCache.has(id)) personCache.set(id, personFields(athlete(id), firstById.get(id), lastById.get(id))); return personCache.get(id) }
+const wantPerson = (id) => { const f = person(id); return { born: f.dob, nat: f.nat, pos: f.pos } }
 const ordOf = (id, a) => ordMap.get(`${id}|${a}`)
 const team = buildTeamLedger(matches, { corrections })
 const builtAt = new Date().toISOString()
@@ -76,7 +98,8 @@ const manifest = { builtAt, source, files: {} }
 const matchById = new Map(matches.map((m) => [m.id, m]))
 const longMap = new Map(players.map((p) => [`${p.id}|${p.athleteId}`, p]))
 const longOf = (id, a) => { const row = longMap.get(`${id}|${a}`); return row && { row, ord: ordOf(id, a), match: matchById.get(id) } }
-const sampleRT = { checked: 0, bad: [] }, fullRT = { checked: 0, bad: [] }, matchRT = { checked: 0, bad: [] }
+const sampleRT = { checked: 0, bad: [] }, fullRT = { checked: 0, bad: [] }, matchRT = { checked: 0, bad: [] }, entRT = { checked: 0, bad: [] }
+const persons = new Map() // athleteId -> { dob, rows } across the six files (coverage among ledger players)
 const decodedClub = []
 
 for (const comp of CLUB_FILES) {
@@ -85,7 +108,7 @@ for (const comp of CLUB_FILES) {
   const ps = players.filter((p) => ids.has(p.id))
   const compKeys = new Set(ms.map((m) => (m.slug === 'uefa.champions_qual' || (m.slug === 'uefa.champions' && m.qualifier) ? 'uefa.champions:qual' : m.slug)))
   const t = { rows: team.rows.filter((r) => compKeys.has(r.comp)), seasons: team.seasons.filter((s) => compKeys.has(s.comp)), runs: team.runs.filter((r) => compKeys.has(r.comp)) }
-  const file = encodeClub({ comp, matches: ms, players: ps, ordOf, team: t, builtAt, source })
+  const { dobDropped, dobSuspect, ...file } = encodeClub({ comp, matches: ms, players: ps, ordOf, team: t, builtAt, source, athlete, person }) // review lists go to the manifest, not the shipped file
   const sz = sizes(file)
   fs.writeFileSync(path.join(OUT, `${comp}.json`), sz.text)
   // round trip through the text, as the site will read it
@@ -95,8 +118,12 @@ for (const comp of CLUB_FILES) {
   fullRT.checked += full.checked; fullRT.bad.push(...full.bad)
   const mt = compareMatches(d, matchById)
   matchRT.checked += mt.checked; matchRT.bad.push(...mt.bad)
-  manifest.files[`${comp}.json`] = { raw: sz.raw, gz: sz.gz, counts: file.counts, parts: Object.fromEntries(Object.entries(sz.parts).map(([k, v]) => [k, v])) }
-  console.log(`${comp.padEnd(15)} ${String(file.counts.rows).padStart(7)} rows ${String(file.counts.entities).padStart(6)} entities ${String(file.counts.matches).padStart(6)} matches (${file.counts.cachedMatches} cached)  ${mb(sz.raw).padStart(9)} raw ${mb(sz.gz).padStart(9)} gz`)
+  const et = compareEntities(d, wantPerson)
+  entRT.checked += et.checked; entRT.bad.push(...et.bad)
+  for (const e of d.entities) { const p = persons.get(e.id) || { dob: false, rows: 0, name: e.name }; p.rows += e.rows; p.dob = p.dob || e.born != null; persons.set(e.id, p) }
+  manifest.files[`${comp}.json`] = { raw: sz.raw, gz: sz.gz, counts: file.counts, dobDropped, dobSuspect, parts: Object.fromEntries(Object.entries(sz.parts).map(([k, v]) => [k, v])) }
+  const dc = file.counts.dob
+  console.log(`${comp.padEnd(15)} ${String(file.counts.rows).padStart(7)} rows ${String(file.counts.entities).padStart(6)} entities ${String(file.counts.matches).padStart(6)} matches (${file.counts.cachedMatches} cached)  ${mb(sz.raw).padStart(9)} raw ${mb(sz.gz).padStart(9)} gz  dob ${dc.with}/${file.counts.entities} entities (${(100 * dc.rowsWith / Math.max(1, file.counts.rows)).toFixed(1)}% of rows)${dc.implausible ? `, ${dc.implausible} implausible ESPN records dropped (${dc.fromWikidata} DOBs from Wikidata P3681)` : ''}${dc.suspect ? `, ${dc.suspect} under 16 at the first row (review)` : ''}, ${file.counts.fillRows} fill rows`)
 }
 
 // the 2,000-row sample across competitions and seasons (the full check above covers every row too)
@@ -108,9 +135,66 @@ for (const comp of CLUB_FILES) {
   for (const [fi, idx] of byFile) { const r = compareClub(decodedClub[fi], longOf, idx); sampleRT.checked += r.checked; sampleRT.bad.push(...r.bad) }
   sampleRT.strata = new Set(pick.map((p) => all[p].key)).size
 }
-console.log(`round trip (club): sample ${sampleRT.checked} rows over ${sampleRT.strata} competition-seasons, ${sampleRT.bad.length} differences; every row ${fullRT.checked}, ${fullRT.bad.length} differences; matches ${matchRT.checked}, ${matchRT.bad.length} differences`)
-for (const b of [...sampleRT.bad, ...fullRT.bad, ...matchRT.bad].slice(0, 10)) console.log('  ', JSON.stringify(b))
-manifest.roundTrip = { club: { sample: { checked: sampleRT.checked, strata: sampleRT.strata, differences: sampleRT.bad.length }, all: { checked: fullRT.checked, differences: fullRT.bad.length }, matches: { checked: matchRT.checked, differences: matchRT.bad.length } } }
+console.log(`round trip (club): sample ${sampleRT.checked} rows over ${sampleRT.strata} competition-seasons, ${sampleRT.bad.length} differences; every row ${fullRT.checked}, ${fullRT.bad.length} differences; matches ${matchRT.checked}, ${matchRT.bad.length} differences; entities (born, nat, pos) ${entRT.checked}, ${entRT.bad.length} differences`)
+for (const b of [...sampleRT.bad, ...fullRT.bad, ...matchRT.bad, ...entRT.bad].slice(0, 10)) console.log('  ', JSON.stringify(b))
+manifest.roundTrip = { club: { sample: { checked: sampleRT.checked, strata: sampleRT.strata, differences: sampleRT.bad.length }, all: { checked: fullRT.checked, differences: fullRT.bad.length }, matches: { checked: matchRT.checked, differences: matchRT.bad.length }, entities: { checked: entRT.checked, differences: entRT.bad.length } } }
+{ // the entity build's anomalies: one `dob-implausible` per player whose ESPN DOB was nulled (data/ledger/compact/anomalies.jsonl)
+  const out = []
+  for (const [id, f] of personCache) if (f.dropped) out.push({ rule: 'dob-implausible', id, name: athlete(id)?.name ?? null, dob: f.dropped.dob, ageFirst: f.dropped.ageFirst, firstRow: f.firstRow, ageLast: f.dropped.ageLast, lastRow: f.dropped.lastRow, espnNationality: f.dropped.espnNat, replacedBy: f.dropped.wikidata ? { source: 'wikidata P3681', dob: f.dropped.wikidata } : null })
+  out.sort((a, b) => a.ageFirst - b.ageFirst)
+  fs.writeFileSync(path.join(OUT, 'anomalies.jsonl'), out.map((x) => JSON.stringify(x)).join('\n') + (out.length ? '\n' : ''))
+  manifest.dobImplausible = { count: out.length, replacedFromWikidata: out.filter((x) => x.replacedBy).length, file: 'data/ledger/compact/anomalies.jsonl' }
+  console.log(`dob-implausible: ${out.length} ESPN DOBs nulled (${manifest.dobImplausible.replacedFromWikidata} replaced from Wikidata P3681) -> data/ledger/compact/anomalies.jsonl`)
+}
+manifest.athleteCorrections = athleteCorr.report
+{ // review list, never auto-corrected: Wikidata DOB (joined by exact normalised name + nationality, not by ESPN id)
+  // more than a year from ESPN's -> data/ledger/compact/dob-disagreements.csv
+  const W = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/index/wikidata/players.json'), 'utf8'))
+  // ESPN's nationality names -> Wikidata's citizenship labels
+  const COUNTRY = { England: ['United Kingdom'], Scotland: ['United Kingdom'], Wales: ['United Kingdom'], 'Northern Ireland': ['United Kingdom'], Netherlands: ['Kingdom of the Netherlands', 'Netherlands'],
+    Denmark: ['Kingdom of Denmark', 'Denmark'], Czechia: ['Czech Republic'], 'Türkiye': ['Turkey'], 'Republic of Ireland': ['Ireland'], USA: ['United States'], 'Congo DR': ['Democratic Republic of the Congo'],
+    Congo: ['Republic of the Congo'], 'Serbia & Montenegro': ['Serbia and Montenegro', 'Serbia', 'Montenegro'], Gambia: ['The Gambia'], 'Cape Verde Islands': ['Cape Verde'], 'Comoros Islands': ['Comoros'],
+    'China PR': ["People's Republic of China"], 'Korea DPR': ['North Korea'], 'Korea Republic': ['South Korea'], Guadeloupe: ['France'], Martinique: ['France'], 'French Guiana': ['France'], 'Curaçao': ['Kingdom of the Netherlands'] }
+  const ix = new Map()
+  for (const w of W) {
+    if (!w.born) continue
+    const names = new Set([w.label, ...(w.labels ?? []), ...(w.aliases ?? [])].filter(Boolean).map(normKey))
+    for (const c of w.citizenship ?? []) for (const n of names) { const k = `${n}|${c.label}`; (ix.get(k) ?? ix.set(k, new Set()).get(k)).add(w.qid) }
+  }
+  const byQid = new Map(W.map((w) => [w.qid, w]))
+  const lines = [['espn_id', 'name', 'espn_name', 'espn_dob', 'ledger_dob', 'espn_nationality', 'wikidata_qid', 'wikidata_label', 'wikidata_dob', 'diff_years', 'wikidata_espn_ids', 'first_row', 'last_row', 'rows', 'correction'].join(',')]
+  const st = { players: 0, withEspnDob: 0, joined: 0, ambiguous: 0, disagree: 0 }
+  const csv = (v) => (v == null ? '' : /[",\n]/.test(String(v)) ? `"${String(v).replace(/"/g, '""')}"` : String(v))
+  const rowsOut = []
+  for (const [id, p] of persons) {
+    st.players++
+    const a = athlete(id)
+    if (!a?.dob) continue
+    st.withEspnDob++
+    const labels = a.nationality ? COUNTRY[a.nationality] ?? [a.nationality] : []
+    const q = new Set()
+    for (const n of new Set([p.name, a.name].filter(Boolean).map(normKey))) for (const l of labels) for (const x of ix.get(`${n}|${l}`) ?? []) q.add(x)
+    if (q.size > 1) { st.ambiguous++; continue }
+    if (q.size !== 1) continue
+    st.joined++
+    const w = byQid.get([...q][0])
+    const diff = (Date.parse(a.dob) - Date.parse(w.born)) / 31557600000
+    if (Math.abs(diff) <= 1) continue
+    st.disagree++
+    rowsOut.push({ diff, line: [id, p.name, a.name, a.dob, person(id).dob, a.nationality, w.qid, w.label, w.born, diff.toFixed(2), (w.ids?.espn ?? []).join(' '), firstById.get(id), lastById.get(id), p.rows, a.corrected?.id ?? ''].map(csv).join(',') })
+  }
+  rowsOut.sort((x, y) => Math.abs(y.diff) - Math.abs(x.diff))
+  fs.writeFileSync(path.join(OUT, 'dob-disagreements.csv'), [...lines, ...rowsOut.map((r) => r.line)].join('\n') + '\n')
+  manifest.dobDisagreements = { ...st, file: 'data/ledger/compact/dob-disagreements.csv', rule: 'unique Wikidata item with the exact normalised name (label, labels or aliases) and citizenship; |ESPN - Wikidata| > 1 year; review only' }
+  console.log(`dob disagreements: ${st.disagree} players (of ${st.joined} joined to a unique Wikidata item by name + nationality; ${st.ambiguous} ambiguous; ${st.withEspnDob} with an ESPN DOB) -> data/ledger/compact/dob-disagreements.csv`)
+}
+{ // DOB coverage among the players who appear in the club files (distinct canonical ids), not among index ids
+  const ps = [...persons.values()]
+  const withDob = ps.filter((p) => p.dob), rows = ps.reduce((n, p) => n + p.rows, 0), rowsDob = withDob.reduce((n, p) => n + p.rows, 0)
+  const top = [...persons].filter(([, p]) => !p.dob).sort((a, b) => b[1].rows - a[1].rows).slice(0, 15).map(([id, p]) => ({ id, rows: p.rows, inIndex: !!athlete(id) }))
+  manifest.dob = { source: 'data/index/athletes.jsonl', indexIds: athleteRows.length, players: ps.length, withDob: withDob.length, withoutDob: ps.length - withDob.length, rows, rowsWithDob: rowsDob, mostRowsWithoutDob: top }
+  console.log(`dob coverage: ${withDob.length} of ${ps.length} ledger players (${(100 * withDob.length / Math.max(1, ps.length)).toFixed(1)}%), ${(100 * rowsDob / Math.max(1, rows)).toFixed(1)}% of club rows; index has ${athleteRows.length} ids`)
+}
 
 // ---- internationals
 if (!has('--no-intl')) {
@@ -139,7 +223,7 @@ for (const [f, p] of Object.entries(manifest.projection.files)) console.log(`pro
 if (manifest.projection.synthetic) { const s = manifest.projection.synthetic; console.log(`synthetic full-scope ${s.comp}: ${s.rows} rows, ${s.entities} entities: ${mb(s.raw)} raw, ${mb(s.gz)} gz (the bytes-per-row projection said ${mb(s.projectedGz)} gz)`) }
 fs.writeFileSync(path.join(OUT, 'manifest.json'), JSON.stringify(manifest, null, 1) + '\n')
 console.log(`compact: ${((Date.now() - t0) / 1000).toFixed(1)} s; data/ledger/compact/manifest.json`)
-if ((manifest.roundTrip.club.all.differences || manifest.roundTrip.club.matches.differences || manifest.roundTrip.intl?.all.differences)) { console.error('ROUND TRIP FAILED'); process.exitCode = 1 }
+if ((manifest.roundTrip.club.all.differences || manifest.roundTrip.club.matches.differences || manifest.roundTrip.club.entities.differences || manifest.roundTrip.intl?.all.differences)) { console.error('ROUND TRIP FAILED'); process.exitCode = 1 }
 
 /**
  * Full-scope sizes from what's cached: every match is already in each file (the index lists them

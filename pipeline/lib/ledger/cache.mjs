@@ -28,3 +28,12 @@ export function readSummary(slug, id) {
   if (text === 'null') return { state: 'empty' }
   try { return { state: 'ok', summary: JSON.parse(text) } } catch { return { state: 'pending', corrupt: true } }
 }
+
+/** The competitor an athlete-store stat record belongs to, from the record's own `$ref` (cached; never fetched).
+ *  The store answers the same record under either competitor's URL, so the URL alone doesn't place a player. */
+export function recordCompetitor(url) {
+  let text
+  try { text = fs.readFileSync(cacheFile(url), 'utf8') } catch { return null }
+  const m = /"\$ref":"[^"]*\/competitors\/(\d+)\/roster\//.exec(text)
+  return m ? m[1] : null
+}

@@ -1,5 +1,5 @@
 // The corrections layer, applied last over the merged rows (data/corrections/intl.json).
-// Kinds:
+// Kinds: goal_minute, cap_goals, cap_minutes (below), and
 //   reassign_lineup_entry  a source lineup entry belongs to another player (FIFA's Murphy = Gerrard):
 //                          the entry's start/minutes move to the target player's row, `set` overrides
 //                          fields, and the row the entry created for the wrong player is removed (or
@@ -80,6 +80,26 @@ function applyCapGoals(c, rows, conflicts, rep) {
   rep.applied = true
 }
 
+// cap_minutes: one cap's started flag, on/off minutes and minutes, where no lineup source has them (Messi's debut,
+// Hungary 1-2 Argentina 2005-08-17: on 64', sent off 65'). {player_key, set: {started, on_min, off_min, off_reason,
+// minutes}}. Only applied when every receipt that carries a quote verifies (and at least one does); the player's
+// started/minutes conflicts in that match are resolved.
+function applyCapMinutes(c, rows, conflicts, rep) {
+  const mid = c.match.match_id
+  const row = rows.find((r) => r.match_id === mid && r.player_key === c.player_key)
+  if (!row) { rep.changes.push(`no row for ${c.player_key} in ${mid}`); return }
+  const quoted = rep.receipts.filter((r, i) => c.receipts[i].quote != null)
+  if (!quoted.length || quoted.some((r) => !r.verified)) { rep.changes.push('a quoted receipt did not verify: not applied'); return }
+  const was = { started: row.started, on_min: row.on_min, off_min: row.off_min, off_reason: row.off_reason, minutes: row.minutes }
+  for (const k of ['started', 'on_min', 'off_min', 'off_reason', 'minutes']) if (k in (c.set ?? {})) row[k] = c.set[k]
+  row.field_source.started = row.field_source.minutes = `correction ${c.id}`
+  row.flags.push(`corrected:${c.id}`)
+  row.receipts.push(...c.receipts.map((r) => ({ source: `correction ${c.id}: ${r.source}`, url: r.url, quote: r.quote ?? undefined })))
+  rep.changes.push(`${c.player_key} ${mid}: ${JSON.stringify(was)} -> started ${row.started}, on ${row.on_min}', off ${row.off_min}' (${row.off_reason}), ${row.minutes} min`)
+  for (const k of conflicts) if (k.match_id === mid && k.player_key === c.player_key && (k.kind === 'started' || k.kind === 'minutes')) { k.resolved_by = c.id; rep.changes.push(`conflict ${k.kind} for ${c.player_key} resolved`) }
+  rep.applied = true
+}
+
 export function applyCorrections(file, rows, conflicts) {
   const doc = readJson(file, { corrections: [] })
   const report = []
@@ -88,6 +108,7 @@ export function applyCorrections(file, rows, conflicts) {
     report.push(rep)
     if (c.kind === 'goal_minute') { applyGoalMinute(c, rows, conflicts, rep); continue }
     if (c.kind === 'cap_goals') { applyCapGoals(c, rows, conflicts, rep); continue }
+    if (c.kind === 'cap_minutes') { applyCapMinutes(c, rows, conflicts, rep); continue }
     if (c.kind !== 'reassign_lineup_entry') { rep.changes.push(`unknown kind ${c.kind}`); continue }
     const mid = c.match.match_id
     const wrong = rows.filter((r) => r.match_id === mid && r.sources.archive?.family === c.source.family && r.sources.archive?.id === c.source.source_id &&

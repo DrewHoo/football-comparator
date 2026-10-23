@@ -230,7 +230,7 @@ export function normaliseEspn({ j, file }) {
     const subsIn = (j.keyEvents ?? []).filter((e) => e.type?.type === 'substitution' && String(e.team?.id) === teamId).map((e) => String(e.participants?.[0]?.athlete?.id))
     const full = players.length >= 11 && subsIn.every((x) => byId.has(x))
     if (players.length >= 11 && !full) warnings.push(`${side}: roster lacks ${subsIn.filter((x) => !byId.has(x)).length} substitute(s) named in the sub events`)
-    sides[side] = { team: bySide[side]?.team ?? r.team?.displayName, lineup: full, players }
+    sides[side] = { team: bySide[side]?.team ?? r.team?.displayName, teamId: bySide[side]?.teamId ?? (r.team?.id != null ? String(r.team.id) : null), lineup: full, players }
   }
   // short or missing rosters: the listed players and the scorers appeared; starts and minutes unknown
   for (const side of ['home', 'away']) {
@@ -244,7 +244,7 @@ export function normaliseEspn({ j, file }) {
       players.push({ name: g.name, full_name: null, ext_id: g.athlete, shirt: null, gk: false, started: null, appeared: true, on_min: null, off_min: null, off_reason: null, minutes: null,
         goals: mine.filter((h) => !h.og).length, goal_minutes: mine.filter((h) => !h.og).map((h) => h.min), own_goals: mine.filter((h) => h.og).length, cards: [] })
     }
-    sides[side] = { team: bySide[side]?.team, lineup: false, scorers_only: players.length > 0, players }
+    sides[side] = { team: bySide[side]?.team, teamId: bySide[side]?.teamId ?? null, lineup: false, scorers_only: players.length > 0, players }
     if (players.length) warnings.push(`${side}: no full roster, ${players.length} players known (scorers or partial list)`)
   }
   return {

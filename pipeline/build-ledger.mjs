@@ -7,14 +7,16 @@
 //   node pipeline/build-ledger.mjs --leagues eng.1,esp.1 --seasons 2002-2005   # partial: writes *.partial.* files
 //   node pipeline/build-ledger.mjs --gate                  # gate seasons only, nothing written, exit 1 on a regression
 //   node pipeline/build-ledger.mjs --merge-review          # print the id-merge candidates by confidence
+//   node pipeline/build-ledger.mjs --no-fill               # leave out the athlete-store fill (data/ledger/fills/athlete-matches.jsonl)
 import fs from 'node:fs'
 import path from 'node:path'
-import { ROOT, loadIndex, readSummary } from './lib/ledger/cache.mjs'
+import { ROOT, loadIndex, readSummary, recordCompetitor } from './lib/ledger/cache.mjs'
 import { buildMatch } from './lib/ledger/match.mjs'
 import { RULES_VERSION } from './lib/ledger/rules.mjs'
 import { buildMergeTable, STAR_IDS, MERGE_THRESHOLD } from './lib/ledger/merge.mjs'
 import { computeOrdinals } from './lib/ledger/ordinals.mjs'
 import { runGates, LEAGUE_GATES, UCL_GATES } from './lib/ledger/gates.mjs'
+import { loadFillRows, mergeFill, FILL_FILE } from './lib/ledger/fill.mjs'
 
 const OUT = path.join(ROOT, 'data/ledger')
 const argv = process.argv.slice(2)
@@ -137,6 +139,24 @@ for (const [id, name] of Object.entries(STAR_IDS)) if (merge.map[id]) throw new 
 }
 for (const c of merge.candidates) if (c.merged) anomalies.push({ id: null, rule: 'athlete-id-merged', athlete: c.ids.find((x) => merge.map[x]) ?? c.ids[1], detail: `${c.name}: ${c.ids.join(' + ')} -> ${merge.map[c.ids[0]] ?? c.ids[0]} (${c.level} ${c.confidence})` })
 
+// ---- the athlete-store fill (lib/ledger/fill.mjs, pipeline/docs/ledger.md): rows from ESPN's athlete-scoped
+// store for the sides the summary withheld (collapsed, missing, hollow) or left without starters. Added only
+// where the summary has no row for that player in that match; the merge table is built from summary rows only.
+let fill = null
+if (!has('--no-fill')) {
+  const fillRows = loadFillRows(ROOT)
+  if (!fillRows) console.log(`fill: ${FILL_FILE} not on disk; withheld sides stay empty`)
+  else {
+    fill = mergeFill({ fillRows, players, matches, anomalies, mergeMap: merge.map, untypedPens, competitorOf: recordCompetitor })
+    players.push(...fill.added)
+    anomalies.push(...fill.notes)
+    const order = new Map(matches.map((m, i) => [m.id, i]))
+    players.sort((a, b) => order.get(a.id) - order.get(b.id)) // stable: a match's fill rows follow its summary rows
+    const seenRow = new Set()
+    for (const p of players) { const k = `${p.id}|${p.athleteId}`; if (seenRow.has(k)) throw new Error(`fill: ${p.athleteId} has two rows in match ${p.id}`); seenRow.add(k) }
+  }
+}
+
 // ---- ordinals (second pass)
 const ordinals = computeOrdinals(players, matches)
 const tDone = Date.now()
@@ -164,13 +184,19 @@ if (!gateMode) {
   writeJsonl('anomalies', anomalies)
   writeJsonl('ordinals', ordinals)
   fs.writeFileSync(path.join(OUT, `id-merge${suffix}.json`), JSON.stringify({ builtAt: new Date().toISOString(), rulesVersion: RULES_VERSION, threshold: MERGE_THRESHOLD, stats: merge.stats, map: merge.map, candidates: merge.candidates }, null, 1) + '\n')
-  fs.writeFileSync(path.join(OUT, `build${suffix}.json`), JSON.stringify({ builtAt: new Date().toISOString(), rulesVersion: RULES_VERSION, scope: { leagues: leagues && [...leagues], seasons: seasons && [...seasons], onlyCached }, counts: { ...counts, matches: matches.length, playerRows: players.length, anomalies: anomalies.length, ordinals: ordinals.length }, anomaliesByRule: byRule, ms: { read: tRead - t0, total: tDone - t0 } }, null, 1) + '\n')
+  fs.writeFileSync(path.join(OUT, `build${suffix}.json`), JSON.stringify({ builtAt: new Date().toISOString(), rulesVersion: RULES_VERSION, scope: { leagues: leagues && [...leagues], seasons: seasons && [...seasons], onlyCached }, counts: { ...counts, matches: matches.length, playerRows: players.length, fillRows: fill?.stats.added ?? 0, anomalies: anomalies.length, ordinals: ordinals.length }, anomaliesByRule: byRule, fill: fill && { file: FILL_FILE, ...fill.stats, unfilled: fill.unfilled, notWithheld: fill.notWithheld }, ms: { read: tRead - t0, total: tDone - t0 } }, null, 1) + '\n')
 }
 
 console.log(`ledger${suffix}: ${counts.events} index events, ${counts.ok} summaries built, ${counts.pending} pending${onlyCached ? ' (skipped)' : ''}, ${counts.empty} empty`)
 console.log(`  ${matches.length} match rows, ${players.length} player rows, ${ordinals.length} ordinals, ${anomalies.length} anomalies; ${merge.stats.athletes} athletes, ${merge.stats.namesWithSeveralIds} names with several ids, ${merge.stats.candidates} merge candidates, ${merge.stats.merged} ids merged`)
 console.log(`  read+build ${((tRead - t0) / 1000).toFixed(1)} s, total ${((tDone - t0) / 1000).toFixed(1)} s (${counts.ok ? ((tRead - t0) / counts.ok).toFixed(2) : '-'} ms per summary)`)
 console.log('  anomalies by rule: ' + Object.entries(byRule).sort((a, b) => b[1] - a[1]).map(([k, v]) => `${k} ${v}`).join(', '))
+if (fill) {
+  const f = fill.stats
+  console.log(`  fill: ${f.added} athlete-store rows added on ${f.sidesFilled} sides (${Object.entries(f.byRule).map(([k, v]) => `${k} ${v}`).join(', ')}); ${f.sidesUnfilled} withheld sides with nothing added; skipped ${f.otherSlug} other slugs, ${f.notWithheld} on sides the summary built, ${f.summaryHasAthlete + f.summaryHasName} already in the summary, ${f.otherSide} on the other side, ${f.duplicate} duplicates, ${f.outOfScope} outside this run`)
+  console.log(`  fill sides: ${f.recordChecked} records read for their $ref competitor (${f.recordUnreadable} unreadable), ${f.recordOtherSide} on the other side of the URL asked, ${f.bothSidesDropped} both-sides rows dropped`)
+  console.log(`  fill clocks: ${f.clocks.fromKeyEvents} rows with a keyEvent clock, ${f.clocks.unknown} with a clock unknown (${f.clocks.minutesFromRecord} minutes from the record, ${f.clocks.minutesNull} null), ${f.clocks.recordDisagrees} where the record's minutes differ from the clocks by more than 2`)
+}
 
 const g = runGates({ matches, players, anomalies, mergeMap: merge.map })
 console.log(g.lines.join('\n'))

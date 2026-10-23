@@ -20,7 +20,10 @@ export function clubView(decodedFiles) {
   for (const m of matches) { const k = `${m.slug}|${m.season}`; const c = cov.get(k) || { n: 0, ok: 0 }; c.n++; if (m.summary === 'ok') c.ok++; cov.set(k, c) }
   const names = new Map()
   for (const r of rows) names.set(r.athleteId, r.name)
-  return { rows, matches, cov, names }
+  // DOB from the entity tables (data/index/athletes.jsonl via encode.mjs); an id in several files carries the same one
+  const born = new Map()
+  for (const d of decodedFiles) for (const e of d.entities) if (e.born && !born.has(e.id)) born.set(e.id, e.born)
+  return { rows, matches, cov, names, born }
 }
 
 const slugsFor = (comps, qualifiers) => {
@@ -94,6 +97,8 @@ function boardScope(gate, view, comps) {
   return need
 }
 
+const ageDays = (dob, date) => Math.round((Date.UTC(+date.slice(0, 4), +date.slice(5, 7) - 1, +date.slice(8, 10)) - Date.UTC(+dob.slice(0, 4), +dob.slice(5, 7) - 1, +dob.slice(8, 10))) / 864e5)
+
 function ageAt(dob, date) {
   const [by, bm, bd] = dob.split('-').map(Number), [y, m, d] = ymd(date).split('-').map(Number)
   let years = y - by
@@ -148,13 +153,35 @@ export function runFactoidGates(gates, view) {
           const b = board(fn).map((x) => x.v)
           rank = got == null ? null : 1 + b.filter((v) => v > got).length
         } else if (how === 'reach' || how === 'youngest-reach') {
-          let c = 0, at = null
-          for (let i = 0; i < mine.length; i++) { c += mine[i][stat] ?? 0; if (c >= q.how.target) { at = i; break } }
-          got = at == null ? null : a.kind === 'age' ? (ent?.dob ? ageAt(ent.dob, mine[at].date) : 'no DOB') : at + 1
+          const reachAt = (l) => { let c = 0; for (let i = 0; i < l.length; i++) { c += l[i][stat] ?? 0; if (c >= q.how.target) return i } return null }
+          const at = reachAt(mine)
+          // the DOB is the ledger's (entity table), never the gate file's: those were derived from the claim itself
+          const dob = id ? view.born.get(id) ?? null : null
+          got = at == null ? null : a.kind === 'age' ? (dob ? ageAt(dob, mine[at].date) : 'no DOB') : at + 1
           extra = { date: at == null ? null : ymd(mine[at].date) }
+          if (a.kind === 'age') {
+            extra.dob = dob
+            if (ent?.dob && dob && ent.dob !== dob) extra.gateDob = ent.dob
+            if (how === 'youngest-reach' && dob && at != null) {
+              // the board: everyone in the field who reached the target, by age at the reaching game
+              const mineDays = ageDays(dob, ymd(mine[at].date))
+              let younger = 0, noDob = 0, reached = 0
+              for (const [oid, l] of byA) {
+                const j = reachAt(l)
+                if (j == null) continue
+                reached++
+                const od = view.born.get(oid)
+                if (!od) { noDob++; continue }
+                if (ageDays(od, ymd(l[j].date)) < mineDays) younger++
+              }
+              rank = 1 + younger
+              extra.board = { reached, withoutDob: noDob }
+            }
+          }
         }
         const diffs = []
         {
+          if (extra.gateDob) diffs.push(`dob ${extra.dob} (ledger) vs ${extra.gateDob} (gate file)`)
           if (got !== a.expected) diffs.push(`${got} vs ${a.expected}`)
           if (a.rank != null && rank != null && rank !== a.rank) diffs.push(`rank ${rank} vs ${a.rank}`)
           if (a.apps != null && extra.apps !== a.apps) diffs.push(`apps ${extra.apps} vs ${a.apps}`)

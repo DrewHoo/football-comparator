@@ -2615,6 +2615,65 @@
      "quote": "118\t43   24- 3-23\tSaint-Denis\tNetherlands\t4-0\tEuropean Ch. Qual."
     }
    ]
+  },
+  {
+   "id": "intl-0050",
+   "added": "2026-10-23",
+   "match": {
+    "date": "2005-08-17",
+    "home": "Hungary",
+    "away": "Argentina",
+    "match_id": "2005-08-17_hungary_argentina"
+   },
+   "source": {
+    "family": "rsssf",
+    "source_id": "messi-intlg",
+    "url": "https://www.rsssf.org/miscellaneous/messi-intlg.html"
+   },
+   "kind": "cap_minutes",
+   "player_key": "ip:messi-intlg",
+   "player": "Lionel Messi",
+   "wrong_source": "none",
+   "wrong_value": {
+    "started": null,
+    "on_min": null,
+    "off_min": null,
+    "off_reason": null,
+    "minutes": null
+   },
+   "set": {
+    "started": false,
+    "on_min": 64,
+    "off_min": 65,
+    "off_reason": "red",
+    "minutes": 1
+   },
+   "reason": "Messi's debut, Hungary 1-2 Argentina, Budapest, friendly. RSSSF's log has the cap (cap 1) with no minutes. ESPN's summary 184000 lists only the three scorers, and ESPN's athlete-store record for him in that match is a 404 (confirmed live 2026-10-23 under both competitors). 11v11's match page (Wayback 20150417001754) has him on for Lisandro López at 64' and a red card at 65'. Clarín's report of 2005-08-18 (Wayback 20080617160028) says his debut lasted 93 seconds before referee Markus Merk showed him the red card. Two sources: on as a substitute, sent off within two minutes; the minute numbers are 11v11's.",
+   "receipts": [
+    {
+     "source": "Clarín, 2005-08-18, 'La más veloz de las rojas' (Oscar Barnade), Wayback capture 20080617160028",
+     "url": "https://web.archive.org/web/20080617160028id_/http://www.clarin.com/diario/2005/08/18/deportes/d-05301.htm",
+     "cache": "data/raw/wayback/9a/9affa92d5e9af4c405215c8168ecc19da0cd5f46.bin",
+     "quote": "Con esos escasos 93 segundos hasta que el &aacute;rbitro Markus Merk le mostr&oacute; la roja"
+    },
+    {
+     "source": "11v11, Hungary v Argentina 17 August 2005, substitutions, Wayback capture 20150417001754",
+     "url": "https://web.archive.org/web/20150417001754id_/http://www.11v11.com/matches/hungary-v-argentina-17-august-2005-254793/",
+     "cache": "data/raw/wayback/1d/1d8231361affdaee1b1c493420432f4ef8d7bae0.bin",
+     "quote": "Lionel Messi for Lisandro Lopez 64"
+    },
+    {
+     "source": "11v11, Hungary v Argentina 17 August 2005, cards",
+     "url": "https://web.archive.org/web/20150417001754id_/http://www.11v11.com/matches/hungary-v-argentina-17-august-2005-254793/",
+     "cache": "data/raw/wayback/1d/1d8231361affdaee1b1c493420432f4ef8d7bae0.bin",
+     "quote": "Lionel Messi 65 R"
+    },
+    {
+     "source": "RSSSF, Lionel Messi's international log, cap 1",
+     "url": "https://www.rsssf.org/miscellaneous/messi-intlg.html",
+     "quote": "  1         17- 8-05\tBudapest\tHungary \t2-1"
+    }
+   ]
   }
  ]
 }

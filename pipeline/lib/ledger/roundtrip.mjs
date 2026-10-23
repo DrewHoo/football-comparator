@@ -3,7 +3,8 @@
 // null). Used by encode-ledger.mjs --check and compact.test.mjs.
 
 export const CLUB_ROW_FIELDS = ['id', 'slug', 'season', 'date', 'qualifier', 'stage', 'athleteId', 'espnId', 'name', 'teamId', 'oppId', 'home',
-  'started', 'subIn', 'subOff', 'sentOff', 'minutes', 'goals', 'pens', 'ownGoals', 'assists', 'yc', 'rc', 'result']
+  'started', 'subIn', 'subOff', 'sentOff', 'minutes', 'goals', 'pens', 'ownGoals', 'assists', 'yc', 'rc', 'result', 'source']
+export const ENTITY_FIELDS = ['born', 'nat', 'pos']
 export const ORD_FIELDS = ['id', 'athleteId', 'comp', 'compApp', 'compStart', 'compSeason', 'tgn', 'app', 'start', 'season']
 export const MATCH_FIELDS = ['id', 'slug', 'season', 'seasonLabel', 'date', 'homeId', 'homeName', 'awayId', 'awayName', 'homeScore', 'awayScore', 'shootout',
   'status', 'stage', 'round', 'seasonSlug', 'qualifier', 'stuck', 'summary', 'extraTime', 'stats', 'keyEvents', 'goalsReconciled', 'quality', 'assistsReliable']
@@ -52,6 +53,21 @@ export function compareClub(decoded, longOf, idx = null) {
     for (const f of ORD_FIELDS) if (!same(d.ord[f], l.ord[f])) bad.push({ i, id: d.id, athleteId: d.athleteId, field: `ord.${f}`, compact: d.ord[f], long: l.ord[f] })
   }
   return { checked: ix.length, bad }
+}
+
+/**
+ * Entities against the person layer they were encoded from.
+ * @param want (entityId, firstRowDate) -> { born, nat, pos } as the long side expects them (born 'YYYY-MM-DD' or null)
+ */
+export function compareEntities(decoded, want) {
+  const bad = []
+  let start = 0
+  for (const e of decoded.entities) {
+    const w = want(e.id, decoded.rows[start]?.date)
+    for (const f of ENTITY_FIELDS) if (!same(e[f], w[f])) bad.push({ id: e.id, field: f, compact: e[f], long: w[f] })
+    start += e.rows
+  }
+  return { checked: decoded.entities.length, bad }
 }
 
 export function compareMatches(decoded, matchById) {

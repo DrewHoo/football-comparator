@@ -10,6 +10,8 @@ import {
 import { buildMergeTable } from './merge.mjs'
 import { computeOrdinals } from './ordinals.mjs'
 import { buildMatch } from './match.mjs'
+import { fillClocks, evidenceClocks, mergeFill } from './fill.mjs'
+import { personFields } from './encode.mjs'
 
 const ath = (id, name = `P${id}`) => ({ id: String(id), displayName: name })
 const stats = (o) => Object.entries(o).map(([abbreviation, value]) => ({ abbreviation, value }))
@@ -200,4 +202,53 @@ test('ordinals: competition and all sequences, qualifiers apart, tgn counts miss
   assert.equal(by['2'].tgn, 2, 'missed match 1 still counts'); assert.equal(by['2'].compApp, 1); assert.equal(by['2'].app, 1)
   assert.equal(by['3'].comp, 'uefa.champions:qual'); assert.equal(by['3'].app, null)
   assert.equal(by['4'].comp, 'uefa.champions'); assert.equal(by['4'].compApp, 1); assert.equal(by['4'].app, 2); assert.equal(by['4'].start, null)
+})
+
+test('fill clocks: keyEvents first, a 0 clock is unknown, minutes by rule 14 (188764, 205664)', () => {
+  const ev = evidenceClocks([{ id: '45843', roles: ["off 70'"] }, { id: '9', roles: ["on 90'+3'"] }])
+  assert.deepEqual(ev.get('9'), { on: 90 })
+  // record says starter, subOuts 1 at 70' (4190 s): clocks give 70 whatever the record's own minutes
+  const messi = fillClocks({ started: true, subIn: null, subOff: 70, sentOff: null, minutes: 71, rc: 0 }, 90, ev.get('45843'))
+  assert.equal(messi.subOff, 70); assert.equal(messi.minutes, 70); assert.equal(messi.minutesFrom, 'clocks')
+  // Juarez on 33': the record's 61 includes stoppage; the clocks say 57
+  assert.equal(fillClocks({ started: false, subIn: 33, subOff: null, sentOff: null, minutes: 61 }, 90, null).minutes, 57)
+  // Capone 205664: subbed on, timeStarted 0 (not recorded), no keyEvent: clock and minutes unknown
+  const capone = fillClocks({ started: false, subIn: 0, subOff: null, sentOff: null, minutes: null }, 90, null)
+  assert.equal(capone.subIn, null); assert.equal(capone.minutes, null); assert.deepEqual(capone.clockUnknown, ['subIn'])
+  // a red card with no clock: minutes from the record when it has them
+  const red = fillClocks({ started: true, subIn: null, subOff: null, sentOff: 0, rc: 1, minutes: 75 }, 90, null)
+  assert.equal(red.sentOff, null); assert.equal(red.minutes, 75); assert.equal(red.minutesFrom, 'record')
+})
+
+test('fill merge: withheld sides only, never over a summary row, side from the record (131335, 118600)', () => {
+  const matches = [{ id: '1', slug: 'ita.1', season: 2003, date: '2003-11-23T14:00Z', summary: 'ok', homeId: 'H', awayId: 'R', homeScore: 2, awayScore: 4, stage: 'league', lineup: { home: {}, away: {} } }]
+  const anomalies = [{ id: '1', rule: 'roster-collapsed', team: 'H', evidence: [] }, { id: '1', rule: 'roster-starters-missing', team: 'R', evidence: [] }]
+  const players = [{ id: '1', athleteId: '50', espnId: '50', name: 'Sub Kept', teamId: 'R', date: '2003-11-23T14:00Z' }]
+  const row = (espnId, teamId, o = {}) => ({ id: '1', slug: 'ita.1', season: 2003, date: '2003-11-23T14:00Z', espnId, name: `P${espnId}`, teamId, started: true, subIn: null, subOff: null, sentOff: null, minutes: 90, goals: 0, pens: 0, ownGoals: 0, assists: 0, yc: 0, rc: 0, receipt: { url: `u${espnId}` }, fill: 'roster-collapsed', ...o })
+  // 12: asked under R, the record's $ref is H. 20 and 21 (merged): one person on both sides, no readable record and
+  // no summary row to choose by, so both are dropped
+  const fillRows = [row('10', 'R', { goals: 1 }), row('50', 'R'), row('11', 'H'), row('12', 'R'), row('20', 'R'), row('21', 'H'), row('99', 'H', { slug: 'eng.2' })]
+  const competitorOf = (u) => ({ u10: 'R', u50: 'R', u11: 'H', u12: 'H' })[u] ?? null
+  const f = mergeFill({ fillRows, players, matches, anomalies, mergeMap: { 21: '20' }, untypedPens: new Set(), competitorOf })
+  const got = f.added.map((r) => `${r.athleteId}@${r.teamId}`).sort()
+  assert.deepEqual(got, ['10@R', '11@H', '12@H'], 'summary row 50 never overridden; 12 moved to H; 20/21 dropped; eng.2 ignored')
+  assert.equal(f.added.find((r) => r.athleteId === '10').result, 'W')
+  assert.equal(f.added.find((r) => r.athleteId === '10').source, 'athlete-store')
+  assert.equal(anomalies[0].filled, 2); assert.equal(anomalies[1].filled, 1)
+  assert.equal(f.stats.otherSlug, 1); assert.equal(f.stats.recordOtherSide, 1); assert.equal(f.stats.bothSidesDropped, 2); assert.equal(f.stats.summaryHasAthlete, 1)
+})
+
+test('person fields: an implausible ESPN DOB is a namesake record (Torres 24257, Sidibé 30302)', () => {
+  const torres = { dob: '2004-08-17', nationality: 'Colombia', position: 'Midfielder', wikidata: { method: 'P3681', born: '1984-03-20' } }
+  const t = personFields(torres, '2007-08-15')
+  assert.equal(t.dob, '1984-03-20'); assert.equal(t.from, 'wikidata-P3681'); assert.equal(t.nat, null); assert.equal(t.pos, null)
+  const sidibe = { dob: '1992-07-29', nationality: 'France', position: 'Defender', wikidata: { method: 'name+nationality+dob', born: '1992-07-29' } }
+  const s = personFields(sidibe, '2004-08-07')
+  assert.equal(s.dob, null, 'a name join found the namesake too: no DOB'); assert.equal(s.nat, null)
+  const ok = personFields({ dob: '1987-06-24', nationality: 'Argentina', position: 'Forward' }, '2004-10-16')
+  assert.equal(ok.dob, '1987-06-24'); assert.equal(ok.nat, 'Argentina'); assert.equal(ok.suspect, undefined)
+  assert.equal(personFields({ dob: '2003-04-02' }, '2018-04-18').suspect, 15.04, 'under 16 at the first row: kept, listed for review')
+  assert.equal(personFields({ dob: '1960-01-01' }, '2002-08-17', '2002-08-17').dob, '1960-01-01', '42 at first and last: kept')
+  const old = personFields({ dob: '1960-01-01', nationality: 'Spain' }, '2002-08-17', '2012-05-01')
+  assert.equal(old.dob, null, '52 at the last row: nulled'); assert.equal(old.dropped.rule, 'dob-implausible'); assert.equal(old.dropped.ageFirst, 42.63)
 })

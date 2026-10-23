@@ -13,12 +13,18 @@ import { build } from './lib/intl/ledger.mjs'
 import { applyCorrections } from './lib/intl/corrections.mjs'
 import { runGates } from './lib/intl/gates.mjs'
 import { nameScore } from './lib/intl/names.mjs'
+import { loadAthleteStore, attachAthleteStore, applyStated } from './lib/intl/athlete-store.mjs'
 
 const args = new Set(process.argv.slice(2))
 const log = (...a) => console.log(...a)
 const out = (f) => path.join(P.out, f)
 
 const B = await build({ log })
+
+// ------------------------------------------------ ESPN's athlete-scoped store (data/ledger/fills/athlete-matches.jsonl), before corrections
+const store = loadAthleteStore()
+B.athleteStore = store ? attachAthleteStore(B, store, { log }) : null
+if (!store) log('athlete store: data/ledger/fills/athlete-matches.jsonl not on disk')
 
 // ------------------------------------------------ corrections, last
 const corrReport = applyCorrections(P.corrections, B.rows, B.conflicts)
@@ -35,13 +41,17 @@ for (const p of B.players) {
   Object.assign(p.counts, {
     rows: rs.length, rsssf_caps: cnt((r) => r.cap_source === 'rsssf'), archive_only: cnt((r) => r.cap_source === 'archive'), espn_only: cnt((r) => r.cap_source === 'espn'),
     martj42_scorer_only: cnt((r) => r.cap_source === 'martj42-scorer'), with_archive: cnt((r) => r.sources.archive), with_espn: cnt((r) => r.sources.espn),
+    athlete_store_only: cnt((r) => r.cap_source === 'athlete-store'), wikidata_only: cnt((r) => r.cap_source === 'wikidata'), with_athlete_store: cnt((r) => r.sources.athlete_store), with_wikidata: cnt((r) => r.sources.wikidata),
     with_minutes: cnt((r) => r.minutes != null), goals: rs.reduce((t, r) => t + (r.goals ?? 0), 0), goals_unknown: cnt((r) => r.goals == null),
     beyond_log: cnt((r) => r.flags.includes('beyond_rsssf_log')),
   })
   p.first = rs[0]?.date ?? null
   p.last = rs.at(-1)?.date ?? null
-  if (p.intl_coverage === 'partial') p.badge = `internationals not yet covered: ${rs.length} appearances known from ${[p.counts.archive_only && 'FIFA/UEFA reports', p.counts.espn_only && 'ESPN', p.counts.martj42_scorer_only && 'martj42 scorers'].filter(Boolean).join(', ')}; no cap-by-cap log`
+  if (p.intl_coverage === 'partial') p.badge = `internationals not yet covered: ${rs.length} appearances known from ${[p.counts.archive_only && 'FIFA/UEFA reports', p.counts.espn_only && 'ESPN', p.counts.athlete_store_only && 'the ESPN athlete store', p.counts.wikidata_only && 'Wikidata', p.counts.martj42_scorer_only && 'martj42 scorers'].filter(Boolean).join(', ')}; no cap-by-cap log`
 }
+// marquee players without a log: complete only when the rows equal the stated totals (lib/intl/athlete-store.mjs STATED)
+B.stated = applyStated(B.players)
+for (const s of B.stated) log(`stated totals ${s.name}: ${s.found ? `${s.ledger_rows} caps / ${s.ledger_goals} goals in the ledger against ${s.caps} / ${s.goals} stated -> ${s.coverage}` : 'no person in the ledger'}`)
 
 // marquee players with no RSSSF log and nothing in the cached sources: explicit stubs, so the site shows
 // the "internationals not yet covered" badge instead of an empty curve
@@ -107,6 +117,11 @@ for (const node of id.parent.keys()) {
     const wp = B.wd.players.get(parts[1])
     q.push({ qid: parts[1], label: wp?.label ?? null, born: wp?.born ?? null, match: wInfo.match, team_matches: nodeCount.get(node) ?? 0, url: `https://www.wikidata.org/wiki/${parts[1]}` })
   }
+}
+// athlete-store forms (one ESPN athlete id per person; lib/intl/athlete-store.mjs)
+for (const [aid, a] of Object.entries(B.athleteStore?.people ?? {})) {
+  const P0 = (players[a.player_key] ??= { player_key: a.player_key, forms: [] })
+  P0.forms.push({ node: `s:${aid}`, source: 'espn-athlete-store', espn_athlete_id: aid, names_as_written: [a.name], team_matches: a.rows, confidence: /^ESPN athlete id/.test(a.method) ? 1 : null, method: a.method })
 }
 for (const p of B.players) if (players[p.player_key]) Object.assign(players[p.player_key], { name: p.name, team: p.team, rsssf_slug: p.rsssf_slug, intl_coverage: p.intl_coverage, espn_athlete_ids: p.espn_athlete_ids, wikidata_qid: p.wikidata_qid, club_join: p.club_join })
 // QIDs added to people who have an RSSSF or archive form (the brief's "where a lineup player matches an archive/RSSSF player")
@@ -180,6 +195,8 @@ const summary = {
   wikidata: B.qidStats,
   join: Object.fromEntries(Object.entries(B.joinStats).map(([k, v]) => [k, { ...v, rate: +(v.joined / Math.max(1, v.total)).toFixed(4) }])),
   join_misses_by_kind: missKinds, conflicts_by_kind: byKind, corrections: corrReport,
+  athlete_store: B.athleteStore && { ...B.athleteStore, people: Object.fromEntries(Object.entries(B.athleteStore.people).map(([k, v]) => [k, v])) },
+  stated_totals: B.stated,
 }
 writeJson(out('build-summary.json'), summary)
 log(`wrote ${rel(P.out)}/: player-matches.jsonl (${B.rows.length}), players.json (${B.players.length}), matches.jsonl (${B.matches.length}), conflicts.jsonl (${B.conflicts.length}), join-misses.jsonl (${B.joinMisses.length + B.dateDisagreements.length}), identity.json, identity-review.json, build-summary.json`)
